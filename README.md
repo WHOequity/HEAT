@@ -69,7 +69,7 @@ By installing and/or using the Toolkit, you (the “Licensee”) enter into an
 agreement with the World Health Organization (“WHO”) and you accept all terms, 
 conditions, and requirements of the Agreement.
 
-1. Components and Types of the Toolkit
+**1. Components and Types of the Toolkit**
 
 1.1. The Toolkit contains software developed by WHO (the “Software”). WHO has,
 or will, make two editions of the Toolkit available:
@@ -95,7 +95,7 @@ a downloadable desktop version. The applicability of certain aspects of the
 Terms of Use will depend on whether you are using HEAT and/or HEAT Plus, and 
 whether that is through the online or desktop version(s).
 
-2. Third-party Software
+**2. Third-party Software**
 
 2.1. Third-party software needed to use the Toolkit. In order to run the stand-
 alone packages, you will need the “R” statistical software and a web browser. In 
@@ -127,7 +127,7 @@ software (“R”, Chrome, Chromium, Microsoft services, or otherwise) does not
 imply that they are endorsed or recommended by WHO in preference to others of a 
 similar nature.
 
-3. License and Terms of Use for the Software
+**3. License and Terms of Use for the Software**
 
 3.1. Copyright and license. The Software is copyright (©) World Health 
 Organization, 2016–2021, and is distributed under the terms of version 3 of the 
@@ -138,7 +138,7 @@ the licenses listed above in part to comply with the those terms. As provided in
 the text of the AGPL v3, components of the Software which are licensed under GPL 
 v3 remain governed by that license.
 
-4. Copyright and Terms of Use for the Data 
+**4. Copyright and Terms of Use for the Data **
 
 4.1. Copyright of Data. The Data in HEAT originates from the WHO Health Equity 
 Monitor database, and is © WHO. For the avoidance of any doubt, WHO hereby 
@@ -150,7 +150,7 @@ is not publishing the Data in HEAT under the AGPL v3. The Data is not based on
 distributed as “part of a whole” with the Software, as those terms and concepts 
 are used in the terminology of the GNU General Public Licenses.
 
-5. Retained Rights and Limitations on Use
+**5. Retained Rights and Limitations on Use**
 
 5.1. Retained Rights. Except as otherwise indicated herein, WHO owns and shall 
 retain all right, title and interest in and to the Toolkit, including all 
@@ -189,7 +189,7 @@ programmes, and/or its research projects or the attributed owner(s) of the Data;
 
   (vii) In any manner which is in violation of this Agreement.
 
-6. Acknowledgment and Use of WHO Name and Emblem
+**6. Acknowledgment and Use of WHO Name and Emblem**
 
 6.1. HEAT Plus (upload database edition). For HEAT Plus, as WHO does not provide 
 any content for that edition, you shall not state or imply that results from 
@@ -216,7 +216,7 @@ company, or product, or (ii) use the name or emblem of WHO in any way. All
 requests to use the WHO name and/or emblem require advance written approval of 
 WHO.
 
-7. Disclaimers by WHO 
+**7. Disclaimers by WHO** 
 
 7.1. No WHO warranties.  WHO makes no warranty with respect to the Toolkit, and 
 disclaims all statutory or implied warranties, expressed or implied, as to the 
@@ -241,7 +241,7 @@ recommended by the World Health Organization in preference to others of a
 similar nature that are not mentioned. Errors and omissions excepted, the names 
 of proprietary products are distinguished by initial capital letters.
 
-8. Your Data and HEAT Plus 
+**8. Your Data and HEAT Plus** 
 
 8.1 By using HEAT Plus, you confirm that all data that you upload to, or use in, 
 HEAT Plus is either owned by you or, if not, you have obtained all necessary and 
@@ -253,7 +253,7 @@ you to use HEAT Plus. You confirm that you will not upload any data to HEAT Plus
 or WHO’s servers which is personal information or data or would in any way be in 
 violation of law, including privacy and intellectual property law. 
 
-9. Limitation of WHO’s Liability
+**9. Limitation of WHO’s Liability**
 
 9.1. WHO shall not be liable for any loss or damage arising directly or 
 indirectly in connection with, or resulting from, your use of the Toolkit.
@@ -263,7 +263,7 @@ incidental or consequential damages which may arise in respect of the Toolkit
 and its use, and the results thereof, including, without limitation, any use of 
 the Data. 
 
-10. Your Indemnification of WHO
+**10. Your Indemnification of WHO**
 
 10.1. You shall indemnify, hold harmless, and defend at your own expense WHO, 
 its officers, agents, and employees from and against any claims, demands, causes 
@@ -271,7 +271,7 @@ of action, and liability of any nature or kind resulting from or relating to
 your use of the Toolkit, including, without limitation, as applicable, your 
 transfer and uploading of data to WHO’s servers or otherwise.
 
-11. Term and Termination of this Agreement
+**11. Term and Termination of this Agreement**
 
 11.1. This Agreement shall remain in effect so long as you hold any copy of the 
 Toolkit on any of your computer systems or storage media. This Agreement, 
@@ -286,7 +286,7 @@ be amended by mutual written agreement of you and WHO.
 immediately cease all use of the Toolkit and destroy and/or remove all copies of 
 the Toolkit from your computer systems and storage media.
 
-12. General Provisions 
+**12. General Provisions **
 
 12.1. You may not assign this Agreement without the prior written agreement of 
 WHO (such agreement not to be unreasonably withheld).

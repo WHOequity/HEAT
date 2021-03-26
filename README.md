@@ -2,14 +2,14 @@
 <hr>
 
 **Content**
-1. [Description](#1.-description)
-2. [Copyright](#2.-copyright)
-3. [Suggested citation](#3.-suggested-citation)
-4. [Disclaimer](#4.-disclaimer)
-5. [Terms of use and software license agreement](#5.-terms-of-use-and-software-license-agreement)
+1. [Description](#(1)-description)
+2. [Copyright](#(2)-copyright)
+3. [Suggested citation](#(3)-suggested-citation)
+4. [Disclaimer](#(4)-disclaimer)
+5. [Terms of use and software license agreement](#(5)-terms-of-use-and-software-license-agreement)
 
 
-### 1. DESCRIPTION
+### (1) DESCRIPTION
 <hr>
 
 #### SOFTWARE
@@ -38,20 +38,20 @@ The source code is available in 4 repositories:
 - [HEAT-Data](https://github.com/WHOequity/HEAT-Data)
 
 
-### 2. COPYRIGHT
+### (2) COPYRIGHT
 <hr>
 
 © Copyright World Health Organization, 2016-2021. 
 
 
-### 3. SUGGESTED CITATION
+### (3) SUGGESTED CITATION
 <hr>
 
 Health Equity Assessment Toolkit (HEAT and HEAT Plus): Software for exploring and comparing health inequalities in countries. Geneva, World Health 
 Organization, 2021. 
 
 
-### 4. DISCLAIMER 
+### (4) DISCLAIMER 
 <hr>
 
 Your use of these materials is subject to the Terms of Use and Software Licence
@@ -59,7 +59,7 @@ agreement – see below – and by using these materials you affirm that you hav
 read, and will comply with, the terms of those documents.
 
 
-### 5. TERMS OF USE AND SOFTWARE LICENSE AGREEMENT
+### (5) TERMS OF USE AND SOFTWARE LICENSE AGREEMENT
 <hr>
 
 Please read these Terms of Use and Software License Agreement (the “Agreement”) 

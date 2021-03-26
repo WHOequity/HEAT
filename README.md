@@ -1,11 +1,12 @@
 ## HEALTH EQUITY ASSESSMENT TOOLKIT (HEAT AND HEAT PLUS)
 <hr>
 
-1. [Description](#description)
-2. [Copyright](#copyright)
-3. [Suggested citation](#suggested-citation)
-4. [Disclaimer](#disclaimer)
-5. [Terms of use and software license agreement](#terms-of-use-and-software-license-agreement)
+**Content**
+1. [Description](#1.-description)
+2. [Copyright](#2.-copyright)
+3. [Suggested citation](#3.-suggested-citation)
+4. [Disclaimer](#4.-disclaimer)
+5. [Terms of use and software license agreement](#5.-terms-of-use-and-software-license-agreement)
 
 
 ### 1. DESCRIPTION

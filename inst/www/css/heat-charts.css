@@ -1,0 +1,10 @@
+.highchart,
+.highcharts-container {
+  overflow: visible !important;
+}
+
+.heat-y-axis .highcharts-axis-title {
+  white-space: normal !important;
+  width: 100px !important;
+  transform: translateY(-50%) !important;
+}

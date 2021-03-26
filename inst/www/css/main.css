@@ -1,0 +1,677 @@
+main {
+  height: 100vh;
+  padding-top: 75px;
+}
+
+.toasts {
+  top: 80px;
+}
+
+.p-no-margin-bottom {
+  margin-bottom: 1rem !important;
+}
+
+.column-no-padding {
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+}
+
+.form-control::placeholder {
+  color: #474747;
+}
+
+.badge:hover,
+.badge:focus {
+  text-decoration: none;
+}
+
+.nav-tabs .nav-link {
+  height: 100%;
+}
+
+.dropdown-menu {
+  z-index: 2030;
+}
+
+.dropdown-item:first-child {
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+}
+
+.dropdown-item:last-child {
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
+}
+
+.yonder-chip input::placeholder {
+/*.yonder-select input::placeholder {*/
+  color: #ced4da;
+}
+
+/*.yonder-chip .darken-placeholder::placeholder,
+.yonder-select .darken-placeholder::placeholder {
+  color: #3c4245;
+}*/
+
+.btn-group-justified .btn {
+  width: 100% !important;
+}
+
+.title--grey {
+  color: #696363;
+  margin-top: .5rem;
+}
+
+.title--orange {
+  color: #d86422;
+  margin-top: .5rem;
+}
+
+.text-orange {
+  color: #d86422 !important;
+}
+
+.title--lightgrey {
+  color: #696363;
+  font-size: 1.25em;
+}
+
+.h-viewport {
+  height: 100vh !important;
+}
+
+.h-viewport.carousel .carousel-inner,
+.h-viewport.carousel .carousel-item {
+  height: 100% !important;
+}
+
+/*
+  .yonder-chip input[data-toggle="dropdown"][disabled] ~ .chips {
+    cursor: not-allowed;
+    pointer-events: none;
+  }
+*/
+
+.yonder-chip .badge {
+  font-weight: 400;
+  line-height: 1.25;
+}
+
+input + .fa {
+  display: block;
+  margin-bottom: 5px;
+}
+
+.navbar .nav-link {
+  color: white !important;
+}
+
+.disabled {
+  cursor: no-drop;
+}
+
+button {
+  cursor: pointer;
+}
+
+.btn-link {
+  line-height: inherit;
+  font-size: inherit;
+}
+
+.text-vertical {
+  transform: rotate(270deg);
+  white-space: nowrap;
+}
+
+.dataTables_filter input {
+  display: inline;
+  height: calc(1.5em + .75rem + 2px);
+  padding: .375rem .75rem;
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1.5;
+  color: #495057;
+  background-color: #fff;
+  background-clip: padding-box;
+  border: 1px solid #ced4da;
+  border-radius: .25rem;
+  transition: border-color .15s ease-in-out, box-shadow .15s ease-in-out;
+}
+
+.fa {
+  font-size: 16px !important;
+}
+
+.w-1\/6 {
+  width: 16.66667% !important;
+}
+
+.open-on-hover .dropdown:hover>.dropdown-menu {
+  display: block;
+}
+
+.open-on-hover .dropdown-menu {
+  margin-top: -0.125rem;
+}
+
+.open-on-hover .dropdown > .dropdown-toggle:active {
+  pointer-events: none;
+}
+
+.custom-select ::-webkit-scrollbar {
+  -webkit-appearance: none;
+  width: 7px;
+}
+
+.custom-select ::-webkit-scrollbar-thumb {
+  border-radius: 4px;
+  background-color: rgba(0, 0, 0, .5);
+  -webkit-box-shadow: 0 0 1px rgba(255, 255, 255, .5);
+}
+
+.plot-output__spinner {
+  position: absolute;
+  top: 25%;
+  left: 50%;
+  width: 5em;
+  height: 5em;
+  z-index: 9001;
+}
+
+/* chart styles */
+.heat-chart-area {
+  font-family: "Lucida Grande", "Lucida Sans Unicode", Arial, Helvetica, sans-serif;
+}
+
+.highchart,
+.highcharts-container {
+  overflow: visible !important;
+}
+
+.highcharts-container {
+  width: 100% !important;
+}
+
+.heat-chart-table {
+  max-width: 100%;
+  table-layout: fixed;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.heat-chart-cell {
+  padding: 0;
+}
+
+.heat-chart-cell .highchart {
+  width: 100% !important;
+  display: flex !important;
+}
+
+.heat-title-cell {
+  width: auto !important;
+}
+
+.max-char-25px {
+  max-width: 25ch;
+}
+
+.pseudo-row {
+  display: -ms-flexbox;
+  display: flex;
+  margin-right: -15px;
+  margin-left: -15px;
+  height: auto;
+  width: 100%;
+}
+
+.pseudo-row > .pseduo-row {
+  margin-right: 0;
+  margin-left: 0;
+}
+
+.pseudo-row .col + .col {
+  padding-left: 0;
+}
+
+.no-padding {
+  padding: 0;
+}
+
+.heat-legend-container svg {
+  overflow: visible !important;
+}
+
+.heat-legend-container .highchart,
+.heat-legend-container .highcharts-container,
+.heat-legend-container .highcharts-root {
+  width: 100%;
+  display: flex;
+}
+
+.heat-legend-container .highcharts-background,
+.heat-legend-container .highcharts-plot-background,
+.heat-legend-container .highcharts-plot-border {
+  transform: scaleY(0);
+}
+
+.heat-main-title {
+  font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 18px;
+  font-weight: bold;
+  color: #696363;
+  text-align: center;
+}
+
+.heat-pane-chart .highchart,
+.heat-pane-chart .highcharts-container {
+  height: auto !important;
+  width: 100% !important;
+}
+
+.heat-pane-title {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: "Lucida Grande", "Lucida Sans Unicode", Arial, Helvetica, sans-serif;
+  font-size: 14px;
+  font-weight: bold;
+  color: #696363;
+  white-space: normal;
+  letter-spacing: .5px;
+  text-align: center;
+  transition: height 0.25s linear;
+}
+
+.add-margin-bottom{
+  margin-bottom: 1rem;
+}
+
+.heat-pane-title.pl-2 { /* wat */
+  padding-left: 12.5% !important;
+}
+
+.heat-pane-title.pl-3 {
+  padding-left: 19.5% !important;
+}
+
+.heat-axis-title {
+  color: rgb(102, 102, 102) !important;
+  font-size: 16px !important;
+  font-weight: 400;
+  text-align: center;
+}
+
+.heat-variable-title {
+  display: table-caption;
+  color: #696363 !important;
+  font-size: 14px !important;
+  font-weight: bold !important;
+  letter-spacing: .5px !important;
+  flex: 1 0 15em;
+  padding: 0 15px;
+}
+
+.heat-vertical-title__outer {
+  position: relative;
+  width: 1em;
+  height: 100%;
+}
+
+.heat-vertical-title__inner {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  margin-left: auto;
+  transform-origin: 50% 50%;
+  -webkit-transform: rotate(-90deg);
+  -moz-transform: rotate(-90deg);
+  -ms-transform: rotate(-90deg);
+  -o-transform: rotate(-90deg);
+  transform: translateY(-50%) translateX(-50%) rotate(-90deg);
+  font-family: "Lucida Grande", "Lucida Sans Unicode", Arial, Helvetica, sans-serif;
+  white-space: nowrap;
+}
+
+.heat-chart-disclaimer {
+  visibility: hidden;
+  height: 0;
+}
+
+.heat-chart-disclaimer p {
+  letter-spacing: .5px;
+}
+
+.highcharts-tooltip-container {
+  z-index: 10;
+}
+
+/* Sara's additions */
+/* p, */
+label,
+.font-size-xl { /* <- please don't hijack a different type of style like this */
+                /*    let this syle control font size only, as it should */
+  color: #3c4245;
+}
+
+/* Change bootstrap blue to WHO blue */
+.bg-blue,
+.btn-group-toggle.active-blue .btn:not(:disabled):not(.disabled).active,
+.btn-blue,
+.dropdown-item:active,
+.dropdown-item.active {
+  background-color: #008dc9 !important;
+  color: #fff !important;
+}
+
+.text-blue {
+  color: #008dc9 !important;
+}
+
+.bg-blue {
+  background-color: #008dc9 !important;
+}
+
+.btn-group-toggle.active-blue .btn:not(:disabled):not(.disabled).active,
+.btn-blue {
+  border: #008dc9;
+}
+
+.custom-control-input:checked~.custom-control-label::before {
+  background-color: #008dc9;
+  border-color: #008dc9;
+}
+
+.btn-blue:hover {
+  background-color: #047db0 !important;
+  border-color: #047db0 !important;
+}
+
+/* Change bootstrap orange to WHO orange */
+.active-orange .active {
+  background-color: #d86422 !important;
+  color: white !important;
+}
+
+.border-orange {
+  border-color: #d86422 !important;
+}
+
+/* Add border to gray buttons */
+.btn-grey:not(.dropdown-item) {
+  border: 1px solid #dae0e5;
+}
+
+/* Remove extra button on button groups */
+.border {
+  border: none !important;
+}
+
+/* Remove border radius on tabs*/
+.card-header .nav-item .btn {
+  border-bottom-right-radius: 0;
+  border-bottom-left-radius: 0;
+}
+
+.card-header .nav-item .btn:hover {
+  background-color: #e2e6ea;
+  border-color: #dae0e5;
+  color: #008dc9;
+}
+
+/* If we need more spacing on form groups please update the bottom
+   margin, this is already set by bootstrap. In the application there
+   are instances when I need to remove the bottom margin. */
+/*.form-group {
+  padding-bottom: 10px;
+}*/
+
+/* More subtle chips, remove excess text shadow */
+.chip {
+  background-color: #dae0e5;
+  border: 1px solid #dae0e5;
+  color: #3c4245;
+  padding: 0 10px;
+  border-radius: 15px;
+  line-height: 25px;
+}
+
+.chip:hover {
+  background-color: #dae0e5;
+  color: #3c4245;
+}
+
+.chip:hover>.chip-close {
+  color: #d86422;
+}
+
+.chip-close {
+  text-shadow: none;
+}
+
+label:not(.custom-control-label):not(.btn):not(.custom-file-label) {
+  font-weight: 600;
+  color: #3c4245;
+  margin-bottom: 1px !important;
+}
+
+.custom-control-label {
+  font-size: 14px;
+}
+
+.background-gray {
+  background-color: rgba(0,0,0,.03);
+  padding: 15px;
+}
+
+.max-width-300px{
+  max-width: 300px;
+}
+
+/* Make homepage nice */
+#app-pane_home {
+  max-width: 960px;
+  margin: 0 auto;
+}
+
+#app-pane_home h1 {
+  text-align: center;
+}
+
+#app-pane_home h1:first-child {
+  color: #008dc9;
+  text-shadow: 1px 1px #d86422;
+}
+
+#app-pane_home h1:nth-child(2) {
+  color: #d86422;
+  text-shadow: 1px 1px #008dc9;
+}
+
+#app-main-display-pane_data_disclaimer {
+  text-align: center;
+  font-style: italic;
+}
+
+hr {
+  opacity: .5;
+}
+
+@media (max-width: 951px) {
+  /* Prevent menu from covering content */
+  .h-screen {
+    padding-top: 50px;
+  }
+
+  /* Column layout on small screens */
+  .row { /* ANOTHER GENERIC OVERWRITE */
+    display: flex;
+    flex-direction: column;
+  }
+
+  .col {
+    max-width: 100%;
+  }
+
+  .col-1, .col-4, .col-8, .col-11, .col-12 {
+    max-width: 100% !important;
+  }
+
+  .hidden-xs{
+    display: none;
+  }
+
+  rect {
+    height: 200;
+  }
+
+  .subtract-15-padding{
+  padding-left: 15px !important;
+  padding-right: 0 !important;
+}
+}
+
+.margin-left-subtract {
+  margin-left: 40px;
+}
+
+/* end media */
+@media (max-width: 705px) {
+  /* Prevent menu from covering content*/
+  .h-screen {
+    padding-top: 50px;
+  }
+}
+
+/* Change tabs to look like buttons for widths when tabs stack on top of each other. Between 1328px and 951px */
+@media (max-width: 1328px) and (min-width: 951px) {
+  .card-header {
+    padding: 3px;
+  }
+
+  .card-header-tabs {
+    margin-right: 0;
+    margin-left: 0;
+    margin-bottom: 0;
+  }
+
+  .card-header .nav-item .btn {
+    border-bottom-right-radius: .25rem;
+    border-bottom-left-radius: .25rem;
+    border-color: #dee2e6;
+  }
+
+  .nav-tabs .nav-item.show .nav-link, .nav-tabs .nav-link.active {
+    border-color: #dee2e6;
+  }
+
+  .nav-tabs .nav-item {
+    margin: 5px;
+  }
+}
+
+/* Change tabs to look like buttons for widths when tabs stack on top of each other. Below 462px */
+@media (max-width: 462px) {
+  .card-header {
+    padding: 3px;
+  }
+
+  .card-header-tabs {
+    margin-right: 0;
+    margin-left: 0;
+    margin-bottom: 0;
+  }
+
+  .card-header .nav-item .btn {
+    border-bottom-right-radius: .25rem;
+    border-bottom-left-radius: .25rem;
+    border-color: #dee2e6;
+  }
+
+  .nav-tabs .nav-item.show .nav-link,
+  .nav-tabs .nav-link.active {
+    border-color: #dee2e6;
+  }
+
+  .nav-tabs .nav-item {
+    margin: 5px;
+  }
+}
+
+.table-text-center {
+  text-align: center;
+}
+
+/*Remove the left padding from table headers*/
+th.table-text-nocenter {
+  padding-left: 8px !important;
+}
+
+
+
+.table-header-vertalign  th {
+  vertical-align: middle !important;
+}
+
+/* Loading screen
+
+
+header,
+main {
+  visibility: hidden;
+}
+
+body:not(.pg-loaded) {
+  background-color: #008dc9;
+}
+
+.pg-loaded header,
+.pg-loaded main {
+  visibility: visible;
+}
+ */
+.pg-loading-logo {
+  width: 35%;
+}
+
+/* View controls
+ */
+.heat-view-controls {
+  width: 100%;
+}
+
+/* Adjusting columns and flex properties
+ */
+.col, .col-1, .col-2, .col-3, .col-4, .col-5, .col-6,
+.col-7, .col-8, .col-9, .col-10, .col-11, .col-12 {
+  float: none;
+}
+
+@media all and (-ms-high-contrast: none), (-ms-high-contrast: active) {
+  /* IE10+ CSS styles go here
+     Override column class applied highcharts
+   */
+  .col, .col-1, .col-2, .col-3, .col-4, .col-5, .col-6,
+  .col-7, .col-8, .col-9, .col-10, .col-11, .col-12 {
+    flex-basis: auto;
+  }
+}
+
+/* summaries tables styles */
+.heat-summaries-indicator {
+  color: #3c4245;
+}
+
+.heat-summaries-subtitle {
+  color: #495057;
+  font-weight: bold;
+  white-space: nowrap;
+}
+
+@media (min-width: 1200px){
+.container, .container-lg, .container-md, .container-sm, .container-xl {
+    max-width: 1250px;
+}
+}
+

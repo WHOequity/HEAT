@@ -1,0 +1,108 @@
+$heat-blue: #008DC9;
+$heat-white: #ffffff;
+$heat-green: #B5E61C;
+$heat-red: red;
+$heat-green-saturated: #94be12;
+$heat-chips-lightgray: #D3D3D3;
+$heat-chips-darkgray: #606060;
+$heat-chips-black: #222222;
+$heat-text-shadow: rgba(#464646, 0.5) 0 3px 6px;
+$heat-box-shadow: 0 3px 6px rgba(#464646, 0.5);
+
+body,
+html {
+  margin: 10px;
+}
+
+.chips-container {
+  padding: 20px;
+  border: 2px solid $heat-chips-lightgray;
+}
+
+.chip {
+  background-color: $heat-chips-lightgray;
+  display: inline-flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding: 10px;
+  border-radius: 25px;
+  line-height: 1.25em;
+  align-items: center;
+  transition: background-color 0.5s;
+  margin: 1px;
+
+  .chip-content {
+    font-size: 1em;
+    color: $heat-chips-black;
+  }
+
+  .chip-close {
+    background-color: inherit;
+    color: $heat-chips-lightgray;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    border: 0;
+    height: 20px;
+    width: 20px;
+    font-size: 1.25em;
+    line-height: 10px;
+    margin-left: 10px;
+    transition: background-color 0.5s;
+
+    & .close {
+      font-size: inherit;
+      font-weight: inherit;
+      line-height: inherit;
+    }
+
+    &:hover {
+      background-color: mix($heat-chips-darkgray, $heat-chips-black, 99%);
+    }
+
+    &:target {
+      display: none;
+    }
+  }
+}
+
+.active {
+  background-color: $heat-green;
+  .chip-close {
+    color: mix($heat-chips-lightgray, $heat-green, 50%);
+
+    &:hover {
+      background-color: mix($heat-green, $heat-chips-black, 70%);
+    }
+  }
+}
+
+.disabled {
+  pointer-events: none;
+
+  .chip-content {
+    color: mix($heat-chips-black, $heat-white, 50%);
+  }
+
+  .chip-close {
+    color: mix($heat-chips-lightgray, $heat-white, 50%);
+    pointer-events: none;
+  }
+}
+
+.error {
+  background-color: mix($heat-chips-lightgray, $heat-red, 50%);
+
+  .chip-content {
+    color: mix($heat-red, $heat-chips-black, 50%);
+  }
+
+  .chip-close {
+    color: mix($heat-chips-lightgray, $heat-red, 50%);
+
+    &:hover {
+      background-color: mix($heat-red, $heat-chips-black, 70%);
+    }
+  }
+}

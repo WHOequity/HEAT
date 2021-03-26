@@ -1,0 +1,175 @@
+body,
+html {
+  scroll-behavior: smooth;
+}
+
+a {
+  white-space: nowrap;
+}
+
+#heat-landing-scroll-container {
+  scroll-behavior: smooth;
+  margin-top: -17px;
+}
+
+.container-max-width-1000px {
+  max-width: 1800px;
+  margin: 0 50px;
+}
+
+.margin-bottom-25 {
+  margin-top: auto !important;
+  margin-bottom: 0 !important;
+}
+
+.heat-sections-12vw {
+  height: auto;
+  padding: 12vw 0;
+}
+
+.heat-sections-16vw {
+  height: auto;
+  padding: 16vw 0 12vw;
+}
+
+#heat-section-one {
+  background: url("data-icicles.png");
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-origin: border-box;
+  height: 100%;
+}
+#heat-section-one h1 {
+  font-size: 4.5em;
+  font-weight: bold;
+  margin-left: auto;
+}
+#heat-section-one p {
+  color: #464646;
+  text-transform: uppercase;
+  font-size: 1.5em;
+}
+
+#copyright-row-container {
+  background-color:#464646;
+}
+
+#copyright-row {
+  justify-content: flex-end;
+  padding: 5px;
+}
+
+#copyright-row p {
+  color: white !important;
+  font-style: bold;
+  margin-bottom: 0;
+}
+
+.heat-section-blue-callout p {
+  font-size: 2em;
+  font-weight: bold;
+  text-shadow: rgba(70, 70, 70, 0.5) 0 3px 6px;
+}
+
+.heat-section-white-callout p {
+  font-size: 2em;
+}
+
+#heat-last-section {
+  padding-top: 3em;
+  padding-bottom: 0;
+}
+#heat-last-section p {
+  color: #464646;
+  font-size: 1.5em;
+}
+
+#heat-footer {
+  position: relative;
+  bottom: 0;
+}
+#heat-footer p {
+  margin-bottom: 0;
+}
+
+.bg-white {
+  background: #ffffff;
+  color: #008DC9;
+}
+
+.bg-blue {
+  background: #008DC9;
+  color: #ffffff;
+}
+
+.bg-gray {
+  background: #D1D1D1;
+  color: #464646;
+}
+
+.heat-emphasis {
+  color: #D86422;
+  font-weight: bold;
+  font-style: normal;
+}
+
+.heat-btn-scroll {
+  position: relative;
+  display: block;
+}
+.heat-btn-scroll img {
+  height: 4em;
+  width: 4em;
+  opacity: 0.8;
+}
+.heat-btn-scroll img:hover {
+  opacity: 1;
+}
+
+/* Extra small devices (phones, 600px and down) */
+@media only screen and (max-width: 600px) {
+  #heat-section-one p {
+    font-size: 1em;
+  }
+
+  .heat-btn-scroll img {
+    height: 3em;
+    width: 3em;
+  }
+
+  .heat-section-blue-callout p {
+    font-size: 1.5em;
+  }
+
+  .heat-section-white-callout p {
+    font-size: 1em;
+  }
+
+  .container-max-width-1000px {
+    margin: 0 20px;
+  }
+}
+/* Small devices (portrait tablets and large phones, 600px and up) */
+@media only screen and (min-width: 681px) and (max-width: 1020px) {
+  #heat-section-one h1 {
+    font-size: 3em;
+    width: 45%;
+  }
+}
+@media only screen and (max-width: 680px) {
+  #heat-section-one h1 {
+    font-size: 1.5em;
+    width: 50%;
+  }
+}
+/* Medium devices (landscape tablets, 768px and up) */
+/* Large devices (laptops/desktops, 992px and up) */
+@media all and (max-width: 1430px) and (min-width: 1200px) {
+  #heat-section-one h1 {
+    background-color: rgba(255, 255, 255, 0.5);
+    display: inline-block;
+    width: 55%;
+  }
+}
+
+/*# sourceMappingURL=heat_landing.css.map */

@@ -1,0 +1,545 @@
+namespace,subject,key,english (en),french (fr),portuguese (pt),spanish (es)
+navigation,labels,heat,Health Equity Assessment Toolkit (HEAT),Outil d’évaluation de l’équité en santé (HEAT),Ferramenta de avaliação de desigualdades em saúde (HEAT),Herramienta de valoración de la equidad en salud (HEAT)
+navigation,labels,heatplus,Health Equity Assessment Toolkit Plus (HEAT Plus),Outil complémentaire d’évaluation de l’équité en santé (HEAT Plus),Ferramenta de avaliação de desigualdades em saúde plus (HEAT Plus),Herramienta adicional de valoración de la equidad en salud (HEAT Plus)
+navigation,labels,home,Home,Accueil,Início,Inicio
+navigation,labels,explore,Explore inequality,Étudier les inégalités,Explorar desigualdades,Explorar desigualdades
+navigation,labels,compare,Compare inequality,Comparer les inégalités,Comparar desigualdades,Comparar desigualdades
+navigation,labels,disag,Disaggregated data,Données désagrégées,Dados desagregados,Datos desagregados
+navigation,labels,summary,Summary measures,Mesures consolidées,Medidas sumárias,Mediciones sintéticas
+navigation,labels,about,About,À propos,Sobre,Acerca de
+navigation,labels,manual,User manual,Manuel d'utilisation,Manual do usuário,Manual del Usuario
+navigation,labels,technotes,Technical notes,Notes techniques,Notas técnicas,Notas técnicas
+navigation,labels,glossary,Indicator compendium,Recueil d'indicateurs,Conjunto de indicadores,Compendio de indicadores
+navigation,labels,software,Software,Logiciel,Software,Software
+navigation,labels,versions,Versions,Versions,Versões,Versiones
+navigation,labels,license,License,Licence,Licença,Licencia
+navigation,labels,feedback,Feedback,Commentaires,Avaliação,Realimentación
+navigation,labels,acknowledgements,Acknowledgements,Remerciements,Créditos,Agradecimientos
+navigation,labels,managedata,Manage data,Gestion des données,Gerenciar os dados,Administrar datos
+navigation,labels,account,Go to account,Compte,Ir para a conta,Vaya a la cuenta
+navigation,labels,logout,Logout,Se déconnecter,Sair da conta,Cerrar sesión
+home,labels,builtin,Built-in database edition,Édition avec base de données intégrée,Edição com banco de dados incluído,Edición de base de datos integrada
+home,paragraphs,heat1,This built-in database edition of the HEAT software uses data from the WHO Health Equity Monitor database (2020 update).,Cette édition avec base de données intégrée du logiciel HEAT s'appuie sur la base de données de l’OMS pour le suivi de l’égalité en santé (mise à jour de 2020).,Esta edição do banco de dados do software HEAT usa dados da base de dados Monitoramento de Equidade em Saúde da OMS (atualizado em 2020),Esta edición del software HEAT con base de datos integrada usa los datos de la base de datos del Monitor de Equidad en Salud de la OMS (actualización 2020)
+home,paragraphs,heat2,HEAT enables the interactive exploration and comparison of health inequalities in countries.,HEAT permet d'étudier les inégalités de santé dans les pays de manière interactive et de faire des comparaisons.,O HEAT permite a exploração interativa e comparação de desigualdades em saúde nos países.,HEAT permite la exploración y comparación interactiva de las desigualdades en salud en los países
+home,paragraphs,heat3a,Use HEAT to,Vous pouvez utiliser HEAT pour,Use o HEAT para,Use HEAT para
+home,paragraphs,heat3b,explore inequalities,étudier les inégalités,explorar desigualdades,explorar desigualdades
+home,paragraphs,heat3c,in one country of interest to determine the latest situation of inequality and the change in inequality over time.,dans un pays et déterminer la situation actuelle et les changements dans le temps en matière d'inégalités.,"em um país de interesse, para determinar a situação mais recente de desigualdade e a mudança das desigualdades ao longo do tempo.",en un país de interés para determinar el estado actual de la situación de desigualdad y el cambio de la desigualdad en el tiempo.
+home,paragraphs,heat4,"Health inequality data, including disaggregated data and summary measures, are visualized in a variety of interactive graphs, maps and tables.","Les données sur les inégalités en matière de santé, y compris les données désagrégées et les mesures consolidées, sont présentées selon un ensemble de graphiques, de cartes et de tableaux interactifs.","Dados sobre desigualdades em saúde, incluindo dados desagregados e medidas sumárias são visualizadas em uma variedade de gráficos interativos, mapas e tabelas.","Los datos de desigualdad en salud, incluyendo datos desagregados y mediciones sintéticas, se visualizan en una variedad de gráficas, mapas y tablas interactivas."
+home,paragraphs,heat5a,Use HEAT to,Vous pouvez utiliser HEAT pour,Use o HEAT para,Use HEAT para
+home,paragraphs,heat5b,compare inequalities,comparer les inégalités,comparar desigualdades,comparar desigualdades
+home,paragraphs,heat5c,in one country of interest with the situation in other countries and do benchmarking.,dans un pays avec la situation dans d'autres et établir des points de référence.,em um país de interesse com a situação em outros países comparativos.,en un país de interés con la situación en otros países y hacer referenciamiento.
+home,paragraphs,heat6,Customized results can be exported and saved in different formats.,Les résultats personnalisés peuvent être exportés et sauvegardés dans différents formats.,Resultados customizados podem ser exportados e salvos em diferentes formatos.,Los resultados personalizados pueden ser exportados y guardados en diferentes formatos.
+home,paragraphs,heat7,"Measuring and monitoring health inequalities is crucial to identify differences in health between different population subgroups, providing important evidence for policies, programmes and practices that aim to tackle health inequities and achieve health for all.","Il est essentiel de mesurer et d'effectuer un suivi des inégalités de santé pour mettre en évidence les différences en matière de santé entre les sous-groupes de population, pour fournir des données factuelles importantes en vue d'établir des politiques, des programmes et des pratiques qui visent à lutter contre les inégalités de santé et à parvenir à la santé pour tous.","Medir e monitorar desigualdades em saúde é crucial para identificar diferenças em saúde entre diferentes subgrupos da população, fornecendo importante evidência para políticas, programas e práticas que objetivam combater desigualdades em saúde e alcançar saúde para todos.","La medición y el monitoreo de las desigualdades en salud son cruciales para identificar diferencias en la salud entre diferentes subgrupos poblacionales, proporcionando evidencia importante para las políticas, los programas y las prácticas digiridas a combatir las inequidades en salud y alcanzar la salud para todos."
+home,paragraphs,heat8,The Health Equity Assessment Toolkit facilitates the analysis and reporting of health inequality data. Disaggregated data and summary measures are visualised in a variety of interactive ways. Customized results can be exported and used to inform priority-setting and policy-making.,L'outil d'évaluation de l'équité en santé (HEAT) permet l'analyse des données sur les inégalités de santé et l'établissement d'un rapport. Les données désagrégées et les mesures consolidées sont présentées par des moyens interactifs. Les résultats personnalisés peuvent être exportés et utilisés pour orienter l'établissement des priorités et l'élaboration des politiques.,A Ferramenta de Avaliação de Equidade em Saúde (HEAT) facilita a análise e reporte de dados de desigualdades em saúde. Dados disagregados e medidas sumárias são visualizadas em uma variedade de modos interativos. Resultados customizados podem ser exportados e usados para informar prioridades e formulação de políticas,La Herramienta de Valoración de la Equidad en Salud facilita el análisis y el reporte de datos sobre desigualdad en salud. Los datos desagregados y las mediciones sintéticas son visualizadas en una variedad de formas interactivas. Los resultados personalizados pueden ser exportados y usados para informar el establecimiento de prioridades y la definición de políticas.
+home,paragraphs,heat9a,The built-in database edition of the software (HEAT) uses data from the,Cette édition avec base de données intégrée du logiciel (HEAT) s'appuie sur la,A edição da base de dados do software (HEAT) usa dados da,La edición de base de datos integrada del software (HEAT) usa los datos de la
+home,paragraphs,heat9b,WHO Health Equity Monitor database,base de données de l'OMS pour le suivi de l'équité en santé,base de dados do Monitoramento de Equidade em Saúde da OMS,base de datos del Monitor de Equidad en Salud de la OMS
+home,paragraphs,heat9c,(2020 update).,(mise à jour de 2020).,(atualizado em 2020).,(actualización 2020).
+home,paragraphs,heat10a,The upload database edition of the software (HEAT Plus) is available on the,L'édition avec base de données à télécharger du logiciel (HEAT Plus) est disponible sur le,A edição do banco de dados de carregamento do software (HEAT Plus) está disponível no,La edición para carga de base de datos del software (HEAT Plus) está disponible en la
+home,paragraphs,heat10b,WHO website,site Internet de l'OMS,site da OMS,página web de la OMS
+home,paragraphs,heat10c,.,.,.,.
+home,paragraphs,heat11a,"For more information about the World Health Organization’s work on health inequality monitoring, please visit the","Pour plus d'informations sur le travail de l'Organisation mondiale de la Santé concernant le suivi des inégalités de santé, veuillez visiter la","Para mais informações sobre o trabalho da Organização Mundial da Saúde sobre o monitoramento de desigualdades em saúde, por favor, visite o","Para más información acerca del trabajo de la Organización Mundial de la Salud en el monitoreo de la desigualdad en salud, por favor visite el"
+home,paragraphs,heat11b,WHO Health Equity Monitor,plateforme de l’OMS pour le suivi de l’égalité en santé,Monitoramento de Equidade em Saúde da OMS,Monitor de Equidad en Salud de la OMS
+home,paragraphs,heat11c,.,.,.,.
+home,citations,heat1,"Suggested citation: Health Equity Assessment Toolkit (HEAT): Software for exploring and comparing health inequalities in countries. Built-in database edition. Version 4.0. Geneva: WHO, 2021.","Citation suggérée: Outil d’évaluation de l’équité en santé (HEAT): logiciel pour l'étude et la comparaison des inégalités de santé dans les pays. Édition avec base de données intégrée. Version 4.0. Genève, Organisation mondiale de la Santé, 2021.",Citação sugerida: Ferramenta de avaliação de desigualdades em saúde (HEAT): Software desenvolvido para explorar e comparar desigualdades em saúde nos países. Edição com banco de dados incluído. Versão 4.0. Genebra; Organização Mudial da Saúde; 2021.,"Cita sugerida: Herramienta de valoración de la equidad en salud (HEAT): Software para la exploración y comparación de desigualdades en salud en países. Edición de base de datos integrada. Versión 4.0. Ginebra: Organización Mundial de la Salud, 2021."
+home,citations,heat2, ,"Note: ""HEAT"" est l'abréviation du nom anglais du logiciel (Health Equity Assessment Toolkit) et peut être employé comme forme courte pour désigner le produit.","Nota: ""HEAT"" é a abreviação do título em inglês (Health Equity Assessment Toolkit) e pode ser utilizado para referir-se a ferramenta.","Nota: ""HEAT"" es la abreviación acronímica original del título en idioma inglés (Health Equity Assessment Toolkit) y puede ser usada como tal para referirse al producto de modo coloquial."
+home,labels,upload,Upload database edition,Édition avec base de données à télécharger,Edição com possibilidade de upload de banco de dados,Edición para carga de base de datos
+home,labels,managedata,Upload and manage data,Télécharger et gérer les données,Carregue e gerencie os dados,Cargar y administrar datos
+home,paragraphs,heatplus1,"HEAT Plus enables the interactive exploration and comparison of health inequalities, using uploaded datasets.","HEAT Plus permet d'étudier les inégalités de santé dans les pays de manière interactive et de faire des comparaisons, en utilisant les ensembles de données téléchargés.",HEAT Plus permite uma exploração interativa e comparação de desigualdades em saúde usando bases de dados carregadas,HEAT Plus permite la exploración y comparación interactivas de las desigualdades en salud usando conjuntos de datos cargados.
+home,paragraphs,heatplus2a,Use HEAT Plus to,Vous pouvez utiliser HEAT Plus pour,Use o HEAT Plus para,Use HEAT Plus para
+home,paragraphs,heatplus2b,explore inequalities,étudier les inégalités,explorar desigualdades,explorar desigualdades
+home,paragraphs,heatplus2c,in one setting of interest to determine the latest situation of inequality and the change in inequality over time,dans une zone précise en vue de déterminer la situation actuelle et l'évolution dans le temps en matière d'inégalités.,em uma localidade de interesse para determinar a situação mais recente de desigualdade e a mudança da desigualdade ao longo do tempo,en un escenario de interés para determinar el estado actual de la desigualdad y el cambio de la desigualdad en el tiempo.
+home,paragraphs,heatplus3,"Health inequality data, including disaggregated data and summary measures, are visualized in a variety of interactive graphs and tables.","Les données sur les inégalités de santé, y compris les données désagrégées et les mesures consolidées, sont présentées selon un ensemble de graphiques et de tableaux interactifs.",Dados de desigualdade em saúde incluindo dados desagregados e medidas sumárias são visualizadas em uma variedade de gráficos e tabelas interativas,"Los datos de desigualdad en salud, incluyendo datos desagregados y mediciones sintéticas, se visualizan en una variedad de gráficas y tablas interactivas."
+home,paragraphs,heatplus4a,Use HEAT Plus to,Vous pouvez utiliser HEAT Plus pour,Use o HEAT Plus para,Use HEAT Plus para
+home,paragraphs,heatplus4b,compare inequalities,comparer les inégalités,comparar desigualdades,comparar desigualdades
+home,paragraphs,heatplus4c,in one setting of interest with the situation in other settings and do benchmarking.,dans une zone précise par rapport à la situation dans d'autres zones et établir des points de référence.,"em uma localidade de interesse com a situação em outra localidade, como parte de uma avaliação comparativa.",en un escenario de interés con la situación en otros escenarios y hacer referenciamiento.
+home,paragraphs,heatplus5,Customized results can be exported and saved in different formats.,Les résultats personnalisés peuvent être exportés et sauvegardés dans différents formats.,Resultados customizados podem ser exportados e salvos em diferentes formatos.,Los resultados personalizados pueden ser exportados y guardados en diferentes formatos.
+home,paragraphs,heatplus6,"Measuring and monitoring health inequalities is crucial to identify differences in health between different population subgroups, providing important evidence for policies, programmes and practices that aim to tackle health inequities and achieve health for all.","Il est essentiel de mesurer et d'effectuer un suivi des inégalités de santé pour mettre en évidence les différences en matière de santé entre les sous-groupes de population, pour fournir des données factuelles importantes en vue d'établir des politiques, des programmes et des pratiques visant à lutter contre l'inéquité en santé et à parvenir à la santé pour tous.","Medir e monitorar desigualdades em saúde é crucial para identificar diferenças na saúde entre diferentes subgrupos populacionais, fornecendo importante evidência para políticas, programas e práticas que objetivam combater as desigualdades em saúde e alcançar saúde para todos","La medición y el monitoreo de las desigualdades en salud son cruciales para identificar diferencias en la salud entre diferentes subgrupos poblacionales, proporcionando evidencia importante para las políticas, los programas y las prácticas digiridas a combatir las inequidades en salud y alcanzar la salud para todos."
+home,paragraphs,heatplus7,The Health Equity Assessment Toolkit Plus facilitates the analysis and reporting of health inequality data. Disaggregated data and summary measures are visualized in a variety of interactive ways. Customized results can be exported and used to inform priority-setting and policy-making.,L'outil d'évaluation de l'équité en santé permet l'analyse des données sur les inégalités de santé et l'établissement d'un rapport. Les données désagrégées et les mesures consolidées sont présentées par des moyens interactifs. Les résultats personnalisés peuvent être exportés et utilisés pour orienter l'établissement de priorités et l'élaboration de politiques.,A Ferramenta de Avaliação de Equidade em Saúde (HEAT) facilita a análise e reporte de dados de desigualdades em saúde. Dados disagregados e medidas sumárias são visualizadas em uma variedade de modos interativos. Resultados customizados podem ser exportados e usados para informar prioridades e formulação de políticas,La Herramienta de Valoración de la Equidad en Salud facilita el análisis y el reporte de datos sobre desigualdad en salud. Los datos desagregados y las mediciones sintéticas son visualizadas en una variedad de formas interactivas. Los resultados personalizados pueden ser exportados y usados para informar el establecimiento de prioridades y la definición de políticas.
+home,paragraphs,heatplus8a,The built-in database edition of the software (HEAT) is available on the,L'édition avec base de données intégrée du logiciel (HEAT) est disponible sur le,A edição da base de dados do software (HEAT) está disponível no,La edición de base de datos integrada del software (HEAT) está disponible en la
+home,paragraphs,heatplus8b,WHO website,site Internet de l'OMS,site da OMS,página web de la OMS
+home,paragraphs,heatplus8c,. HEAT uses data from the,. HEAT s'appuie sur la,. HEAT usa dados da,. HEAT usa los datos de la
+home,paragraphs,heatplus8d,WHO Health Equity Monitor database,base de données de l'OMS pour le suivi de l'équité en santé,base de dados do Monitoramento de Equidade em Saúde da OMS,base de datos del Monitor de Equidad en Salud de la OMS
+home,paragraphs,heatplus8e,(2020 update).,(mise à jour de 2020).,(atualizado em 2020).,(actualización 2020).
+home,paragraphs,heatplus9a,"For more information about the World Health Organization’s work on health inequality monitoring, please visit the","Pour plus d'informations sur le travail de l'Organisation mondiale de la Santé concernant le suivi des inégalités de santé, veuillez visiter la","Para mais informações sobre o trabalho da Organização Mundial da Saúde sobre o monitoramento de desigualdades em saúde, por favor, visite o","Para más información acerca del trabajo de la Organización Mundial de la Salud en el monitoreo de la desigualdad en salud, por favor visite el"
+home,paragraphs,heatplus9b,WHO Health Equity Monitor,plateforme de l’OMS pour le suivi de l’égalité en santé,Monitoramento de Equidade em Saúde da OMS,Monitor de Equidad en Salud de la OMS
+home,paragraphs,heatplus9c,.,.,.,.
+home,citations,heatplus1,"Suggested citation: Health Equity Assessment Toolkit Plus (HEAT Plus): Software for exploring and comparing health inequalities in countries. Upload database edition. Version 4.0. Geneva: WHO, 2021.","Citation suggérée: Outil complémentaire d’évaluation de l’équité en santé (HEAT Plus): logiciel pour l'étude et la comparaison des inégalités de santé dans les pays. Édition avec base de données à télécharger. Version 4.0. Genève, Organisation mondiale de la Santé, 2021.",Citação sugerida: Ferramenta de avaliação de desigualdades em saúde plus (HEAT Plus): Software desenvolvido para explorar e comparar desigualdades em saúde nos países. Edição com possibilidade de upload de banco de dados. Versão 4.0. Genebra; Organização Mudial da Saúde; 2021.,"Herramienta adicional de valoración de la equidad en salud (HEAT Plus): Software para la exploración y comparación de desigualdades en salud en países. Edición para carga de base de datos. Versión 4.0. Ginebra: Organización Mundial de la Salud, 2021."
+home,citations,heatplus2,"WHO provides this toolkit without data, and all data added to, or resulting from, the toolkit are the sole responsibility of the user, not WHO.","L'OMS ne fournit pas de données avec ce logiciel, et toutes les données qui y sont ajoutées ou en sont issues relèvent de la responsabilité exclusive de l'utilisateur, et non de la responsabilité de l'OMS.","A OMS disponibiliza esta ferramenta sem banco de dados, e todos os dados adicionados a ela, ou resultantes da mesma são de responsibilidade exclusiva do usuário, não da OMS.","La OMS proporciona esta herramienta sin datos; cualesquiera datos agregados a, o que resulten de, la herramienta son de responsabilidad exclusiva del usuario, no de la OMS."
+home,citations,heatplus3, ,"Note: ""HEAT Plus"" est l'abréviation du nom anglais du logiciel (Health Equity Assessment Toolkit Plus) et peut être employé comme forme courte pour désigner le produit.","Nota: ""HEAT Plus"" é a abreviação do título em inglês (Health Equity Assessment Toolkit Plus) e pode ser utilizado para referir-se a ferramenta.","Nota: ""HEAT Plus"" es la abreviación acronímica original del título en idioma inglés (Health Equity Assessment Toolkit Plus) y puede ser usada como tal para referirse al producto de modo coloquial."
+manager,labels,managedata,Manage data,Gestion des données,Gerenciar os dados,Administrar datos
+manager,labels,uploadnew,Upload new database,Charger une nouvelle base de données,Upload de um novo banco de dados,Cargar una nueva base de datos
+manager,labels,select,Select database,Sélectionner une base de données,Selecionar banco de dados,Seleccionar la base de datos
+manager,labels,disclaimer,Datasets have to be in a specific format and stored as comma separated values (csv) or Microsoft Excel (xls or xlsx) files in order to be uploaded to HEAT Plus. The HEAT Plus template and validation tool helps you prepare your data according to the template and validate that your dataset has been formatted correctly. Please refer to the user manual for further information.,Les ensembles de données doivent être dans un format spécifique et sauvegardés en tant que fichiers csv (comma separated value) ou xls/xlsx (Microsoft Excel) pour être téléchargés dans HEAT Plus. Le modèle de présentation de HEAT Plus et l'outil de validation vous aident à préparer vos données en fonction du modèle et à vérifier que votre ensemble de données a été formaté correctement. Veuillez consulter le manuel d'utilisation pour plus d'informations.,Os bancos de dados devem estar em um formato específico e armazenados como arquivos de valores separados por vírgula (csv) ou Microsoft Excel (xls ou xlsx) para serem carregados pelo HEAT Plus. A ferramenta de modelo e validação do HEAT Plus ajuda a preparar seus dados de acordo com o modelo e verifica que seu banco de dados foi formatado corretamente. Por favor veja o manual do usuário para mais informações,"Los conjuntos de datos (datasets) tienen que estar configurados en un formato específico y almacenados como archivos de valores separados por comas (csv) o Microsoft Excel (xls o xlsx) para que puedan ser cargados en el HEAT Plus. La plantilla y herramienta de validación de HEAT Plus le ayuda a preparar sus datos de acuerdo a la plantilla y a validar que su conjunto de datos ha sido formateado correctamente. Por favor, refiérase al manual del usuario para más información."
+manager,labels,choose,Choose file,Sélectionner un fichier,Escolha o arquivo,Escojer el archivo
+manager,labels,browse,Browse,Parcourir,Procurar,Navegar
+manager,labels,nonechosen,No file chosen,Aucun fichier n'a été sélectionné,Nenhum arquivo escolhido,No se ha elegido ningún archivo
+manager,labels,downloads,Download the,Télécharger le,Baixe a,Descargar la
+manager,labels,downloadsa,template and validation tool,modèle et outil de validation,ferramenta de modelo e validação,plantilla y herramienta de validación
+manager,labels,downloadsb,and,et le,e o,y el
+manager,labels,downloadsc,user manual,manuel d'utilisation,manual do usuário,manual del usuario
+manager,labels,saveas,Save database as,Sauvegarder la base de données sous,Salvar o banco de dados como,Guardar la base de datos como
+manager,labels,choosename,Choose filename,Choisir un nom de fichier,Escolha o nome do arquivo,Escojer el nombre del archivo
+manager,labels,upload,Upload database,Télécharger la base de données,Carregue a base de dados,Cargado de la base de datos
+manager,uploads,start,Upload starting,Téléchargement,Iniciando o carregamento,Se inició el cargado
+manager,uploads,measures,Creating summary measures,Créer des mesures consolidées,Criando medidas sumárias,Crear mediciones sintéticas
+manager,uploads,strata,Creating strata,Créer des strates,Criando estratos,Crear estratos
+manager,uploads,dimensions,Creating dimensions,Créer des dimensions,Criando dimensões,Crear dimensiones
+manager,uploads,saving,Saving results,Sauvegarder les résultats,Salvando resultados,Guardar los resultados
+manager,uploads,complete,Upload complete,Téléchargement terminé,Carregamento completo,Se completó el cargado
+manager,uploads,success,Upload successful,Téléchargement réussi,Carregamento bem sucessido,Cargado exitoso
+manager,uploads,uploaded,The database was uploaded.,La base de données a été téléchargée,A base de dados foi carregada,La base de datos fue cargada.
+manager,warnings,fileerror,Error in file,Erreur de fichier,Erro no arquivo,Error en el archivo
+manager,warnings,variables,The file does not have all the required variables,Des variables sont manquantes dans le fichier,O arquivo não tem todas as variáveis necessárias,El archivo no contiene todas las variables requeridas.
+manager,warnings,mandatory,One of the mandatory variables has missing values,Il manque des valeurs pour l'une des variables obligatoires,Uma das variáveis obrigatórias tem valores missing,Una de las variables obligatorias tiene valores faltantes
+manager,warnings,notmandatory,"There are missing values in the estimate variable. While not mandatory, if data for this variable are missing some calculations will not function in HEAT Plus.","Il manque des valeurs dans la variable d'estimation. Bien que ces données ne soient pas obligatoires, leur absence empêchera la réalisation de certains calculs dans HEAT Plus.","Existem valores missing na variável estimada. Mesmo que não sejam dados obrigatórios, caso os dados para esta variável sejam missing, alguns cálculos não irão funcionar no HEAT Plus","Hay valores faltantes en la variable de estimación.  Aunque no es mandatorio, si hay datos faltantes para esta variable algunos cálculos no funcionarán en HEAT Plus"
+manager,warnings,characters,Not all character variables contain characters (text/string),Les variables de caractère ne comprennent pas toutes des caractères (text/string),Nem todas variáveis textuais contém caracteres (texto),No todas las variables de caracteres contienen caracteres (texto/cadena)
+manager,warnings,iso3,Not all ISO3 values are three characters,Les valeurs ISO3 ne comprennent pas toutes trois caractères,Nem todos valores de ISO3 são três caracteres,No todos los valores ISO-3 tienen tres caracteres
+manager,warnings,numbers,Variables that should be only numbers contain characters (text/string),Les variables qui ne devraient se composer que de chiffres contiennent aussi des caractères (text/string),Variáveis que deveriam conter apenas números contém caracteres (texto),Las variables que deberían tener solamente números contienen caracteres (texto/cadena)
+manager,warnings,years,Not all years are four-digit numbers,Les années ne sont pas toutes composées de quatre chiffres,Nem todos os anos são números de 4 dígitos,No todos los años son números de cuatro dígitos
+manager,warnings,integers,There are decimal numbers where integers are required,Il y a des nombres décimaux là où des nombres entiers sont requis,Existem números decimais quando inteiros são requeridos,Hay números decimales donde se requieren enteros.
+manager,warnings,negatives,There are negative numbers where negative numbers are not allowed,Il y a des nombres négatifs là où les nombres négatifs ne sont pas autorisés,Existem números negativos quando números negativos não são permitidos,Hay números negativos donde no se permiten números negativos
+manager,warnings,positives,Variables that must be positive or missing are negative,Les variables devant être positives ou manquantes sont négatives,Variáveis que devem ser positivas ou missing são negativas,Las variables que deben ser positivas o faltantes son negativas
+manager,warnings,binary,Variables that must be binary have non 1/0 values,Les variables devant être binaires ne comprennent pas 1 ou 0,Variáveis que devem ser binárias não têm valores 1/0,Las variables que deben ser binarias tienen valores diferentes de 0 y 1
+manager,warnings,orderedvars,There is a problem with the ordered variables,Il y a un problème avec les variables demandées,Existe um problema com as variáveis ordenadas,Hay un problema con las variables ordenadas
+manager,warnings,sequence,Subgroup order must be an increasing sequence of integers starting with 1 when ordered dimension = 1,L'ordre des sous-groupes doit se constituer d'une séquence croissante de nombres entiers commençant par 1 lorsque la dimension demandée = 1,Ordem dos subgrupos deve ser uma sequência crescente de inteiros começando com 1 quando a dimensão ordenada = 1,El orden de los subgrupos debe ser una secuencia ascendente de números enteros comenzando con 1 cuando la dimensión ordenada = 1
+manager,warnings,settings,Setting and ISO3 are not consistent,Les valeurs de zone et d'ISO3 ne sont pas cohérentes,Localidade e ISO3 não são consistentes,El escenario y el ISO-3 no son consistentes
+manager,warnings,abbreviations,Indicator abbreviation and name are not uniquely matched,L'abréviation de l'indicateur et le nom ne forment pas une correspondance unique,Abreviação do indicador e nome não estão unicamente combinadas,La abreviación y el nombre del indicador no coinciden de forma única.
+manager,warnings,indidcators,Indicator information is not consistent,L'information sur l'indicateur n'est pas cohérente,Informação do indicador não é consistente,La información del indicador no es consistente
+manager,warnings,ordereddims,There is inconsistency in ordered dimensions,Il y a une incohérence dans les dimensions demandées,Existe inconsistência nas dimesões ordenadas,Hay inconsistencia en las dimensiones ordenadas
+manager,text,or,Or,Ou,Ou,O
+manager,labels,open,Open existing database,Ouvrir une base de données existante,Abrir um banco de dados existente,Abrir una base de datos existente
+manager,labels,successopen,Data successfully opened,Données ouvertes avec succès,Dados abertos com sucesso,Datos desplegados exitosamente
+manager,text,done,Done,Fait,Pronto,Hecho
+navigation,labels,hline,Horizontal line,Ligne horizontale,Linha horizontal,Línea horizontal
+navigation,labels,vbar,Vertical bar,Barre verticale,Barra vertical,Barra vertical
+navigation,labels,hbar,Horizontal bar,Barre horizontale,Barra horizontal,Barra horizontal
+navigation,labels,map,Map,Carte,Mapa,Mapa
+navigation,labels,table,Table,Tableau,Tabela,Tabla
+navigation,labels,bar,Bar,Barre,Barra,Barra
+navigation,labels,line,Line,Ligne,Linha,Línea
+navigation,labels,graph,Graph,Graphique,Gráfico,Gráfica
+sidepanel,labels,selection,Selection,Sélection,Seleção,Selección
+inputs,labels,setting,"Setting (e.g. country, province, district)","Zone (par exemple, pays, province, district)","Localidade (ex. país, província, distrito)","Escenario (e.g., pais, provincia, distrito)"
+inputs,labels,source_plural,Data sources,Sources de données,Fontes de dados,Fuentes de datos
+inputs,labels,year,Year,Année,Ano,Año
+inputs,labels,year_plural,Years,Années,Anos,Años
+inputs,labels,recent,Most recent year,Année la plus récente,Ano mais recente,Año más reciente
+inputs,labels,indicator,Health indicator,Indicateur de santé,Indicador de saúde,Indicador de salud
+inputs,labels,indicator_plural,Health indicators,Indicateurs de santé,Indicadores de saúde,Indicadores de salud
+inputs,labels,dimension,Inequality dimension,Dimension d'inégalité,Dimensão de desigualdade,Dimensión de desigualdad
+inputs,labels,dimension_plural,Inequality dimensions,Dimensions d'inégalité,Dimensões de desigualdade,Dimensiones de desigualdad
+inputs,labels,measure,Summary measure,Mesure consolidée,Medida sumária,Medición sintética
+inputs,labels,measure_plural,Summary measures,Mesures consolidées,Medidas sumárias,Mediciones sintéticas
+values,indicators,aci,Absolute concentration index (ACI),Indice de concentration absolue (ACI),Índice de concentração absoluto (ACI),Índice de concentración absoluto (ACI)
+values,indicators,bgsd,Between-group standard deviation (BGSD),Écart-type intergroupe (BGSD),Desvio padrão entre grupos (BGSD),Desviación estándar entre grupos (BGSD)
+values,indicators,bgv,Between-group variance (BGV),Variance intergroupe (BGV),Variância entre grupos (BGV),Varianza entre grupos (BGV)
+values,indicators,cov,Coefficient of variation (COV),Coefficient de variation (COV),Coeficiente de variação (COV),Coeficiente de variación (COV)
+values,indicators,d,Difference (D),Différence (D),Diferença (D),Diferencia (D)
+values,indicators,idisu,Index of disparity (unweighted) (IDISU),Indice de disparité (non pondéré) (IDISU),Índice de disparidade (não-ponderado) (IDISU),Índice de disparidad (no-ponderado) (IDISU)
+values,indicators,idisw,Index of disparity (weighted) (IDISW),Indice de disparité (pondéré) (IDISW),Índice de disparidade (ponderado) (IDISW),Índice de disparidad (ponderado) (IDISW)
+values,indicators,mdbu,Mean difference from best performing subgroup (unweighted) (MDBU),Différence moyenne par rapport au sous-groupe le plus performant (non pondérée) (MDBU),Diferença média do subgrupo de melhor desempenho (não ponderada) (MDBU),Diferencia media del subgrupo de mejor rendimiento (no-ponderada) (MDBU)
+values,indicators,mdbw,Mean difference from best performing subgreoup (weighted) (MDBW),Différence moyenne par rapport au sous-groupe le plus performant (pondérée) (MDBW),Diferença média do subgrupo de melhor desempenho (ponderada) (MDBW),Diferencia media del subgrupo de mejor rendimiento (ponderada) (MDBW)
+values,indicators,mdmu,Mean difference from mean (unweighted) (MDMU),Différence moyenne par rapport à la moyenne (non pondérée) (MDMU),Diferença média da média (não ponderada) (MDMU),Diferencia media del promedio (no-ponderada) (MDMU)
+values,indicators,mdmw,Mean difference from mean (weighted) (MDMW),Différence moyenne par rapport à la moyenne (pondérée) (MDMW),Diferença média da média (ponderada) (MDMW),Diferencia media del promedio (ponderada) (MDMW)
+values,indicators,mld,Mean log deviation (MLD),Déviation log moyenne (MLD),Desvio médio de log (MLD),Desviación log media (MLD)
+values,indicators,paf,Population attributable fraction (PAF),Fraction attribuable dans la population (PAF),Fração atribuível populacional (PAF),Fracción atribuible poblacional (PAF)
+values,indicators,par,Population attributable risk (PAR),Risque attribuable dans la population (PAR),Risco atribuível populacional (PAR),Riesgo atribuible poblacional (PAR)
+values,indicators,r,Ratio (R),Ratio (R),Razão (R),Razón (R)
+values,indicators,rci,Relative concentration index (RCI),Indice de concentration relative (RCI),Índice de concentração relativo (RCI),Índice de concentración relativo (RCI)
+values,indicators,rii,Relative index of inequality (RII),Indice d'inégalité relative (RII),Índice de desigualdade relativo (RII),Índice de desigualdad relativo (RII)
+values,indicators,sii,Slope index of inequality (SII),Indice de pente d'inégalité (SII),Índice de desigualdade absoluto (SII),Índice de desigualdad de la pendiente (SII)
+values,indicators,ti,Theil index (TI),Indice de Theil (TI),Índice de Theil (TI),Índice de Theil (TI)
+inputs,placeholders,selection,Make a selection,Sélectionner,Faça uma seleção,Haga una selección
+sidepanel,labels,options,Options,Options,Opções,Opciones
+options,labels,range,Axis range,Plage de l'axe,Intervalo do eixo,Rango de los ejes
+options,labels,min,Axis minimum,Valeur minimum de l'axe,Eixo máximo,Eje mínimo
+options,labels,max,Axis maximum,Valeur maximum de l'axe,Eixo mínimo,Eje máximo
+options,labels,hmin,Horizontal axis minimum,Valeur minimum de l'axe horizontal,Eixo horizontal mínimo,Mínimo en el eje horizontal
+options,labels,hmax,Horizontal axis maximum,Valeur maximum de l'axe horizontal,Eixo horizontal máximo,Máximo en el eje horizontal
+options,labels,vmin,Vertical axis minimum,Valeur minimum de l'axe vertical,Eixo vertical mínimo,Mínimo en el eje vertical
+options,labels,vmax,Vertical axis maximum,Valeur maximum de l'axe horizontal,Eixo vertical máximo,Máximo en el eje vertical
+options,labels,graph,Graph titles,Titres des graphiques,Títulos dos gráficos,Títulos de la gráfica
+options,labels,title,Main title,Titre principal,Título,Etiquetas de datos
+options,labels,htitle,Horizontal axis title,Titre de l'axe horizontal,Título do eixo horizontal,Título del eje horizontal
+options,labels,vtitle,Vertical axis title,Titre de l'axe vertical,Título do eixo vertical,Título del eje vertical
+options,labels,data,Data labels,Étiquettes des données,Rótulos dos dados,Etiquetas de datos
+options,labels,size,Size,Taille,Tamanho,Tamaño
+options,values,none,None,Aucune,Nenhum,Ninguno
+options,values,small,Small,Faible,Pequeno,Pequeño
+options,values,medium,Medium,Intermédiaire,Médio,Mediano
+options,values,large,Large,Élevée,Grande,Grande
+options,labels,decimals,Number of decimals,Nombre de décimales,Número de casas decimais,Número de decimales
+options,labels,ci,Confidence interval,Intervalle de confiance,Intervalo de confiança,Intervalo de confianza
+options,labels,include95,Include 95% confidence interval,Inclure un intervalle de confiance de 95%,Incluir intervalo de confiança de 95%,Incluir intervalo de confianza al 95%
+options,labels,reference,Reference lines,Lignes de référence,Linhas de referências,Líneas de referencia
+options,labels,average,Setting average,Moyenne pour la zone,Média da localidade,Estableciendo el promedio
+options,labels,median,Median,Médiane,Mediana,Mediana
+options,labels,sortdata,Sort data,Classer les données,Ordenar os dados,Ordenar los datos
+options,labels,sortby,Sort by,Classer par,Ordenar por,Ordenar por
+options,labels,subgroup,Subgroup,Sous-groupe,Subgrupo,Subgrupo
+options,labels,indicator,Indicator,Indicateur,Indicador,Indicador
+options,labels,sortorder,Sort order,Ordre de classement,Ordem de classificação,Definir el orden
+options,labels,ascending,Ascending,Croissant,Ordem crescente,Ascendente
+options,labels,descending,Descending,Décroissant,Ordem decrescente,Descendente
+options,labels,highlight,Highlight subgroup,Mettre en évidence le sous-groupe,Destacar subgrupo,Resaltar un subgrupo
+options,labels,content,Table content,Contenu du tableau,Conteúdo da tabela,Contenido de la tabla
+options,labels,variables,Variables,Variables,Variáveis,Variables
+options,values,setting,Setting,Zone,Localidade,Escenario
+options,values,year,Year,Année,Ano,Año
+options,values,source,Source,Source,Fonte,Fuente
+options,values,indicatorabbr,Indicator abbreviation,Abréviation de l'indicateur,Abreviação do indicador,Abreviatura del indicador
+options,values,indicatorname,Indicator name,Nom de l'indicateur,Nome do indicador,Nombre del indicador
+options,values,dimension,Dimension,Dimension,Dimensão,Dimensión
+options,values,subgroup,Subgroup,Sous-groupe,Subgrupo,Subgrupo
+options,values,measureabbr,Summary measure abbreviation,Abréviation de la mesure consolidée,Abreviação da medida sumária,Abreviatura de la medición sintética
+options,values,measurename,Summary measure name,Nom de la mesure consolidée,Nome da medida sumária,Nombre de la Medición sintética
+options,values,estimate,Estimate,Estimation,Estimativa,Estimado
+options,values,lowerbound,95% CI lower bound,IC 95 % - limite inférieure,Limite inferior do IC 95%,Límite inferior IC95%
+options,values,upperbound,95% CI upper bound,IC 95 % - limite supérieure,Limite superior do IC 95%,Límite superior IC95%
+options,values,popshare,Population share,Part de la population,Percentual da população,Cuota poblacional
+options,values,flag,Flag,À signaler,Marcação,Alerta
+options,values,settingavg,Setting average,Moyenne pour la zone,Média da localidade,Promedio del escenario
+options,values,format,Format,Format,Formato,Formato
+options,labels,graphstyle,Graph style,Style de graphique,Estilo do gráfico,Estilo de gráfica
+options,labels,points,Points,Points,Pontos,Puntos
+options,labels,iso3,ISO 3 labels,Étiquettes ISO3,Rótulos ISO 3,Etiquetas ISO-3
+options,labels,setting,Setting labels,Étiquettes de zone,Definir rótulos,Etiquetas del escenario
+sidepanel,labels,downloads,Downloads,Téléchargements,Baixar,Descargas
+downloads,labels,graph,Graph download,Télécharger le graphique,Baixar o gráfico,Descarga de la gráfica
+downloads,text,graph,The graph will be downloaded as a png or jpg image or pdf. Titles and axis labels will be displayed according to your selections.,"Le graphique sera téléchargé en tant qu'image au format png ou jpg, ou au format pdf. Les titres et les noms de l'axe seront affichés selon vos choix.",O gráfico será baixado como uma imagem em png ou jpg ou como pdf. Títulos e rótulos dos eixos serão apresentados de acordo com suas seleções,La gráfica será descargada como una imagen png o jpg o pdf. Los títulos y etiquetas de eje serán presentadas de acuerdo a su selección.
+downloads,text,map,The graph will be downloaded as a png or jpg image or pdf. Titles will be displayed according to your selections.,"Le graphique sera téléchargé en tant qu'image au format png ou jpg, ou au format pdf. Les titres seront affichés selon vos choix.",O gráfico será baixado como uma imagem em png ou jpg ou como pdf. Títulos serão mostrados de acordo com suas seleções,La gráfica será descargada como una imagen png o jpg o pdf. Los títulos serán presentadas de acuerdo a su selección.
+downloads,labels,image,Select image type,Sélectionner le type d'image,Selecione o tipo de imagem,Seleccionar el tipo de imagen
+downloads,buttons,graph,Download graph,Télécharger le graphique,Baixar gráfico,Descargar gráfico
+downloads,labels,data,Data download,Télécharger les données,Baixar os dados,Descarga de datos
+downloads,labels,separator,Select field separator,Sélectionner le séparateur de champs,Selecione separador de campo,Seleccionar el separador de campo
+downloads,text,data,"The data will be downloaded as a text file with values separated by commas or tabs, according to your selection. These can be opened in a text editor or spreadsheet package.","Les données du tableau seront téléchargées sous la forme d'un fichier texte dans lequel les valeurs seront séparées par une virgule ou une tabulation. Sélectionnez votre séparateur de champ, puis téléchargez les données pour les ouvrir dans un éditeur de texte ou un tableur.",Os dados da tabela serão baixados como texto separado por vírgula ou tabulação. Selecione seu separador preferido e depois baixe os dados. Estes podem ser abertos em um editor de textos ou em uma planilha.,"Los datos serán descargados como archivo de texto con valores separados por comas o tabulaciones (tabs), según su selección. Este archivo podrá ser abierto en un editor de texto o un editor de hojas de cálculo."
+downloads,values,commas,Commas,Virgules,Vírgulas,Comas
+downloads,values,tabs,Tabs,Tabulations,Abas,Pestañas
+downloads,buttons,data,Download data,Télécharger les données,Baixar dados,Descargar datos
+sidepanel,labels,summaries,Summary measures,Mesures consolidées,Medidas sumárias,Mediciones sintéticas
+sidepanel,text,calculations,"Difference and ratio measures are calculated for dimensions with 30 subgroups or more. If estimates are not available, then summary measures cannot be calculated.","Les mesures de ratio et de différence sont calculées pour des dimensions avec 30 sous-groupes ou plus. Si les estimations ne sont pas disponibles, les mesures consolidées ne peuvent pas être calculées.","Medidas de diferença e razão são calculadas para dimensões com 30 subgrupos ou mais. Se estimativas não estão disponíveis, então as medidas sumárias não podem ser calculadas.","Las mediciones de diferencia y de razón son calculadas para dimensiones con 30 o más subgrupos. Si los estimados no están disponibles, entonces las mediciones sintéticas no pueden ser calculadas."
+sidepanel,table,measure,Summary measure,Mesure consolidée,Medida sumária,Medición sintética
+sidepanel,table,estimate,Estimate,Estimation,Estimativa,Estimado
+sidepanel,difference,percentile8020,Difference (percentile 80 - percentile 20),Différence (80e centile - 20e centile),Diferença (percentil 80 - percentil 20),Diferencia (percentil 80 - percentil 20)
+sidepanel,ratio,ratio8020,Ratio (percentile 80 / percentile 20),Ratio (80e centile / 20e centile),Razão (percentil 80 / percentil 20),Razón (percentil 80 / percentil 20)
+sidepanel,difference,quintile51,Difference (mean quintile 5 - mean quintile 1),Différence (moyenne 5e quintile - moyenne 1er quintile),Diferença (média quintil 5 - média quintil 1),Diferencia (promedio quintil 5 - promedio quintil 1)
+sidepanel,ratio,quintile51,Ratio (mean quintile 5 / mean quintile 1),Ratio (moyenne 5e quintile / moyenne 1er quintile),Razão (média quintil 5 / média quintil 1),Razón (promedio quintil 5 / promedio quintil 1)
+sidepanel,difference,percentile9010,Difference (percentile 90 - percentile 10),Différence (90e centile - 10e centile),Diferença (percentil 90 - percentil 10),Diferencia (percentil 90 - percentil 10)
+sidepanel,ratio,percentile9010,Ratio (percentile 90 / percentile 10),Ratio (90e centile / 10e centile),Razão (percentil 90 / percentil 10),Razón (percentil 90 / percentil 10)
+sidepanel,difference,decile9010,Difference (mean decile 90 - mean decile 10),Différence (moyenne 90e centile - moyenne 10e centile),Diferença (média percentil 90 - média percentil 10),Diferencia (promedio percentil 90 - promedio percentil 10)
+sidepanel,ratio,decile9010,Ratio (mean decile 90 / mean decile 10),Ratio (moyenne 90e centile - moyenne 10e centile),Razão (média percentil 90 / média percentil 10),Razón (promedio percentil 90 / promedio percentil 10)
+sidepanel,difference,percentile955,Difference (percentile 95 - percentile 5),Différence (95e centile - 5e centile),Diferença (percentil 95 - percentil 5),Diferencia (percentil 95 - percentil 5)
+sidepanel,ratio,percentile955,Ratio (percentile 95 / percentile 5),Ratio (95e centile / 5e centile),Razão (percentil 95 / percentil 5),Razón (percentil 95 / percentil 5)
+sidepanel,difference,topbottom,Difference (mean top 5%  - mean bottom 5%),Différence (moyenne des 5% supérieurs - moyenne des 5% inférieurs),Diferença (média 5% superior - média 5% inferior),Diferencia (promedio 5% superior - promedio 5% inferior)
+sidepanel,ratio,topbottom,Ratio (mean top 5% / mean bottom 5%),Ratio (moyenne des 5% supérieurs / moyenne des 5% inférieurs),Razão (média 5% superior / média 5% inferior),Razón (promedio 5% superior / promedio 5% inferior)
+sidepanel,labels,benchmark,Benchmarks,Points de référence,Referências,Cotas de referencia
+benchmarks,labels,income,Filter by country-income group,Filtrer par groupe de revenu du pays,Filtrar por grupo de renda dos países,Filtrar por grupo de pais según ingreso
+values,groups,highincome,High income,Haut revenu,Renda alta,Ingreso alto
+values,groups,uppermiddleincome,Upper middle income,Revenu intermédiaire supérieur,Renda média alta,Ingreso medio alto
+values,groups,lowermiddleincome,Lower middle income,Revenu intermédiaire inférieur,Renda média baixa,Ingreso medio bajo
+values,groups,lowincome,Low income,Faible revenu,Renda baixa,Ingreso bajo
+benchmarks,labels,region,Filter by WHO region,Filtrer par région de l'OMS,Filtrar por região da OMS,Filtrar por región de la OMS
+values,regions,african,African,Afrique,Africano,de África
+values,regions,americas,Americas,Amériques,Américas,de las Américas
+values,regions,easternmediterranean,Eastern Mediterranean,Méditerranée orientale,Mediterrâneo Oriental,del Mediterráneo Oriental
+values,regions,european,European,Europe,Europeu,de Europa
+values,regions,southeastasia,South-East Asia,Asie du Sud-Est,Sudeste Asiático,de Asia Sudoriental
+values,regions,westernpacific,Western Pacific,Pacifique occidental,Pacífico Ocidental,del Pacífico Occidental
+benchmarks,labels,setting,Select comparison settings,Sélectionner les paramètres de comparaison,Selecione o local de comparação,Seleccionar comparación de escenarios
+benchmarks,labels,year,Select years,Sélectionner l'année,Selecione o ano,Seleccionar el año
+benchmarks,text,year,By how many years can the benchmark settings' data vary from the focus setting's data?,De combien d'années les données des zones de référence peuvent varier par rapport aux données des zones ciblées ?,Por quantos anos os dados das localidades comparativas podem variar dos dados da localidade selecionada?,¿Por cuántos años los datos del escenario de referencia varían de los datos del escenario de interés?
+charts,warnings,available,"Estimates are displayed when data are available for the selected combination of variables; if estimates are not shown, data are not available.","Les estimations sont affichées lorsque les données sont disponibles pour la combinaison de variables sélectionnée. Si les estimations ne sont pas affichées, c'est que les données ne sont pas disponibles.","Estimativas são apresentadas quando dados estão disponíveis para uma combinação selecionada de variáveis; se estimativas não são mostradas, os dados não estão disponíveis","Los estimados son presentados cuando existen datos disponibles para la combinación de variables seleccionada; si los estimados no aparecen, no hay datos disponibles."
+charts,warnings,availablemap,"Estimates are displayed when data for the selected combination of variables and boundaries of subnational regions that match those in the data are available; if estimates are not shown, either data or boundaries are not available. Maps are not available for MICS and RHS data.","Les estimations sont affichées lorsque les données sont disponibles pour la combinaison de variables sélectionnée et les limites des régions infranationales qui correspondent à celles des données. Si les estimations ne sont pas affichées, c'est que les données ou les limites ne sont pas disponibles. Les cartes ne sont pas disponibles pour les données tirées des enquêtes en grappes à indicateurs multiples ni pour celles concernant les enquêtes sur la santé reproductive.","As estimativas são exibidas quando a combinação de variáveis e limites das regiões subnacionais selecionadas correspondem aos dados disponíveis; se as estimativas não forem exibidas, os dados ou os limites das regiões não estão disponíveis. Mapas não estão disponíveis para inquéritos MICS e RHS.","Las estimaciones se muestran cuando están disponibles los datos para la combinación seleccionada de variables y límites de regiones subnacionales que coinciden con los de los datos; si no se muestran estimaciones, los datos o los límites no están disponibles. Los mapas no están disponibles para los datos de encuestas MICS y RHS."
+charts,disclaimers,nodefault,There is no data for this combination of variables.,Il n’y a pas de données pour cette combinaison de variables.,Não existem dados para essa combinação de variáveis.,No hay datos para esta combinación de variables.
+charts,disclaimers,nomap,There is either no data for this combination of variables or there are no boundaries of subnational regions that match those in the data. Maps are not available for MICS and RHS data.,"Soit il n’y a pas de données pour cette combinaison de variables, soit il n’y a pas de limites des régions infranationales qui correspondent à celles des données. Les cartes ne sont pas disponibles pour les données tirées des enquêtes en grappes à indicateurs multiples ni pour celles concernant les enquêtes sur la santé reproductive.","Não existem dados para a combinação de variáveis, ou os limites das regiões subnacionais não correspondem aos dados disponíveis. Mapas não estão disponíveis para inquéritos MICS e RHS.",No hay datos para esta combinación de variables o no hay límites de regiones subnacionales que coincidan con los de los datos. Los mapas no están disponibles para los datos de encuestas MICS y RHS.
+charts,titles,comparedisag,[indicator_name] by [dimension] in [number_settings] settings,[indicator_name] par [dimension] dans [number_settings] zones,[indicator_name] por [dimension] em [number_settings] localidades,[indicator_name] según [dimension] en [number_settings] escenarios
+charts,titles,comparesumm,[indicator_name]: setting average and within-setting inequality (according to [dimension]) in [number_settings] settings,[indicator_name]: moyenne pour la zone et au sein de la zone (en fonction de [dimension]) dans [number_settings] zones,[indicator_name]: média na localidade e desigualdade dentro da localidade (de acordo com [dimension]) em [number_settings] localidades,[indicator_name]: escenario promedio y desigualdad al interior del escenario (según [dimension]) en [number_settings] escenarios
+charts,tooltips,affectedpop,of affected population,de la population touchée,da população afetada,de población afectada
+charts,tooltips,estimate,Estimate,Estimation,Estimativa,Estimado
+charts,tooltips,95ci,95% CI,IC 95%,IC 95%,IC 95%
+charts,tooltips,settingavg,Setting average,Moyenne pour la zone,Média da localidade,Promedio del escenario
+charts,lines,median,Median,Médiane,Mediana,Mediana
+charts,lines,average,Setting average,Moyenne pour la zone,Média da localidade,Estableciendo el promedio
+charts,legend,national,National boundaries,Limites nationales,Limites nacionais,Fronteras nacionales
+charts,legend,subnational,Subnational boundaries (DHS/SPA/AIS),Limites infranationales (DHS/SPA/AIS),Limites subnacionais (DHS/SPA/AIS),Fronteras subnacionales (DHS/SPA/AIS)
+charts,legend,notavailable,Not available,Sans objet,Não disponível,No disponible
+charts,disclaimer,para1,"The designations employed and the presentation of the material in this toolkit do not imply the expression of any opinion whatsoever on the part of WHO concerning the legal status of any country, territory, city or area or of its authorities, or concerning the delimitation of its frontiers or boundaries. Dotted and dashed lines on maps represent approximate border lines for which there may not yet be full agreement.","Les appellations employées dans le présent outil et la présentation des données qui y figurent n’impliquent de la part de l’OMS aucune prise de position quant au statut juridique des pays, territoires, villes ou zones, ou de leurs autorités, ni quant au tracé de leurs frontières ou limites. Les traits discontinus formés d’une succession de points ou de tirets sur les cartes représentent des frontières approximatives dont le tracé peut ne pas avoir fait l'objet d'un accord définitif.","As designações empregadas e a apresentação do material nesta  ferramenta não implicam na expressão de qualquer opinião por parte da OMS em relação a situação legal de um país, território, cidade ou área, ou de suas autoridades, ou a respeito da delimitação de suas fronteiras ou limites. As linhas pontilhadas e tracejadas nos mapas representam linhas de fronteiras aproximadas, as quais ainda não estão em total acordo.","Las designaciones empleadas en la presentación del material en esta herramienta no implican en absoluto la expresión de alguna opinión por parte de la OMS concerniente al estado legal de cualquier pais, territorio, ciudad o area ni de sus autoridades, ni concerniente a la delimitación de sus fronteras o límites. Las líneas punteadas o discontínuas en los mapas representan bordes fronterizos aproximados sobre los cuales puede no haber aún acuerdo completo."
+charts,disclaimer,para2,"The international borders of the map provided reflect the current political and geographic status as of the date of publication (2021). However, the technical health information is based on data accurate with respect to the year selected. The disconnect in this arrangement should be noted but no implications regarding political or terminological status should be drawn from this arrangement as it is purely a function of technical and graphical limitations.","Les frontières internationales sur la carte fournie correspondent au statut politique et géographique en vigueur à la date de publication (2021). Cependant, les informations sanitaires techniques se fondent sur des données qui étaient correctes pour l'année sélectionnée. Ce décalage doit être relevé, mais il ne faut pas en tirer de conclusions d'ordre politique ou terminologique car il s'explique entièrement pas des limitations techniques et graphiques.","As fronteiras internacionais do mapa fornecido refletem a situação política e geográfica atual na data de publicação (2021). No entanto, as informações técnicas de saúde são baseadas em dados precisos em relação ao ano selecionado. Essa desconexão deve ser notada, mas nenhuma implicação quanto a situação política ou de terminologia deve ser extraída, visto que isto é apenas devido às limitações técnicas e gráficas.","Los límites internacionales del mapa provisto reflejan el actual estado político y geográfico a la fecha de publicación (2021). Sin embargo, la información técnica sobre salud se basa en datos precisos con respecto al año seleccionado. Se hace notar la desconexión en este arreglo, pero no se deben generar implicaciones respecto al estado político o terminológico a partir de dicho arreglo, ya que éste es puramente una función de las limitaciones técnicas y gráficos."
+tables,labels,search,Search,Recherche,Buscar,Búsqueda
+tables,labels,previous,Previous,Précédent,Anterior,Previo
+tables,labels,next,Next,Suivant,Próximo,Siguiente
+charts,axes,average,Setting average,Moyenne pour la zone,Média da localidade,Promedio del escenario
+charts,legend,benchmark,Benchmark settings,Paramètres de comparaison,Configurações de referência,Configuración del referenciamiento
+downloads,text,heat1,"Health Equity Assessment Toolkit (HEAT): Software for exploring and comparing health inequalities in countries. Built-in database edition. Version 4.0. Geneva, World Health Organization, 2021.","Outil d’évaluation de l’équité en santé (HEAT): logiciel pour l'étude et la comparaison des inégalités de santé dans les les pays. Édition avec base de données intégrée. Version 4.0. Genève, Organisation mondiale de la Santé, 2021.",Ferramenta de avaliação de desigualdades em saúde (HEAT): Software desenvolvido para explorar e comparar desigualdades em saúde nos países. Edição com banco de dados incluído. Versão 4.0. Genebra; Organização Mudial da Saúde; 2021.,"Herramienta de valoración de la equidad en salud (HEAT): Software para la exploración y comparación de desigualdades en salud en países. Edición de base de datos integrada. Versión 4.0. Ginebra: Organización Mundial de la Salud, 2021."
+downloads,text,heat2,The disaggregated data used in this version were drawn from the WHO Health Equity Monitor database (2020 update) which may have been revised or updated since that time. The most recent version of that database is available on the WHO website (https://www.who.int/data/gho/health-equity/health-equity-monitor-database).,"Les données désagrégées utilisées dans cette version proviennent de la base de données de l'OMS pour le suivi de l'équité en santé (mise à jour de 2020), qui peut avoir été révisée ou mise à jour depuis. La version la plus récente de cette base de données est disponible sur le site Internet de l'OMS (https://www.who.int/data/gho/health-equity/health-equity-monitor-database).",Os dados desagregados utilizados nessa versão foram criados pela base de dados do Monitoramento de Equidade em Saúde da OMS (atualizado em 2020) os quais podem ter sido revisados ou atualizados desde esta data. A versão mais recente dessa base de dados está disponível no site da OMS (https://www.who.int/data/gho/health-equity/health-equity-monitor-database).,"Los datos desagregados usados en esta versión fueron tomados de la base de datos del Monitor de Equidad en Salud de la OMS (actualización 2020), los cuales pueden haber sido revisados o actualizados desde entonces. La versión más reciente de dicha base de datos está disponible en la página web de la OMS  (https://www.who.int/data/gho/health-equity/health-equity-monitor-database)."
+downloads,text,disclaimer1,"The designations employed and the presentation of the material in this toolkit do not imply the expression of any opinion whatsoever on the part of WHO concerning the legal status of any country, territory, city or area or of its authorities, or concerning the delimitation of its frontiers or boundaries. Dotted and dashed lines on maps represent approximate border lines for which there may not yet be full agreement.","Les appellations employées dans le présent outil et la présentation des données qui y figurent n’impliquent de la part de l’OMS aucune prise de position quant au statut juridique des pays, territoires, villes ou zones, ou de leurs autorités, ni quant au tracé de leurs frontières ou limites. Les traits discontinus formés d’une succession de points ou de tirets sur les cartes représentent des frontières approximatives dont le tracé peut ne pas avoir fait l'objet d'un accord définitif.","As designações empregadas e a apresentação do material nesta  ferramenta não implicam na expressão de qualquer opinião por parte da OMS em relação a situação legal de um país, território, cidade ou área, ou de suas autoridades, ou a respeito da delimitação de suas fronteiras ou limites. As linhas pontilhadas e tracejadas nos mapas representam linhas de fronteiras aproximadas, as quais ainda não estão em total acordo.","Las designaciones empleadas en la presentación del material en esta herramienta no implican en absoluto la expresión de alguna opinión por parte de la OMS concerniente al estado legal de cualquier pais, territorio, ciudad o area ni de sus autoridades, ni concerniente a la delimitación de sus fronteras o límites. Las líneas punteadas o discontínuas en los mapas representan bordes fronterizos aproximados sobre los cuales puede no haber aún acuerdo completo."
+downloads,text,disclaimer2,"The international borders of the map provided reflect the current political and geographic status as of the date of publication (2021). However, the technical health information is based on data accurate with respect to the year selected. The disconnect in this arrangement should be noted but no implications regarding political or terminological status should be drawn from this arrangement as it is purely a function of technical and graphical limitations.","Les frontières internationales sur la carte fournie correspondent au statut politique et géographique en vigueur à la date de publication (2021). Cependant, les informations sanitaires techniques se fondent sur des données qui étaient correctes pour l'année sélectionnée. Ce décalage doit être relevé, mais il ne faut pas en tirer de conclusions d'ordre politique ou terminologique car il s'explique entièrement pas des limitations techniques et graphiques.","As fronteiras internacionais do mapa fornecido refletem a situação política e geográfica atual na data de publicação (2021). No entanto, as informações técnicas de saúde são baseadas em dados precisos em relação ao ano selecionado. Essa desconexão deve ser notada, mas nenhuma implicação quanto a situação política ou de terminologia deve ser extraída, visto que isto é apenas devido às limitações técnicas e gráficas.","Los límites internacionales del mapa provisto reflejan el actual estado político y geográfico a la fecha de publicación (2021). Sin embargo, la información técnica sobre salud se basa en datos precisos con respecto al año seleccionado. Se hace notar la desconexión en este arreglo, pero no se deben generar implicaciones respecto al estado político o terminológico a partir de dicho arreglo, ya que éste es puramente una función de las limitaciones técnicas y gráficos."
+downloads,text,heatplus1,"Health Equity Assessment Toolkit Plus (HEAT Plus): Software for exploring and comparing health inequalities in countries. Upload database edition. Version 4.0. Geneva, World Health Organization, 2021.","Outil complémentaire d’évaluation de l’équité en santé (HEAT Plus): logiciel pour l'exploration et la comparaison des inégalités de santé dans les les pays. Édition avec base de données à télécharger. Version 4.0. Genève, Organisation mondiale de la Santé, 2021.","Ferramenta de avaliação de desigualdades em saúde plus (HEAT Plus): Software desenvolvido para explorar e comparar desigualdades em saúde nos países. Edição com possibilidade de upload de banco de dados. Versão 4.0. Genebra, Organização Mundial da Saúde, 2021.","Herramienta adicional de valoración de la equidad en salud (HEAT Plus): Software para la exploración y comparación de desigualdades en salud en países. Edición para carga de base de datos. Versión 4.0. Ginebra: Organización Mundial de la Salud, 2021."
+downloads,text,heatplus2,"WHO provides this toolkit without data, and all data added to, or resulting from, the toolkit are the sole responsibility of the user, not WHO.","L'OMS ne fournit pas de données avec ce logiciel, et toutes les données qui y sont ajoutées ou en sont issues relèvent de la responsabilité exclusive de l'utilisateur, et non de la responsabilité de l'OMS.","A OMS disponibiliza esta ferramenta sem banco de dados, e todos os dados adicionados a ela, ou resultantes da mesma, são de responsibilidade exclusiva do usuário, não da OMS.","La OMS proporciona esta herramienta sin datos; cualesquiera datos agregados a, o que resulten de, la herramienta son de responsabilidad exclusiva del usuario, no de la OMS."
+values,settings,Afghanistan,Afghanistan,Afghanistan,Afeganistão,Afganistán
+values,settings,Albania,Albania,Albanie,Albania,Albania
+values,settings,Algeria,Algeria,Algérie,Algeria,Argelia
+values,settings,Andorra,Andorra,Andore,Andorra,Andorra
+values,settings,Angola,Angola,Angola,Angola,Angola
+values,settings,Antigua and Barbuda,Antigua and Barbuda,Antigua-et-Barbuda,Antigua e Barbuda,Antigua y Barbuda
+values,settings,Argentina,Argentina,Argentine,Argentina,Argentina
+values,settings,Armenia,Armenia,Arménie,Armênia,Armenia
+values,settings,Australia,Australia,Australie,Austrália,Australia
+values,settings,Austria,Austria,Autriche,Áustria,Austria
+values,settings,Azerbaijan,Azerbaijan,Azerbaïdjan,Azerbaijão,Azerbaiyán
+values,settings,Bahamas,Bahamas,Bahamas,Bahamas,Bahamas
+values,settings,Bahrain,Bahrain,Bahreïn,Bahrain,Bahrein
+values,settings,Bangladesh,Bangladesh,Bangladesh,Bangladesh,Bangladesh
+values,settings,Barbados,Barbados,Barbade,Barbados,Barbados
+values,settings,Belarus,Belarus,Bélarus,Belarus,Belarús
+values,settings,Belgium,Belgium,Belgique,Bélgica,Bélgica
+values,settings,Belize,Belize,Belize,Belize,Belice
+values,settings,Benin,Benin,Bénin,Benin,Benin
+values,settings,Bhutan,Bhutan,Bhoutan,Butão,Bhután
+values,settings,Bolivia (Plurinational State of),Bolivia (Plurinational State of),Bolivie (État plurinational de),Bolívia,Bolivia (Estado Plurinacional de)
+values,settings,Bosnia and Herzegovina,Bosnia and Herzegovina,Bosnie-Herzégovine,Bósnia e Herzegovina,Bosnia y Herzegovina
+values,settings,Botswana,Botswana,Botswana,Botswana,Botswana
+values,settings,Brazil,Brazil,Brésil,Brasil,Brasil
+values,settings,Brunei Darussalam,Brunei Darussalam,Brunéi Darussalam,Brunei,Brunei Darussalam
+values,settings,Bulgaria,Bulgaria,Bulgarie,Bulgaria,Bulgaria
+values,settings,Burkina Faso,Burkina Faso,Burkina Faso,Burkina Faso,Burkina Faso
+values,settings,Burundi,Burundi,Burundi,Burundi,Burundi
+values,settings,Cabo Verde,Cabo Verde,Cabo Verde,Cabo Verde,Cabo Verde
+values,settings,Cambodia,Cambodia,Cambodge,Camboja,Camboya
+values,settings,Cameroon,Cameroon,Cameroun,Camarões,Camerún
+values,settings,Canada,Canada,Canada,Canadá,Canadá
+values,settings,Central African Republic,Central African Republic,République centrafricaine,República Centro-Africana,República Centroafricana
+values,settings,Chad,Chad,Tchad,Chade,Chad
+values,settings,Chile,Chile,Chili,Chile,Chile
+values,settings,China,China,Chine,China,China
+values,settings,Colombia,Colombia,Colombie,Colômbia,Colombia
+values,settings,Comoros,Comoros,Comores,Comores,Comoras
+values,settings,Congo,Congo,Congo,Congo,Congo
+values,settings,Cook Islands,Cook Islands,Îles Cook,Ilhas Cook,Islas Cook
+values,settings,Costa Rica,Costa Rica,Costa Rica,Costa Rica,Costa Rica
+values,settings,Croatia,Croatia,Croatie,Croácia,Costa de Marfil
+values,settings,Cuba,Cuba,Cuba,Cuba,Croacia
+values,settings,Cyprus,Cyprus,Chypre,Chipre,Cuba
+values,settings,Czechia,Czechia,Tchéquie,República Checa,Chipre
+values,settings,Cote d'Ivoire,Côte d'Ivoire,Côte d'Ivoire,Costa do Marfim,República Checa
+values,settings,Democratic People's Republic of Korea,Democratic People's Republic of Korea,République populaire démocratique de Corée,Coréia do Norte,República Popular Democrática de Corea
+values,settings,Democratic Republic of the Congo,Democratic Republic of the Congo,République démocratique du Congo,República Democrática do Congo,República Democrática del Congo
+values,settings,Denmark,Denmark,Danemark,Dinamarca,Dinamarca
+values,settings,Djibouti,Djibouti,Djibouti,Djibouti,Djibouti
+values,settings,Dominica,Dominica,Dominique,Dominica,Dominica
+values,settings,Dominican Republic,Dominican Republic,République dominicaine,República Dominicana,República Dominicana
+values,settings,Ecuador,Ecuador,Équateur,Equador,Ecuador
+values,settings,Egypt,Egypt,Égypte,Egito,Egipto
+values,settings,El Salvador,El Salvador,El Salvador,El Salvador,El Salvador
+values,settings,Equatorial Guinea,Equatorial Guinea,Guinée équatoriale,Guiné Equatorial,Guinea Ecuatorial
+values,settings,Eritrea,Eritrea,Érythrée,Eritrea,Eritrea
+values,settings,Estonia,Estonia,Estonie,Estônia,Estonia
+values,settings,Eswatini,Eswatini,Eswatini,Eswatini,Eswatini
+values,settings,Ethiopia,Ethiopia,Éthiopie,Etiópia,Etiopía
+values,settings,Fiji,Fiji,Fidji,Fiji,Fiji
+values,settings,Finland,Finland,Finlande,Finlândia,Finlandia
+values,settings,France,France,France,França,Francia
+values,settings,Gabon,Gabon,Gabon,Gabão,Gabón
+values,settings,Gambia,Gambia,Gambie,Gâmbia,Gambia
+values,settings,Georgia,Georgia,Géorgie,Geórgia,Georgia
+values,settings,Germany,Germany,Allemagne,Alemanha,Alemania
+values,settings,Ghana,Ghana,Ghana,Gana,Ghana
+values,settings,Greece,Greece,Grèce,Grécia,Grecia
+values,settings,Grenada,Grenada,Grenade,Granada,Granada
+values,settings,Guatemala,Guatemala,Guatemala,Guatemala,Guatemala
+values,settings,Guinea,Guinea,Guinée,Guiné,Guinea
+values,settings,Guinea-Bissau,Guinea-Bissau,Guinée-Bissau,Guiné-Bissau,Guinea-Bissau
+values,settings,Guyana,Guyana,Guyana,Guiana,Guyana
+values,settings,Haiti,Haiti,Haïti,Haiti,Haití
+values,settings,Honduras,Honduras,Honduras,Honduras,Honduras
+values,settings,Hungary,Hungary,Hongrie,Hungria,Hungría
+values,settings,Iceland,Iceland,Islande,Islândia,Islandia
+values,settings,India,India,Inde,Índia,India
+values,settings,Indonesia,Indonesia,Indonésie,Indonésia,Indonesia
+values,settings,Iran (Islamic Republic of),Iran (Islamic Republic of),Iran (République islamique d'),Irã,Irán (República Islámica del)
+values,settings,Iraq,Iraq,Iraq,Iraque,Iraq
+values,settings,Ireland,Ireland,Irlande,Irlanda,Irlanda
+values,settings,Israel,Israel,Israël,Israel,Israel
+values,settings,Italy,Italy,Italie,Itália,Italia
+values,settings,Jamaica,Jamaica,Jamaïque,Jamaica,Jamaica
+values,settings,Japan,Japan,Japon,Japão,Japón
+values,settings,Jordan,Jordan,Jordanie,Jordânia,Jordania
+values,settings,Kazakhstan,Kazakhstan,Kazakhstan,Cazaquistão,Kazajstán
+values,settings,Kenya,Kenya,Kenya,Quênia,Kenya
+values,settings,Kiribati,Kiribati,Kiribati,Kiribati,Kiribati
+values,settings,Kuwait,Kuwait,Koweït,Kuwait,Kuwait
+values,settings,Kyrgyzstan,Kyrgyzstan,Kirghizistan,Quirguistão,Kirguistán
+values,settings,Lao People's Democratic Republic,Lao People's Democratic Republic,République démocratique populaire lao,Laos,República Democrática Popular Lao
+values,settings,Latvia,Latvia,Lettonie,Letônia,Letonia
+values,settings,Lebanon,Lebanon,Liban,Líbano,Líbano
+values,settings,Lesotho,Lesotho,Lesotho,Lesoto,Lesotho
+values,settings,Liberia,Liberia,Libéria,Libéria,Liberia
+values,settings,Libya,Libya,Libye,Líbia,Libia
+values,settings,Lithuania,Lithuania,Lituanie,Lituânia,Lituania
+values,settings,Luxembourg,Luxembourg,Luxembourg,Luxemburgo,Luxemburgo
+values,settings,Madagascar,Madagascar,Madagascar,Madagascar,Madagascar
+values,settings,Malawi,Malawi,Malawi,Malawi,Malawi
+values,settings,Malaysia,Malaysia,Malaisie,Malásia,Malasia
+values,settings,Maldives,Maldives,Maldives,Maldivas,Maldivas
+values,settings,Mali,Mali,Mali,Mali,Malí
+values,settings,Malta,Malta,Malte,Malta,Malta
+values,settings,Marshall Islands,Marshall Islands,Îles Marshall,Ilhas Marshall,Islas Marshall
+values,settings,Mauritania,Mauritania,Mauritanie,Mauritânia,Mauritania
+values,settings,Mauritius,Mauritius,Maurice,Maurício,Mauricio
+values,settings,Mexico,Mexico,Mexique,México,México
+values,settings,Micronesia (Federated States of),Micronesia (Federated States of),Micronésie (États fédérés de),Micronésia,Micronesia (Estados Federados de)
+values,settings,Monaco,Monaco,Monaco,Mônaco,Mónaco
+values,settings,Mongolia,Mongolia,Mongolie,Mongólia,Mongolia
+values,settings,Montenegro,Montenegro,Monténégro,Montenegro,Montenegro
+values,settings,Morocco,Morocco,Maroc,Marrocos,Marruecos
+values,settings,Mozambique,Mozambique,Mozambique,Moçambique,Mozambique
+values,settings,Myanmar,Myanmar,Myanmar,Myanmar,Myanmar
+values,settings,Namibia,Namibia,Namibie,Namíbia,Namibia
+values,settings,Nauru,Nauru,Nauru,Nauru,Nauru
+values,settings,Nepal,Nepal,Népal,Nepal,Nepal
+values,settings,Netherlands,Netherlands,Pays-Bas,Holanda,Países Bajos
+values,settings,New Zealand,New Zealand,Nouvelle-Zélande,Nova Zelânida,Nueva Zelandia
+values,settings,Nicaragua,Nicaragua,Nicaragua,Nicarágua,Nicaragua
+values,settings,Niger,Niger,Niger,Niger,Níger
+values,settings,Nigeria,Nigeria,Nigéria,Nigéria,Nigeria
+values,settings,Niue,Niue,Nioué,Niue,Niue
+values,settings,Norway,Norway,Norvège,Noruega,Noruega
+values,settings,Oman,Oman,Oman,Omã,Omán
+values,settings,Pakistan,Pakistan,Pakistan,Paquistão,Pakistán
+values,settings,Palau,Palau,Palaos,Palau,Palau
+values,settings,Panama,Panama,Panama,Panamá,Panamá
+values,settings,Papua New Guinea,Papua New Guinea,Papouasie-Nouvelle-Guinée,Papua-Nova Guiné,Papua Nueva Guinea
+values,settings,Paraguay,Paraguay,Paraguay,Paraguai,Paraguay
+values,settings,Peru,Peru,Pérou,Peru,Perú
+values,settings,Philippines,Philippines,Philippines,Filipinas,Filipinas
+values,settings,Poland,Poland,Pologne,Polonia,Polonia
+values,settings,Portugal,Portugal,Portugal,Portugal,Portugal
+values,settings,Qatar,Qatar,Qatar,Catar,Qatar
+values,settings,Republic of Korea,Republic of Korea,République de Corée,República da Coréia,República de Corea
+values,settings,Republic of Moldova,Republic of Moldova,République de Moldova,República Moldova,República de Moldova
+values,settings,Romania,Romania,Roumanie,Romênia,Rumania
+values,settings,Russian Federation,Russian Federation,Fédération de Russie,Federação da Rússia,Federación de Rusia
+values,settings,Rwanda,Rwanda,Rwanda,Ruanda,Rwanda
+values,settings,Saint Kitts and Nevis,Saint Kitts and Nevis,Saint-Kitts-et-Nevis,Federação de São Cristóvão e Nevis,Saint Kitts y Nevis
+values,settings,Saint Lucia,Saint Lucia,Sainte-Lucie,Santa Lúcia,Santa Lucía
+values,settings,Saint Vincent and the Grenadines,Saint Vincent and the Grenadines,Saint-Vincent-et-les Grenadines,São Vicente e Granadinas,San Vicente y las Granadinas
+values,settings,Samoa,Samoa,Samoa,Samoa,Samoa
+values,settings,San Marino,San Marino,Saint-Marin,San Marino,San Marino
+values,settings,Sao Tome and Principe,Sao Tome and Principe,Sao Tomé-et-Principe,São Tomé e Príncipe,Santo Tomé y Príncipe
+values,settings,Saudi Arabia,Saudi Arabia,Arabie saoudite,Arábia Saudita,Arabia Saudita
+values,settings,Senegal,Senegal,Sénégal,Senegal,Senegal
+values,settings,Serbia,Serbia,Serbie,Sérvia,Serbia
+values,settings,Seychelles,Seychelles,Seychelles,Seicheles,Seychelles
+values,settings,Sierra Leone,Sierra Leone,Sierra Leone,Serra Leoa,Sierra Leona
+values,settings,Singapore,Singapore,Singapour,Singapore,Singapur
+values,settings,Slovakia,Slovakia,Slovaquie,Eslováquia,Eslovaquia
+values,settings,Slovenia,Slovenia,Slovénie,Eslovênia,Eslovenia
+values,settings,Solomon Islands,Solomon Islands,Îles Salomon,Ilhas Salomão,Islas Salomón
+values,settings,Somalia,Somalia,Somalie,Somália,Somalia
+values,settings,South Africa,South Africa,Afrique du Sud,África do Sul,Sudáfrica
+values,settings,South Sudan,South Sudan,Soudan du Sud,Sudão do Sul,Sudán del Sur
+values,settings,Spain,Spain,Espagne,Espanha,España
+values,settings,Sri Lanka,Sri Lanka,Sri Lanka,Sri Lanka,Sri Lanka
+values,settings,Sudan,Sudan,Soudan,Sudão,Sudán
+values,settings,Suriname,Suriname,Suriname,Suriname,Suriname
+values,settings,Sweden,Sweden,Suède,Suécia,Suecia
+values,settings,Switzerland,Switzerland,Suisse,Suíça,Suiza
+values,settings,Syrian Arab Republic,Syrian Arab Republic,République arabe syrienne,República Árabe da Síria,República Árabe Siria
+values,settings,Tajikistan,Tajikistan,Tadjikistan,Tajiquistão,Tayikistán
+values,settings,Thailand,Thailand,Thaïlande,Tailândia,Tailandia
+values,settings,North Macedonia,North Macedonia,Macédoine du Nord,Macedônia do Norte,Macedonia del Norte
+values,settings,Timor-Leste,Timor-Leste,Timor-Leste,Timor-Leste,Timor-Leste
+values,settings,Togo,Togo,Togo,Togo,Togo
+values,settings,Tonga,Tonga,Tonga,Tonga,Tonga
+values,settings,Trinidad and Tobago,Trinidad and Tobago,Trinité-et-Tobago,Trinidade e Tobago,Trinidad y Tobago
+values,settings,Tunisia,Tunisia,Tunisie,Tunísia,Túnez
+values,settings,Turkey,Turkey,Turquie,Turquia,Turquía
+values,settings,Turkmenistan,Turkmenistan,Turkménistan,Turquemenistão,Turkmenistán
+values,settings,Tuvalu,Tuvalu,Tuvalu,Tuvalu,Tuvalu
+values,settings,Uganda,Uganda,Ouganda,Uganda,Uganda
+values,settings,Ukraine,Ukraine,Ukraine,Ucrânia,Ucrania
+values,settings,United Arab Emirates,United Arab Emirates,Émirats arabes unis,Emirados Árabes Unidos,Emiratos Arabes Unidos
+values,settings,United Kingdom,United Kingdom,Royaume-Uni,Reino Unido,Reino Unido de Gran Bretaña e Irlanda del Norte
+values,settings,United Republic of Tanzania,United Republic of Tanzania,République-Unie de Tanzanie,República Unida da Tanzânia,República Unida de Tanzanía
+values,settings,United States of America,United States of America,États-Unis d'Amérique,Estados Unidos da América,Estados Unidos de América
+values,settings,Uruguay,Uruguay,Uruguay,Uruguai,Uruguay
+values,settings,Uzbekistan,Uzbekistan,Ouzbékistan,Uzbequistão,Uzbekistán
+values,settings,Vanuatu,Vanuatu,Vanuatu,Vanuatu,Vanuatu
+values,settings,Venezuela (Bolivarian Republic of),Venezuela (Bolivarian Republic of),Venezuela (République bolivarienne du),Venezuela,Venezuela (República Bolivariana de)
+values,settings,Viet Nam,Viet Nam,Viet Nam,Vietnã,Viet Nam
+values,settings,Yemen,Yemen,Yémen,Iêmen,Yemen
+values,settings,Zambia,Zambia,Zambie,Zâmbia,Zambia
+values,settings,Zimbabwe,Zimbabwe,Zimbabwe,Zimbábue,Zimbabwe
+values,sources,DHS,DHS,DHS,DHS,DHS
+values,sources,MICS,MICS,MICS,MICS,MICS
+values,sources,RHS,RHS,RHS,RHS,RHS
+values,indicators,asfr1,Adolescent fertility rate (births per 1000 women aged 15-19 years),Taux de fécondité des adolescentes (accouchements par 1000 femmes âgées de 15 à 19 ans),Taxa de fecundidade em adolescentes (partos por 1000 mulheres de 15-19 anos),Tasa de fecundidad adolescente (partos por 1000 mujeres de 15 a 19 años de edad)
+values,indicators,anc45,Antenatal care coverage - at least four visits (in the five years preceding the survey) (%),Couverture par au moins 4 visites de soins prénatals (dans les 5 ans qui précèdent l'enquête) (%),Cobertura de atenção pré-natal - ao menos quatro visitas (nos cinco anos anteriores ao inquérito) (%),Cobertura de atención prenatal - al menos cuatro consultas (en los cinco años previos a la encuesta) (%)
+values,indicators,anc4,Antenatal care coverage - at least four visits (in the two or three years preceding the survey) (%),Couverture par au moins 4 visites de soins prénatals (dans les 2 ou 3 ans qui précèdent l'enquête) (%),Cobertura de atenção pré-natal - ao menos quatro visitas (nos dois ou três anos anteriores ao inquérito) (%),Cobertura de atención prenatal - al menos cuatro consultas (en los dos o tres años previos a la encuesta) (%)
+values,indicators,anc15,Antenatal care coverage - at least one visit (in the five years preceding the survey) (%),Couverture par au moins 1 visite de soins prénatals (dans les 5 ans qui précèdent l'enquête) (%),Cobertura de atenção pré-natal - ao menos uma visita (nos cinco anos anteriores ao inquérito) (%),Cobertura de atención prenatal - al menos una consulta (en los cinco años previos a la encuesta) (%)
+values,indicators,anc1,Antenatal care coverage - at least one visit (in the two or three years preceding the survey) (%),Couverture par au moins 1 visite de soins prénatals (dans les 2 ou 3 ans qui précèdent l'enquête) (%),Cobertura de atenção pré-natal - ao menos uma visita (nos dois ou três anos anteriores ao inquérito) (%),Cobertura de atención prenatal - al menos una consulta (en los dos o tres años previos a la encuesta) (%)
+values,indicators,vbcg,BCG immunization coverage among one-year-olds (%),Couverture de la vaccination par le BCG chez les enfants d'un an (%),Cobertura da vacina BCG entre crianças de um ano de idade (%),Cobertura de inmunización con BCG en niños de un año de edad (%)
+values,indicators,sba5,Births attended by skilled health personnel (in the five years preceding the survey) (%),Accouchements en présence de personnel qualifié (dans les 5 ans qui précèdent l'enquête) (%),Partos assistidos por profissional de saúde qualificado  (nos cinco anos anteriores ao inquérito) (%),Partos atendidos por personal de salud capacitado (en los cinco años previos a la encuesta) (%)
+values,indicators,sba,Births attended by skilled health personnel (in the two or three years preceding the survey) (%),Accouchements en présence de personnel qualifié (dans les 2 ou 3 ans qui précèdent l'enquête) (%),Partos assistidos por profissional de saúde qualificado  (nos dois ou três anos anteriores ao inquérito) (%),Partos atendidos por personal de salud capacitado (en los dos o tres años previos a la encuesta) (%)
+values,indicators,csection5,Births by caesarean section (in the five years preceding the survey) (%),Accouchements par césarienne (dans les 5 ans qui précèdent l'enquête) (%),Partos por cesárea (nos cinco anos anteriores ao inquérito) (%),Partos por cesárea (en los cinco años previos a la encuesta) (%)
+values,indicators,csection,Births by caesarean section (in the two or three years preceding the survey) (%),Accouchements par césarienne (dans les 2 ou 3 ans qui précèdent l'enquête) (%),Partos por cesárea (nos dois ou três anos anteriores ao inquérito) (%),Partos por cesárea (en los dos o tres años previos a la encuesta) (%)
+values,indicators,itnch,Children aged < 5 years sleeping under insecticide-treated nets (%),Enfants âgés de moins de 5 ans dormant sous une moustiquaire imprégnée d'insecticide (%),Crianças menores de 5 anos que dormem sob mosquiteiros tratados com insecticida (%),Niños menores de 5 años que duermen bajo mallas tratadas con insecticida (%)
+values,indicators,ors,Children aged < 5 years with diarrhoea receiving oral rehydration salts (%),Enfants âgés de moins de 5 ans présentant une diarrhée et recevant des sels de réhydratation orale (%),Crianças menores de 5 anos com diarréia que receberam sais de reidratação oral (%),Niños menores de 5 años con diarrea que reciben sales de rehidratación oral (%)
+values,indicators,ort,Children aged < 5 years with diarrhoea receiving oral rehydration therapy and continued feeding (%),Enfants âgés de moins de 5 ans présentant une diarrhée et bénéficiant d'une thérapie de réhydratation orale et d'une alimentation en continu  (%),Crianças menores de 5 anos com diarréia que receberam terapia de reidratação oral e alimentação continuada (%),Niños menores de 5 años con diarrea que reciben sales de rehidratación oral y alimentación continuada (%)
+values,indicators,carep,Children aged < 5 years with pneumonia symptoms taken to a health facility (%),Enfants âgés de moins de 5 ans présentant des symptômes de pneumonie qui sont emmenés dans un établissement de santé (%),Crianças menores de 5 anos com sintomas de pneumonia levados para uma instituição de saúde (%),Niños menores de 5 años con síntomas de neumonía que son llevados a un centro de atención de salud (%)
+values,indicators,vita,Children aged 6-59 months who received vitamin A supplementation (%),Enfants âgés de 6 à 59 mois ayant bénéficié d'une supplémentation en vitamine A (%),Crianças entre 6-59 meses que receberam suplementação de vitamina A (%),Niños de 6 a 59 meses de edad que reciben suplementación de vitamina A (%)
+values,indicators,cci,Composite coverage index (%),Indice composite de couverture (%),Índice composto de cobertura (%),Índice compuesto de cobertura (%)
+values,indicators,cpmt,Contraceptive prevalence - use of modern and traditional methods (%),Prévalence des contraceptifs - méthodes modernes et traditionnelles (%),Prevalência de contraceptivos - métodos modernos e tradicionais (%),Prevalencia anticonceptiva - métodos modernos y tradicionales (%)
+values,indicators,cpmowho,Contraceptive prevalence - use of modern methods (%),Prévalence des contraceptifs - méthodes modernes (%),Prevalência de contraceptivos - métodos modernos (%),Prevalencia anticonceptiva - métodos modernos (%)
+values,indicators,fps,Demand for family planning satisfied - use of modern and traditional methods (%),Demande en planification familiale satisfaite - méthodes modernes et traditionnelles (%),Demanda por planejamento familiar satisfeita - métodos modernos e tradicionais (%),Demanda satisfecha de planificación familiar - métodos modernos y tradicionales (%)
+values,indicators,fpsmowho,Demand for family planning satisfied - use of modern methods (%),Demande en planification familiale satisfaite - méthodes modernes (%),Demanda por planejamento familiar satisfeita - métodos modernos (%),Demanda satisfecha de planificación familiar - métodos modernos (%)
+values,indicators,vdpt,DTP3 immunization coverage among one-year-olds (%),Couverture de la vaccination par le DTC3 chez les enfants d'un an (%),Cobertura da vacina DPT3 entre crianças de um ano de idade,Cobertura de inmunización con DPT3 en niños de un año de edad (%)
+values,indicators,bfearly,Early initiation of breastfeeding (in the two years preceding the survey) (%),Démarrage précoce de l'allaitement (dans les 2 ans qui précèdent l'enquête) (%),Iniciação precoce da amamentação (nos dois anos anteriores ao inquérito) (%),Inicio temprano de la lactancia materna (en los dos años previos a la encuesta) (%)
+values,indicators,bfearly,Early initiation of breastfeeding (in the five years preceding the survey) (%),Démarrage précoce de l'allaitement (dans les 5 ans qui précèdent l'enquête) (%),Iniciação precoce da amamentação (nos cinco anos anteriores ao inquérito) (%),Inicio temprano de la lactancia materna (en los cinco años previos a la encuesta) (%)
+values,indicators,vfull,Full immunization coverage among one-year-olds (%),Couverture vaccinale complète chez les enfants d'un an (%),Cobertura de imunização completa em crianças de um ano de idade (%),Cobertura completa de inmunización en niños de un año de edad (%)
+values,indicators,imr,Infant mortality rate (deaths per 1000 live births),Taux de mortalité infantile (décès pour 1000 naissances vivantes),"Taxa de mortalidade infantil (óbitos por 1,000 nascidos vivos)",Tasa de mortalidad infantil (muertes por 1000 nacidos vivos)
+values,indicators,vmsl,Measles immunization coverage among one-year-olds (%),Couverture de la vaccination contre la rougeole chez les enfants d'un an (%),Cobertura da vacina de sarampo em crianças de um ano (%),Cobertura de inmunización contra sarampión en niños de un año de edad (%)
+values,indicators,nmr,Neonatal mortality rate (deaths per 1000 live births),Taux de mortalité néonatale (décès pour 1000 naissances vivantes),"Taxa de mortalidade neonatal (óbitos por 1,000 nascidos vivos)",Tasa de mortalidad neonatal (muertes por 1000 nacidos vivos)
+values,indicators,bmi30wm,"Obesity prevalence in non-pregnant women aged 15-49 years, BMI >= 30 (%)","Prévalence de l'obésité chez les femmes non enceintes âgées de 15 à 49 ans, IMC >= 30 (%)","Prevalência de obesidade em mulheres não grávidas, com idade entre 15-49 anos, IMC >= 30 (%)","Prevalencia de obesidad en mujeres no-embarazadas de 15 a 49 años de edad, IMC>=30 (%)"
+values,indicators,overweight,Overweight prevalence in children aged < 5 years (%),Prévalence de l'excès pondéral chez les enfants de moins de 5 ans (%),Prevalência de sobrepeso em crianças menores de 5 anos (%),Prevalencia de sobrepeso en niños menores de cinco años (%)
+values,indicators,vpolio,Polio immunization coverage among one-year-olds (%),Couverture de la vaccination contre la poliomyélite chez les enfants d'un an (%),Cobertura da vacina de pólio em crianças de um ano (%),Cobertura de inmunización contra polio en niños de un año de edad (%)
+values,indicators,itnwm,Pregnant women sleeping under insecticide-treated nets (%),Femmes enceintes dormant sous une moustiquaire imprégnée d'insecticide (%),Mulheres grávidas dormindo sob mosquiteiros tratados com inseticida (%),Mujeres embarazadas que duermen bajo mallas tratadas con insecticida (%)
+values,indicators,sevwasting,Severe wasting prevalence in children aged < 5 years (%),Prévalence de l'émaciation grave chez les enfants de moins de 5 ans (%),Prevalência de déficit de peso para altura em crianças menores de 5 anos (%),Prevalencia de emaciación severa (wasting) en niños menores de 5 años (%)
+values,indicators,stunting,Stunting prevalence in children aged < 5 years (%),Prévalence du retard de croissance chez les enfants de moins de 5 ans (%),Prevalência de déficit de comprimento/altura em crianças menores de 5 anos (%),Prevalencia de retraso en el crecimiento (stunting) en niños menores de 5 años (%)
+values,indicators,tfr,Total fertility rate (births per woman),Indice synthétique de fécondité (accouchements par femme),Taxa de fecundidade total (partos por mulher),Tasa de fecundidad total (partos por mujer)
+values,indicators,u5mr,Under-five mortality rate (deaths per 1000 live births),Taux de mortalité des moins de cinq ans (décès pour 1000 naissances vivantes),"Taxa de mortalidade de menores de cinco anos (óbitos por 1,000 nascidos vivos)",Tasa de mortalidad en menores de 5 años (muertes por 1000 nacidos vivos)
+values,indicators,underweight,Underweight prevalence in children aged < 5 years (%),Prévalence de l'insuffisance pondérale chez les enfants de moins de 5 ans (%),Prevalência de baixo peso para idade em crianças <5 anos (%),Prevalencia de bajo peso en niños menores de 5 años (%)
+values,indicators,wasting,Wasting prevalence in children aged < 5 years (%),Prévalence de l'émaciation chez les enfants de moins de 5 ans (%),Prevalência de baixo peso para altura em crianças <5 anos (%),Prevalencia de emaciación (wasting) en niños menores de 5 años (%)
+values,dimensions,Economic status (wealth decile),Economic status (wealth decile),Statut économique (décile),Situação econômica (decis de riqueza),Estado socioeconómico (decil de riqueza)
+values,dimensions,Economic status (wealth quintile),Economic status (wealth quintile),Statut économique (quintile),Situação econômica (quintis de riqueza),Estado socioeconómico (quintil de riqueza)
+values,dimensions,Education,Education,Niveau d'instruction,Educação,Educación
+values,dimensions,Place of residence,Place of residence,Lieu de résidence,Local de residência,Lugar de residencia
+values,dimensions,Sex,Sex,Sexe,Sexo,Sexo
+values,dimensions,Subnational region,Subnational region,Région du pays,Região subnacional,Región subnacional
+values,dimensions,Age,Age,Âge,Idade,Edad
+values,subgroups,Decile 1 (poorest),Decile 1 (poorest),Décile 1 (le plus pauvre),Decil 1 (mais pobre),Decil 1 (más pobre)
+values,subgroups,Decile 2,Decile 2,Décile 2,Decil 2,Decil 2
+values,subgroups,Decile 3,Decile 3,Décile 3,Decil 3,Decil 3
+values,subgroups,Decile 4,Decile 4,Décile 4,Decil 4,Decil 4
+values,subgroups,Decile 5,Decile 5,Décile 5,Decil 5,Decil 5
+values,subgroups,Decile 6,Decile 6,Décile 6,Decil 6,Decil 6
+values,subgroups,Decile 7,Decile 7,Décile 7,Decil 7,Decil 7
+values,subgroups,Decile 8,Decile 8,Décile 8,Decil 8,Decil 8
+values,subgroups,Decile 9,Decile 9,Décile 9,Decil 9,Decil 9
+values,subgroups,Decile 10 (richest),Decile 10 (richest),Décile 10 (le plus riche),Decil 10 (mais rico),Decil 10 (más rico)
+values,subgroups,Quintile 1 (poorest),Quintile 1 (poorest),Quintile 1 (le plus pauvre),Quintil 1 (mais pobre),Quintil 1 (más pobre)
+values,subgroups,Quintile 2,Quintile 2,Quintile 2,Quintil 2,Quintil 2
+values,subgroups,Quintile 3,Quintile 3,Quintile 3,Quintil 3,Quintil 3
+values,subgroups,Quintile 4,Quintile 4,Quintile 4,Quintil 4,Quintil 4
+values,subgroups,Quintile 5 (richest),Quintile 5 (richest),Quintile 5 (le plus riche),Qunitl 5 (mais rico),Quintil 5 (más rico)
+values,subgroups,No education,No education,Aucune instruction,Nenhuma educação,Sin educación formal
+values,subgroups,Primary school,Primary school,Éducation primaire,Educação primária,Educación primaria
+values,subgroups,Secondary school +,Secondary school +,Éducation secondaire ou plus,Educação secundária ou mais,Educación secundaria o más
+values,subgroups,Rural,Rural,Zones rurales,Rural,Rural
+values,subgroups,Urban,Urban,Zones urbaines,Urbano,Urbano
+values,subgroups,Female,Female,Femmes,Feminino,Femenino
+values,subgroups,Male,Male,Hommes,Masculino,Masculino
+values,subgroups,15-19 years,15-19 years,15-19 ans,15-19 anos,15-19 años
+values,subgroups,20-49 years,20-49 years,20-49 ans,20-49 anos,20-49 años
+values,subgroups,0-1 years,0-1 years,0-1 ans,0-1 anos,0-1 años
+values,subgroups,2-5 years,2-5 years,2-5 ans,2-5 anos,2-5 años

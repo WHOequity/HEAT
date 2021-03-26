@@ -1,0 +1,43 @@
+Package: heat
+Type: Package
+Title: WHO HEAT Application
+Version: 3.1.1
+Authors@R: c(
+   person("Ahmadreza", "Hosseinpoor", role = c("aut", "ctb")), 
+   person("Anne", "Schlotheuber", role = c("aut", "ctb")), 
+   person("Zev", "Ross", role = c("aut", "cre"), email = "zev@zevross.com"),
+   person("Nate", "Teetor", role = "ctb", email = "nate@zevross.com"),
+   person(family = "World Health Organization", role = "cph")
+   )
+Description: An application to explore and compare within-country health 
+   inequalities across settings.
+License: GPL-2 | file LICENSE
+Encoding: UTF-8
+LazyData: true
+RoxygenNote: 7.1.0
+Roxygen: list(markdown = TRUE)
+Remotes:
+    whoequity/heat-data,
+    whoequity/heat-measures,
+    nteetor/highcharter
+Imports:
+    shiny (<= 1.5.0),
+    yonder (<= 0.2.0),
+    htmltools (<= 0.5.0),
+    highcharter (<= 0.7.0.9000),
+    dplyr (<= 0.8.4),
+    tidyr (<= 0.8.3),
+    purrr,
+    glue,
+    viridisLite,
+    DT (<= 0.12.0),
+    waiter (>= 0.0.2),
+    fs,
+    pkgload,
+    heatdata,
+    heatmeasures,
+    readr
+Depends:
+    yonder
+Suggests:
+    cli

@@ -1,0 +1,175 @@
+<!--
+? Copyright World Health Organization (WHO) 2016-2021.
+This file is part of the WHO Health Equity Assessment Toolkit
+(HEAT and HEAT Plus), a software application for assessing
+health inequalities in countries.
+
+This program is free software: you can redistribute it and/or modify
+it under the terms of the GNU Affero General Public License as
+published by the Free Software Foundation, either version 3 of the
+License, or (at your option) any later version.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU Affero General Public License for more details.
+
+You should have received a copy of the GNU Affero General Public License
+along with this program.  If not, see <https://www.gnu.org/licenses/>.
+-->
+
+<div class="aboutcontainer">
+<h1 class="aboutheader">Versions</h1>
+
+<p>&nbsp;</p>
+
+<p><strong>April 2021 - Version 4.0 (final)</strong></p>
+<ul>
+	<li>Desktop versions for Windows and Macintosh developed</li>
+	<li>Translation of the interface into French, Portuguese and Spanish</li>
+	<li>Addition of new maps</li>
+	<li>Correction to summary measure formulas:</li>
+	<ul>
+		<li>Correct use of reference subgroup in the calculation of MDBU and MDBW</li>
+	</ul>
+	<li>Several other fixes to software functionality</li>
+</ul>
+
+<p>&nbsp;</p>
+
+<p><strong>July 2020 - Version 4.0 (beta)</strong></p>
+<ul>
+	<li>Update of the built-in Health Equity Monitor database (2020 update).</li>
+	<li>The source code has been completely restructured to improve performance. This included dividing the application into four R packages: heat, heatplus, heatdata, and heatmeasures. These packages handle validating and bundling the built-in database in HEAT and uploaded databases in HEAT Plus, generating interactive charts within the application and static charts for download, and contain all the modules used to build and run HEAT and HEAT Plus.</li>
+	<li>The interface has been entirely redesigned to enhance user friendliness:</li>
+	<ul>
+		<li>The home page now allows users to vertically scroll through information</li>
+		<li>Disaggregated data and summary measure views under "Explore inequality" and "Compare inequality" have been separated into two distinct sections</li>
+		<li>Graphs showing disaggregated data under "Explore inequality" have been divided into two separate views: horizontal line graphs and vertical bar graphs</li>
+		<li>Graphs showing summary measures under "Explore inequality" have been divided into two separate views: line graphs and bar graphs</li>
+		<li>In all views, graph/map/table options are now found under a separate tab of the side panel</li>
+		<li>In all views, download options are now found under a separate tab of the side panel</li>
+		<li>In all views under "Compare inequality", benchmark options are now listed in a separate tab in the side panel</li>
+		<li>In horizontal bar graphs showing disaggregated data under "Explore inequality", special summary measure calculations are now listed in a separate tab in the side panel</li>
+		<li>Graph facet layouts have been redesigned with css grid and flexbox</li>
+		<li>Color palettes have been updated</li>
+	</ul>
+	<li>New features have been added to allow for greater customization:</li>
+	<ul>
+		<li>Table views have been added for disaggregated data and summary measures under "Compare inequality"</li>
+		<li>Graph options now include the option to show/hide data labels, control the size of data labels and choose the number of decimals</li>
+		<li>Graph options for horizontal bar graphs showing disaggregated data under "Explore inequality" now include the option to show/hide 95% confidence intervals</li>
+		<li>Graphs options for scatterplots showing summary measures under "Compare inequality" now include the option to show data points as setting labels in addition to points or ISO3 labels and control the size of data labels</li>
+		<li>Benchmark options under "Compare inequality" now automatically select comparison settings given the chosen country income groups and WHO regions</li>
+	</ul>
+	<li>Correction to summary measure formulas:</li>
+	<ul>
+		<li>Division of MDBU and MDMU by number of observations (n)</li>
+		<li>Multiplication of RCI by 100</li>
+		<li>Multiplication of MLD and TI by 1000</li>
+	</ul>
+</ul>
+
+<p>&nbsp;</p>
+
+<p><strong>July 2019 - Version 3.1</strong></p>
+<ul>
+	<li>Update of the built-in Health Equity Monitor database (2019 update).</li>
+</ul>
+
+<p>&nbsp;</p>
+
+<p><strong>December 2018 - Version 3.0</strong></p>
+<ul>
+	<li>Incorporation of interactive visuals (replacing static graphs).</li>
+	<li>Incorporation of a translation feature.</li>
+	<li>Addition of a new tab under "Explore inequality" featuring maps.</li>
+	<li>Calculation of additional summary measures of inequality for non-ordered dimensions, including</li>
+	<ul>
+		<li>Between-group standard deviation (BGSD),</li>
+		<li>Coefficient of variation (COV),</li>
+		<li>Unweighted mean differnce from best performing subgroup (MDBU),</li>
+		<li>Unweighted mean difference from mean (MDMU).</li>
+	</ul>
+	<li>Revision of summary measure formulas for</li>
+	<ul>
+		<li>Slope index of inequality (SII),</li>
+		<li>Relative index of inequality (RII).</li>
+	</ul>
+	<li>Incorporation of additional summary measures of inequality in the "Explore inequality" - Disaggregated data (detailed bar graphs) tab, calculated for non-ordered dimensions with more than</li>
+	<ul>
+		<li>30 subgroups:</li>
+		<ul>
+			<li>Difference between percentile 80 and percentile 20,</li>
+			<li>Ratio of percentile 80 to percentile 20,</li>
+			<li>Differnce between the mean estimates in quintile 5 and quintile 1,</li>
+			<li>Ratio of the mean estimates in quintile 5 to quintile 1.</li>
+		</ul>
+		<li>60 subgroups:</li>
+		<ul>
+			<li>Difference between percentile 90 and percentile 10,</li>
+			<li>Ratio of percentile 90 to percentile 10,</li>
+			<li>Differnce between the mean estimates in decile 10 and decile 1,</li>
+			<li>Ratio of the mean estimates in decile 10 to decile 1.</li>
+		</ul>
+		<li>100 subgroups:</li>
+		<ul>
+			<li>Difference between percentile 95 and percentile 5,</li>
+			<li>Ratio of percentile 95 to percentile 5,</li>
+			<li>Differnce between the mean estimates in the top 5% and the bottom 5%,</li>
+			<li>Ratio of the mean estimates in the top 5% to the bottom 5%.</li>
+		</ul>
+	</ul>
+</ul>
+
+<p>&nbsp;</p>
+
+<p><strong>February 2018 - Version 2.1</strong></p>
+<ul>
+	<li>Update of the built-in Health Equity Monitor database (2018 update).</li>
+</ul>
+
+<p>&nbsp;</p>
+
+<p><strong>July 2017 &ndash; Version 2.0</strong></p>
+<ul>
+	<li>Restructuring of source code for improved performance, including
+	<ul>
+		<li>Improving the cascade of user selections to minimize plot redrawing, and</li>
+		<li>Pre-calculating 95% confidence intervals of summary measures (instead of&nbsp;on the fly).</li>
+	</ul>
+	</li>
+	<li>Addition of a new tab under "Explore inequality" featuring detailed bar graphs.</li>
+	<li>Addition of accordion-style menus for graph options and table options.</li>
+	<li>Alteration of variable names in order to conform with the terminology used in HEAT Plus, including
+	<ul>
+		<li>Changing &lsquo;country&rsquo; to &lsquo;setting&rsquo;, and</li>
+		<li>Changing &lsquo;national average&rsquo; to &lsquo;setting average&rsquo;.</li>
+	</ul>
+	</li>
+	<li>Revision of summary measures of inequality, including
+	<ul>
+		<li>Dropping the previous Relative Index of Inequality (RII),</li>
+		<li>Renaming the previous Kunst-Mackenbach Index (KMI) to Relative Index of Inequality (RII),</li>
+		<li>Revising the formulas for the Slope Index of Inequality (SII) and the Relative Index of Inequality (RII), both for the estimate and analytic 95% confidence intervals,</li>
+		<li>Adding the Weighted Index of Disparity (IDIS_W),</li>
+		<li>Dropping the bootstrap 95% confidence intervals,</li>
+		<li>Adding the simulation-based 95% confidence intervals for the Index of Disparity (IDIS), Mean Difference from Mean (MDM), Mean Difference from Best-Performing Subgroup (MDB) and Weighted Index of Disparity (IDIS_W),</li>
+		<li>Calculating the average as the weighted average based on the estimate and population size.</li>
+	</ul>
+	</li>
+</ul>
+
+<p>&nbsp;</p>
+
+<p><strong>January 2017 - Version 1.1</strong></p>
+<ul>
+	<li>Update of the built-in Health Equity Monitor database (2016 update).</li>
+</ul>
+<p>&nbsp;</p>
+<p><strong>May 2016 - Version 1.0</strong></p>
+<ul>
+	<li>Initial public release.</li>
+</ul>
+
+</div>

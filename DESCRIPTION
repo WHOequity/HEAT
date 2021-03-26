@@ -17,8 +17,8 @@ LazyData: true
 RoxygenNote: 7.1.0
 Roxygen: list(markdown = TRUE)
 Remotes:
-    whoequity/heat-data,
-    whoequity/heat-measures,
+    whoequity/heatdata,
+    whoequity/heatmeasures,
     nteetor/highcharter
 Imports:
     shiny (<= 1.5.0),

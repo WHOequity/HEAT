@@ -2,11 +2,11 @@
 <hr>
 
 **Content**
-[Description](#description)
-[Copyright](#copyright)
-[Suggested citation](#suggested-citation)
-[Disclaimer](#disclaimer)
-[Terms of use and software license agreement](#terms-of-use-and-software-license-agreement)
+1. [Description](#description)
+2. [Copyright](#copyright)
+3. [Suggested citation](#suggested-citation)
+4. [Disclaimer](#disclaimer)
+5. [Terms of use and software license agreement](#terms-of-use-and-software-license-agreement)
 <hr>
 
 ### DESCRIPTION

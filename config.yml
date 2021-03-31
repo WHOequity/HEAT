@@ -1,0 +1,7 @@
+default:
+  shiny:
+    PORT: 8080
+
+portable:
+  local:
+    DIR: ./Data/User-data/

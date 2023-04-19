@@ -14,20 +14,20 @@
 
 #### SOFTWARE
 The WHO **Health Equity Assessment Toolkit** is a software application that 
-facilitates the assessment of health inequalities in countries. Health 
-inequality data are visualized in a variety of interactive graphs, maps and 
-tables, making it easy to analyze and interpret results. Visualizations can be 
-exported and used to communicate findings for evidence-based decision making. 
+facilitates the assessment of health inequalities. Inequalities can be assessed
+through disaggregated data and summary measures of health inequality, visualized
+in interactive graphs, maps and tables. Results can be exported and saved in
+different formats. 
 
 The toolkit is available in two editions: 
-- **HEAT**, Built-in Database Edition, which contains the WHO Health Equity 
-Monitor database;
+- **HEAT**, Built-in Database Edition, which contains the WHO Health Inequality
+Data Repository;
 - **HEAT Plus**, Upload Database Edition, which allows users to upload and work 
 with their own datasets.
 
-Both HEAT and HEAT Plus are available as online versions and downloadable 
-desktop versions. For further information about HEAT and HEAT Plus, please refer 
-to the WHO website: https://www.who.int/gho/health_equity/assessment_toolkit
+HEAT and HEAT Plus are available as online versions and downloadable desktop 
+versions. For further information about HEAT and HEAT Plus, please refer to the 
+WHO website: https://www.who.int/data/inequality-monitor/assessment_toolkit
 
 #### SOURCE CODE
 The source code is available in 4 repositories: 
@@ -40,14 +40,14 @@ The source code is available in 4 repositories:
 ### COPYRIGHT
 <hr>
 
-© Copyright World Health Organization, 2016-2021. 
+© Copyright World Health Organization, 2016-2023. 
 
 
 ### SUGGESTED CITATION
 <hr>
 
-Health Equity Assessment Toolkit (HEAT and HEAT Plus): Software for exploring and comparing health inequalities in countries. Geneva, World Health 
-Organization, 2021. 
+Health Equity Assessment Toolkit (HEAT and HEAT Plus): Software for exploring and 
+comparing health inequalities in countries. Geneva, World Health Organization, 2023. 
 
 
 ### DISCLAIMER 
@@ -74,10 +74,9 @@ conditions, and requirements of the Agreement.
 1.1. The Toolkit contains software developed by WHO (the “Software”). WHO has,
 or will, make two editions of the Toolkit available:
 
-  (i) HEAT, the built-in database edition, which includes WHO data, originating 
-from the WHO Health Equity Monitor database, for use with the Software 
-(the “Data”), and which does not allow you to upload your own data into the 
-Software; and 
+  (i) HEAT, the built-in database edition, which includes data from the 
+Health Inequality Data Repository for use with the Software (the “Data”), 
+and which does not allow you to upload your own data into the Software; and 
 
   (ii) HEAT Plus, the upload database edition which enables you to upload your 
 own data into the toolkit, does not include the Data, and does not include any 
@@ -90,7 +89,7 @@ this Agreement apply to the built-in and/or upload database editions, as
 applicable in your particular case, including, as applicable the Software and 
 the Data.
 
-1.2 Both HEAT and HEAT Plus are available in two formats: an online version, and 
+1.2 HEAT and HEAT Plus are available in two formats: an online version, and 
 a downloadable desktop version. The applicability of certain aspects of the 
 Terms of Use will depend on whether you are using HEAT and/or HEAT Plus, and 
 whether that is through the online or desktop version(s).
@@ -101,9 +100,7 @@ whether that is through the online or desktop version(s).
 alone packages, you will need the “R” statistical software and a web browser. In 
 the stand-alone package of the Toolkit, WHO has provided a portable version of 
 “R”, and the portable edition of the web browsers Google Chrome or Chromium. 
-These do not require any installation. Furthermore, to use the online version of 
-HEAT Plus, you are required to establish an account with Microsoft, and login 
-with that account, and thereby accept the Microsoft Terms of Use.
+These do not require any installation.
 
 2.2. WHO disclaimers for third-party software. WHO makes no warranties 
 whatsoever, and specifically disclaims any and all warranties, express or 
@@ -130,7 +127,7 @@ similar nature.
 **3. License and Terms of Use for the Software**
 
 3.1. Copyright and license. The Software is copyright (©) World Health 
-Organization, 2016–2021, and is distributed under the terms of version 3 of the 
+Organization, 2016–2023, and is distributed under the terms of version 3 of the 
 GNU Affero General Public License (AGPL v3). As stated in the source code for 
 the Software, the Software incorporates or makes reference to other open source 
 software, issued under multiple license types, and WHO issues the Software under 
@@ -138,11 +135,13 @@ the licenses listed above in part to comply with the those terms. As provided in
 the text of the AGPL v3, components of the Software which are licensed under GPL 
 v3 remain governed by that license.
 
-**4. Copyright and Terms of Use for the Data **
+**4. Copyright and Terms of Use for the Data**
 
-4.1. Copyright of Data. The Data in HEAT originates from the WHO Health Equity 
-Monitor database, and is © WHO. For the avoidance of any doubt, WHO hereby 
-asserts its copyright in the Data, and reserves all rights in the Data.
+4.1. Copyright of Data. The Data in HEAT are from the WHO Health Inequality 
+Data Repository. Except where otherwise indicator, the Data is © WHO. Please 
+refer to the Indicator Metadata for more information about the source of the Data. 
+For the avoidance of any doubt, WHO hereby asserts its copyright in the Data, 
+and reserves all rights in the Data.
 
 4.2. Data not part of Software or Published under GPL. Unlike the Software, WHO 
 is not publishing the Data in HEAT under the AGPL v3. The Data is not based on 
@@ -206,8 +205,8 @@ reports, briefings, and journal articles) must include the following citation of
 the source: 
 
 Health Equity Assessment Toolkit (HEAT): Software for exploring and comparing 
-health inequalities in countries. Built-in database edition. Version 4.0. 
-Geneva, World Health Organization, 2021.
+health inequalities in countries. Built-in database edition. Version 5.0. 
+Geneva, World Health Organization, 2023.
 
 Other than as provided above, you shall not (i) in connection with your use of 
 HEAT, state or imply that WHO endorses or is affiliated with you or your use of 
@@ -286,7 +285,7 @@ be amended by mutual written agreement of you and WHO.
 immediately cease all use of the Toolkit and destroy and/or remove all copies of 
 the Toolkit from your computer systems and storage media.
 
-**12. General Provisions **
+**12. General Provisions**
 
 12.1. You may not assign this Agreement without the prior written agreement of 
 WHO (such agreement not to be unreasonably withheld).

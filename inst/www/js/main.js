@@ -1,11 +1,71 @@
 $(function () {
+
+  // $(document).ready(function () {
+  //   $(".chip .chip-content").map(function (x, i) {
+  //     var txt = $(i).html().replaceAll("&nbsp;", "");
+  //     console.log(txt);
+  //     $(i).html(txt);
+  //   });
+  // });
+
+  $("nav").toggleClass("navbar-expand-xl navbar-expand-custom");
+
+  Shiny.addCustomMessageHandler("modal-stay-open", function (message) {
+    console.log('in here')
+    $("body").addClass("modal-open")
+  })
+
+Shiny.addCustomMessageHandler("hide-map-button", function(message){
+
+
+  if(message['display'] === 'true'){
+    $("input[value='map'][name='heat-nav_explore_disag']").parent().removeClass("hidestuff")
+  } else {
+    $("input[value='map'][name='heat-nav_explore_disag']").parent().addClass("hidestuff")
+  }
+
+})
+
+  checkForChart();
+
+
+  Shiny.addCustomMessageHandler("make-invalid-dimension", function (message) {
+    add_class_invalid("#heat-explore_disag_line-dimension", message);
+    add_class_invalid("#heat-explore_disag_bar-dimension", message);
+    add_class_invalid("#heat-explore_disag_table-dimension", message);
+    add_class_invalid("#heat-explore_disag_detail-dimension", message);
+    add_class_invalid("#heat-explore_summary_bar-dimension", message);
+    add_class_invalid("#heat-explore_summary_line-dimension", message);
+    add_class_invalid("#heat-explore_summary_table-dimension", message);
+    add_class_invalid("#heat-compare_disag_graph-dimension", message);
+    add_class_invalid("#heat-compare_disag_table-dimension", message);
+    add_class_invalid("#heat-compare_summary_graph-dimension", message);
+    add_class_invalid("#heat-compare_summary_table-dimension", message);
+  });
+
+  Shiny.addCustomMessageHandler("make-invalid-year", function (message) {
+    add_class_invalid("#heat-explore_disag_line-year", message);
+    add_class_invalid("#heat-explore_disag_bar-year", message);
+    add_class_invalid("#heat-explore_disag_map-year", message);
+    add_class_invalid("#heat-explore_disag_detail-year", message);
+    add_class_invalid("#heat-explore_summary_bar-year", message);
+    add_class_invalid("#heat-explore_summary_line-year", message);
+    add_class_invalid("#heat-explore_summary_table-year", message);
+
+    add_class_invalid("#heat-compare_disag_table-year", message);
+    add_class_invalid("#heat-compare_disag_graph-year", message);
+    add_class_invalid("#heat-compare_summary_graph-year", message);
+    add_class_invalid("#heat-compare_summary_table-year", message);
+  });
+
+  Shiny.addCustomMessageHandler("chart-timer", function (message) {
+      console.log('in chart timer listen')
+      checkForChartTimerDebug();
+  });
+
+
   $("#heat-header-title").on("click", function () {
     $("#heat-nav>li>button:first").click();
-    //$("#heat-pane_main").removeClass("active");
-    //$("#heat-pane_other").removeClass("active");
-    //$("#heat-pane_home").addClass("active");
-    //$("#heat-nav>li>button:first").addClass("active")
-    //$("#heat-nav>li>button:not(:first)").removeClass("active")
   });
   Shiny.addCustomMessageHandler("heat:activate-plot-output", function (msg) {
     $(document.querySelectorAll(".heat-plot-output.active")).removeClass(
@@ -131,10 +191,15 @@ $(function () {
     var height = msg.height || chart.offsetHeight;
 
     if (!msg.height && chart.querySelector(".heat-chart-disclaimer")) {
-      var disHeight = chart.querySelector(".heat-chart-disclaimer")
-        .scrollHeight;
+      var disHeight = chart.querySelector(
+        ".heat-chart-disclaimer"
+      ).scrollHeight;
       height += disHeight * 1.5;
     }
+
+    var legend = document.querySelector('.heat-legend-chart');
+    var xtraHeight = (legend === null) ? 0 : legend.offsetHeight;
+    height += xtraHeight;
 
     html2canvas(chart, {
       ignoreElements: function (el) {
@@ -148,10 +213,13 @@ $(function () {
         );
 
         if (disclaimer) {
+          var legend = document.querySelector('.heat-legend-chart');
+          var xtraHeight = (legend === null) ? 0 : legend.offsetHeight;
+
           disclaimer.style.height = "auto";
           disclaimer.style.visibility = "visible";
 
-          disclaimer.style.paddingTop = "10px";
+          disclaimer.style.paddingTop = xtraHeight + "px";
           disclaimer.style.paddingLeft = "10px";
           disclaimer.style.paddingLeft = "10px";
 
@@ -252,16 +320,16 @@ $(function () {
     });
 
     /*$(".yonder-checkbox").each(function() {
-      var $checkbox = $(this);
-      var ns = $checkbox.attr("data-i18n-ns") + ".";
+    var $checkbox = $(this);
+    var ns = $checkbox.attr("data-i18n-ns") + ".";
 
-      $checkbox.find("label").each(function() {
-        var $link = $(this);
-        var $input = $link.prev();
+    $checkbox.find("label").each(function() {
+      var $link = $(this);
+      var $input = $link.prev();
 
-        $link.attr("data-i18n", ns + $input.val());
-      });
-    });*/
+      $link.attr("data-i18n", ns + $input.val());
+    });
+  });*/
 
     $("[data-i18n-target]").each(function () {
       var $el = $(this);
@@ -381,5 +449,70 @@ function saveImage(url, type, filename, width, height) {
     } else {
       window.open(url);
     }
+  }
+}
+
+function add_class_invalid(idval, message, classval = "invalid-val") {
+  console.log(message['from'])
+  const invalid_vals = [].concat(message["invalid"]);
+  const valid_vals = [].concat(message["valid"]);
+  var checkExist1 = setInterval(function () {
+    if ($(idval + " .dropdown-item").length) {
+      for (let i = 0; i < invalid_vals.length; i++) {
+        $(idval + ' .dropdown-item[value="' + invalid_vals[i] + '"]').addClass(
+          classval
+        );
+
+        $(idval + ' .chip[value="' + invalid_vals[i] + '"]').addClass(
+          "invalid-chip-val"
+        );
+      }
+
+      for (let i = 0; i < valid_vals.length; i++) {
+        $(idval + ' .dropdown-item[value="' + valid_vals[i] + '"]').removeClass(
+          classval
+        );
+
+        $(idval + ' .chip[value="' + valid_vals[i] + '"]').removeClass(
+          "invalid-chip-val"
+        );
+      }
+
+      clearInterval(checkExist1);
+    }
+  }, 100);
+}
+
+function checkForChart() {
+  var checkExist3 = setInterval(function () {
+    //
+    if ($(".highcharts-root").length) {
+      Shiny.setInputValue("heat-chartexists", Math.random());
+      Shiny.setInputValue("heatplus-chartexists", Math.random());
+      clearInterval(checkExist3);
+    }
+  }, 100);
+}
+
+
+function checkForChartTimerDebug() {
+  var checkExist4 = setInterval(function () {
+    //
+    if ($(".highcharts-root").length) {
+      console.log('in js')
+      Shiny.setInputValue("heat-chartexists_debug_timer", Math.random());
+      clearInterval(checkExist4);
+    }
+  }, 100);
+}
+
+function addAccordionToggle(element) {
+  element.classList.toggle("active");
+  /* Toggle between hiding and showing the active panel */
+  var panel = element.nextElementSibling;
+  if (panel.style.display === "block") {
+    panel.style.display = "none";
+  } else {
+    panel.style.display = "block";
   }
 }

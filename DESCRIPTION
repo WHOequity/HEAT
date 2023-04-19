@@ -17,26 +17,29 @@ LazyData: true
 RoxygenNote: 7.1.0
 Roxygen: list(markdown = TRUE)
 Remotes:
-    WHOequity/HEAT-Data@main,
-    WHOequity/HEAT-Measures@main,
+    WHOequity/HEAT-Data-development@master,
+    WHOequity/HEAT-Measures-development@master,
     nteetor/highcharter
 Imports:
-    shiny (<= 1.5.0),
-    yonder (<= 0.2.0),
-    htmltools (<= 0.5.0),
-    highcharter (<= 0.7.0.9000),
-    dplyr (<= 0.8.4),
-    tidyr (<= 0.8.3),
+    shiny,
+    yonder,
+    htmltools,
+    highcharter,
+    dplyr,
+    tidyr,
     purrr,
     glue,
     viridisLite,
-    DT (<= 0.12.0),
-    waiter (>= 0.0.2),
+    DT,
+    waiter,
     fs,
     pkgload,
     heatdata,
     heatmeasures,
-    readr
+    readr,
+    shinyvalidate,
+    shinyWidgets,
+    arrow
 Depends:
     yonder
 Suggests:

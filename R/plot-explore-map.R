@@ -116,13 +116,19 @@ chartExploreMap <- function(data,
                             title_vertical = NULL,
                             title_main = NULL,
                             decimal_places = 1,
-                            language = "en") {
+                            language = "en",
+                            dataset_name = TRUE,
+                            is_map_dataset,
+                            is_who_dataset) {
+
+  if(!is_map_dataset) return()
   # ├─ config ----
   data_setting <- unique(data$setting)
   data_iso3 <- unique(data$iso3)
   data_year <- unique(data$year)
   data_indicator <- data$indicator_name[1]
   null_fill_color <- "rgb(100,100,100)"
+  flex_indicator <- data_indicator %in% names(FLEXIBLE_SCALE_INDICATORS)
 
 
   chart_palette <- color_stops(5, c(viridisLite::viridis(5, begin = 0.2, direction = -1)))
@@ -211,9 +217,8 @@ chartExploreMap <- function(data,
       labels = list(
         useHTML = TRUE
       ),
-      stops = chart_palette
-      # min = minhc,
-      # max = maxhc
+      stops = chart_palette,
+      max = if(flex_indicator) NULL else 100
     ) %>%
     chart_tooltip(
       heading = "this.point.setting + ', ' + 'DHS' + ' ' + this.point.year",
@@ -243,7 +248,8 @@ chartExploreMap <- function(data,
     title_vertical = NULL,
     legend = NULL,
     map_disclaimer = TRUE,
-    language = language
+    language = language,
+    is_who_dataset = is_who_dataset
   )
 }
 
@@ -285,18 +291,19 @@ chart_map_legend <- function(chart, setting, language) {
       name = translate(c(language, "charts", "legend", "subnational" )),#"Subnational boundaries (DHS)",
       showInLegend = TRUE,
       type = "line",
-      color = "#cccccc",
-      marker = list()
+      color = "#cccccc"
+      #marker = list()
     ) %>%
     hc_add_series(
       data = NULL,
       name = translate(c(language, "charts", "legend", "national" )),
       showInLegend = TRUE,
       type = "line",
-      color = "rgb(100,100,100)",
-      marker = list()
+      color = "rgb(100,100,100)"
+      #marker = list()
     ) %>%
     hc_plotOptions(
+
       scatter = list(
         events = list(legendItemClick = JS("function() { return false; }"))
       ),
@@ -304,6 +311,7 @@ chart_map_legend <- function(chart, setting, language) {
         events = list(legendItemClick = JS("function() { return false; }"))
       )
     ) %>%
+    hc_xAxis(visible = FALSE) |>
     hc_legend(
       useHTML = TRUE,
       enabled = TRUE,

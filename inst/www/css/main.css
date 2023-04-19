@@ -1,6 +1,14 @@
 main {
   height: 100vh;
-  padding-top: 75px;
+  padding-top: 5px;
+}
+
+.desktop-lang-select {
+  display: block;
+}
+
+.mobile-lang-select {
+  display: block;
 }
 
 .toasts {
@@ -44,7 +52,7 @@ main {
 }
 
 .yonder-chip input::placeholder {
-/*.yonder-select input::placeholder {*/
+  /*.yonder-select input::placeholder {*/
   color: #ced4da;
 }
 
@@ -59,12 +67,12 @@ main {
 
 .title--grey {
   color: #696363;
-  margin-top: .5rem;
+  margin-top: 0.5rem;
 }
 
 .title--orange {
   color: #d86422;
-  margin-top: .5rem;
+  margin-top: 0.5rem;
 }
 
 .text-orange {
@@ -73,7 +81,18 @@ main {
 
 .title--lightgrey {
   color: #696363;
-  font-size: 1.25em;
+  font-size: 1rem;
+}
+
+.dataname-title{
+    color: #d86422 !important;
+    margin-top: 4px;
+    margin-bottom: 4px;
+    font-size: 1rem;
+    font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,"Noto Sans",sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";
+    font-weight: 500;
+}
+
 }
 
 .h-viewport {
@@ -126,8 +145,8 @@ button {
 
 .dataTables_filter input {
   display: inline;
-  height: calc(1.5em + .75rem + 2px);
-  padding: .375rem .75rem;
+  height: calc(1.5em + 0.75rem + 2px);
+  padding: 0.375rem 0.75rem;
   font-size: 1rem;
   font-weight: 400;
   line-height: 1.5;
@@ -135,8 +154,12 @@ button {
   background-color: #fff;
   background-clip: padding-box;
   border: 1px solid #ced4da;
-  border-radius: .25rem;
-  transition: border-color .15s ease-in-out, box-shadow .15s ease-in-out;
+  border-radius: 0.25rem;
+  transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+}
+
+.controls-margtop{
+  margin-top: 6px;
 }
 
 .fa {
@@ -147,7 +170,7 @@ button {
   width: 16.66667% !important;
 }
 
-.open-on-hover .dropdown:hover>.dropdown-menu {
+.open-on-hover .dropdown:hover > .dropdown-menu {
   display: block;
 }
 
@@ -166,8 +189,8 @@ button {
 
 .custom-select ::-webkit-scrollbar-thumb {
   border-radius: 4px;
-  background-color: rgba(0, 0, 0, .5);
-  -webkit-box-shadow: 0 0 1px rgba(255, 255, 255, .5);
+  background-color: rgba(0, 0, 0, 0.5);
+  -webkit-box-shadow: 0 0 1px rgba(255, 255, 255, 0.5);
 }
 
 .plot-output__spinner {
@@ -181,7 +204,8 @@ button {
 
 /* chart styles */
 .heat-chart-area {
-  font-family: "Lucida Grande", "Lucida Sans Unicode", Arial, Helvetica, sans-serif;
+  font-family: "Lucida Grande", "Lucida Sans Unicode", Arial, Helvetica,
+    sans-serif;
 }
 
 .highchart,
@@ -239,6 +263,10 @@ button {
   padding: 0;
 }
 
+.heat-legend-container .html-widget{
+  height: 31px !important;
+}
+
 .heat-legend-container svg {
   overflow: visible !important;
 }
@@ -274,26 +302,36 @@ button {
   display: flex;
   align-items: center;
   justify-content: center;
-  font-family: "Lucida Grande", "Lucida Sans Unicode", Arial, Helvetica, sans-serif;
+  font-family: "Lucida Grande", "Lucida Sans Unicode", Arial, Helvetica,
+    sans-serif;
   font-size: 14px;
   font-weight: bold;
   color: #696363;
   white-space: normal;
-  letter-spacing: .5px;
+  letter-spacing: 0.5px;
   text-align: center;
   transition: height 0.25s linear;
 }
 
-.add-margin-bottom{
+.add-margin-bottom {
   margin-bottom: 1rem;
 }
 
-.heat-pane-title.pl-2 { /* wat */
+.heat-pane-title.pl-2 {
+  /* wat */
   padding-left: 12.5% !important;
 }
 
 .heat-pane-title.pl-3 {
   padding-left: 19.5% !important;
+}
+
+.dataset-title{
+  text-align: center;
+    margin: 5px 0;
+    color: grey;
+    font-size: 0.8em;
+    font-style: italic;
 }
 
 .heat-axis-title {
@@ -303,12 +341,17 @@ button {
   text-align: center;
 }
 
+.grey-pane-title{
+  color: grey;
+  margin-bottom: 4px;
+}
+
 .heat-variable-title {
   display: table-caption;
   color: #696363 !important;
   font-size: 14px !important;
   font-weight: bold !important;
-  letter-spacing: .5px !important;
+  letter-spacing: 0.5px !important;
   flex: 1 0 15em;
   padding: 0 15px;
 }
@@ -330,7 +373,8 @@ button {
   -ms-transform: rotate(-90deg);
   -o-transform: rotate(-90deg);
   transform: translateY(-50%) translateX(-50%) rotate(-90deg);
-  font-family: "Lucida Grande", "Lucida Sans Unicode", Arial, Helvetica, sans-serif;
+  font-family: "Lucida Grande", "Lucida Sans Unicode", Arial, Helvetica,
+    sans-serif;
   white-space: nowrap;
 }
 
@@ -340,7 +384,7 @@ button {
 }
 
 .heat-chart-disclaimer p {
-  letter-spacing: .5px;
+  letter-spacing: 0.5px;
 }
 
 .highcharts-tooltip-container {
@@ -350,8 +394,9 @@ button {
 /* Sara's additions */
 /* p, */
 label,
-.font-size-xl { /* <- please don't hijack a different type of style like this */
-                /*    let this syle control font size only, as it should */
+.font-size-xl {
+  /* <- please don't hijack a different type of style like this */
+  /*    let this syle control font size only, as it should */
   color: #3c4245;
 }
 
@@ -378,7 +423,7 @@ label,
   border: #008dc9;
 }
 
-.custom-control-input:checked~.custom-control-label::before {
+.custom-control-input:checked ~ .custom-control-label::before {
   background-color: #008dc9;
   border-color: #008dc9;
 }
@@ -442,7 +487,7 @@ label,
   color: #3c4245;
 }
 
-.chip:hover>.chip-close {
+.chip:hover > .chip-close {
   color: #d86422;
 }
 
@@ -461,11 +506,11 @@ label:not(.custom-control-label):not(.btn):not(.custom-file-label) {
 }
 
 .background-gray {
-  background-color: rgba(0,0,0,.03);
+  background-color: rgba(0, 0, 0, 0.03);
   padding: 15px;
 }
 
-.max-width-300px{
+.max-width-300px {
   max-width: 300px;
 }
 
@@ -495,108 +540,50 @@ label:not(.custom-control-label):not(.btn):not(.custom-file-label) {
 }
 
 hr {
-  opacity: .5;
+  opacity: 0.5;
 }
 
-@media (max-width: 951px) {
-  /* Prevent menu from covering content */
-  .h-screen {
-    padding-top: 50px;
-  }
-
-  /* Column layout on small screens */
-  .row { /* ANOTHER GENERIC OVERWRITE */
-    display: flex;
-    flex-direction: column;
-  }
-
-  .col {
-    max-width: 100%;
-  }
-
-  .col-1, .col-4, .col-8, .col-11, .col-12 {
-    max-width: 100% !important;
-  }
-
-  .hidden-xs{
-    display: none;
-  }
-
-  rect {
-    height: 200;
-  }
-
-  .subtract-15-padding{
-  padding-left: 15px !important;
-  padding-right: 0 !important;
+#heat-header-title-desktop {
+  justify-content: flex-start !important;
+  text-align: left !important;
+  display: flex;
+  margin-left: 15px;
 }
+
+#heat-header-title-mobile {
+  display: none !important;
+}
+
+.navbar-light .navbar-toggler {
+  border: none !important;
+  color: #fff !important;
 }
 
 .margin-left-subtract {
   margin-left: 40px;
 }
 
-/* end media */
-@media (max-width: 705px) {
-  /* Prevent menu from covering content*/
-  .h-screen {
-    padding-top: 50px;
-  }
+label.btn.btn-grey.hidestuff{
+  display: none !important;
 }
 
-/* Change tabs to look like buttons for widths when tabs stack on top of each other. Between 1328px and 951px */
-@media (max-width: 1328px) and (min-width: 951px) {
-  .card-header {
-    padding: 3px;
-  }
-
-  .card-header-tabs {
-    margin-right: 0;
-    margin-left: 0;
-    margin-bottom: 0;
-  }
-
-  .card-header .nav-item .btn {
-    border-bottom-right-radius: .25rem;
-    border-bottom-left-radius: .25rem;
-    border-color: #dee2e6;
-  }
-
-  .nav-tabs .nav-item.show .nav-link, .nav-tabs .nav-link.active {
-    border-color: #dee2e6;
-  }
-
-  .nav-tabs .nav-item {
-    margin: 5px;
-  }
+.sk-circle {
+  margin-top: 2rem !important;
+}
+.heat-view-controls label.btn {
+  display: flex !important;
+  flex-flow: row-reverse nowrap;
+  align-items: center;
+  justify-content: center;
 }
 
-/* Change tabs to look like buttons for widths when tabs stack on top of each other. Below 462px */
-@media (max-width: 462px) {
-  .card-header {
-    padding: 3px;
-  }
+.heat-view-controls .fa {
+  margin-right: 10px;
+  font-size: 1rem !important;
+}
 
-  .card-header-tabs {
-    margin-right: 0;
-    margin-left: 0;
-    margin-bottom: 0;
-  }
-
-  .card-header .nav-item .btn {
-    border-bottom-right-radius: .25rem;
-    border-bottom-left-radius: .25rem;
-    border-color: #dee2e6;
-  }
-
-  .nav-tabs .nav-item.show .nav-link,
-  .nav-tabs .nav-link.active {
-    border-color: #dee2e6;
-  }
-
-  .nav-tabs .nav-item {
-    margin: 5px;
-  }
+table.dataTable thead th {
+  white-space: nowrap;
 }
 
 .table-text-center {
@@ -608,9 +595,79 @@ th.table-text-nocenter {
   padding-left: 8px !important;
 }
 
+/* Data select modal */
+
+.selected-dataset {
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+/* Style the buttons that are used to open and close the accordion panel */
+.accordion {
+  background-color: #008dc9;
+  color: white;
+  cursor: pointer;
+  padding: 7px 15px;
+  width: 100%;
+  text-align: left;
+  border: none;
+  border-bottom: 1px solid white;
+  outline: none;
+  transition: 0.4s;
+}
+
+/* Add a background color to the button if it is clicked on (add the .active class with JS), and when you move the mouse over it (hover) */
+button.accordion.active,
+.accordion:hover {
+  /* background-color: #d86422; */
+}
+
+/* Style the accordion panel. Note: hidden by default */
+.accpanel {
+  padding: 0 18px;
+  background-color: white;
+  display: none;
+  overflow: hidden;
+}
+
+.accordion:after {
+  content: "+"; /* Unicode character for "plus" sign (+) */
+  font-size: 15px;
+  color: #fff;
+  float: right;
+  margin-left: 5px;
+}
+
+#heat-dc-choosedatamodal .modal-title {
+  color: grey;
+}
+
+#heat-dc-choosedatamodal .btn-default {
+  background-color: #ced4da;
+  margin-right: 5px;
+}
+
+#dc-choosedatamodal .modal-title {
+  color: grey;
+}
+
+#dc-choosedatamodal .btn-default {
+  background-color: #ced4da;
+  margin-right: 5px;
+}
 
 
-.table-header-vertalign  th {
+button.accordion.active:after {
+  content: "-"; /* Unicode character for "minus" sign (-) */
+  color: #fff;
+}
+
+button.accordion:focus {
+  outline: none;
+  box-shadow: none;
+}
+
+.table-header-vertalign th {
   vertical-align: middle !important;
 }
 
@@ -643,19 +700,20 @@ body:not(.pg-loaded) {
 
 /* Adjusting columns and flex properties
  */
-.col, .col-1, .col-2, .col-3, .col-4, .col-5, .col-6,
-.col-7, .col-8, .col-9, .col-10, .col-11, .col-12 {
+.col,
+.col-1,
+.col-2,
+.col-3,
+.col-4,
+.col-5,
+.col-6,
+.col-7,
+.col-8,
+.col-9,
+.col-10,
+.col-11,
+.col-12 {
   float: none;
-}
-
-@media all and (-ms-high-contrast: none), (-ms-high-contrast: active) {
-  /* IE10+ CSS styles go here
-     Override column class applied highcharts
-   */
-  .col, .col-1, .col-2, .col-3, .col-4, .col-5, .col-6,
-  .col-7, .col-8, .col-9, .col-10, .col-11, .col-12 {
-    flex-basis: auto;
-  }
 }
 
 /* summaries tables styles */
@@ -669,9 +727,453 @@ body:not(.pg-loaded) {
   white-space: nowrap;
 }
 
-@media (min-width: 1200px){
-.container, .container-lg, .container-md, .container-sm, .container-xl {
-    max-width: 1250px;
-}
+.data-select {
+  max-width: 300px !important;
 }
 
+.bench-label {
+  font-size: 0.8em;
+  font-style: italic;
+}
+
+.alldates-btn {
+  flex-direction: row-reverse;
+  display: flex;
+  margin-bottom: 10px;
+  margin-top: -40px;
+}
+
+.alldates-btn .fa {
+  font-size: 15px !important;
+}
+
+.alldates-btn .btn {
+  z-index: 2;
+  font-size: 0.8em;
+  padding: 3px 10px;
+  background-color: #fff;
+}
+
+.nav-tabs li {
+  margin: 10px;
+  padding: 5px;
+}
+
+[data-id="Id084"] {
+  border: thin solid;
+  width: 500px !important;
+}
+
+#heat-datachoose {
+  background-color: #d86422 !important;
+  outline: 2px solid #b6b6b6;
+  margin-left: 10px;
+  color: #fff;
+  font-size: 0.8em;
+  font-weight: bold;
+}
+
+.accpanel .custom-radio {
+  margin: 10px 0;
+}
+
+/*git709*/
+.sticky-top.container-fluid {
+  margin-right: 0 !important;
+  padding-right: 20px !important;
+}
+
+.invalid-val {
+  color: #c1c1c1 !important;
+}
+
+.invalid-val:hover {
+  color: lightgrey;
+}
+
+.invalid-chip-val {
+  color: #9c9c9c !important;
+}
+
+.invalid-chip-val:hover {
+  color: lightgrey;
+}
+
+.radio-line {
+  display: flex;
+  flex-wrap: nowrap;
+  align-items: center;
+}
+
+.tooltip-radio {
+  /*position: relative;*/
+  display: inline-block;
+}
+
+.tooltip-radio .tooltip-radiotext {
+  visibility: hidden;
+  /*width: 120px;*/
+  border-radius: 6px;
+  padding: 5px 5px;
+  position: absolute;
+  z-index: 1000;
+  font-size: 0.8em;
+  left: 3%;
+  right: 3%;
+  background-color: #e9e2e2;
+  padding: 10px 20px;
+}
+
+.tooltip-radio:hover .tooltip-radiotext {
+  visibility: visible;
+}
+
+.radio-line .custom-control-label {
+  vertical-align: text-top !important;
+  margin-right: 10px;
+}
+
+.radio-line i.fas.fa-circle-info {
+  color: #b3b2b2;
+}
+
+.selected-dataset {
+  min-height: 56px;
+}
+
+.terms-span{
+      margin-right: 20px;
+    font-size: 1em;
+    font-style: italic;
+}
+.terms-warn{
+     text-align: center;
+     margin-bottom: 10px;
+
+}
+
+.terms-button{
+  display:flex;
+     align-items: baseline;
+     justify-content: center;
+}
+
+.heat-management-modal .modal-footer{
+  display: block;
+}
+
+.modal-header-subdiv{
+  display: flex;
+    width: 100%;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.modal-header .close {
+  display: none !important;
+}
+
+/* ------------  MEDIA QUERIES ------------ */
+
+/* With jQuery force different collapse point on Yonder */
+/*https://www.codeply.com/go/J70zkpygvk*/
+@media (min-width: 1300px) {
+  .navbar-expand-custom {
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: flex-start;
+  }
+  .navbar-expand-custom .navbar-nav {
+    flex-direction: row;
+  }
+  .navbar-expand-custom .navbar-nav .nav-link {
+    padding-right: 0.5rem;
+    padding-left: 0.5rem;
+  }
+  .navbar-expand-custom .navbar-collapse {
+    display: flex !important;
+  }
+  .navbar-expand-custom .navbar-toggler {
+    display: none;
+  }
+
+  .navbar-nav .dropdown-menu {
+    position: absolute;
+  }
+}
+
+/* When browser window is at least 705px */
+@media (min-width: 705px) {
+  .navbar-nav {
+    justify-content: flex-end;
+    margin-left: auto !important;
+    margin-right: 5px !important;
+  }
+}
+
+/* This is the navbar and waiter */
+@media (max-width: 1300px) {
+  /* Prevent menu from covering content */
+  .h-screen {
+    padding-top: 50px;
+  }
+
+  .max-char-25px {
+    max-width: 40ch;
+    width: 30ch;
+  }
+
+  /* overall title when browser is wide*/
+  #heat-header-title-desktop {
+    display: none !important;
+  }
+
+  /* title on mobile*/
+  #heat-header-title-mobile {
+    display: flex !important;
+  }
+
+  #heat-datachoose {
+    padding: 3px 10px;
+    font-size: 0.8em;
+    margin-right: 10px !important;
+  }
+
+  .mobile-lang-select .custom-select {
+    height: 30px;
+    font-size: 0.8em;
+    line-height: 1;
+    margin-right: 10px !important;
+  }
+  /* these are the links within the navbar mobile menu
+  Like "Home" and "Explore inequality"
+  */
+  .navbar .nav-link {
+    width: 100%;
+    margin: 0 -4px;
+    border-radius: inherit;
+  }
+
+  /* these are the divs that hold the links within the navbar mobile menu */
+  .navbar .nav-item {
+    /*background-color: #3b94cb;*/
+  }
+
+  /* when .nav-link is open, these are the sub items
+  like "Disaggregated data"*/
+  .navbar .dropdown-item {
+    text-align: center;
+    color: white;
+  }
+
+  /* This is the submenu with  user manual etc */
+  .navbar-nav .dropdown-menu {
+    background-color: #3b94cb;
+  }
+
+  .dropdown-item:focus,
+  .dropdown-item:hover {
+    /* color: #16181b; */
+    /* text-decoration: none; */
+    background-color: #028bc5;
+  }
+
+  /* puts the WHO logo in the middle */
+  .navbar-brand {
+    width: 55%;
+  }
+
+  .desktop-lang-select {
+    display: none;
+  }
+
+  .mobile-lang-select {
+    display: block;
+  }
+
+  .hidden-xs {
+    display: none;
+  }
+
+  /* not sure what this is for*/
+  rect {
+    height: 200;
+  }
+
+  /* Change tabs to look like buttons for widths when tabs stack on top of each other. Below 951px */
+
+  .waiter-overlay-content {
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+  .waiter-overlay-content h1 {
+    font-size: 1.5em;
+    margin-bottom: 1rem !important;
+    margin-top: 1rem !important;
+    margin: 0 auto;
+  }
+
+  .nav-tabs .nav-item.show .nav-link,
+  .nav-tabs .nav-link.active {
+    border-color: #dee2e6;
+  }
+
+  .nav-tabs .nav-item {
+    margin: 5px;
+  }
+}
+
+/* This is the main app not including the navbar */
+@media (max-width: 1100px) {
+  /* margin around selection/options/downloads*/
+  .nav-tabs .nav-item {
+    margin: 5px;
+  }
+
+  /* this reduces padding on the buttons like "Horizontal line */
+  .subtract-15-padding {
+    padding-left: 15px !important;
+    padding-right: 0 !important;
+  }
+
+  /* the sidebar is a card and this card header is
+  the div that holds the Selection/Options/Downloads*/
+  .card-header {
+    padding: 3px;
+  }
+
+  /* card header tabs are the
+  Selection/Options/Downloads in the sidebar */
+  .card-header-tabs {
+    margin-right: 0;
+    margin-left: 0;
+    margin-bottom: 0;
+  }
+
+  /* these are the actual buttons for Selection/Options/Downloads */
+  .card-header .nav-item .btn {
+    border-bottom-right-radius: 0.25rem;
+    border-bottom-left-radius: 0.25rem;
+    border-color: #dee2e6;
+  }
+
+  /* Column layout on small screens */
+  .row {
+    /* ANOTHER GENERIC OVERWRITE */
+    display: flex;
+    flex-direction: column;
+  }
+
+  .col {
+    max-width: 100%;
+  }
+
+  .col-1,
+  .col-4,
+  .col-8,
+  .col-11,
+  .col-12 {
+    max-width: 100% !important;
+  }
+}
+
+@media (max-width: 705px) {
+  /* Prevent menu from covering content*/
+  .h-screen {
+    padding-top: 50px;
+  }
+
+  .heat-view-controls .fa {
+    display: none !important;
+  }
+
+  .heat-view-controls label.btn {
+    display: flex !important;
+    flex-direction: column-reverse;
+    justify-content: center;
+    font-size: 0.9em !important;
+  }
+
+  .heat-view-controls label.btn:nth-child(2) {
+    font-size: 15px;
+  }
+}
+
+@media (max-width: 1300px) {
+}
+
+/* Change tabs to look like buttons for widths when tabs stack on top of each other. Between 1328px and 951px */
+
+/*
+@media (max-width: 1300px) {
+  .card-header {
+    padding: 3px;
+  }
+
+  .card-header-tabs {
+    margin-right: 0;
+    margin-left: 0;
+    margin-bottom: 0;
+  }
+
+  .card-header .nav-item .btn {
+    border-bottom-right-radius: 0.25rem;
+    border-bottom-left-radius: 0.25rem;
+    border-color: #dee2e6;
+  }
+
+  .nav-tabs .nav-item.show .nav-link,
+  .nav-tabs .nav-link.active {
+    border-color: #dee2e6;
+  }
+
+  .nav-tabs .nav-item {
+    margin: 5px;
+  }
+}
+*/
+
+@media all and (-ms-high-contrast: none), (-ms-high-contrast: active) {
+  /* IE10+ CSS styles go here
+     Override column class applied highcharts
+   */
+  .col,
+  .col-1,
+  .col-2,
+  .col-3,
+  .col-4,
+  .col-5,
+  .col-6,
+  .col-7,
+  .col-8,
+  .col-9,
+  .col-10,
+  .col-11,
+  .col-12 {
+    flex-basis: auto;
+  }
+}
+
+/* don't remember what this was for but we don't use navbar-expand-xl
+@media (min-width: 1300px) {
+  .container,
+  .container-lg,
+  .container-md,
+  .container-sm,
+  .container-xl {
+    max-width: 1300px;
+  }
+}
+
+
+@media (min-width: 1300px) {
+  navbar-expand-xl .navbar-nav .nav-link {
+    padding-right: 0.5rem !important;
+    padding-left: 0.5rem !important;
+  }
+}
+*/

@@ -26,10 +26,13 @@ default_source <- function(values, max) {
 
 default_year <- function(values, max) {
   if (max == 1) {
-    max(values)
+    val <- suppressWarnings(max(values))
+    if(is.infinite(val))
+      val <- NULL
   } else {
-    sort(head(sort(values, decreasing = TRUE), max))
+    val <- sort(head(sort(values, decreasing = TRUE), max))
   }
+  val
 }
 
 default_indicator <- function(values, max) {
@@ -44,11 +47,17 @@ default_measure <- function(values, max) {
   head(values, max)
 }
 
-
+default_benchmark_year <- function(values){
+  list(
+    beg = 2001,
+    end = 2003
+  )
+}
 
 default_indicator_dimension <- function(strata,
                                         current_indicator, current_dimension,
                                         new_country, new_source, new_year) {
+
 
   # All indicators and all dimensions in country
   all_indicators_dimensions <- strata %>%

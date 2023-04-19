@@ -16,20 +16,27 @@
 # You should have received a copy of the GNU Affero General Public License
 # along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-#git 56
-CONSTANT_OUTCOME_INDICATORS <- c(
-  "Adolescent fertility rate (births per 1000 women aged 15-19 years)" = "asfr1",
-  "Total fertility rate (births per woman)" = "tfr",
-  "Stunting prevalence in children aged < 5 years (%)" = "stunt5",
-  "Underweight prevalence in children aged < 5 years (%)" = "uwgt5",
-  "Wasting prevalence in children aged < 5 years (%)" = "wast5",
-  "Infant mortality rate (deaths per 1000 live births)" = "imr",
-  "Neonatal mortality rate (deaths per 1000 live births)" = "nmr",
-  "Under-five mortality rate (deaths per 1000 live births)" = "u5mr",
-  "Obesity prevalence in non-pregnant women aged 15-49 years, BMI >= 30 (%)" = "bmi30wm",
-  "Overweight prevalence in children aged < 5 years (%)" = "overweight",
-  "Severe wasting prevalence in children aged < 5 years (%)" = "sevwasting"
-)
+#git 56 -- another.
+# FLEXIBLE_SCALE_INDICATORS <- c(
+#   "Adolescent fertility rate (births per 1000 women aged 15-19 years)" = "asfr1",
+#   "Total fertility rate (births per woman)" = "tfr",
+#   "Stunting prevalence in children aged < 5 years (%)" = "stunt5",
+#   "Underweight prevalence in children aged < 5 years (%)" = "uwgt5",
+#   "Wasting prevalence in children aged < 5 years (%)" = "wast5",
+#   "Infant mortality rate (deaths per 1000 live births)" = "imr",
+#   "Neonatal mortality rate (deaths per 1000 live births)" = "nmr",
+#   "Under-five mortality rate (deaths per 1000 live births)" = "u5mr",
+#   "Obesity prevalence in non-pregnant women aged 15-49 years, BMI >= 30 (%)" = "bmi30wm",
+#   "Overweight prevalence in children aged < 5 years (%)" = "overweight",
+#   "Severe wasting prevalence in children aged < 5 years (%)" = "sevwasting",
+#   "AIDS-related mortality (deaths per 1000 population)" = "aids_mortality"
+# )
+
+FLEXIBLE_SCALE_INDICATORS <- heatdata::info_indicators %>%
+  dplyr::filter(flexible_scale == 1)
+
+FLEXIBLE_SCALE_INDICATORS <- FLEXIBLE_SCALE_INDICATORS$indicator_abbr %>%
+  setNames(FLEXIBLE_SCALE_INDICATORS$indicator_name)
 
 
 hc_xAxis_multiples <- function(hc, ...) {
@@ -378,7 +385,7 @@ plot_line_setting <- function(value, language) {
   )
 }
 
-plot_line_median <- function(value, language) {
+plot_line_median <- function(value, language, zindex = 5) {
 
   setting_median <- translate(c(language, "options", "labels", "median"))
 
@@ -392,11 +399,11 @@ plot_line_median <- function(value, language) {
       ),
       text = glue("{setting_median}: { value }"),
       useHTML = TRUE,
-      zIndex = 5
+      zIndex = zindex
     ),
     value = value,
     width = 2,
-    zIndex = 5
+    zIndex = zindex
   )
 }
 
@@ -481,7 +488,7 @@ chart_map_disclaimer <- function(language) {
   )
 }
 
-chart_disclaimer <- function(language = "en") {
+chart_disclaimer <- function(language = "en", is_who_dataset) {
   if (is_heat_plus()) {
     div(
       class = "heat-chart-disclaimer",
@@ -513,6 +520,14 @@ chart_disclaimer <- function(language = "en") {
         #  WHO website",
         translate(c(language, "downloads", "text", "heat2"))
       ) %>%
+        font(size = "xs"),
+      tags$p(
+        # "Health Equity Assessment Toolkit (HEAT): Software for exploring and comparing
+        #  health inequalities in countries. Built-in database edition.
+        #  Version 4.0 (beta). Geneva, World Health Organization, 2020."
+        if(!is_who_dataset)
+          get_nonwho_disclaimer()
+      ) %>%
         font(size = "xs")
     )
   }
@@ -520,8 +535,10 @@ chart_disclaimer <- function(language = "en") {
 
 chart_table <- function(charts, title_top, title_right,
                         title_main, title_horizontal, title_vertical, legend,
-                        map_disclaimer = FALSE, language = "en") {
+                        map_disclaimer = FALSE, language = "en",
+                        is_who_dataset) {
   total_columns <- if (is.null(title_right)) 12 else 10
+
 
   if (!is.null(title_top)) {
     my_width <- floor(total_columns / length(title_top))
@@ -637,7 +654,7 @@ chart_table <- function(charts, title_top, title_right,
         chart_map_disclaimer(language)
       )
     },
-    chart_disclaimer(language)
+    chart_disclaimer(language, is_who_dataset)
   )
 }
 
@@ -902,7 +919,7 @@ get_axis_min_max <- function(.data,
   # outcome indicators can be anything
   isHEATPlus <- is_heat_plus()
   indicators <- .data$indicator_name %>% unique()
-  only_coverage_indicator <- !any(.data$indicator_abbr%in%CONSTANT_OUTCOME_INDICATORS)
+  only_coverage_indicator <- !any(.data$indicator_abbr%in%FLEXIBLE_SCALE_INDICATORS)
   padval <- 0.05
   est_var <- ifelse(disaggregated, "estimate", "inequal")
   lb_var <- ifelse(disaggregated, "ci_lb", "se.lowerci")
@@ -1004,7 +1021,7 @@ get_axis_min_max <- function(.data,
 
   if (plot_type != "explore-summary-line") {
     maxmin <- maxmin %>%
-      dplyr::mutate(coverage_indicator = !indicator_name %in% names(CONSTANT_OUTCOME_INDICATORS))
+      dplyr::mutate(coverage_indicator = !indicator_name %in% names(FLEXIBLE_SCALE_INDICATORS))
   }
 
   if (plot_type %in% c("explore-disaggregated-line", "compare-disaggregated-line")) {
@@ -1099,18 +1116,18 @@ get_axis_min_max <- function(.data,
 }
 
 color_adjustment <- function(.data, lang) {
-  if (!is_heat_plus()) {
-    sub_nat <- translate(c(lang, "values", "dimensions", "Subnational region"))
+  if (is_heat_plus()) {
+    #sub_nat <- translate(c(lang, "values", "dimensions", "Subnational region"))
 
-    .data <- .data %>%
-      dplyr::mutate(
-        color = ifelse(
-          dimension == !!sub_nat,
-          highcharter::hex_to_rgba(color, 0.5),
-          color
-        )
-      )
-  } else {
+    # .data <- .data %>%
+    #   dplyr::mutate(
+    #     color = ifelse(
+    #       dimension == !!sub_nat,
+    #       highcharter::hex_to_rgba(color, 0.5),
+    #       color
+    #     )
+    #   )
+  # } else {
     dims <- .data %>%
       dplyr::group_by(setting, source, year, dimension) %>%
       dplyr::summarise(n = dplyr::n()) %>%
@@ -1152,6 +1169,7 @@ standard_tooltip_body <- function(include_conf = TRUE, from_map = FALSE,
   label_of_affected_pop <- paste0("% ", translate(c(language, "charts", "tooltips", "affectedpop")))
   text_notavailable <- translate(c(language, "charts","legend","notavailable"))
   text_ci <- translate(c(language, "charts","tooltips","95ci"))#"95% CI"
+  text_flag <- translate(c(language, "options", "values", "flag"))
 
   text_conf <- paste(
     " + (this.point.ci_lb === 'NA' ? ';", text_ci, " ", tolower(text_notavailable), "' : ';", text_ci, "' + this.point.ci_lb + '-' + this.point.ci_ub)"
@@ -1164,7 +1182,8 @@ standard_tooltip_body <- function(include_conf = TRUE, from_map = FALSE,
         "'", label_estimate, ": ' + this.point.estimate",
         if (include_conf) text_conf
       ),
-      paste("'Flag: '", "+ this.point.flag"),
+      #paste("'Flag: '", "+ this.point.flag"),
+      paste0("'", text_flag, ": ' + this.point.flag"),
       paste(label_setting_avg, " + this.point.setting_average")
     )
 
@@ -1175,7 +1194,7 @@ standard_tooltip_body <- function(include_conf = TRUE, from_map = FALSE,
     tooltip_body <- c(
       glue::glue("this.point.subgroup + (this.point.popshare === null ? '' : ' (' + this.point.popshare + '{label_of_affected_pop})')"),
       glue::glue("'{label_estimate}: ' + (this.point.subgroup === '14 jammu and kashmir' ? 'Not applicable' :  this.point.estimate_for_tooltip + (this.point.ci_lb === 'NA' || this.point.ci_lb === null ? '; {text_ci} {tolower(text_notavailable)}' : '; {text_ci} ' + this.point.ci_lb + '-' + this.point.ci_ub))"),
-      paste("'Flag: '", "+ this.point.flag"),
+      paste0("'", text_flag, ": ' + this.point.flag"),
       glue::glue("{label_setting_avg} + (this.point.subgroup === '14 jammu and kashmir' ? 'Not applicable' :  this.point.setting_average)")
     )
   }
@@ -1196,4 +1215,91 @@ standard_tooltip_body <- function(include_conf = TRUE, from_map = FALSE,
   }
 
   tooltip_body
+}
+
+
+get_summary_vtitle <- function(data, language){
+
+  txt <- "Something went wrong"
+
+  if(nrow(data) > 0){
+
+    dims <- unique(data$dimension)
+    inds <- unique(data$indicator_abbr)
+    measure <- unique(data$measure)
+    base_txt <- "between two (extreme) subgroups"
+    measure_vals <- list("D" = "Difference", "R" = "Ratio")
+    separator <- ifelse(measure == "D", "-", "/")
+
+    measure_txt <- measure_vals[[measure]]
+
+
+    if(length(dims) > 1 || length(inds) > 1){
+      txt <- paste(measure_txt, base_txt)
+    } else {
+
+      favourable_indicator <- heatdata::info_indicators |>
+        dplyr::filter(indicator_abbr == data$indicator_abbr[1]) |>
+        dplyr::pull(favourable_indicator) |>
+        unique()
+      favourable_indicator <- favourable_indicator == 1
+
+      dim_info <- heatdata::info_dimension_colors |>
+        dplyr::filter(dimension == data$dimension[1]) |>
+        dplyr::select(subgroup, ordered_dimension, subgroup_order, reference_subgroup) |>
+        dplyr::distinct()
+
+      ordered <- unique(dim_info$ordered_dimension) == 1
+      n_subgroups <- nrow(dim_info)
+      has_reference <- any(dim_info$reference_subgroup == 1)
+
+      if(ordered){
+        if(favourable_indicator){
+          txt <- glue::glue("Most-advantaged {separator} Most-disadvantaged")
+        } else {
+          txt <- glue::glue("Most-disadvantaged {separator} Most-advantaged")
+        }
+      }
+
+      if(!ordered){
+        if(n_subgroups == 2){
+          if(has_reference){
+            if(favourable_indicator){
+              txt <- glue::glue("Reference group {separator} Other group")
+            } else {
+              txt <- glue::glue("Other group {separator} Reference group")
+            }
+          } else {
+            if(favourable_indicator){
+              txt <- glue::glue("Highest {separator} Lowest")
+            } else {
+              txt <- glue::glue("Highest {separator} Lowest")
+            }
+          }
+
+        }
+        if(n_subgroups > 2){
+          if(has_reference){
+            if(favourable_indicator){
+              txt <- glue::glue("Reference group {separator} Other group (that maximizes the {tolower(measure_txt)})")
+            } else {
+              txt <- glue::glue("Other group (that maximizes the {tolower(measure_txt)}) {separator} Reference group")
+            }
+          } else {
+            if(favourable_indicator){
+              txt <- glue::glue("Highest {separator} Lowest")
+            } else {
+              txt <- glue::glue("Highest {separator} Lowest")
+            }
+          }
+
+        }
+      }
+
+    }
+  }
+
+
+  txt
+
 }

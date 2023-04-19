@@ -96,7 +96,7 @@ table_compare_summary <- function(.data, columns, decimal_places, focus_setting,
 
   data_selection <- .data %>%
     dplyr::mutate_if(~ is.numeric(.), ~ round_for_tables(., !!decimal_places)) %>%
-    dplyr::mutate(year = round(as.numeric(year))) %>%
+    #dplyr::mutate(year = round(as.numeric(year))) %>%
     dplyr::mutate(
       estimate = inequal,
       ci_lb = se.lowerci,

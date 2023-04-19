@@ -101,6 +101,14 @@ en_list <- function(x) {
   }
 }
 
+is_value <- function(val) {
+  !is.null(val) &&
+    !is.na(val) &&
+    !is.infinite(val) &&
+    length(val) != 0
+}
+
+
 # obsolete ----
 
 only <- function(.data, var) {
@@ -139,40 +147,211 @@ customDebounce <- function(r, millis, priority = 100,
   v <- reactiveValues(trigger = NULL, when = NULL)
   firstRun <- TRUE
 
-  observe({
-    r()
-    # needed to remove this in order to get data to load on start up
-    # if (firstRun) {
-    #   firstRun <<- FALSE
-    #   return()
-    # }
-    v$when <- Sys.time() + millis()/1000
-  }, label = "debounce tracker", domain = domain, priority = priority)
+  observe(
+    {
+      r()
+      # needed to remove this in order to get data to load on start up
+      # if (firstRun) {
+      #   firstRun <<- FALSE
+      #   return()
+      # }
+      v$when <- Sys.time() + millis() / 1000
+    },
+    label = "debounce tracker",
+    domain = domain,
+    priority = priority
+  )
 
-  observe({
-    if (is.null(v$when)) {
-      return()
-    }
+  observe(
+    {
+      if (is.null(v$when)) {
+        return()
+      }
 
-    now <- Sys.time()
+      now <- Sys.time()
 
-    if (now >= v$when) {
-      v$trigger <- isolate(v$trigger %||% 0) %% 999999999 + 1
-      v$when <- NULL
-    } else {
-      invalidateLater((v$when - now) * 1000)
-    }
-  }, label = "debounce timer", domain = domain, priority = priority)
+      if (now >= v$when) {
+        v$trigger <- isolate(v$trigger %||% 0) %% 999999999 + 1
+        v$when <- NULL
+      } else {
+        invalidateLater((v$when - now) * 1000)
+      }
+    },
+    label = "debounce timer",
+    domain = domain,
+    priority = priority
+  )
 
-  er <- eventReactive(v$trigger, {
-    r()
-  }, label = "debounce result", ignoreNULL = FALSE, domain = domain)
+  er <- eventReactive(v$trigger,
+    {
+      r()
+    },
+    label = "debounce result",
+    ignoreNULL = FALSE,
+    domain = domain
+  )
 
-  primer <- observe({
-    primer$destroy()
-    er()
-  }, label = "debounce primer", domain = domain, priority = priority)
+  primer <- observe(
+    {
+      primer$destroy()
+      er()
+    },
+    label = "debounce primer",
+    domain = domain,
+    priority = priority
+  )
 
   er
 }
 
+
+is_mapping_dataset <- function(dataset_name) {
+  dataset_name %in% c("rep_rmnch")
+}
+
+
+# https://stackoverflow.com/questions/40513153/shiny-extra-white-space-in-selectinput-choice-display-label
+create_big_space <- function(n1){
+  if(!is.na(n1))
+    n1 <- paste(rep(intToUtf8(160), n1), collapse = "")
+
+  n1
+}
+
+get_date_integer <- function(val, .data) {
+  .data |>
+    dplyr::filter(year == val) |>
+    dplyr::pull(year_int) |>
+    unique()
+}
+is_chip_input <- function(obj) {
+  grepl("chips", deparse1(obj))
+}
+
+make_input_name <- function(val){
+  tolower(gsub(" ", "_", gsub(",", "", val)))
+}
+
+
+clean_time <- function(){
+
+  stringr::str_sub(Sys.time(), 12)
+}
+
+elapsed_time <- function(comparetime){
+  round(Sys.time() - comparetime, 2)
+}
+
+incl_timers <- function(){
+  opt <- getOption("heat.debug.timers", "none")
+  opt != "none"
+}
+
+add_timing <- function(session, txt){
+
+
+}
+
+show_timings <- function(module = "heat-explore_disag_line", return_data = FALSE){
+  suppressMessages(tbl <- readr::read_csv("~/junk/timings.csv"))
+
+  names(tbl) <- c("what", "time")
+  tbl$diff <- tbl$time - c(NA, tbl$time[1:(length(tbl$time)-1)])
+
+  tbl <- tbl |>
+    dplyr::mutate(
+      diff = round(as.numeric(diff), 2)
+    ) |>
+    dplyr::relocate(diff) |>
+    dplyr::select(-time) |>
+    data.frame()
+
+  tbl$diff[1] <- 0
+
+  tbl$elapsed <- cumsum(tbl$diff)
+
+  if(!is.null(module)){
+    tbl <- tbl |>
+      dplyr::filter(
+        grepl(module, what) | !grepl("heat-", what)
+      ) |>
+      data.frame()
+
+
+  }
+  print(tbl, max = 1000)
+
+  dplyr::count(tbl, what, sort = TRUE) |>
+    dplyr::filter(n > 1) |>
+    print(max = 1000)
+
+  if(return_data){
+    return(tbl)
+  } else {
+    invisible()
+  }
+
+}
+
+add_time <- function(..., file = "~/junk/timings.csv"){
+  if(incl_timers()){
+    opt <- getOption("heat.debug.timers", "none")
+    fe <- file.exists(file)
+    txt <- paste0(unlist(list(...)), collapse=" -- ")
+
+    if(grepl(opt, "show")){
+      if(opt == "showall"){
+        message(Sys.time(), " ", txt)
+      } else{
+        if(!grepl(
+          "summary_bar|disag_graph|summary_graph|disag_map|disag_table|summary_line|summary_table|disag_detail|disag_bar",
+          txt
+        )){
+          message(Sys.time(), " ", txt)
+        }
+      }
+    }
+
+
+    cat(
+      txt,
+      ",",
+      as.character(Sys.time()),
+      "\n",
+      file = file,
+      append = fe
+    )
+  }
+
+  invisible()
+}
+
+
+is_compare <- function(current){
+  grepl("compare_disag", current) || grepl("compare_summary", current)
+}
+
+# options(heat.special.message = NULL) # all modules
+# options(heat.special.message = "heat-explore_disag_line") # just one
+#options(heat.special.message = "heat-explore_disag_line heat-compare_summary_graph heat-compare_summary_graph-benchmark no this") # a few
+special_message <- function(txt, this, ...){
+
+  module <- getOption("heat.special.message")
+  if(is.null(module) || grepl(this, module)){
+    time_info <- format(Sys.time(), "%M:%S")
+    message(time_info, " ", txt, " ", gsub("heat-", "", this), " ", paste(..., collapse = " | "))
+  }
+
+}
+
+# message(
+#   "Data rows: ", nrow(Data$main()), "\n",
+#   paste(state$setting, collapse = ", "), "\n",
+#   paste(state$source, collapse = ", "), "\n",
+#   paste(state$year, collapse = ", "), "\n",
+#   paste(state$recent, collapse = ", "), "\n",
+#   paste(state$indicator, collapse = ", "), "\n",
+#   paste(state$dimension, collapse = ", "), "\n",
+#   paste(state$comparison, collapse = ", "), "\n"
+# )
+#

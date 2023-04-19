@@ -26,10 +26,10 @@ NAV <- list(
 
 ICONS <- list(
   selection = icon("filter"),
-  benchmark = icon("sliders-h"),
-  options = icon("cog"),
-  summaries = icon("th-list"),
-  downloads = icon("file-download")
+  benchmark = icon("sliders"),
+  options = icon("gear"),
+  summaries = icon("table-list"),
+  downloads = icon("file-arrow-down")
 )
 
 viewUI <- function(id, nav, source, year, indicator, dimension, measure,
@@ -97,7 +97,7 @@ viewUI <- function(id, nav, source, year, indicator, dimension, measure,
               formGroup(
                 label = div(
                   i18n(
-                    key = "inputs.labels.source_plural",  # Select data source(s)
+                    key = "inputs.labels.source_plural", # Select data source(s)
                     plural = TRUE, # source
                   )
                 ),
@@ -166,19 +166,36 @@ viewUI <- function(id, nav, source, year, indicator, dimension, measure,
                         placeholder = "inputs.placeholders.selection"
                       )
                     } else {
-                      chipInput(
-                        i18n(
-                          ns = "inputs.labels"
+                      list(
+                        div(
+                          class = "alldates-btn",
+                          yonder::buttonInput(
+                            id = ns("alldates"),
+                            label = div(
+                              span(i18n("inputs.buttons.all_dates"))
+                            )
+                          ),
+                          yonder::buttonInput(
+                            id = ns("removedates"),
+                            label = div(
+                              span(i18n("inputs.buttons.remove_dates"))
+                            )
+                          )
                         ),
-                        id = ns("year"),
-                        choices = NULL,
-                        values = NULL,
-                        selected = NULL,
-                        placeholder = "inputs.placeholders.selection",
-                        sort = "fixed"
-                      ) %>%
-                        active("grey") %>%
-                        shadow()
+                        chipInput(
+                          i18n(
+                            ns = "inputs.labels"
+                          ),
+                          id = ns("year"),
+                          choices = NULL,
+                          values = NULL,
+                          selected = NULL,
+                          placeholder = "inputs.placeholders.selection",
+                          sort = "fixed"
+                        ) %>%
+                          active("grey") %>%
+                          shadow()
+                      )
                     }
                   )
                 )
@@ -341,14 +358,13 @@ viewUI <- function(id, nav, source, year, indicator, dimension, measure,
       column(
         # class = "pl-0",
         width = 8,
-        uiOutput(class = "col add-margin-bottom",
+        uiOutput(
           outputId = ns("disclaimer"),
           container = function(...) {
             tags$div(...) %>%
-              display("flex") %>%
-              #flex(justify = "center") %>%
-              font(size = "xs") %>%
-              height(2)
+              #display("flex") %>%
+              # flex(justify = "center") %>%
+              font(size = "xs")
           }
         ),
         output(ns("visual"))
@@ -360,7 +376,11 @@ viewUI <- function(id, nav, source, year, indicator, dimension, measure,
 viewServer <- function(input, output, session, Events, Data, visible,
                        year, source, indicator, dimension, measure, summaries,
                        benchmarks, render, visual, options = list(),
-                       downloads = list(), language) {
+                       downloads = list(), language, most_recent = NULL, dataset_name,
+                       is_who_dataset, is_map_dataset) {
+
+
+
   ns <- session$ns
   this <- ns(NULL)
 
@@ -373,10 +393,11 @@ viewServer <- function(input, output, session, Events, Data, visible,
     indicator = NULL,
     dimension = NULL,
     measure = NULL,
-    comparisons = NULL
-
-    # title_main = NULL
+    recent = NULL,
+    comparisons = NULL,
+    after_first_module_load = FALSE
   )
+
 
   # ├ setters ----
   setSetting <- function(values) {
@@ -396,7 +417,6 @@ viewServer <- function(input, output, session, Events, Data, visible,
   }
 
   setDimension <- function(values) {
-
     state$dimension <- default_dimension(values, max = dimension)
   }
 
@@ -439,7 +459,7 @@ viewServer <- function(input, output, session, Events, Data, visible,
       observeEvent(state[[x]], {
         val <- glue::glue_collapse(state[[x]], sep = ", ")
 
-        debug_msg("State",  x, val)
+        debug_msg("State", x, val)
       })
     })
   }
@@ -458,25 +478,46 @@ viewServer <- function(input, output, session, Events, Data, visible,
   })
 
 
+  observeEvent(dataset_name(), {
+    m_options$reset(
+      horizontal_title = if (!is.null(measure) && benchmarks) {
+        translate(c(language(), "options", "labels", "average")) # "Setting average" # @translate
+      }
+    )
+  })
 
+
+
+  r_setting <- reactive(input$setting)
+  d_setting <- debounce(r_setting, 500)
 
   # setting ----
   # ├ observe setting ----
-  observeEvent(c(input$setting), {
-    req(
-      visible()#
-      # !all_equal(input$setting, state$setting)
-    )
+  observeEvent(d_setting(), {
 
-    Events$set_setting <- list(
-      from = this,
-      selected = input$setting
-    )
+
+    req(visible())
+
+    if(session$userData$app_init && this != "heat-explore_disag_line"){
+      #Events$set_setting$prev <- Events$set_setting$from
+      return()
+    }
+
+    add_time("observe d_setting()", this)
+
+
+    #Events$set_setting$prev <- Events$set_setting$from
+    Events$set_setting$from <- this
+    Events$set_setting$selected <- input$setting
 
     # ││├ benchmarks ----
     benchmark_selection <- Data$country_info() %>%
       dplyr::filter(setting == !!input$setting) %>%
       dplyr::slice(1)
+
+    if (nrow(benchmark_selection) == 0) {
+      return()
+    }
 
     new_incomes <- benchmark_selection$wbincome_name
     new_regions <- benchmark_selection$whoreg6
@@ -486,9 +527,6 @@ viewServer <- function(input, output, session, Events, Data, visible,
         whoreg6 == !!new_regions
       ) %>%
       dplyr::distinct(choices = setting, values = iso3)
-
-    state$comparison <- new_comparisons$values
-
 
     Events$set_benchmark_setting <- list(
       from = this,
@@ -519,14 +557,7 @@ viewServer <- function(input, output, session, Events, Data, visible,
       dplyr::distinct(year) %>%
       dplyr::pull()
 
-    Events$set_year <- list(
-      from = this,
-      force = TRUE,
-      choices = x_years,
-      values = x_years,
-      selected = x_years,
-      recent = as.numeric(input$recent)
-    )
+
 
     new_indicator_dimension <- default_indicator_dimension(
       strata = Data$strata(),
@@ -545,6 +576,7 @@ viewServer <- function(input, output, session, Events, Data, visible,
       selected = new_indicator_dimension$indicator_selected
     )
 
+
     Events$set_dimension <- list(
       from = this,
       force = TRUE,
@@ -552,15 +584,33 @@ viewServer <- function(input, output, session, Events, Data, visible,
       values = new_indicator_dimension$dimension,
       selected = new_indicator_dimension$dimension_selected
     )
+
+    Events$set_year <- list(
+      from = this,
+      force = TRUE,
+      choices = x_years,
+      values = x_years,
+      selected = x_years,
+      recent = input$recent
+    )
+
+    state$set_comparison_null <- rnorm(1)
+
   })
 
   # ├ set_setting ----
   observeEvent(Events$set_setting, {
     msg <- Events$set_setting
 
-    # showNavPane(ns(paste0("pane_", NAV$SELECTION)), session = session)
+    add_time("observe set_setting", this)
+
     if (!visible() && input$nav != NAV$SELECTION) {
       updateNavInput(id = "nav", selected = NAV$SELECTION, session = session)
+    }
+
+    if (Events$set_setting$from == "init") {
+      updateNavInput(id = "nav", selected = NAV$SELECTION, session = session) #803
+      Events$set_year$recent <- NULL
     }
 
 
@@ -603,6 +653,8 @@ viewServer <- function(input, output, session, Events, Data, visible,
       !all_equal(r_source(), state$source)
     )
 
+    add_time("observe d_source()", this)
+
     Events$set_source <- list(
       from = this,
       selected = r_source()
@@ -622,7 +674,7 @@ viewServer <- function(input, output, session, Events, Data, visible,
       choices = new_years,
       values = new_years,
       selected = new_years,
-      recent = as.numeric(input$recent)
+      recent = input$recent
     )
 
     new_indicator_dimension <- default_indicator_dimension(
@@ -642,6 +694,7 @@ viewServer <- function(input, output, session, Events, Data, visible,
       selected = new_indicator_dimension$indicator_selected
     )
 
+
     Events$set_dimension <- list(
       from = this,
       force = TRUE,
@@ -654,6 +707,9 @@ viewServer <- function(input, output, session, Events, Data, visible,
   # ├ set_source ----
   observeEvent(Events$set_source, {
     msg <- Events$set_source
+
+
+    add_time("observe set_source", this)
 
     do_update <- function() {
       selected_source <- setSource(msg$selected)
@@ -679,10 +735,10 @@ viewServer <- function(input, output, session, Events, Data, visible,
   # year ----
   if (year == 1) {
     updateYear <- updateSelectInput
-    d_year <- r_year <- reactive(as.numeric(input$year))
+    d_year <- r_year <- reactive(input$year)
   } else {
     updateYear <- updateChipInput
-    r_year <- reactive(as.numeric(input$year))
+    r_year <- reactive(input$year)
     d_year <- debounce(r_year, 250)
   }
 
@@ -695,6 +751,8 @@ viewServer <- function(input, output, session, Events, Data, visible,
       !all_equal(r_year(), state$year)
     )
 
+    add_time("observe d_year", this)
+
     selected_year <- r_year()
 
 
@@ -702,6 +760,7 @@ viewServer <- function(input, output, session, Events, Data, visible,
       from = this,
       selected = selected_year
     )
+
 
     x_indicator_dimension <- default_indicator_dimension(
       strata = Data$strata(),
@@ -712,43 +771,35 @@ viewServer <- function(input, output, session, Events, Data, visible,
       new_year = default_year(selected_year, year)
     )
 
-    # if(length(x_indicator_dimension$indicator_choices) == 0){
-    #
-    #   Events$set_indicator <- list(
-    #     from = this,
-    #     force = TRUE,
-    #     selected = input$indicator
-    #   )
-    #
-    #   Events$set_dimension <- list(
-    #     from = this,
-    #     force = TRUE,
-    #     selected = input$dimension
-    #   )
-    # }else{
-      Events$set_indicator <- list(
-        from = this,
-        force = TRUE,
-        choices = x_indicator_dimension$indicator_choices,
-        values = x_indicator_dimension$indicator_values,
-        selected = x_indicator_dimension$indicator_selected
-      )
 
-      Events$set_dimension <- list(
-        from = this,
-        force = TRUE,
-        choices = x_indicator_dimension$dimension,
-        values = x_indicator_dimension$dimension,
-        selected = x_indicator_dimension$dimension_selected
-      )
-    # }
+    Events$set_year <- list(
+      from = this,
+      selected = selected_year
+    )
+
+    Events$set_indicator <- list(
+      from = this,
+      force = TRUE,
+      choices = x_indicator_dimension$indicator_choices,
+      values = x_indicator_dimension$indicator_values,
+      selected = x_indicator_dimension$indicator_selected
+    )
 
 
+    Events$set_dimension <- list(
+      from = this,
+      force = TRUE,
+      choices = x_indicator_dimension$dimension,
+      values = x_indicator_dimension$dimension,
+      selected = x_indicator_dimension$dimension_selected
+    )
   })
 
   # ├ set_year ----
   observeEvent(Events$set_year, {
     msg <- Events$set_year
+
+    add_time("observe set_year", this)
 
     do_update <- function() {
       checked <- length(msg$recent) > 0
@@ -760,6 +811,8 @@ viewServer <- function(input, output, session, Events, Data, visible,
       }
 
       if (!ignoreMessage(msg)) {
+        disable <- NULL
+
         updateYear(
           id = "year",
           choices = msg$choices,
@@ -769,14 +822,13 @@ viewServer <- function(input, output, session, Events, Data, visible,
         )
 
         if (!is.null(msg$values)) {
-          updateCheckboxInput(
-            id = "recent",
-            # choices = "Most recent year",
-            choices = "Most recent year",
-            values = max(msg$values),
-            selected = checked,
-            session = session
-          )
+          # updateCheckboxInput(
+          #   id = "recent",
+          #   choices = translate(c(isolate(language()), "inputs", "labels", "recent")),
+          #   values = max(msg$values),
+          #   selected = checked,
+          #   session = session
+          # )
         }
       }
     }
@@ -788,29 +840,37 @@ viewServer <- function(input, output, session, Events, Data, visible,
     }
   })
 
+  r_recent <- reactive(input$recent)
+  d_recent <- debounce(r_recent, 250)
   # recent year ----
-  observeEvent(input$recent, ignoreNULL = FALSE, {
+  observeEvent(d_recent(), ignoreNULL = FALSE, {
     req(visible())
 
-    Events$toggle_recent_year <- list(
+    add_time("observe d_recent", this)
+
+    Events$set_recent_year <- list(
       from = this,
       force = TRUE,
-      value = as.numeric(input$recent),
-      selected = as.numeric(input$year),
+      value = input$recent,
+      selected = input$year,
       no_years = is.null(input$year)
     )
   })
 
-  observeEvent(Events$toggle_recent_year, {
-    msg <- Events$toggle_recent_year
+  observeEvent(Events$set_recent_year, {
+    msg <- Events$set_recent_year
+
+    add_time("observe set_recent_year", this)
 
     do_update <- function() {
       checked <- length(msg$value) > 0
 
       if (checked) {
         state$year <- msg$value
+        state$recent <- TRUE
       } else if (!msg$no_years) {
-        setYear(msg$selected)
+        setYear(isolate(input$year))
+        state$recent <- FALSE
       }
 
       if (!ignoreMessage(msg)) {
@@ -836,6 +896,125 @@ viewServer <- function(input, output, session, Events, Data, visible,
     }
   })
 
+
+  # all dates ----
+  observeEvent(input$alldates, {
+    req(visible())
+
+    add_time("observe input$alldates", this)
+
+    x_years <- Data$setting_yr_src() %>%
+      dplyr::filter(
+        setting == !!input$setting,
+        source %in% !!input$source
+      ) %>%
+      dplyr::distinct(year) %>%
+      dplyr::pull()
+
+    x_indicator_dimension <- default_indicator_dimension(
+      strata = Data$strata(),
+      current_indicator = input$indicator,
+      current_dimension = input$dimension,
+      new_country = input$setting,
+      new_source = state$source,
+      new_year = default_year(x_years, year)
+    )
+
+    Events$set_indicator <- list(
+      from = this,
+      force = TRUE,
+      choices = x_indicator_dimension$indicator_choices,
+      values = x_indicator_dimension$indicator_values,
+      selected = x_indicator_dimension$indicator_selected
+    )
+
+
+    Events$set_dimension <- list(
+      from = this,
+      force = TRUE,
+      choices = x_indicator_dimension$dimension,
+      values = x_indicator_dimension$dimension,
+      selected = x_indicator_dimension$dimension_selected
+    )
+
+    Events$set_year <- list(
+      from = this,
+      force = TRUE,
+      choices = x_years,
+      values = x_years,
+      selected = x_years,
+      recent = input$recent
+    )
+  })
+
+
+  # remove dates ----
+  observeEvent(input$removedates, {
+    req(visible())
+
+    add_time("observe input$removedates", this)
+
+    all_years <- Data$strata() %>%
+      dplyr::filter(
+        setting == !!input$setting,
+        source %in% !!input$source
+      )
+
+    x_years <- all_years %>%
+      dplyr::filter(
+        indicator_abbr %in% !!input$indicator,
+        dimension %in% !!input$dimension
+      ) %>%
+      dplyr::group_by(indicator_abbr, dimension) |>
+      dplyr::summarise(
+        maxyr = max(year)
+      ) |>
+      dplyr::pull(maxyr) |>
+      unique()
+
+    all_years <- all_years |>
+      dplyr::pull(year) |>
+      unique()
+
+
+
+    x_indicator_dimension <- default_indicator_dimension(
+      strata = Data$strata(),
+      current_indicator = input$indicator,
+      current_dimension = input$dimension,
+      new_country = input$setting,
+      new_source = state$source,
+      new_year = default_year(x_years, year)
+    )
+
+    Events$set_indicator <- list(
+      from = this,
+      force = TRUE,
+      choices = x_indicator_dimension$indicator_choices,
+      values = x_indicator_dimension$indicator_values,
+      selected = x_indicator_dimension$indicator_selected
+    )
+
+
+    Events$set_dimension <- list(
+      from = this,
+      force = TRUE,
+      choices = x_indicator_dimension$dimension,
+      values = x_indicator_dimension$dimension,
+      selected = x_indicator_dimension$dimension_selected
+    )
+
+    Events$set_year <- list(
+      from = this,
+      force = TRUE,
+      choices = all_years,
+      values = all_years,
+      selected = x_years,
+      recent = input$recent
+    )
+  })
+
+
   # indicator ----
   if (indicator == 1) {
     updateIndicator <- updateSelectInput
@@ -850,6 +1029,8 @@ viewServer <- function(input, output, session, Events, Data, visible,
   observeEvent(d_indicator(), {
     req(visible())
 
+    add_time("observe d_indicator", this)
+
     Events$set_indicator <- list(
       from = this,
       selected = input$indicator
@@ -859,6 +1040,8 @@ viewServer <- function(input, output, session, Events, Data, visible,
   # ├ set_indicator ----
   observeEvent(Events$set_indicator, {
     msg <- Events$set_indicator
+
+    add_time("observe set_indicator", this)
 
     if (isTRUE(options$sorting)) {
       selected_indicator <- default_indicator(msg$selected, indicator)
@@ -876,10 +1059,23 @@ viewServer <- function(input, output, session, Events, Data, visible,
       )
     }
 
+    #msg$choices <- do_indicator_indent(msg$choices, dataset_name())
+
     do_update <- function() {
       selected_indicator <- setIndicator(msg$selected)
 
       if (!ignoreMessage(msg)) {
+        disable <- NULL
+
+        # updateYear(
+        #   id = "year",
+        #   #choices = msg$choices,
+        #   #values = msg$values,
+        #   #selected = selected_year,
+        #   disable = disable,
+        #   session = session
+        # )
+
         updateIndicator(
           id = "indicator",
           choices = msg$choices,
@@ -900,18 +1096,19 @@ viewServer <- function(input, output, session, Events, Data, visible,
 
   observeEvent(language(), {
 
-    if(is.null(dimension)){
+    add_time("observe language()", this)
+
+    if (is.null(dimension)) {
       state$dimension <- translate(c(language(), "values", "dimensions", "Subnational region"))
     }
 
     m_options$reset(
       horizontal_title = if (!is.null(measure) && benchmarks) {
-        translate(c(language(), "options", "labels", "average"))#"Setting average" # @translate
+        translate(c(language(), "options", "labels", "average")) # "Setting average" # @translate
       }
     )
-
-})
-
+  })
+  # dimension ----
   if (!is.null(dimension)) {
     if (dimension == 1) {
       updateDimension <- updateSelectInput
@@ -926,6 +1123,8 @@ viewServer <- function(input, output, session, Events, Data, visible,
     observeEvent(d_dimension(), {
       req(visible())
 
+      add_time("observe d_dimension", this)
+
       Events$set_dimension <- list(
         from = this,
         selected = input$dimension
@@ -937,23 +1136,40 @@ viewServer <- function(input, output, session, Events, Data, visible,
       new_measures <- pick_measures(Data$measures(), input$dimension, language())
 
       Events$set_measure <- list(
-          from = this,
-          force = TRUE,
-          choices = new_measures$choices,
-          values = new_measures$values,
-          selected = "D", # default_measure(new_measures$values, max = measure),
-          previous = state$measure
-        )
+        from = this,
+        force = TRUE,
+        choices = new_measures$choices,
+        values = new_measures$values,
+        selected = "D", # default_measure(new_measures$values, max = measure),
+        previous = state$measure
+      )
     })
 
     # ├ set_dimension ----
     observeEvent(Events$set_dimension, {
       msg <- Events$set_dimension
 
+      #git707
+      #session$sendCustomMessage("window-resize", "msg")
+
+      add_time("observe set_dimension", this)
+
+
       do_update <- function() {
         selected_dimension <- setDimension(msg$selected)
 
         if (!ignoreMessage(msg)) {
+          disable <- NULL
+
+          updateYear(
+            id = "year",
+            # choices = msg$choices,
+            # values = msg$values,
+            # selected = selected_year,
+            # disable = disable,
+            session = session
+          )
+
           updateDimension(
             id = "dimension",
             choices = msg$choices,
@@ -986,6 +1202,8 @@ viewServer <- function(input, output, session, Events, Data, visible,
     observeEvent(d_measure(), {
       req(visible())
 
+      add_time("observe d_measure", this)
+
       Events$set_measure <- list(
         from = this,
         selected = input$measure,
@@ -996,6 +1214,8 @@ viewServer <- function(input, output, session, Events, Data, visible,
     # ├ set_measure ----
     observeEvent(Events$set_measure, {
       msg <- Events$set_measure
+
+      add_time("observe set_measure", this)
 
       do_update <- function() {
         if (any(msg$previous %in% msg$values)) {
@@ -1024,24 +1244,130 @@ viewServer <- function(input, output, session, Events, Data, visible,
   }
 
 
+  # gray ----
+
+
+  r_setsrcyrind <- reactive({
+    req(!is.null(input$indicator))
+    input$setting
+    input$source
+    input$year
+    input$indicator
+    input$dimension
+  })
+
+  d_setsrcyrind <- debounce(r_setsrcyrind, 1000)
+
+  observeEvent(d_setsrcyrind(), {
+
+    if(session$userData$app_init && this == "heat-compare_summary_table")
+      session$userData$app_init <- FALSE
+
+    add_time("observe d_setsrcyrind", this)
+
+    grey_out_options <- function() {
+      if (!grepl("explore_disag_map", this)) {
+        isolate({
+          all_vals <- Data$strata() |>
+            dplyr::filter(
+              setting == Events$set_setting$selected,
+              source %in% Events$set_source$selected
+            )
+
+          all_years <- all_vals |>
+            dplyr::pull(year)
+
+          all_dimensions <- all_vals |>
+            dplyr::pull(dimension) |>
+            unique()
+
+          sel_indicator <- Events$set_indicator$selected
+          sel_dimension <- Events$set_dimension$selected
+          l_indicator <- length(sel_indicator)
+          l_dimension <- length(sel_dimension)
+
+
+          max_ind <- ifelse(is.infinite(indicator) | l_indicator < indicator, l_indicator, indicator)
+          max_dim <- ifelse(is.infinite(dimension) | l_dimension < dimension, l_dimension, dimension)
+
+          valid_vals <- Data$strata() |>
+            dplyr::filter(
+              setting == Events$set_setting$selected,
+              source %in% Events$set_source$selected,
+              indicator_abbr %in% Events$set_indicator$selected[1:max_ind]
+            )
+
+          valid_dimensions <- valid_vals |>
+            dplyr::pull(dimension) |>
+            unique()
+
+          valid_years <- valid_vals |>
+            dplyr::filter(
+              dimension %in% Events$set_dimension$selected[1:max_dim]
+            ) |>
+            dplyr::pull(year)
+
+
+          invalid <- all_years[!all_years %in% valid_years]
+          if (length(invalid) == 0) invalid <- 9999
+
+          session$sendCustomMessage("make-invalid-year", list(
+            valid = unique(valid_years),
+            invalid = unique(invalid),
+            from = this
+          ))
+
+
+          invalid <- all_dimensions[!all_dimensions %in% valid_dimensions]
+          if (length(invalid) == 0) invalid <- 9999
+
+          session$sendCustomMessage("make-invalid-dimension", list(
+            valid = unique(valid_dimensions),
+            invalid = unique(invalid),
+            from = this
+          ))
+        })
+      }
+    }
+
+
+    if (visible()) {
+      grey_out_options()
+    } else {
+      session$onFlushed(grey_out_options)
+    }
+  })
+
+
 
   # benchmarks module ----
   if (isTRUE(benchmarks)) {
-
     benchmark <- callModule(
       benchmarkServer, "benchmark",
       parent = this,
       Data = Data, Events = Events,
       visible = reactive(input$nav == NAV$BENCHMARK),
-      language = language
+      language = language # ,
+      # state = state
     )
 
     r_comparison <- benchmark$comparison
+    r_benchmark_source <- benchmark$benchmark_source
 
     observe(state$comparison <- r_comparison())
+    observe(state$benchmark_source <- r_benchmark_source())
 
-    r_variance <- benchmark$variance
+
+    r_benchmark_year_beg <- benchmark$benchmark_year_beg
+    r_benchmark_year_end <- benchmark$benchmark_year_end
+    r_benchmark_year_near <- benchmark$benchmark_year_near
+
+
   }
+
+  observeEvent(state$set_comparison_null, {
+    state$comparison <- NULL
+  }, priority = 100000)
 
   # options module ----
   m_options <- callModule(
@@ -1049,7 +1375,8 @@ viewServer <- function(input, output, session, Events, Data, visible,
     Events = Events,
     parent = this,
     visible = reactive(input$nav == NAV$OPTIONS),
-    is_log_scale = if (!is.null(measure)) reactive(is_log_scale(input$measure))
+    is_log_scale = if (!is.null(measure)) reactive(is_log_scale(input$measure)),
+    language = language
   )
 
   if (getOption("heat.debug", 0) >= 1) {
@@ -1068,7 +1395,6 @@ viewServer <- function(input, output, session, Events, Data, visible,
   # ├ observe update highlight subgroup ----
   if (isTRUE(options$subgroup_highlight)) {
     observe({
-
       req(state$setting, state$year, state$dimension, language())
 
       new_subgroups <- isolate(Data$main()) %>%
@@ -1083,7 +1409,7 @@ viewServer <- function(input, output, session, Events, Data, visible,
       m_options$update_highlight_subgroup(
         choices = new_subgroups,
         values = new_subgroups,
-        selected = ''
+        selected = ""
       )
     })
   }
@@ -1092,114 +1418,389 @@ viewServer <- function(input, output, session, Events, Data, visible,
   if (!is.null(options$title)) {
     observeEvent(r_data(), {
 
-      # state$title_main <- options$title(r_data())
-      #
-      # m_options$set_title_main(state$title_main)
+      add_time("observe r_data for titles", this)
       m_options$set_title_main(options$title(r_data(), language()))
 
       if (!is.null(measure)) {
-        m_options$set_title_vertical(measure_name(state$measure, language()))
+        if(state$measure %in% c("R", "D")){
+          m_options$set_title_vertical(measure_name(state$measure, language()))
+          #m_options$set_title_vertical(get_summary_vtitle(r_data(), language()))
+        } else {
+          m_options$set_title_vertical(measure_name(state$measure, language()))
+        }
+
+
       }
+      add_time("end observe r_data for titles", this)
     })
 
-    # observeEvent(m_options$title_main(), {
-    #   state$title_main <- m_options$title_main()
-    # })
   }
 
   # disclaimer ----
   output$disclaimer <- renderUI({
 
-    tags$p(
-      class = "text-muted p-no-margin-bottom",
-      if (
-        NROW(r_data()) == 0 |
-        !state$setting %in% r_data()$setting |
-        (isTRUE(options$disclaimer == "map") && !(unique(r_data()$iso3) %in% heatdata::spatial_national$iso3))
+    #req(all(isolate(Events$set_benchmark_comparison$selected) %in% state$comparison))
+
+    is_map_dataset <- isolate(is_map_dataset()) && !is_heat_plus()
+    is_who_dataset <- isolate(is_who_dataset()) && !is_heat_plus()
+    is_compare_page <- is_compare(this)
+
+    shiny::tagList(
+      tags$p(
+        class = "text-muted p-no-margin-bottom p-margin-top",
+        if(!is_who_dataset){
+          #get_nonwho_disclaimer()
+          i18n(key = "charts.disclaimers.disclaimer")
+        }
+      ),
+      tags$p(
+        class = "text-muted p-no-margin-bottom p-margin-top",
+        if(is_compare_page){
+          i18n(key = "charts.disclaimers.compareineq")
+        }
+      ),
+      tags$p(
+        class = "text-muted p-no-margin-bottom p-margin-top",
+        if (
+          NROW(r_data()) == 0 |
+          !state$setting %in% r_data()$setting |
+          (isTRUE(options$disclaimer == "map") && !(unique(r_data()$iso3) %in% heatdata::spatial_national$iso3))
         ) {
-        if (isTRUE(options$disclaimer == "map")) {
-          # "There is no data for this combination of variables. Maps are not available for MICS and RHS data."
-          i18n(key = "charts.disclaimers.nomap")
+          if (isTRUE(options$disclaimer == "map") && is_map_dataset) {
+            # "There is no data for this combination of variables. Maps are not available for MICS and RHS data."
+            i18n(key = "charts.disclaimers.nomap")
+          } else if (isTRUE(options$disclaimer == "map") && !is_map_dataset) {
+            i18n(key = "charts.disclaimers.nomapdataset")
+            #"There are no maps associated with this dataset (we need to translate this)"
+            # i18n(key = "charts.disclaimers.nonmapdataset")
+          } else {
+            # "There is no data for the combination of variables"
+            i18n(key = "charts.disclaimers.nodefault")
+          }
         } else {
-          # "There is no data for the combination of variables"
-          i18n(key = "charts.disclaimers.nodefault")
+          if (isTRUE(options$disclaimer == "map")) {
+            # "If estimates are not shown for a selected combination of variables, then data are not available. Maps are not available for MICS and RHS data."
+            i18n("charts.warnings.availablemap")
+          } else {
+            # "If estimates are not shown for a selected combination of variables, then data are not available."
+            i18n("charts.warnings.available")
+          }
         }
-      } else {
-        if (isTRUE(options$disclaimer == "map")) {
-          # "If estimates are not shown for a selected combination of variables, then data are not available. Maps are not available for MICS and RHS data."
-          i18n("charts.warnings.availablemap")
-        } else {
-          # "If estimates are not shown for a selected combination of variables, then data are not available."
-          i18n("charts.warnings.available")
-        }
-      }
+      )
     )
+
   })
 
   # data ----
   if (benchmarks && is.null(measure)) {
     # ├ Compare disaggregated ----
+
+
     r_data <- reactive({
 
+
+
       req(
+        visible(),
         state$setting,
         state$source,
         state$year,
         state$indicator,
         state$dimension,
+        state$comparison,
+        grepl("compare_disag_", this),
+        setequal(Events$set_benchmark_comparison$selected, state$comparison),#git695
+        cancelOutput = TRUE
       )
 
-      m_year <- max(state$year)
-      v_year <- seq.int(state$year - r_variance(), state$year + r_variance())
 
-      Data$main() %>%
+      add_time("begin r_data compare-disag", this)
+
+      heat_data <- isolate(Data$main())
+      year_to_int <- isolate(Data$date_to_integer())
+
+      heat_data <- heat_data %>%
         dplyr::filter(
-          (setting %in% state$setting & year == state$year) |
-            ((iso3 %in% state$comparison | setting %in% state$comparison) & year %in% v_year),
-          #source == state$source, #I re-allowed this, but could it be an issue?
           indicator_abbr %in% state$indicator,
           dimension %in% state$dimension
+        )
+
+
+      if (isTruthy(d_recent())) {
+        max_focus_year <- heat_data |>
+          dplyr::filter(
+            setting == state$setting
+          ) |>
+          dplyr::pull(year) |>
+          max() |>
+          suppressWarnings()
+      } else {
+        max_focus_year <- state$year
+      }
+
+      focus_year_int <- year_to_int %>%
+        dplyr::filter(
+          year == max_focus_year
         ) %>%
-        dplyr::group_by(setting) %>%
-        dplyr::filter(year == closest(year, m_year)) %>%
-        dplyr::ungroup()
+        dplyr::pull(year_int)
 
 
+      if (!isTruthy(focus_year_int)) {
+        return()
+      }
+
+      year_beg_int <- year_to_int %>%
+        dplyr::filter(
+          year == r_benchmark_year_beg()
+        ) %>%
+        dplyr::pull(year_int)
+
+      year_end_int <- year_to_int %>%
+        dplyr::filter(
+          year == r_benchmark_year_end()
+        ) %>%
+        dplyr::pull(year_int)
+
+      has_bench_years <- all(
+        is_value(r_benchmark_year_beg()),
+        is_value(r_benchmark_year_end())
+      )
+
+
+      if (!has_bench_years | is_value(r_benchmark_year_near())) {
+        setting_data <- heat_data %>%
+          dplyr::filter(setting %in% state$setting & year == max_focus_year)
+
+        comparison_data <- heat_data %>%
+          dplyr::filter(iso3 %in% state$comparison | setting %in% state$comparison) %>%
+          dplyr::filter(source %in% state$benchmark_source) %>%
+          dplyr::filter(setting != state$setting) %>%
+          dplyr::mutate(year_diff = abs(year_int - focus_year_int)) %>%
+          dplyr::arrange(year_diff) %>%
+          dplyr::group_by(setting) %>%
+          dplyr::mutate(min_diff = suppressWarnings(min(year_diff, na.rm = TRUE))) %>%
+          dplyr::filter(year_diff == min_diff) %>%
+          dplyr::select(-year_diff, -min_diff)
+
+        benchmark_data <- dplyr::bind_rows(
+          setting_data,
+          comparison_data
+        ) %>%
+          dplyr::select(-year_int)
+
+        # git680
+        cntry_count <- benchmark_data |>
+          dplyr::distinct(setting, year) |>
+          dplyr::group_by(setting) |>
+          dplyr::summarise(
+            n = dplyr::n(),
+            maxyr = suppressWarnings(max(year))
+          )
+
+        if (any(cntry_count$n > 1)) {
+          benchmark_data <- dplyr::semi_join(
+            benchmark_data,
+            cntry_count,
+            by = c("setting", "year" = "maxyr")
+          )
+        }
+      } else {
+        if (length(year_beg_int) == 0) {
+          return()
+        }
+
+        setting_data <- heat_data %>%
+          dplyr::filter(setting %in% state$setting & year == max_focus_year)
+
+        comparison_data <- heat_data %>%
+          dplyr::filter(iso3 %in% state$comparison | setting %in% state$comparison) %>%
+          dplyr::filter(setting != state$setting) %>%
+          dplyr::filter(
+            year_int >= year_beg_int,
+            year_int <= year_end_int
+          )
+
+
+        benchmark_data <- dplyr::bind_rows(
+          setting_data,
+          comparison_data
+        ) %>%
+          dplyr::select(-year_int)
+      }
+
+      add_time("end r_data compare-disag", this)
+      benchmark_data
     })
   } else if (!is.null(measure)) {
     # ├ Compare summary ----
     if (benchmarks) {
       r_data <- reactive({
+
+        data_measures <- isolate(Data$measures())
+        year_to_int <- isolate(Data$date_to_integer())
+
+        st_setting <- state$setting
+        st_source <- state$source
+        st_year <- state$year
+        d_recent <- d_recent()
+        st_indicator <- state$indicator
+        st_dimension <- state$dimension
+        st_comparison <- state$comparison
+        st_measure <- state$measure
+        benchmark_year_beg <- r_benchmark_year_beg()
+        benchmark_year_end <- r_benchmark_year_end()
+        benchmark_year_near <- r_benchmark_year_near()
+        benchmark_source <- r_benchmark_source()
+        all_comparison <- setequal(Events$set_benchmark_comparison$selected, state$comparison)#git695
+
+
         req(
-          state$setting,
-          state$source,
-          state$year,
-          state$indicator,
-          state$dimension
+          visible(),
+          st_setting,
+          st_source,
+          st_year,
+          st_indicator,
+          st_dimension,
+          st_comparison,
+          all_comparison,
+          grepl("compare_summary_", this)
+        )
+        add_time("begin r_data compare-summary", this)
+
+        has_bench_years <- all(
+          is_value(benchmark_year_beg),
+          is_value(benchmark_year_end)
         )
 
-        m_year <- max(state$year)
-        v_year <- seq.int(state$year - r_variance(), state$year + r_variance())
-
-        Data$measures() %>%
+        data_measures <- data_measures %>%
           dplyr::filter(
-            (setting %in% state$setting & year == state$year) |
-              ((iso3 %in% state$comparison | setting %in% state$comparison) & year %in% v_year),
-            #source == state$source,#I re-allowed this, but could it be an issue?
-            indicator_abbr %in% state$indicator,
-            dimension %in% state$dimension,
-            measure %in% state$measure
+            indicator_abbr %in% st_indicator,
+            dimension %in% st_dimension,
+            measure %in% st_measure
+          )
+
+
+        if (isTruthy(d_recent)) {
+          max_focus_year <- data_measures |>
+            dplyr::filter(
+              setting == st_setting
+            ) |>
+            dplyr::pull(year) |>
+            max() |>
+            suppressWarnings()
+        } else {
+          max_focus_year <- st_year
+        }
+
+        focus_year_int <- year_to_int %>%
+          dplyr::filter(
+            year == max_focus_year
           ) %>%
-          dplyr::group_by(setting) %>%
-          dplyr::filter(year == closest(year, m_year)) %>%
-          dplyr::ungroup() %>%
-          dplyr::arrange(dplyr::desc(setting == state$setting))
+          dplyr::pull(year_int)
+
+        if (!isTruthy(focus_year_int)) {
+          return()
+        }
+
+        year_beg_int <- year_to_int %>%
+          dplyr::filter(
+            year == benchmark_year_beg
+          ) %>%
+          dplyr::pull(year_int)
+
+        year_end_int <- year_to_int %>%
+          dplyr::filter(
+            year == benchmark_year_end
+          ) %>%
+          dplyr::pull(year_int)
+
+        if (!has_bench_years | is_value(benchmark_year_near)) {
+          setting_data <- data_measures %>%
+            dplyr::filter(setting %in% st_setting & year == max_focus_year)
+
+
+          comparison_data <- data_measures %>%
+            dplyr::filter(iso3 %in% st_comparison | setting %in% st_comparison) %>%
+            dplyr::filter(source %in% benchmark_source) %>%
+            dplyr::filter(setting != st_setting) %>%
+            dplyr::mutate(year_diff = abs(year_int - focus_year_int)) %>%
+            dplyr::arrange(year_diff) %>%
+            dplyr::group_by(setting) %>%
+            dplyr::mutate(min_diff = suppressWarnings(min(year_diff, na.rm = TRUE))) %>%
+            dplyr::filter(year_diff == min_diff) %>%
+            dplyr::select(-year_diff, -min_diff)
+
+          if(all(is.na(setting_data$r_national)) || all(is.na(comparison_data$r_national)))
+            return()
+
+          benchmark_data <- dplyr::bind_rows(
+            setting_data,
+            comparison_data
+          ) %>%
+            dplyr::ungroup() %>%
+            dplyr::arrange(dplyr::desc(setting == st_setting)) %>%
+            dplyr::select(-year_int)
+
+          # git680
+          cntry_count <- benchmark_data |>
+            dplyr::distinct(setting, year) |>
+            dplyr::group_by(setting) |>
+            dplyr::summarise(
+              n = dplyr::n(),
+              maxyr = suppressWarnings(max(year))
+            )
+
+          if (any(cntry_count$n > 1)) {
+            benchmark_data <- dplyr::semi_join(
+              benchmark_data,
+              cntry_count,
+              by = c("setting", "year" = "maxyr")
+            )
+          }
+
+          if (any(cntry_count$n > 1)) {
+            benchmark_data <- dplyr::semi_join(
+              benchmark_data,
+              cntry_count,
+              by = c("setting", "year" = "maxyr")
+            )
+          }
+        } else {
+          if (length(year_beg_int) == 0) {
+            return()
+          }
+
+          setting_data <- data_measures %>%
+            dplyr::filter(setting %in% st_setting & year == max_focus_year)
+
+          comparison_data <- data_measures %>%
+            dplyr::filter(iso3 %in% st_comparison | setting %in% st_comparison) %>%
+            dplyr::filter(setting != st_setting) %>%
+            dplyr::filter(
+              year_int >= year_beg_int,
+              year_int <= year_end_int
+            )
+
+          if(all(is.na(setting_data$r_national)) || all(is.na(comparison_data$r_national)))
+            return()
+
+          benchmark_data <- dplyr::bind_rows(
+            setting_data,
+            comparison_data
+          ) %>%
+            dplyr::ungroup() %>%
+            dplyr::arrange(dplyr::desc(setting == st_setting)) %>%
+            dplyr::select(-year_int)
+        }
+
+        add_time("end r_data compare-summary", this)
+        benchmark_data
       })
     } else {
       # ├ Explore summary ----
       r_data <- reactive({
-
         req(
+          visible(),
           state$setting,
           state$source,
           state$year,
@@ -1208,50 +1809,112 @@ viewServer <- function(input, output, session, Events, Data, visible,
           state$measure
         )
 
-        Data$measures() %>%
+        add_time("begin r_data explore-summary", this)
+
+        recent <- isolate(state$recent)
+
+        summary_dat <- isolate(Data$measures()) %>%
           dplyr::filter(
             setting %in% state$setting,
             source %in% state$source,
-            year %in% state$year,
             indicator_abbr %in% state$indicator,
             dimension %in% state$dimension,
             measure %in% state$measure
           )
+
+        if (!is.null(recent) && recent) {
+          summary_dat <- summary_dat |>
+            dplyr::filter(year == max(summary_dat$year))
+        } else {
+          summary_dat <- summary_dat |>
+            dplyr::filter(
+              year %in% state$year
+            )
+        }
+        add_time("end r_data explore-summary", this)
+        summary_dat
       })
     }
     # ├ Explore disaggregated bar, line, and table ----
   } else {
     r_data <- reactive({
-      req(
-        state$setting,
-        state$source,
-        state$year,
-        state$indicator,
-        state$dimension
-      )
+
+
+      #browser()
+      data_main <- isolate(Data$main())
 
       lang <- isolate(language())
-      dimension <- state$dimension
+      st_setting <- state$setting
+      st_source <- state$source
+      st_year <- state$year
+      st_recent <- isolate(state$recent)
+      st_indicator <- state$indicator
+      st_dimension <- state$dimension
 
-      if (lang != "en" && dimension == "Subnational region") {
-        dimension <- translate(c(lang, "values", "dimensions", dimension))
+      req(
+        visible(),
+        st_setting,
+        st_source,
+        st_year,
+        st_indicator,
+        st_dimension
+      )
+
+      add_time("begin r_data explore-disag", this)
+
+      if (lang != "en" && "Subnational region" %in% st_dimension) {
+        trans_dim <- translate(c(lang, "values", "dimensions", "Subnational region"))
+        st_dimension[st_dimension == "Subnational region"] <- trans_dim
       }
 
-      Data$main() %>%
-        dplyr::filter(
-          setting %in% state$setting,
-          source %in% state$source,
-          year %in% state$year,
-          indicator_abbr %in% state$indicator,
-          dimension %in% !!dimension,
-        )
+      if (!is.null(st_recent) && st_recent) {
+        dat <- data_main %>%
+          dplyr::filter(
+            setting %in% st_setting,
+            source %in% st_source,
+            indicator_abbr %in% st_indicator,
+            dimension %in% !!st_dimension,
+          ) %>%
+          dplyr::group_by(
+            setting,
+            indicator_abbr,
+            dimension
+          ) %>%
+          dplyr::mutate(
+            maxyr = suppressWarnings(max(year))
+          ) %>%
+          dplyr::filter(
+            year == maxyr
+          ) %>%
+          dplyr::ungroup()
+      } else {
+        dat <- data_main %>%
+          dplyr::filter(
+            setting %in% st_setting,
+            source %in% st_source,
+            year %in% st_year,
+            indicator_abbr %in% st_indicator,
+            dimension %in% !!st_dimension,
+          )
+      }
+
+      add_time("end r_data explore-disag", this)
+      dat
     })
   }
 
   # visual reactive ----
   r_visual <- reactive({
-    req(NROW(r_data()) > 0 & state$setting %in% r_data()$setting)
 
+    req(
+      NROW(r_data()) > 0 &
+        state$setting %in% r_data()$setting,
+        !grepl("compare", this) ||
+        (grepl("compare", this) && all(isolate(Events$set_benchmark_comparison$selected) %in% state$comparison))
+        )
+
+
+    add_time("begin creating visual", this)
     visual(
       .data = r_data(),
       title_main = m_options$title_main(), # state$title_main,
@@ -1276,23 +1939,27 @@ viewServer <- function(input, output, session, Events, Data, visible,
       decimal_places = m_options$decimal_places(),
       table_decimals = m_options$table_decimals(),
       columns = m_options$columns(),
-      data_only = FALSE,#isolate(input$nav != NAV$DOWNLOADS),
+      data_only = FALSE, # isolate(input$nav != NAV$DOWNLOADS),
       rename = TRUE,
-      language = language()
+      language = language(),
+      recent = isTRUE(state$recent),
+      dataset_name = dataset_name(),
+      is_who_dataset = isolate(is_who_dataset())
     )
   })
 
   # render visual ----
   output$visual <- render({
-    visible()
-
+    req(visible())
     if (getOption("heat.debug", 0) >= 1) {
       debug_msg("Visual", "render", NULL)
     }
 
+    add_time("render visual", this)
     r_visual()
   })
-  # shiny::outputOptions(output, "visual", suspendWhenHidden = FALSE)
+
+
 
   # download visual ----
   # data download, chart or table data?
@@ -1313,8 +1980,8 @@ viewServer <- function(input, output, session, Events, Data, visible,
           )
       })
     } else {
-
       r_data_download <- reactive({
+        add_time("reactive r_data_download 1", this)
         # disaggregated specific columns
         r_data() %>%
           dplyr::select(
@@ -1335,12 +2002,13 @@ viewServer <- function(input, output, session, Events, Data, visible,
     r_data_download <- reactive({
       i_data <- r_data()
       req(NROW(i_data) > 0)
+      add_time("reactive r_data_download 2", this)
       visual(
         .data = i_data,
         focus_setting = state$setting,
-        table_decimals = m_options$table_decimals(),
+        table_decimals = Inf,
         columns = m_options$columns(),
-        data_only = TRUE, #isolate(input$nav == NAV$DOWNLOADS),
+        data_only = TRUE, # isolate(input$nav == NAV$DOWNLOADS),
         rename = FALSE,
         language = language()
       )
@@ -1350,7 +2018,8 @@ viewServer <- function(input, output, session, Events, Data, visible,
     downloadsServer, "downloads",
     chart = if (isTRUE(downloads$chart)) r_visual,
     data = r_data_download,
-    language = language
+    language = language,
+    is_who_dataset = is_who_dataset
   )
 
 

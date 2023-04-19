@@ -25,6 +25,7 @@ homeUI <- function(id) {
 }
 
 homeServer <- function(input, output, session) {
+
   list(
     open_explore = reactive({
       input$open_explore

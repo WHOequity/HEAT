@@ -166,9 +166,30 @@ a {
 }
 @media only screen and (max-width: 680px) {
   #heat-section-one h1 {
-    font-size: 1.5em;
-    width: 50%;
+    font-size: 2em;
+    width: 100%;
+    text-align: center;
   }
+  #heat-section-one {
+    background: none;
+  }
+  #heat-section-one #sect1-p1{
+    text-align: center;
+  }
+  #heat-section-one #sect1-p2 {
+    margin-left: 0px;
+    text-align: center;
+  }
+  .heat-btn-scroll {
+    display: flex;
+    justify-content: center;
+  }
+
+#heat-last-section p, #heat-last-section span {
+  font-size: 18px !important;
+  line-height: 26px !important;
+  text-align: left !important;
+}
 }
 /* Medium devices (landscape tablets, 768px and up) */
 /* Large devices (laptops/desktops, 992px and up) */

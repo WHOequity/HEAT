@@ -16,10 +16,17 @@
 # You should have received a copy of the GNU Affero General Public License
 # along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-initial_setting <- function(x, lang) {
+initial_setting <- function(x, lang, dataname) {
   if (!getOption("heat.plus", FALSE)) {
 
-    translate(c(lang, "values", "settings", "Indonesia"))
+    default_setting <- heatdata::info_databases |>
+      dplyr::filter(internal_name %in% dataname) |>
+      dplyr::pull(setting) |>
+      unique()
+
+    transl <- translate(c(lang, "values", "settings", default_setting))
+    ifelse(is.null(transl), x[1], transl)
+
   } else {
     x[1]
   }
@@ -33,17 +40,31 @@ initial_year <- function(x) {
   sort(x)
 }
 
-initial_indicator <- function(x) {
+initial_indicator <- function(x, lang, dataname) {
   if (!getOption("heat.plus", FALSE)) {
-    "sba"
+    indic <- heatdata::info_databases |>
+      dplyr::filter(internal_name %in% dataname) |>
+      dplyr::pull(indicator_abbr) |>
+      unique()
+
+    ifelse(is.null(indic), x[1], indic)
+
   } else {
     x[1]
   }
 }
 
-initial_dimension <- function(x, lang) {
+initial_dimension <- function(x, lang, dataname) {
   if (!getOption("heat.plus", FALSE)) {
-    translate(c(lang, "values", "dimensions", "Economic status (wealth decile)"))
+
+    default_dimension <- heatdata::info_databases |>
+      dplyr::filter(internal_name %in% dataname) |>
+      dplyr::pull(dimension) |>
+      unique()
+
+    dimension <- translate(c(lang, "values", "dimensions", default_dimension))
+    ifelse(is.null(dimension), x[1], dimension)
+
   } else {
     x[1]
   }

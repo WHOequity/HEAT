@@ -17,19 +17,22 @@
 # along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 title_explore_disaggregated <- function(data, language = "en") {
-  data %>%
-    dplyr::distinct(setting, source, year) %>%
-    dplyr::group_by(setting, source) %>%
-    dplyr::summarise(year = glue::glue_collapse(year, sep = ", ")) %>%
-    dplyr::mutate(srcyr = paste(source, year)) %>%
-    dplyr::summarise(
-      srcyr = glue::glue_collapse(srcyr, sep = ", ", last = ", and ")
-    ) %>%
-    glue::glue_data("{ setting } ({ srcyr })") %>%
-    as.character()
+  # data %>%
+  #   dplyr::distinct(setting, source, year) %>%
+  #   dplyr::group_by(setting, source) %>%
+  #   dplyr::summarise(year = glue::glue_collapse(year, sep = ", ")) %>%
+  #   dplyr::mutate(srcyr = paste(source, year)) %>%
+  #   dplyr::summarise(
+  #     srcyr = glue::glue_collapse(srcyr, sep = ", ", last = ", and ")
+  #   ) %>%
+  #   glue::glue_data("{ setting } ({ srcyr })") %>%
+  #   as.character()
+
+  unique(data$setting)
 }
 
 title_explore_detail <- function(data, language = "en") {
+
   data %>%
     dplyr::distinct(setting, source, year) %>%
     dplyr::group_by(setting, source) %>%
@@ -38,7 +41,7 @@ title_explore_detail <- function(data, language = "en") {
     dplyr::summarise(
       srcyr = glue::glue_collapse(srcyr, sep = ", ", last = ", and ")
     ) %>%
-    glue::glue_data("{ setting } ({ srcyr })") %>%
+    glue::glue_data("{ setting }") %>%
     as.character()
 }
 
@@ -56,21 +59,24 @@ title_explore_map <- function(data, language = "en") {
 }
 
 title_explore_summary <- function(data, language = "en") {
-  data %>%
-    dplyr::distinct(setting, source, year) %>%
-    dplyr::group_by(setting, source) %>%
-    dplyr::summarise(year = glue::glue_collapse(year, sep = ", ")) %>%
-    dplyr::mutate(srcyr = paste(source, year)) %>%
-    dplyr::summarise(
-      srcyr = glue::glue_collapse(srcyr, sep = ", ", last = ", and ")
-    ) %>%
-    glue::glue_data("{ setting } ({ srcyr })") %>%
-    as.character()
+  # data %>%
+  #   dplyr::distinct(setting, source, year) %>%
+  #   dplyr::group_by(setting, source) %>%
+  #   dplyr::summarise(year = glue::glue_collapse(year, sep = ", ")) %>%
+  #   dplyr::mutate(srcyr = paste(source, year)) %>%
+  #   dplyr::summarise(
+  #     srcyr = glue::glue_collapse(srcyr, sep = ", ", last = ", and ")
+  #   ) %>%
+  #   glue::glue_data("{ setting } ({ srcyr })") %>%
+  #   as.character()
+
+  unique(data$setting)
 }
 
 title_compare_disaggregated <- function(data, language = "en") {
+
   n_settings <- data %>%
-    dplyr::group_by(setting, source, year) %>%
+    dplyr::group_by(setting) %>%
     dplyr::n_groups()
 
   tmp_title <- translate(c(language, "charts", "titles", "comparedisag"))
@@ -83,7 +89,7 @@ title_compare_disaggregated <- function(data, language = "en") {
 
 title_compare_summary <- function(data, language = "en") {
   n_settings <- data %>%
-    dplyr::group_by(setting, source, year) %>%
+    dplyr::group_by(setting) %>%
     dplyr::n_groups()
 
   tmp_title <- translate(c(language, "charts", "titles", "comparesumm"))

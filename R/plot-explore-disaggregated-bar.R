@@ -25,7 +25,9 @@ chartExploreDisaggregatedBar <- function(data,
                                          conf_int = FALSE,
                                          data_labels = "none",
                                          decimal_places = 1,
-                                         language = "en") {
+                                         language = "en",
+                                         recent,
+                                         is_who_dataset) {
   data_years <- sort(unique(data$year))
   data_indicators <- sort(unique(data$indicator_name))
   data_dimensions <- unique(data$dimension)
@@ -47,6 +49,7 @@ chartExploreDisaggregatedBar <- function(data,
   end_on_tick <- FALSE
 
   data_grouped <- data %>%
+    dplyr::mutate(color = gsub(",0.5)", ",1.0)", color)) %>% #git735
     dplyr::select(
       setting, dimension, indicator_name, indicator_abbr, year,
       source, subgroup, estimate, se, ci_lb, ci_ub, population, popshare,
@@ -58,7 +61,9 @@ chartExploreDisaggregatedBar <- function(data,
       low = ci_lb,
       high = ci_ub,
       year0 = x,
-      popshare = popshare * 100
+      popshare = popshare * 100,
+      x = if(recent) 0 else x,
+      year0 = if(recent) 0 else year0
     ) %>%
     dplyr::group_by(dimension, indicator_name) %>%
     tidyr::nest() %>%
@@ -140,8 +145,7 @@ chartExploreDisaggregatedBar <- function(data,
           temp_data <- data_arranged %>%
             dplyr::select(year, estimate, rank) %>%
             tidyr::spread(year, estimate, fill = 0) %>%
-            tidyr::gather(year, estimate, -rank) %>%
-            dplyr::mutate(year = as.numeric(year))
+            tidyr::gather(year, estimate, -rank)
 
           data_arranged <- dplyr::left_join(temp_data, data_arranged, by = c("rank", "year"), suffix = c(".x", ""))
           data_arranged$x <- as.numeric(as.character(factor(data_arranged$year, levels = sort(unique(data_arranged$year)), labels = sort(unique(data_arranged$year0)))))
@@ -180,6 +184,7 @@ chartExploreDisaggregatedBar <- function(data,
           )
         })
 
+        if(recent) data_years <- data_group$year[1]
         generateChartExploreDisaggregatedBar(
           series_column = series_column,
           series_errorbars = series_errorbars,
@@ -208,6 +213,7 @@ chartExploreDisaggregatedBar <- function(data,
     dplyr::arrange(dimension, subgroup_order) %>%
     dplyr::ungroup() %>%
     dplyr::distinct(dimension, subgroup, color) %>%
+    dplyr::mutate(color = gsub(",0.5)", ",1.0)", color)) %>% #git735
     dplyr::transmute(
       dimension = dimension,
       label = subgroup,
@@ -221,6 +227,8 @@ chartExploreDisaggregatedBar <- function(data,
     dplyr::summarise(charts = list(chart)) %>%
     dplyr::pull()
 
+
+
   chart_table(
     charts = charts,
     title_top = unique(data_charts$dimension),
@@ -229,7 +237,8 @@ chartExploreDisaggregatedBar <- function(data,
     title_vertical = title_vertical,
     title_horizontal = title_horizontal,
     legend = legend,
-    language = language
+    language = language,
+    is_who_dataset = is_who_dataset
   )
 }
 
@@ -255,6 +264,7 @@ generateChartExploreDisaggregatedBar <- function(series_column,
   if (conf_int) {
     chart <- hc_add_series_list(chart, series_errorbars)
   }
+
 
   chart %>%
     hc_chart(

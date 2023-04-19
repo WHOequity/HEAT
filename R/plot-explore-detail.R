@@ -30,15 +30,26 @@ chartExploreDetail <- function(data,
                                conf_int = FALSE,
                                data_labels = "none",
                                decimal_places = 1,
-                               language = "en") {
+                               language = "en",
+                               is_who_dataset) {
   include_conf <- conf_int
-  # print(highlight_subgroup)
-  # browser()
+
+
   if (sort_by == "subgroup") {
     if (sort_order == "ascending") {
-      data_sorted <- dplyr::arrange(data, xtfrm(subgroup))
+      if(unique(data$ordered_dimension) == 1){
+        data_sorted <- dplyr::arrange(data, xtfrm(subgroup_order))
+      } else {
+        data_sorted <- dplyr::arrange(data, xtfrm(subgroup))
+      }
+
+
     } else if (sort_order == "descending") {
-      data_sorted <- dplyr::arrange(data, -xtfrm(subgroup))
+      if(unique(data$ordered_dimension) == 1){
+        data_sorted <- dplyr::arrange(data, -xtfrm(subgroup_order))
+      } else {
+        data_sorted <- dplyr::arrange(data, -xtfrm(subgroup))
+      }
     }
   }
 
@@ -81,6 +92,7 @@ chartExploreDetail <- function(data,
   end_on_tick <- FALSE
 
   data_charts <- data_sorted %>%
+    dplyr::mutate(color = gsub(",0.5)", ",1.0)", color)) %>% #git735
     dplyr::transmute(
       dimension,
       indicator_name,
@@ -230,15 +242,18 @@ chartExploreDetail <- function(data,
       fill = list(chart = list(chartEmpty()))
     )
 
+  data_years <- sapply(data_charts$data, function(x) unique(x$year))
+
   chart_table(
     charts = list(data_charts$chart),
-    title_top = unique(data_charts$indicator_name),
+    title_top = paste0(unique(data_charts$indicator_name), " (", data_years, ")"),
     title_right = data_sorted$dimension[1],
     title_main = title_main,
     title_horizontal = title_horizontal,
     title_vertical = title_vertical,
     legend = NULL,
-    language = language
+    language = language,
+    is_who_dataset = is_who_dataset
   )
 }
 

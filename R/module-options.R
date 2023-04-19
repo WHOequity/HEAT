@@ -411,9 +411,11 @@ optionsUI <- function(id, data_labels, confidence_intervals, reference_lines,
 }
 
 optionsServer <- function(input, output, session, parent,
-                          Events, visible, is_log_scale = NULL) {
+                          Events, visible, is_log_scale = NULL, language) {
   ns <- session$ns
   this <- ns(NULL)
+
+  add_time("enter optionsServer", this)
 
   # helpers ----
   ignoreMessage <- function(msg) {
@@ -627,14 +629,13 @@ optionsServer <- function(input, output, session, parent,
 
   if (!is.null(is_log_scale)) {
     observe({
-      req(is_log_scale())
 
       less_than_zero <- isTRUE(input$axis_min <= 0)
 
       updateTextInput(
         id = "axis_min",
-        invalid = if (less_than_zero) {
-          "Axis minimum must be greater than 0 for log-scale axis"
+        invalid = if (is_log_scale() && less_than_zero) {
+          translate(c(isolate(language()), "charts", "warnings", "axismin")) #Axis minimum must be greater than 0 for log-scale axis"
         },
         session = session
       )
@@ -645,14 +646,13 @@ optionsServer <- function(input, output, session, parent,
     })
 
     observe({
-      req(is_log_scale())
 
       less_than_zero <- isTRUE(input$axis_vertical_min <= 0)
 
       updateTextInput(
         id = "axis_vertical_min",
-        invalid = if (less_than_zero) {
-          "Vertical axis minimum must be greater than 0 for log-scale axis"
+        invalid = if (is_log_scale() && less_than_zero) {
+          translate(c(isolate(language()), "charts", "warnings", "verticalaxismin")) #"Vertical axis minimum must be greater than 0 for log-scale axis"
         },
         session = session
       )
@@ -666,6 +666,7 @@ optionsServer <- function(input, output, session, parent,
   # reset options ----
   reset <- function(horizontal_title = NULL, vertical_title = NULL) {
     # ├ axes ----
+    add_time("options reset", this)
     state$axis_min <- NULL
     state$axis_max <- NULL
     state$axis_horizontal_min <- NULL
@@ -708,7 +709,7 @@ optionsServer <- function(input, output, session, parent,
     updateRadioInput(id = "sort_by", selected = "subgroup", session = session)
     updateRadioInput(id = "sort_order", selected = "ascending", session = session)
   }
-
+  add_time("end options reset", this)
   # return list of reactives ----
   list(
     reset = reset,

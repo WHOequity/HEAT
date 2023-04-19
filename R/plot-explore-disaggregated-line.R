@@ -23,7 +23,15 @@ chartExploreDisaggregatedLine <- function(data,
                                           axis_min = NULL,
                                           axis_max = NULL,
                                           decimal_places = 1,
-                                          language = "en") {
+                                          language = "en",
+                                          recent,
+                                          is_who_dataset) {
+
+
+
+
+
+
   data_years <- sort(unique(data$year))
   data_indicators <- sort(unique(data$indicator_name))
   data_dimensions <- unique(data$dimension)
@@ -61,7 +69,9 @@ chartExploreDisaggregatedLine <- function(data,
       y = match(year, !!data_years) - 1,
       year0 = y,
       name = subgroup,
-      popshare = popshare * 100
+      popshare = popshare * 100,
+      y = if(recent) 0 else y,
+      year0 = if(recent) 0 else year0
     ) %>%
     dplyr::group_by(dimension, indicator_name) %>%
     dplyr::arrange(dimension, x) %>%
@@ -101,6 +111,7 @@ chartExploreDisaggregatedLine <- function(data,
       chart = purrr::pmap(., function(dimension, indicator_name, data) {
         is_top_row <- indicator_name == first_indicator
 
+
         data_series <- data %>%
           dplyr::mutate(year_copy = year) %>%
           dplyr::group_by(year_copy) %>%
@@ -114,6 +125,7 @@ chartExploreDisaggregatedLine <- function(data,
             )
           })
 
+        if(recent) data_years <- data$year[1]
         generateChartExploreDisaggregatedLine(
           data = data_series,
           categories = data_years,
@@ -129,6 +141,7 @@ chartExploreDisaggregatedLine <- function(data,
         )
       })
     )
+
 
   charts <- data_charts %>%
     dplyr::group_by(indicator_name) %>%
@@ -166,7 +179,8 @@ chartExploreDisaggregatedLine <- function(data,
     title_horizontal = title_horizontal,
     title_vertical = title_vertical,
     legend = legend,
-    language = language
+    language = language,
+    is_who_dataset = is_who_dataset
   )
 }
 
@@ -181,6 +195,7 @@ generateChartExploreDisaggregatedLine <- function(data,
                                                   include_conf,
                                                   decimal_places,
                                                   language = "en") {
+
 
   highchart() %>%
     hc_add_series_list(data) %>%
@@ -217,9 +232,10 @@ generateChartExploreDisaggregatedLine <- function(data,
     ) %>%
     hc_yAxis(
       categories = as.list(categories),
+      endOnTick = end_on_tick,
       labels = list(
-        x = -5,
-        formatter = JS("function(){return this.value.toString().length !== 4 ? '' : this.value;}")
+        x = -5
+        #,formatter = JS("function(){return this.value.toString().length !== 4 ? '' : this.value;}")
       ),
       min = 0,
       max = length(categories) - 1,

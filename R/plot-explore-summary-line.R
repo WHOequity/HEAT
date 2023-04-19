@@ -25,7 +25,8 @@ chartExploreSummaryLine <- function(data,
                                     conf_int = FALSE,
                                     data_labels = "none",
                                     decimal_places = decimal_places,
-                                    language = "en") {
+                                    language = "en",
+                                    is_who_dataset) {
 
 
   include_conf <- conf_int
@@ -188,13 +189,13 @@ chartExploreSummaryLine <- function(data,
           ) %>%
           hc_xAxis(
             categories = as.list(data_years),
-            labels = list(
-              step = 1,
-              style = list(
-                textOverflow = "none",
-                whiteSpace = "normal"
-              )
-            ),
+            # labels = list(
+            #   step = 1,
+            #   style = list(
+            #     textOverflow = "none",
+            #     whiteSpace = "normal"
+            #   )
+            # ),
             min = 0,
             max = length(data_years) - 1,
             tickLength = 0,
@@ -245,6 +246,7 @@ chartExploreSummaryLine <- function(data,
     title_vertical = title_vertical,
     title_horizontal = title_horizontal,
     legend = legend,
-    language = language
+    language = language,
+    is_who_dataset = is_who_dataset
   )
 }

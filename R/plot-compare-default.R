@@ -24,7 +24,9 @@ chartCompareDefault <- function(data,
                                 axis_min = NULL,
                                 axis_max = NULL,
                                 decimal_places = 1,
-                                language = "en") {
+                                language = "en",
+                                is_who_dataset) {
+
 
   data <- color_adjustment(data, language)
 
@@ -166,6 +168,6 @@ chartCompareDefault <- function(data,
     title_horizontal = title_horizontal,
     title_vertical = title_vertical,
     legend = legend,
-    disclaimer = chart_disclaimer(language)
+    disclaimer = chart_disclaimer(language, is_who_dataset)
   )
 }

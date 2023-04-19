@@ -28,7 +28,8 @@ chartCompareSummary <- function(data,
                                 axis_vertical_min = NULL,
                                 axis_vertical_max = NULL,
                                 decimal_places = 1,
-                                language = "en") {
+                                language = "en",
+                                is_who_dataset) {
   include_conf <- all(!is.na(data$se.lowerci)) && all(!is.na(data$se.upperci))
   color_setting <- if (is_heat_plus()) "#b5e61d" else "#e56620"
   color_benchmark <- "#2a5783"
@@ -71,6 +72,15 @@ chartCompareSummary <- function(data,
       decimal_places
     )
 
+  x_avg <- median(data_series$x, na.rm = TRUE)
+  y_avg <- median(data_series$y, na.rm = TRUE)
+
+  dec_x <- get_median_decimals(x_avg)
+  dec_y <- get_median_decimals(y_avg)
+
+  x_avg <- round(x_avg, dec_x)
+  y_avg <- round(y_avg, dec_y)
+
   data_series <- data_series %>%
     dplyr::group_by(title) %>%
     tidyr::nest() %>%
@@ -108,6 +118,7 @@ chartCompareSummary <- function(data,
   )
 
   legend <- chart_legend(legend_items)
+
 
   chart <- highchart() %>%
     hc_add_series_list(data_series) %>%
@@ -153,6 +164,7 @@ chartCompareSummary <- function(data,
       labels = list(
         format = h_label_format
       ),
+      plotLines = list(plot_line_median(x_avg, language, 0)),
       min = axis_horizontal_min,
       max = axis_horizontal_max,
       startOnTick = is.null(axis_horizontal_min),
@@ -172,6 +184,7 @@ chartCompareSummary <- function(data,
       min = axis_vertical_min,
       max = axis_vertical_max,
       startOnTick = is.null(axis_vertical_min),
+      plotLines = list(plot_line_median(y_avg, language, 0)),
       title = list(
         text = FALSE
       ),
@@ -183,6 +196,7 @@ chartCompareSummary <- function(data,
       decimal_places = decimal_places
     )
 
+
   chart_singleton(
     chart = chart,
     title_top = NULL,
@@ -191,6 +205,6 @@ chartCompareSummary <- function(data,
     title_horizontal = title_horizontal,
     title_vertical = title_vertical,
     legend = legend,
-    disclaimer = chart_disclaimer(language)
+    disclaimer = chart_disclaimer(language, is_who_dataset)
   )
 }

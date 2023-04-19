@@ -16,92 +16,33 @@
 # You should have received a copy of the GNU Affero General Public License
 # along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-appendColors <- function(.data, language) {
+appendColors <- function(.data, dimension_colors) {
 
-  # age ----
-  dim_age <- translate(c(language, "values", "dimensions", "Age"))
-  # age_0_2 <- translate(c(language, "values", "subgroups", "0-2 years"))
-  # age_2_5 <-
-  # age_0_2 <- "0-2 years"
-  # age_2_5 <- "2-5 years"
-  age_0_1 <- translate(c(language, "values", "subgroups", "0-1 years"))
-  age_2_5 <- translate(c(language, "values", "subgroups", "2-5 years"))
-  age_15_19 <- translate(c(language, "values", "subgroups", "15-19 years"))
-  age_20_49 <- translate(c(language, "values", "subgroups", "20-49 years"))
+  dimension_colors <- dimension_colors %>%
+    dplyr::select(-dimension, -subgroup)
 
-  # economic status (wealth quintile) ----
-  dim_econ_quin <- translate(c(language, "values", "dimensions", "Economic status (wealth quintile)"))
-  econ_quin_1 <- translate(c(language, "values", "subgroups", "Quintile 1 (poorest)"))
-  econ_quin_2 <- translate(c(language, "values", "subgroups", "Quintile 2"))
-  econ_quin_3 <- translate(c(language, "values", "subgroups", "Quintile 3"))
-  econ_quin_4 <- translate(c(language, "values", "subgroups", "Quintile 4"))
-  econ_quin_5 <- translate(c(language, "values", "subgroups", "Quintile 5 (richest)"))
+  one_col <- dimension_colors %>%
+    dplyr::filter(subgroup_id == "ALL_SUBGROUPS")
 
-  # education ----
-  dim_edu <- translate(c(language, "values", "dimensions", "Education"))
-  edu_none <- translate(c(language, "values", "subgroups", "No education"))
-  edu_primary <- translate(c(language, "values", "subgroups", "Primary school"))
-  edu_secondary  <- translate(c(language, "values", "subgroups", "Secondary school +"))
+  multi_col <- dimension_colors %>%
+    dplyr::filter(subgroup_id != "ALL_SUBGROUPS")
 
-  # place of residence ----
-  dim_reside <- translate(c(language, "values", "dimensions", "Place of residence"))
-  reside_urban <- translate(c(language, "values", "subgroups", "Urban"))
-  reside_rural <- translate(c(language, "values", "subgroups", "Rural"))
 
-  # sex ----
-  dim_sex <- translate(c(language, "values", "dimensions", "Sex"))
-  sex_female <- translate(c(language, "values", "subgroups", "Female"))
-  sex_male <- translate(c(language, "values", "subgroups", "Male"))
+  .data <-  dplyr::left_join(.data, multi_col, by = c("dimension_id", "subgroup_id"))
 
-  # subnational region ----
-  dim_subnat <- translate(c(language, "values", "dimensions", "Subnational region"))
+  for(i in 1:nrow(one_col)){
+    dimen_id <- one_col$dimension_id[i]
+    onecol <- one_col$color[i]
+    oneopacity <- one_col$opacity[i]
+    .data$color[.data$dimension_id == dimen_id] <- onecol
+    .data$opacity[.data$dimension_id == dimen_id] <- oneopacity
+  }
 
-  # economic status (wealth decile) ----
-  dim_econ_dec <- translate(c(language, "values", "dimensions", "Economic status (wealth decile)"))
-  econ_dec_1 <- translate(c(language, "values", "subgroups", "Decile 1 (poorest)"))
-  econ_dec_2 <- translate(c(language, "values", "subgroups", "Decile 2"))
-  econ_dec_3 <- translate(c(language, "values", "subgroups", "Decile 3"))
-  econ_dec_4 <- translate(c(language, "values", "subgroups", "Decile 4"))
-  econ_dec_5 <- translate(c(language, "values", "subgroups", "Decile 5"))
-  econ_dec_6 <- translate(c(language, "values", "subgroups", "Decile 6"))
-  econ_dec_7 <- translate(c(language, "values", "subgroups", "Decile 7"))
-  econ_dec_8 <- translate(c(language, "values", "subgroups", "Decile 8"))
-  econ_dec_9 <- translate(c(language, "values", "subgroups", "Decile 9"))
-  econ_dec_10 <- translate(c(language, "values", "subgroups", "Decile 10 (richest)"))
-
-  dplyr::mutate(
-    .data,
-    color = dplyr::case_when(
-      dimension == !!dim_age & subgroup == !!age_0_1 ~ "#e6c1f0",
-      dimension == !!dim_age & subgroup == !!age_2_5 ~ "#a874a8",
-      dimension == !!dim_age & subgroup == !!age_15_19 ~ "#c6c1f0",
-      dimension == !!dim_age & subgroup ==!!age_20_49 ~ "#8074a8",
-      dimension == !!dim_econ_quin & subgroup == !!econ_quin_1 ~ "#8ed07f",
-      dimension == !!dim_econ_quin & subgroup == !!econ_quin_2 ~ "#6eb663",
-      dimension == !!dim_econ_quin & subgroup == !!econ_quin_3 ~ "#519c51",
-      dimension == !!dim_econ_quin & subgroup == !!econ_quin_4 ~ "#308344",
-      dimension == !!dim_econ_quin & subgroup == !!econ_quin_5 ~ "#24693d",
-      dimension == !!dim_edu & subgroup == !!edu_none ~ "#fa8f79",
-      dimension == !!dim_edu & subgroup == !!edu_primary ~ "#e74545",
-      dimension == !!dim_edu & subgroup == !!edu_secondary ~ "#ae123a",
-      dimension == !!dim_reside & subgroup == !!reside_urban ~ "#98d9e4",
-      dimension == !!dim_reside & subgroup == !!reside_rural ~ "#3ca8bc",
-      dimension == !!dim_sex & subgroup == !!sex_female ~ "#fcc66d",
-      dimension == !!dim_sex & subgroup == !!sex_male ~ "#ef8a0c",
-      dimension == !!dim_subnat ~ "#2a5783",
-      dimension == !!dim_econ_dec & subgroup == !!econ_dec_1 ~ "#b9e1af",
-      dimension == !!dim_econ_dec & subgroup == !!econ_dec_2 ~ "#a3d896",
-      dimension == !!dim_econ_dec & subgroup == !!econ_dec_3 ~ "#8ed07f",
-      dimension == !!dim_econ_dec & subgroup == !!econ_dec_4 ~ "#77c664",
-      dimension == !!dim_econ_dec & subgroup == !!econ_dec_5 ~ "#65b058",
-      dimension == !!dim_econ_dec & subgroup == !!econ_dec_6 ~ "#3ca856",
-      dimension == !!dim_econ_dec & subgroup == !!econ_dec_7 ~ "#36964d",
-      dimension == !!dim_econ_dec & subgroup == !!econ_dec_8 ~ "#308344",
-      dimension == !!dim_econ_dec & subgroup == !!econ_dec_9 ~ "#24693d",
-      dimension == !!dim_econ_dec & subgroup == !!econ_dec_10 ~ "#154b2b",
-      TRUE ~ "#007300"
+  .data %>%
+    dplyr::mutate(
+      opacity = ifelse(is.na(opacity), 1, opacity),
+      color = highcharter::hex_to_rgba(color, opacity)
     )
-  )
 }
 
 table_column_alignment <- function(.data) {
@@ -336,11 +277,28 @@ benchmark_regions <- function(country_info) {
     dplyr::select(choices = whoreg6_name, values = whoreg6)
 }
 
-benchmark_comparisons <- function(country_info, income_group, region) {
+benchmark_comparisons <- function(setting_yr_src, country_info, income_group, region, sources) {
+
+  if(!is.null(sources) && !any(sources == " ")){
+    setting_yr_src <- setting_yr_src |>
+      dplyr::filter(source %in% sources)
+  }
+
+  settings <- setting_yr_src |>
+    dplyr::pull(setting) |>
+    unique()
+
+  country_info <- country_info |>
+    dplyr::filter(
+      setting %in% settings
+    )
+
+
   filter_incomes <- country_info %>%
     dplyr::filter(
       wbincome_name %in% !!income_group
     )
+
 
   if (is.null(region)) {
     filter_regions <- filter_incomes
@@ -359,3 +317,25 @@ benchmark_comparisons <- function(country_info, income_group, region) {
     ) %>%
     dplyr::distinct(choices, values)
 }
+
+get_benchmark_years <- function(setting_yr_src, setting, comparisons){
+
+  filter_incomes <- setting_yr_src %>%
+    dplyr::filter(
+      setting %in% c(setting, comparisons)
+    ) %>%
+    dplyr::select(year) %>%
+    dplyr::distinct(year) %>%
+    dplyr::pull() %>%
+    sort()
+
+}
+
+get_median_decimals <- function(val){
+  if(!isTruthy(val)) return(10)
+  if(val >= 1) return(1)
+  if(val >= 0.5 & val < 1) return(2)
+  if(val < 0.5) return (3)
+  10
+}
+

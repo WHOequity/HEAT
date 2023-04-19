@@ -16,7 +16,11 @@
 # You should have received a copy of the GNU Affero General Public License
 # along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-licenseModal <- function() {
+licenseModal <- function(ns = NULL) {
+
+  buttonid <- "thismodal"
+  if(!is.null(ns))
+    buttonid <- ns(buttonid)
   m <- modal(
     id = NULL,
     size = "lg",
@@ -26,8 +30,8 @@ licenseModal <- function() {
     ),
     footer = div(
       buttonInput(
-        id = NULL,
-        label = "I accept",
+        id = buttonid,
+        label = "Close",
         `data-dismiss` = "modal"
       )
     )
@@ -64,4 +68,8 @@ languageSelect <- function() {
     # tags$option(value = "en", "EN"),
     # tags$option(value = "es", "ES")
   )
+}
+
+get_nonwho_disclaimer <- function(){
+  "Please note that these data are from external published sources and are therefore not WHO official estimates. Please refer to the Indicator Metadata in the About menu for more information."
 }

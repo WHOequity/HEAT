@@ -25,7 +25,8 @@ chartExploreSummaryBar <- function(data,
                                    conf_int = FALSE,
                                    data_labels = "none",
                                    decimal_places = 1,
-                                   language = "en") {
+                                   language = "en",
+                                   is_who_dataset) {
 
   # print(paste('explore-summary-bar ', language))
 
@@ -213,6 +214,8 @@ chartExploreSummaryBar <- function(data,
     dplyr::summarise(charts = list(chart)) %>%
     dplyr::pull()
 
+
+
   chart_table(
     charts = charts,
     title_top = unique(data_charts$dimension),
@@ -221,7 +224,8 @@ chartExploreSummaryBar <- function(data,
     title_vertical = title_vertical,
     title_horizontal = title_horizontal,
     legend = NULL,
-    language = language
+    language = language,
+    is_who_dataset = is_who_dataset
   )
 }
 

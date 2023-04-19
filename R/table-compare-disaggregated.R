@@ -97,7 +97,7 @@ table_compare_disaggregated <- function(.data, columns, decimal_places,
   data_formatted <- .data %>%
     dplyr::mutate(popshare = popshare * 100) %>%
     dplyr::mutate_if(~ is.numeric(.), ~ round_for_tables(., !!decimal_places)) %>%
-    dplyr::mutate(year = round(as.numeric(year))) %>%
+    #dplyr::mutate(year = round(as.numeric(year))) %>%
     dplyr::select(!!!columns_selection)
 
   if (isTRUE(data_only)) {

@@ -101,7 +101,9 @@ downloadsUI <- function(id, chart, map = FALSE) {
 }
 
 downloadsServer <- function(input, output, session,
-                            chart = NULL, data = NULL, language) {
+                            chart = NULL, data = NULL,
+                            language,
+                            is_who_dataset) {
 
   if (!is.null(chart)) {
     chart_id <- gsub("-[^-]+$", "-visual", session$ns(NULL))
@@ -124,7 +126,7 @@ downloadsServer <- function(input, output, session,
 
       cat(
         file = temp,
-        table_disclaimer(language()),
+        table_disclaimer(language(), is_who_dataset),
         sep = ""
       )
       if (input$data_extension == "csv") {

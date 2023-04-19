@@ -24,22 +24,28 @@
 heatApp <- function(launch.browser = TRUE, port = 8080) {
   options(
     shiny.launch.browser = launch.browser,
-    shiny.port = port
+    shiny.port = port,
+    shiny.host = "0.0.0.0"
   )
+
+  if(incl_timers())
+    options(digits.secs = 2)
+
+  shinyOptions(cache = cachem::cache_mem(max_size = 2000e6))
 
   shinyApp(
     ui = list(
       waiter::use_waiter(),
-      htmltools::htmlDependencies(highchartOutput(NULL)),
+      #htmltools::htmlDependencies(highchartOutput(NULL)),
       tags$head(
         locales(),
         assets()
       ),
       waiter::waiter_show_on_load(
         html = div(
-          # div(style="display: block; margin-left: auto; margin-right: auto; width: 30%",
-          #     img("heat-assets/img/who-logo-white.png")
-          # ),
+          div(style="display: block; margin-left: auto; margin-right: auto; width: 30%",
+              img("heat-assets/img/who-logo-white.png")
+          ),
           d2("Health Equity Assessment Toolkit") %>%
             font(color = "white") %>%
             margin(bottom = 5, right = 2, left = 2),
@@ -50,12 +56,14 @@ heatApp <- function(launch.browser = TRUE, port = 8080) {
           ) %>%
             margin(top = -4)
         ),
-        color = "#008dc9",
-        logo = "heat-assets/img/who-logo-white.png"
+        color = "#008dc9"#,
+          #logo = "heat-assets/img/who-logo-white.png"
+
       ),
       heatUI(
         id = "heat",
-        home = homeUI("home")
+        home = homeUI("home")#,
+        #nav_extra = dataChooseDropdown("dc")
       )
     ),
     server = function(input, output, session) {
@@ -68,17 +76,59 @@ heatApp <- function(launch.browser = TRUE, port = 8080) {
         homeServer, "home"
       )
 
-      callModule(
-        heatServer, "heat",
-        open_explore = m_home$open_explore,
-        open_compare = m_home$open_compare,
-        language = r_lang
-      )
+
+
 
       session$onFlushed(function() {
+
         waiter::waiter_hide()
-        showModal(licenseModal())
+        #showModal(licenseModal())
+
+        m_data_choose <- callModule(
+          dataChooseServer, "dc",
+          language = reactive("en")
+        )
+
+        showModal(
+          dataManagementModal(
+            session$ns("dc"),
+            current_data = "rep_rmnch",
+            language = "en",
+            add_cancel = FALSE
+          )
+        )
+
+        observeEvent(m_data_choose$dataset_name(), {
+
+          waiter::waiter_show(
+            html = div(
+              tags$h1(translate(c("en", "navigation", "labels", "spinner"))) %>%
+                font(color = "white"),
+              div(
+                waiter::spin_circle()
+              ) %>%
+                margin(top = -4)
+            ),
+            color = "#008dc9"
+
+          )
+          callModule(
+            heatServer, "heat",
+            open_explore = m_home$open_explore,
+            open_compare = m_home$open_compare,
+            language = r_lang,
+            initial_dataset = m_data_choose$dataset_name()
+          )
+
+        })
+
+
       })
+    },
+    onStart = function() {
+      if(incl_timers() && file.exists("~/junk/timings.csv")){
+        file.remove("~/junk/timings.csv")
+      }
     }
   )
 }
@@ -88,15 +138,97 @@ heatUI <- function(id, home, nav_extra = NULL) {
   ns <- NS(id)
 
   webpage(
-    nav = navbar(
-      class = "open-on-hover",
-      collapse = "lg",
-      brand = div(
-        tags$img(
-          height = "30px",
-          src = "heat-assets/img/who-logo-white.png"
-        ),
-        span(id="heat-header-title",
+    nav = container(
+      navbar(
+        collapse = "xl",
+        brand = div(
+          # mobile language selector ----
+          div(class="mobile-lang-select",
+              languageSelect(),
+              if (!getOption("heat.plus", FALSE)) actionButton(inputId = ns("datachoose"), label = tags$span(i18n("navigation.labels.choose_dataset"))) |>
+                margin(right = 2),
+          ) %>%
+            margin(right = 2),
+
+          tags$img(
+            height = "30px",
+            src = "heat-assets/img/who-logo-white.png"
+          ),
+          span(id="heat-header-title-desktop",
+               # "Health Equity Assessment Toolkit",
+               if (is_heat_plus()) {
+                 i18n("navigation.labels.heatplus")
+               } else {
+                 i18n("navigation.labels.heat")
+               }
+               # if (is_heat_plus()) "Plus (HEAT Plus)" else "(HEAT)"
+          ) %>%
+            font(color = "white", weight = "bold", align = "center") %>%
+            padding(left = 0, right = 0, top = 2, bottom = 2) %>%
+            display("flex") %>%
+            flex(justify = "center")
+        ) %>%
+          display("flex") %>%
+          width(1/2) %>%
+          flex(justify = "between", align = "center"),
+        # nav ----
+        navInput(
+          i18n(
+            ns = "navigation.labels"
+          ),
+          id = ns("nav"),
+          choices = list(
+            "home",
+            menuInput(
+              align = "right",
+              id = ns("explore"),
+              label = "explore",
+              choices = c(
+                "disaggregated",
+                "summary"
+              ),
+              values = c("disag", "summary")
+            ),
+            menuInput(
+              align = "right",
+              id = ns("compare"),
+              label = "compare",
+              choices = c(
+                "disaggregated",
+                "summary"
+              ),
+              values = c("disag", "summary")
+            ),
+            menuInput(
+              align = "right",
+              id = ns("about"),
+              label = "about",
+              choices = c(
+                "manual",
+                "technotes",
+                if (!is_heat_plus()) "glossary",
+                "training",
+                "software",
+                "versions",
+                "license",
+                "feedback",
+                "acknowledgements"
+              )
+            )
+          ),
+          values = c("home", "explore", "compare", "about"),
+          selected = "home"
+        ) %>%
+          margin(left = -4, right = -4) %>%
+          active(if (getOption("heat.plus", FALSE)) "green" else "orange"),
+        #if (getOption("heat.plus", TRUE)) dataChooseDropdown(ns("dc")),
+        nav_extra  # extra nav components ----
+        # div(class="desktop-lang-select",
+        #     languageSelect()
+        # )
+      ) %>%
+        padding(all = 0),
+      div(id="heat-header-title-mobile",
           # "Health Equity Assessment Toolkit",
           if (is_heat_plus()) {
             i18n("navigation.labels.heatplus")
@@ -104,67 +236,16 @@ heatUI <- function(id, home, nav_extra = NULL) {
             i18n("navigation.labels.heat")
           }
           # if (is_heat_plus()) "Plus (HEAT Plus)" else "(HEAT)"
-        ) %>%
-          font(color = "white", weight = "bold") %>%
-          margin(left = 3)
       ) %>%
+        font(color = "white", weight = "bold", align = "center") %>%
+        padding(left = 0, right = 0, top = 2, bottom = 2) %>%
         display("flex") %>%
-        flex(align = "center"),
-      # nav ----
-      navInput(
-        i18n(
-          ns = "navigation.labels"
-        ),
-        id = ns("nav"),
-        choices = list(
-          "home",
-          menuInput(
-            align = "right",
-            id = ns("explore"),
-            label = "explore",
-            choices = c(
-              "disaggregated",
-              "summary"
-            ),
-            values = c("disag", "summary")
-          ),
-          menuInput(
-            align = "right",
-            id = ns("compare"),
-            label = "compare",
-            choices = c(
-              "disaggregated",
-              "summary"
-            ),
-            values = c("disag", "summary")
-          ),
-          menuInput(
-            align = "right",
-            id = ns("about"),
-            label = "about",
-            choices = c(
-              "manual",
-              "technotes",
-              if (!is_heat_plus()) "glossary",
-              "software",
-              "versions",
-              "license",
-              "feedback",
-              "acknowledgements"
-            )
-          )
-        ),
-        values = c("home", "explore", "compare", "about"),
-        selected = "home"
-      ) %>%
-        margin(left = "auto", right = 2) %>%
-        active(if (getOption("heat.plus", FALSE)) "green" else "orange"),
-      nav_extra,  # extra nav components ----
-      languageSelect() # language selector ----
+        flex(justify = "center")
     ) %>%
+      flex(align = "center") %>%
       background("blue") %>%
-      shadow("small") %>%
-      affix("top"),
+      shadow("small") |>
+      affix("sticky"),
     navContent(
       navPane(
         class = "active",
@@ -173,19 +254,18 @@ heatUI <- function(id, home, nav_extra = NULL) {
         home # home ----
       ),
       navPane( # other ----
-        fade = FALSE,
-        class = "container-fluid",
-        id = ns("pane_other"),
-        columns(
-          class = "px-5",
-          column(
-            width = 10,
-            htmlOutput(
-              outputId = ns("about_content")
-            )
-          ) %>%
-            margin(l = "auto", r = "auto")
-        )
+               fade = FALSE,
+               class = "container-fluid",
+               id = ns("pane_other"),
+               columns(
+                 column(
+                   width = c(xs = 12, sm = 10),
+                   htmlOutput(
+                     outputId = ns("about_content")
+                   )
+                 ) %>%
+                   margin(l = "auto", r = "auto")
+               )
       ),
       navPane(
         id = ns("pane_main"),
@@ -194,43 +274,58 @@ heatUI <- function(id, home, nav_extra = NULL) {
           columns(
             column(
               width = 4,
+
               navContent(
+
                 navPane(
                   fade = FALSE,
                   id = ns("pane_explore_disag_titles"),
-                  h3(i18n("navigation.labels.explore")) %>%
-                    font(color = get_app_color()),
-                  h4(class = "title--lightgrey", i18n("navigation.labels.disag"))
+                  uiOutput(ns('dataname_expdis')),
+                  div(class = "grey-pane-title",
+                    tags$span(i18n("navigation.labels.explore")),
+                    "| ",
+                    tags$span(i18n("navigation.labels.disag"))
+                  )
                 ),
                 navPane(
                   fade = FALSE,
                   id = ns("pane_explore_summary_titles"),
-                  h3(i18n("navigation.labels.explore")) %>%
-                    font(color = get_app_color()),
-                  h4(class = "title--lightgrey", i18n("navigation.labels.summary"))
+                  uiOutput(ns('dataname_expsum')),
+                  div(class = "grey-pane-title",
+                      tags$span(i18n("navigation.labels.explore")),
+                      "| ",
+                      tags$span(i18n("navigation.labels.summary"))
+                  )
                 ),
                 navPane(
                   fade = FALSE,
                   id = ns("pane_compare_disag_titles"),
-                  h3(i18n("navigation.labels.compare")) %>%
-                    font(color = get_app_color()),
-                  h4(class = "title--lightgrey", i18n("navigation.labels.disag"))
+                  uiOutput(ns('dataname_comdis')),
+                  div(class = "grey-pane-title",
+                      tags$span(i18n("navigation.labels.compare")),
+                      "| ",
+                      tags$span(i18n("navigation.labels.disag"))
+                  )
                 ),
                 navPane(
                   fade = FALSE,
                   id = ns("pane_compare_summary_titles"),
-                  h3(i18n("navigation.labels.compare")) %>%
-                    font(color = get_app_color()),
-                  h4(class = "title--lightgrey", i18n("navigation.labels.summary"))
+                  uiOutput(ns('dataname_comsum')),
+                  div(class = "grey-pane-title",
+                      tags$span(i18n("navigation.labels.compare")),
+                      "| ",
+                      tags$span(i18n("navigation.labels.summary"))
+                  )
                 )
               )
             ),
             column(
-              class = "d-flex align-items-center justify-content-center subtract-15-padding",
+              class = "controls-margtop align-items-center justify-content-center subtract-15-padding",
               width = 8,
               navContent(
                 # chart / table view nav ----
                 class = "heat-view-controls",
+                uiOutput(ns("dataset_title")),
                 navPane(
                   fade = FALSE,
                   id = ns("pane_nav_explore_disag"),
@@ -239,8 +334,8 @@ heatUI <- function(id, home, nav_extra = NULL) {
                     id = ns("nav_explore_disag"),
                     choices = drop_nulls(list(
                       list(div(i18n("navigation.labels.hline")), icon("chart-line")),
-                      list(div(i18n("navigation.labels.vbar")), icon("chart-bar")),
-                      list(div(i18n("navigation.labels.hbar")), span(class = "fa fa-flip-horizontal", icon(class = "fa-rotate-270", "chart-bar"))),
+                      list(div(i18n("navigation.labels.vbar")), span(class = "fa fa-flip-horizontal", icon(class = "fa-rotate-270", "chart-bar"))),
+                      list(div(i18n("navigation.labels.hbar")),  icon("chart-bar")),
                       if (!getOption("heat.plus", FALSE)) list(div(i18n("navigation.labels.map")), icon("globe")),
                       list(div(i18n("navigation.labels.table")), icon("table"))
                     )),
@@ -382,8 +477,8 @@ heatUI <- function(id, home, nav_extra = NULL) {
               nav = c(NAV$SELECTION, NAV$OPTIONS, NAV$DOWNLOADS, NAV$SUMMARIES),
               source = Inf,
               year = 1,
-              indicator = 3,
-              dimension = if (isTRUE(getOption("heat.plus"))) 1,
+              indicator = 5,
+              dimension = 1, #if (isTRUE(getOption("heat.plus"))) 1,
               measure = NULL,
               summaries = TRUE,
               benchmarks = FALSE,
@@ -682,7 +777,8 @@ heatUI <- function(id, home, nav_extra = NULL) {
 #' @export
 heatServer <- function(input, output, session, Data = NULL,
                        open_explore = NULL, open_compare = NULL,
-                       nullify = NULL, on_data_open = NULL, language = NULL) {
+                       nullify = NULL, on_data_open = NULL, language = NULL,
+                       initial_dataset = "rep_rmnch") {
   ns <- session$ns
 
 
@@ -698,8 +794,20 @@ heatServer <- function(input, output, session, Data = NULL,
     set_benchmark_region = NULL,
     set_benchmark_comparison = NULL,
     set_benchmark_variance = NULL,
+    set_benchmark_year_beg = NULL,
+    set_benchmark_year_end = NULL,
     set_title_main = NULL,
     nullify = NULL
+  )
+
+  # state ----
+  state <- reactiveValues(
+    data_change_explore_disag = FALSE,
+    data_change_explore_summary = FALSE,
+    data_change_compare_disag = FALSE,
+    data_change_compare_summary = FALSE,
+    data_name = initial_dataset,
+    force_ui_data_refresh = FALSE # git687
   )
 
   # debug ----
@@ -731,38 +839,87 @@ heatServer <- function(input, output, session, Data = NULL,
     })
   }
 
+
+    observeEvent(input$chartexists_debug_timer, {
+        add_time("#### CHART LOADED")
+    })
+
+
+
+
+
+  # data select server ----
+  m_data_choose <- callModule(
+    dataChooseServer, "dc",
+    language = language
+  )
+
+  #m_data_choose$dataset_name()
+  dataset_name <- reactive({
+    if(is.null(m_data_choose$dataset_name())){
+      state$data_name
+    } else {
+      m_data_choose$dataset_name()
+    }
+  })
+
+
+  # Data$ object ----
   if (is.null(Data)) {
     Data <- list(
       main = reactive({
-        req(language())
+        req(language(), dataset_name())
 
-        heatdata::translate_heat_raw() %>%
-          heatdata::translate_subset(language = language()) %>%
-          appendColors(language = language())
-        # appendColors(heatdata::data_heat_raw)
+        add_time("Begin reading main data")
+
+        heatdata::get_heat_table(dataset_name(), "data_raw") |>
+          heatdata::translate_subset(language = language())
+
       }),
       measures = reactive({
+        req(language(), dataset_name())
 
-        # this data does not require translation
-        heatdata::translate_inequality_measures() %>%
+        add_time("Begin reading inequality data")
+
+        heatdata::get_heat_table(dataset_name(), "data_inequality_measures") |>
           heatdata::translate_subset(language = language())
+
       }),
       strata = reactive({
-        # heatdata::data_heat_strata
-        heatdata::translate_strata() %>%
+        req(language(), dataset_name())
+
+        add_time("Begin reading strata data")
+
+        heatdata::get_heat_table(dataset_name(), "data_strata") |>
           heatdata::translate_subset(language = language())
+
       }),
       setting_yr_src = reactive({
+        req(language(), dataset_name())
 
-        # heatdata::info_setting_yr_src
-        heatdata::translate_setting_year_source() %>%
+        add_time("Begin reading setting_yr_src data")
+
+        heatdata::get_heat_table(dataset_name(), "info_setting_yr_src") |>
           heatdata::translate_subset(language = language())
+
       }),
       country_info = reactive({
-        # heatdata::data_countries
+        req(language(), dataset_name())
 
-        heatdata::translate_countries() %>%
+        add_time("Begin reading country_info data")
+
+        heatdata::get_heat_table(dataset_name(), "data_countries") |>
           heatdata::translate_subset(language = language())
+
+      }),
+      date_to_integer = reactive({
+        req(language(), dataset_name())
+
+        add_time("Begin reading date_to_integer data")
+
+        heatdata::get_heat_table(dataset_name(), "info_date_to_integer") |>
+          heatdata::translate_subset(language = language())
+
       })
     )
   }
@@ -801,13 +958,23 @@ heatServer <- function(input, output, session, Data = NULL,
       "versions" = "versions.html",
       "license" = "license.html",
       "feedback" = "feedback.html",
-      "acknowledgements" = "acknowledgements.html"
+      "acknowledgements" = "acknowledgements.html",
+      "training" = "training.html"
     )
 
     path <- file.path("www", "locales", "en", file)
 
     if (is.null(.about_cache[[path]])) {
       lines <- readLines(system.file(path, package = get_heat_prefix()))
+
+      metadata <- heatdata::info_databases |>
+        dplyr::filter(internal_name == dataset_name()) |>
+        dplyr::pull(metadata)
+
+      metadata <- paste0("heat-assets/locales/en/", metadata)
+
+      lines <- stringr::str_replace(lines,"heat-assets/locales/en/indicator_compendium.pdf", metadata)
+
       content <- HTML(paste(lines, collapse = "\n"))
 
       .about_cache[[path]] <- content
@@ -820,10 +987,21 @@ heatServer <- function(input, output, session, Data = NULL,
   outputOptions(output, "about_content", suspendWhenHidden = FALSE)
 
   observe({
+
+    state$force_ui_data_refresh
+
     req(input$nav == "explore")
 
     if (input$explore == "disag") {
       clicked <- input$nav_explore_disag
+
+      isolate({
+        if(state$data_change_explore_disag){
+          clicked <- "line"
+          state$data_change_explore_disag <- FALSE
+        }
+      })
+
 
       if (clicked == "line") {
         showNavPane(ns("pane_explore_disag_line"))
@@ -842,6 +1020,15 @@ heatServer <- function(input, output, session, Data = NULL,
     } else {
       clicked <- input$nav_explore_summary
 
+      isolate({
+        if(state$data_change_explore_summary){
+          clicked <- "bar"
+          state$data_change_explore_summary <- FALSE
+        }
+      })
+
+
+
       if (clicked == "bar") {
         showNavPane(ns("pane_explore_summary_bar"))
       } else if (clicked == "line") {
@@ -853,13 +1040,25 @@ heatServer <- function(input, output, session, Data = NULL,
       showNavPane(ns("pane_nav_explore_summary"))
       showNavPane(ns("pane_explore_summary_titles"))
     }
+
   })
 
   observe({
+
     req(input$nav == "compare")
 
     if (input$compare == "disag") {
       clicked <- input$nav_compare_disag
+
+
+      isolate({
+        if(state$data_change_compare_disag){
+          clicked <- "graph"
+          state$data_change_compare_disag <- FALSE
+        }
+      })
+
+
 
       if (clicked == "graph") {
         showNavPane(ns("pane_compare_disag_graph"))
@@ -871,6 +1070,15 @@ heatServer <- function(input, output, session, Data = NULL,
       showNavPane(ns("pane_compare_disag_titles"))
     } else {
       clicked <- input$nav_compare_summary
+
+      isolate({
+        if(state$data_change_compare_summary){
+          clicked <- "graph"
+          state$data_change_compare_summary <- FALSE
+        }
+      })
+
+
 
       if (clicked == "graph") {
         showNavPane(ns("pane_compare_summary_graph"))
@@ -909,6 +1117,93 @@ heatServer <- function(input, output, session, Data = NULL,
     })
   }
 
+
+
+
+
+  # observe: dataset_name() ----
+  observeEvent(dataset_name(), {
+    req(!is_heat_plus())
+    waiter::waiter_show(
+      html = div(
+        tags$h1(translate(c(isolate(language()), "navigation", "labels", "spinner"))) %>%
+          font(color = "white"),
+        div(
+          waiter::spin_circle()
+        ) %>%
+          margin(top = -4)
+      ),
+      color = "#008dc9"
+
+    )
+    add_time("observe dataset_name()", dataset_name())
+    session$userData$app_init <- TRUE
+    state$data_name <- dataset_name()
+
+    info_database <- heatdata::info_databases |>
+      dplyr::filter(internal_name == dataset_name())
+
+    state$is_who_dataset <- unique(info_database$is_WHO_dataset)
+    state$is_map_dataset <- unique(info_database$show_map)
+
+    updateRadiobarInput("nav_explore_disag", selected = "line")
+    updateRadiobarInput("nav_explore_summary", selected = "bar")
+
+    updateRadiobarInput("nav_compare_disag", selected = "graph")
+    updateRadiobarInput("nav_compare_summary", selected = "graph")
+
+    updateNavInput("nav", selected = "explore", session = session)
+    updateMenuInput("explore", selected = "disag", session = session)
+    updateMenuInput("compare", selected = FALSE, session = session)
+    showNavPane(ns("pane_explore_disag_line"))
+
+    # git687
+    if(input$nav == "explore" && input$explore == "disag")
+      state$force_ui_data_refresh <- !state$force_ui_data_refresh
+
+    state$data_change_explore_disag <- TRUE
+    state$data_change_explore_summary <- TRUE
+    state$data_change_compare_disag <- TRUE
+    state$data_change_compare_summary <- TRUE
+
+    datname <- gsub("data_", "", dataset_name()) |> unique()
+    # txt <- heatdata::info_databases$dataset_name[heatdata::info_databases$internal_name == datname ] |>
+    #   unique()
+
+    # Sorry! This is terrible, module did not save code
+    # and putting it above pane was not nice
+
+    tmpui <- div(class ="dataname-title",
+                 tags$span(i18n(paste0("module.dataset_name.", datname, "_dataset"))))
+    output$dataname_expdis <- renderUI(tmpui)
+    output$dataname_expsum <- renderUI(tmpui)
+    output$dataname_comdis <- renderUI(tmpui)
+    output$dataname_comsum <- renderUI(tmpui)
+
+    Events$set_recent_year <- list(
+      from = "init",
+      force = TRUE,
+      value = NULL,
+      selected = NULL,
+      no_years = FALSE,
+      seed = rnorm(1)
+    )
+
+    disp <- ifelse(state$is_map_dataset, "true", "false")
+    session$sendCustomMessage("hide-map-button", list(display = disp))
+
+
+    session$onFlushed(waiter::waiter_hide)
+    add_time("end observe dataset_name()", dataset_name())
+  }, ignoreInit = FALSE, priority = 10)
+
+
+  observeEvent(dataset_name(), {
+    state$data_name <- dataset_name()
+  }, once = TRUE)
+
+
+  # VIEWS ON INITIAL LOAD ----
   # explore disaggregated line ----
   callModule(
     viewServer, "explore_disag_line",
@@ -928,6 +1223,9 @@ heatServer <- function(input, output, session, Data = NULL,
       chart = TRUE
     ),
     language = language,
+    dataset_name = dataset_name,
+    is_who_dataset = reactive(state$is_who_dataset),
+    is_map_dataset = reactive(state$is_map_dataset),
     visual = function(.data, ...) {
       args <- list(...)
 
@@ -939,397 +1237,464 @@ heatServer <- function(input, output, session, Data = NULL,
         axis_min = args$axis_min,
         axis_max = args$axis_max,
         decimal_places = args$decimal_places,
-        language = args$language
+        language = args$language,
+        recent = args$recent,
+        is_who_dataset = args$is_who_dataset
       )
     }
   )
 
-  # explore disaggregated bar ----
-  callModule(
-    viewServer, "explore_disag_bar",
-    Events = Events, Data = Data,
-    visible = reactive(
-      input$nav == "explore" &&
-        input$explore == "disag" &&
-        input$nav_explore_disag == "bar"
-    ),
-    source = Inf, year = Inf, indicator = 5, dimension = 5, measure = NULL,
-    summaries = FALSE, benchmarks = FALSE, render = renderUI,
-    options = list(
-      title = title_explore_disaggregated
-    ),
-    downloads = list(
-      chart = TRUE
-    ),
-    language = language,
-    visual = function(.data, ...) {
-      args <- list(...)
 
-      chartExploreDisaggregatedBar(
-        data = .data,
-        title_main = args$title_main,
-        title_horizontal = args$title_horizontal,
-        title_vertical = args$title_vertical,
-        axis_min = args$axis_min,
-        axis_max = args$axis_max,
-        conf_int = args$conf_int,
-        data_labels = args$data_labels,
-        decimal_places = args$decimal_places,
-        language = args$language
-      )
-    }
-  )
 
-  # explore disaggregated detail ----
-  callModule(
-    viewServer, "explore_disag_detail",
-    Events = Events, Data = Data,
-    visible = reactive(
-      input$nav == "explore" &&
-        input$explore == "disag" &&
-        input$nav_explore_disag == "detail"
-    ),
-    source = Inf, year = 1, indicator = 3,
-    dimension = if (isTRUE(getOption("heat.plus"))) 1, measure = NULL,
-    summaries = TRUE, benchmarks = FALSE, render = renderUI,
-    options = list(
-      sorting = TRUE,
-      subgroup_highlight = TRUE,
-      title = title_explore_detail
-    ),
-    downloads = list(
-      chart = TRUE
-    ),
-    language = language,
-    visual = function(.data, ...) {
-      args <- list(...)
+  # VIEWS ON DELAYED LOAD ----
 
-      chartExploreDetail(
-        data = .data,
-        title_main = args$title_main,
-        title_horizontal = args$title_horizontal,
-        title_vertical = args$title_vertical,
-        axis_min = args$axis_min,
-        axis_max = args$axis_max,
-        sort_by = args$sort_by,
-        sort_order = args$sort_order,
-        sort_indicator = args$sort_indicator,
-        highlight_subgroup = args$highlight_subgroup,
-        plot_lines = args$plot_lines,
-        conf_int = args$conf_int,
-        data_labels = args$data_labels,
-        decimal_places = args$decimal_places,
-        language = args$language
-      )
-    }
-  )
+  observeEvent(input$chartexists, {
 
-  # explore disaggregated map ----
-  callModule(
-    viewServer, "explore_disag_map",
-    Events = Events, Data = Data,
-    visible = reactive(
-      input$nav == "explore" &&
-        input$explore == "disag" &&
-        input$nav_explore_disag == "map"
-    ),
-    source = Inf, year = 1, indicator = 1, dimension = NULL, measure = NULL,
-    summaries = FALSE, benchmarks = FALSE, render = renderUI,
-    options = list(
-      disclaimer = "map",
-      title = title_explore_map
-    ),
-    downloads = list(
-      chart = TRUE
-    ),
-    language = language,
-    visual = function(.data, ...) {
-      args <- list(...)
 
-      chartExploreMap(
-        data = .data,
-        title_main = args$title_main,
-        decimal_places = args$decimal_places,
-        language = args$language
-      )
-    }
-  )
 
-  # explore disaggregated table ----
-  callModule(
-    viewServer, "explore_disag_table",
-    Events = Events, Data = Data,
-    visible = reactive(
-      input$nav == "explore" &&
-        input$explore == "disag" &&
-        input$nav_explore_disag == "table"
-    ),
-    source = Inf, year = Inf, indicator = Inf, dimension = Inf, measure = NULL,
-    summaries = FALSE, benchmarks = FALSE, render = DT::renderDataTable,
-    downloads = list(
-      chart = FALSE
-    ),
-    language = language,
-    visual = function(.data, ...) {
-      args <- list(...)
-      table_explore_disaggregated(
-        .data = .data,
-        columns = args$columns,
-        decimal_places = args$table_decimals,
-        data_only = args$data_only,
-        rename = args$rename,
-        language = args$language
-      )
-    }
-  )
 
-  # explore summary bar ----
-  callModule(
-    viewServer, "explore_summary_bar",
-    Events = Events, Data = Data,
-    visible = reactive(
-      input$nav == "explore" &&
-        input$explore == "summary" &&
-        input$nav_explore_summary == "bar"
-    ),
-    source = Inf, year = Inf, indicator = 5, dimension = 5, measure = 1,
-    summaries = FALSE, benchmarks = FALSE, render = renderUI,
-    options = list(
-      title = title_explore_summary
-    ),
-    downloads = list(
-      chart = TRUE
-    ),
-    language = language,
-    visual = function(.data, ...) {
-      args <- list(...)
+    # compare disaggregated graph ----
+    callModule(
+      viewServer, "compare_disag_graph",
+      Events = Events, Data = Data,
+      visible = reactive(
+        input$nav == "compare" &&
+          input$compare == "disag" &&
+          input$nav_compare_disag == "graph"
+      ),
+      source = Inf, year = 1, indicator = 1, dimension = 1, measure = NULL,
+      summaries = FALSE, benchmarks = TRUE, render = renderUI,
+      options = list(
+        title = title_compare_disaggregated
+      ),
+      downloads = list(
+        chart = TRUE
+      ),
+      language = language,
+      dataset_name = dataset_name,
+      is_who_dataset = reactive(state$is_who_dataset),
+      is_map_dataset = reactive(state$is_map_dataset),
+      visual = function(.data, ...) {
+        args <- list(...)
 
-      chartExploreSummaryBar(
-        data = .data,
-        title_main = args$title_main,
-        title_horizontal = args$title_horizontal,
-        title_vertical = args$title_vertical,
-        axis_min = args$axis_min,
-        axis_max = args$axis_max,
-        conf_int = args$conf_int,
-        data_labels = args$data_labels,
-        decimal_places = args$decimal_places,
-        language = args$language
-      )
-    }
-  )
+        chartCompareDefault(
+          data = .data,
+          title_main = args$title_main,
+          title_horizontal = args$title_horizontal,
+          title_vertical = args$title_vertical,
+          axis_min = args$axis_min,
+          axis_max = args$axis_max,
+          focus_setting = args$focus_setting,
+          decimal_places = args$decimal_places,
+          language = args$language,
+          is_who_dataset = args$is_who_dataset
+        )
+      }
+    )
 
-  # explore summary line ----
-  callModule(
-    viewServer, "explore_summary_line",
-    Events = Events, Data = Data,
-    visible = reactive(
-      input$nav == "explore" &&
-        input$explore == "summary" &&
-        input$nav_explore_summary == "line"
-    ),
-    source = Inf, year = Inf, indicator = 5, dimension = 5, measure = 1,
-    summaries = FALSE, benchmarks = FALSE, render = renderUI,
-    options = list(
-      title = title_explore_summary
-    ),
-    downloads = list(
-      chart = TRUE
-    ),
-    language = language,
-    visual = function(.data, ...) {
-      args <- list(...)
 
-      chartExploreSummaryLine(
-        data = .data,
-        title_main = args$title_main,
-        title_horizontal = args$title_horizontal,
-        title_vertical = args$title_vertical,
-        axis_min = args$axis_min,
-        axis_max = args$axis_max,
-        conf_int = args$conf_int,
-        data_labels = args$data_labels,
-        decimal_places = args$decimal_places,
-        language = args$language
-      )
-    }
-  )
+    # compare summary graph ----
+    callModule(
+      viewServer, "compare_summary_graph",
+      Events = Events, Data = Data,
+      visible = reactive(
+        input$nav == "compare" &&
+          input$compare == "summary" &&
+          input$nav_compare_summary == "graph"
+      ),
+      source = Inf, year = 1, indicator = 1, dimension = 1, measure = 1,
+      summaries = FALSE, benchmarks = TRUE, render = renderUI,
+      options = list(
+        sorting = TRUE,
+        title = title_compare_summary
+      ),
+      downloads = list(
+        chart = TRUE
+      ),
+      language = language,
+      dataset_name = dataset_name,
+      is_who_dataset = reactive(state$is_who_dataset),
+      is_map_dataset = reactive(state$is_map_dataset),
+      visual = function(.data, ...) {
+        args <- list(...)
 
-  # explore summary table ----
-  callModule(
-    viewServer, "explore_summary_table",
-    Events = Events, Data = Data,
-    visible = reactive(
-      input$nav == "explore" &&
-        input$explore == "summary" &&
-        input$nav_explore_summary == "table"
-    ),
-    source = Inf, year = Inf, indicator = Inf, dimension = Inf, measure = Inf,
-    summaries = FALSE, benchmarks = FALSE, render = DT::renderDataTable,
-    downloads = list(
-      chart = FALSE
-    ),
-    language = language,
-    visual = function(.data, ...) {
-      args <- list(...)
+        chartCompareSummary(
+          data = .data,
+          title_main = args$title_main,
+          title_horizontal = args$title_horizontal,
+          title_vertical = args$title_vertical,
+          axis_horizontal_min = args$axis_horizontal_min,
+          axis_horizontal_max = args$axis_horizontal_max,
+          axis_vertical_min = args$axis_vertical_min,
+          axis_vertical_max = args$axis_vertical_max,
+          focus_setting = args$focus_setting,
+          label_style = args$label_style,
+          label_size = args$label_size,
+          decimal_places = args$decimal_places,
+          language = args$language,
+          is_who_dataset = args$is_who_dataset
+        )
+      }
+    )
 
-      table_explore_summary(
-        .data = .data,
-        columns = args$columns,
-        decimal_places = args$table_decimals,
-        data_only = args$data_only,
-        rename = args$rename,
-        language = args$language
-      )
-    }
-  )
 
-  # compare disaggregated graph ----
-  callModule(
-    viewServer, "compare_disag_graph",
-    Events = Events, Data = Data,
-    visible = reactive(
-      input$nav == "compare" &&
-        input$compare == "disag" &&
-        input$nav_compare_disag == "graph"
-    ),
-    source = Inf, year = 1, indicator = 1, dimension = 1, measure = NULL,
-    summaries = FALSE, benchmarks = TRUE, render = renderUI,
-    options = list(
-      title = title_compare_disaggregated
-    ),
-    downloads = list(
-      chart = TRUE
-    ),
-    language = language,
-    visual = function(.data, ...) {
-      args <- list(...)
 
-      chartCompareDefault(
-        data = .data,
-        title_main = args$title_main,
-        title_horizontal = args$title_horizontal,
-        title_vertical = args$title_vertical,
-        axis_min = args$axis_min,
-        axis_max = args$axis_max,
-        focus_setting = args$focus_setting,
-        decimal_places = args$decimal_places,
-        language = args$language
-      )
-    }
-  )
+    # explore summary bar ----
+    callModule(
+      viewServer, "explore_summary_bar",
+      Events = Events, Data = Data,
+      visible = reactive(
+        input$nav == "explore" &&
+          input$explore == "summary" &&
+          input$nav_explore_summary == "bar"
+      ),
+      source = Inf, year = Inf, indicator = 5, dimension = 5, measure = 1,
+      summaries = FALSE, benchmarks = FALSE, render = renderUI,
+      options = list(
+        title = title_explore_summary
+      ),
+      downloads = list(
+        chart = TRUE
+      ),
+      language = language,
+      dataset_name = dataset_name,
+      is_who_dataset = reactive(state$is_who_dataset),
+      is_map_dataset = reactive(state$is_map_dataset),
+      visual = function(.data, ...) {
+        args <- list(...)
 
-  # compare disaggregated table ----
-  callModule(
-    viewServer, "compare_disag_table",
-    Events = Events, Data = Data,
-    visible = reactive(
-      input$nav == "compare" &&
-        input$compare == "disag" &&
-        input$nav_compare_disag == "table"
-    ),
-    source = Inf, year = 1, indicator = Inf, dimension = Inf, measure = NULL,
-    summaries = FALSE, benchmarks = TRUE, render = DT::renderDataTable,
-    downloads = list(
-      chart = FALSE
-    ),
-    language = language,
-    visual = function(.data, ...) {
-      args <- list(...)
+        chartExploreSummaryBar(
+          data = .data,
+          title_main = args$title_main,
+          title_horizontal = args$title_horizontal,
+          title_vertical = args$title_vertical,
+          axis_min = args$axis_min,
+          axis_max = args$axis_max,
+          conf_int = args$conf_int,
+          data_labels = args$data_labels,
+          decimal_places = args$decimal_places,
+          language = args$language,
+          is_who_dataset = args$is_who_dataset
+        )
+      }
+    )
 
-      table_compare_disaggregated(
-        .data = .data,
-        columns = args$columns,
-        decimal_places = args$table_decimals,
-        focus_setting = args$focus_setting,
-        data_only = args$data_only,
-        rename = args$rename,
-        language = args$language
-      )
-    }
-  )
+    # explore disaggregated bar ----
 
-  # compare summary graph ----
-  callModule(
-    viewServer, "compare_summary_graph",
-    Events = Events, Data = Data,
-    visible = reactive(
-      input$nav == "compare" &&
-        input$compare == "summary" &&
-        input$nav_compare_summary == "graph"
-    ),
-    source = Inf, year = 1, indicator = 1, dimension = 1, measure = 1,
-    summaries = FALSE, benchmarks = TRUE, render = renderUI,
-    options = list(
-      sorting = TRUE,
-      title = title_compare_summary
-    ),
-    downloads = list(
-      chart = TRUE
-    ),
-    language = language,
-    visual = function(.data, ...) {
-      args <- list(...)
+    callModule(
+      viewServer, "explore_disag_bar",
+      Events = Events, Data = Data,
+      visible = reactive(
+        input$nav == "explore" &&
+          input$explore == "disag" &&
+          input$nav_explore_disag == "bar"
+      ),
+      source = Inf, year = Inf, indicator = 5, dimension = 5, measure = NULL,
+      summaries = FALSE, benchmarks = FALSE, render = renderUI,
+      options = list(
+        title = title_explore_disaggregated
+      ),
+      downloads = list(
+        chart = TRUE
+      ),
+      language = language,
+      dataset_name = dataset_name,
+      is_who_dataset = reactive(state$is_who_dataset),
+      is_map_dataset = reactive(state$is_map_dataset),
+      visual = function(.data, ...) {
+        args <- list(...)
 
-      chartCompareSummary(
-        data = .data,
-        title_main = args$title_main,
-        title_horizontal = args$title_horizontal,
-        title_vertical = args$title_vertical,
-        axis_horizontal_min = args$axis_horizontal_min,
-        axis_horizontal_max = args$axis_horizontal_max,
-        axis_vertical_min = args$axis_vertical_min,
-        axis_vertical_max = args$axis_vertical_max,
-        focus_setting = args$focus_setting,
-        label_style = args$label_style,
-        label_size = args$label_size,
-        decimal_places = args$decimal_places,
-        language = args$language
-      )
-    }
-  )
+        chartExploreDisaggregatedBar(
+          data = .data,
+          title_main = args$title_main,
+          title_horizontal = args$title_horizontal,
+          title_vertical = args$title_vertical,
+          axis_min = args$axis_min,
+          axis_max = args$axis_max,
+          conf_int = args$conf_int,
+          data_labels = args$data_labels,
+          decimal_places = args$decimal_places,
+          language = args$language,
+          recent = args$recent,
+          is_who_dataset = args$is_who_dataset
+        )
+      }
+    )
 
-  # compare summary table ----
-  callModule(
-    viewServer, "compare_summary_table",
-    Events = Events, Data = Data,
-    visible = reactive(
-      input$nav == "compare" &&
-        input$compare == "summary" &&
-        input$nav_compare_summary == "table"
-    ),
-    source = Inf, year = 1, indicator = Inf, dimension = Inf, measure = Inf,
-    summaries = FALSE, benchmarks = TRUE, render = DT::renderDataTable,
-    downloads = list(
-      chart = FALSE
-    ),
-    language = language,
-    visual = function(.data, ...) {
-      args <- list(...)
+    # explore disaggregated detail ----
+    callModule(
+      viewServer, "explore_disag_detail",
+      Events = Events, Data = Data,
+      visible = reactive(
+        input$nav == "explore" &&
+          input$explore == "disag" &&
+          input$nav_explore_disag == "detail"
+      ),
+      source = Inf, year = 1, indicator = 5,
+      dimension = 1, #if (isTRUE(getOption("heat.plus"))) 1,
+      measure = NULL,
+      summaries = TRUE, benchmarks = FALSE, render = renderUI,
+      options = list(
+        sorting = TRUE,
+        subgroup_highlight = TRUE,
+        title = title_explore_detail
+      ),
+      downloads = list(
+        chart = TRUE
+      ),
+      language = language,
+      dataset_name = dataset_name,
+      is_who_dataset = reactive(state$is_who_dataset),
+      is_map_dataset = reactive(state$is_map_dataset),
+      visual = function(.data, ...) {
+        args <- list(...)
 
-      table_compare_summary(
-        .data = .data,
-        columns = args$columns,
-        decimal_places = args$table_decimals,
-        focus_setting = args$focus_setting,
-        data_only = args$data_only,
-        rename = args$rename,
-        language = args$language
-      )
-    }
-  )
+        chartExploreDetail(
+          data = .data,
+          title_main = args$title_main,
+          title_horizontal = args$title_horizontal,
+          title_vertical = args$title_vertical,
+          axis_min = args$axis_min,
+          axis_max = args$axis_max,
+          sort_by = args$sort_by,
+          sort_order = args$sort_order,
+          sort_indicator = args$sort_indicator,
+          highlight_subgroup = args$highlight_subgroup,
+          plot_lines = args$plot_lines,
+          conf_int = args$conf_int,
+          data_labels = args$data_labels,
+          decimal_places = args$decimal_places,
+          language = args$language,
+          is_who_dataset = args$is_who_dataset
+        )
+      }
+    )
 
+    # explore disaggregated map ----
+    callModule(
+      viewServer, "explore_disag_map",
+      Events = Events, Data = Data,
+      visible = reactive(
+        input$nav == "explore" &&
+          input$explore == "disag" &&
+          input$nav_explore_disag == "map"
+      ),
+      source = Inf, year = 1, indicator = 1, dimension = NULL, measure = NULL,
+      summaries = FALSE, benchmarks = FALSE, render = renderUI,
+      options = list(
+        disclaimer = "map",
+
+        title = title_explore_map
+      ),
+      downloads = list(
+        chart = TRUE
+      ),
+      language = language,
+      dataset_name = dataset_name,
+      is_who_dataset = reactive(state$is_who_dataset),
+      is_map_dataset = reactive(state$is_map_dataset),
+      visual = function(.data, ...) {
+        args <- list(...)
+
+        chartExploreMap(
+          data = .data,
+          title_main = args$title_main,
+          decimal_places = args$decimal_places,
+          language = args$language,
+          dataset_name = args$dataset_name,
+          is_map_dataset = isolate(state$is_map_dataset),
+          is_who_dataset = args$is_who_dataset
+        )
+      }
+    )
+
+    # explore disaggregated table ----
+    callModule(
+      viewServer, "explore_disag_table",
+      Events = Events, Data = Data,
+      visible = reactive(
+        input$nav == "explore" &&
+          input$explore == "disag" &&
+          input$nav_explore_disag == "table"
+      ),
+      source = Inf, year = Inf, indicator = Inf, dimension = Inf, measure = NULL,
+      summaries = FALSE, benchmarks = FALSE, render = DT::renderDataTable,
+      downloads = list(
+        chart = FALSE
+      ),
+      language = language,
+      dataset_name = dataset_name,
+      is_who_dataset = reactive(state$is_who_dataset),
+      is_map_dataset = reactive(state$is_map_dataset),
+      visual = function(.data, ...) {
+        args <- list(...)
+        table_explore_disaggregated(
+          .data = .data,
+          columns = args$columns,
+          decimal_places = args$table_decimals,
+          data_only = args$data_only,
+          rename = args$rename,
+          language = args$language
+        )
+      }
+    )
+
+
+    # explore summary line ----
+    callModule(
+      viewServer, "explore_summary_line",
+      Events = Events, Data = Data,
+      visible = reactive(
+        input$nav == "explore" &&
+          input$explore == "summary" &&
+          input$nav_explore_summary == "line"
+      ),
+      source = Inf, year = Inf, indicator = 5, dimension = 5, measure = 1,
+      summaries = FALSE, benchmarks = FALSE, render = renderUI,
+      options = list(
+        title = title_explore_summary
+      ),
+      downloads = list(
+        chart = TRUE
+      ),
+      language = language,
+      dataset_name = dataset_name,
+      is_who_dataset = reactive(state$is_who_dataset),
+      is_map_dataset = reactive(state$is_map_dataset),
+      visual = function(.data, ...) {
+        args <- list(...)
+
+        chartExploreSummaryLine(
+          data = .data,
+          title_main = args$title_main,
+          title_horizontal = args$title_horizontal,
+          title_vertical = args$title_vertical,
+          axis_min = args$axis_min,
+          axis_max = args$axis_max,
+          conf_int = args$conf_int,
+          data_labels = args$data_labels,
+          decimal_places = args$decimal_places,
+          language = args$language,
+          is_who_dataset = args$is_who_dataset
+        )
+      }
+    )
+
+    # explore summary table ----
+    callModule(
+      viewServer, "explore_summary_table",
+      Events = Events, Data = Data,
+      visible = reactive(
+        input$nav == "explore" &&
+          input$explore == "summary" &&
+          input$nav_explore_summary == "table"
+      ),
+      source = Inf, year = Inf, indicator = Inf, dimension = Inf, measure = Inf,
+      summaries = FALSE, benchmarks = FALSE, render = DT::renderDataTable,
+      downloads = list(
+        chart = FALSE
+      ),
+      language = language,
+      dataset_name = dataset_name,
+      is_who_dataset = reactive(state$is_who_dataset),
+      is_map_dataset = reactive(state$is_map_dataset),
+      visual = function(.data, ...) {
+        args <- list(...)
+
+        table_explore_summary(
+          .data = .data,
+          columns = args$columns,
+          decimal_places = args$table_decimals,
+          data_only = args$data_only,
+          rename = args$rename,
+          language = args$language
+        )
+      }
+    )
+
+
+    # compare disaggregated table ----
+    callModule(
+      viewServer, "compare_disag_table",
+      Events = Events, Data = Data,
+      visible = reactive(
+        input$nav == "compare" &&
+          input$compare == "disag" &&
+          input$nav_compare_disag == "table"
+      ),
+      source = Inf, year = 1, indicator = Inf, dimension = Inf, measure = NULL,
+      summaries = FALSE, benchmarks = TRUE, render = DT::renderDataTable,
+      downloads = list(
+        chart = FALSE
+      ),
+      language = language,
+      dataset_name = dataset_name,
+      is_who_dataset = reactive(state$is_who_dataset),
+      is_map_dataset = reactive(state$is_map_dataset),
+      visual = function(.data, ...) {
+        args <- list(...)
+
+        table_compare_disaggregated(
+          .data = .data,
+          columns = args$columns,
+          decimal_places = args$table_decimals,
+          focus_setting = args$focus_setting,
+          data_only = args$data_only,
+          rename = args$rename,
+          language = args$language
+        )
+      }
+    )
+
+
+    # compare summary table ----
+    callModule(
+      viewServer, "compare_summary_table",
+      Events = Events, Data = Data,
+      visible = reactive(
+        input$nav == "compare" &&
+          input$compare == "summary" &&
+          input$nav_compare_summary == "table"
+      ),
+      source = Inf, year = 1, indicator = Inf, dimension = Inf, measure = Inf,
+      summaries = FALSE, benchmarks = TRUE, render = DT::renderDataTable,
+      downloads = list(
+        chart = FALSE
+      ),
+      language = language,
+      dataset_name = dataset_name,
+      is_who_dataset = reactive(state$is_who_dataset),
+      is_map_dataset = reactive(state$is_map_dataset),
+      visual = function(.data, ...) {
+        args <- list(...)
+
+        table_compare_summary(
+          .data = .data,
+          columns = args$columns,
+          decimal_places = args$table_decimals,
+          focus_setting = args$focus_setting,
+          data_only = args$data_only,
+          rename = args$rename,
+          language = args$language
+        )
+      }
+    )
+
+  }, once = TRUE)
   # observe change in main data ----
   observeEvent(c(Data$main(), language()), {
     req(NROW(Data$main()) > 0)
 
+    add_time("observe Data$main", dataset_name())
+
     lang <- language()
+    dataname <- dataset_name()
 
     x_setting <- Data$setting_yr_src() %>%
       dplyr::distinct(setting) %>%
       dplyr::pull()
 
-    init_setting <- initial_setting(x_setting, lang)
+    init_setting <- initial_setting(x_setting, lang, dataname)
 
     data_selection <- Data$strata() %>%
       dplyr::filter(setting == !!init_setting)
@@ -1362,25 +1727,29 @@ heatServer <- function(input, output, session, Data = NULL,
 
     selected_indicator_dimension <- default_indicator_dimension(
       strata = Data$strata(),
-      current_indicator = initial_indicator(x_indicators),
-      current_dimension = initial_dimension(x_dimension, lang),
+      current_indicator = initial_indicator(x_indicators, lang, dataname),
+      current_dimension = initial_dimension(x_dimension, lang, dataname),
       new_country = init_setting,
       new_source = init_source,
       new_year = init_year
     )
 
+
     Events$set_setting <- list(
       from = "init",
+      prev = "pre-init", #git804
       choices = x_setting,
       values = x_setting,
-      selected = init_setting
+      selected = init_setting,
+      sample = rnorm(1)
     )
 
 
     Events$set_benchmark_setting <- list(
       from = "init",
       selected = init_setting,
-      language = language() # this is not used EXCEPT to force a change
+      language = language(), # this is not used EXCEPT to force a change
+      rand = rnorm(1) # this is not used EXCEPT to force a change
     )
 
     Events$set_source <- list(
@@ -1390,11 +1759,13 @@ heatServer <- function(input, output, session, Data = NULL,
       selected = initial_source(x_source)
     )
 
+
     Events$set_year <- list(
       from = "init",
       choices = x_year,
       values = x_year,
-      selected = init_year
+      selected = init_year,
+      recent = as.numeric(input$`explore_disag_line-recent`) #git545
     )
 
     Events$set_indicator <- list(
@@ -1403,6 +1774,8 @@ heatServer <- function(input, output, session, Data = NULL,
       values = x_indicators$values,
       selected = selected_indicator_dimension$indicator_selected
     )
+
+
 
     Events$set_dimension <- list(
       from = "init",
@@ -1429,6 +1802,22 @@ heatServer <- function(input, output, session, Data = NULL,
     if (!is.null(on_data_open)) {
       on_data_open()
     }
+    add_time("end observe Data$main", dataset_name())
   })
-}
 
+
+  observeEvent(input$datachoose, {
+    req(!is_heat_plus())
+    showModal(
+      dataManagementModal(
+        ns("dc"),
+        current_data = dataset_name(),
+        language = language(),
+        add_cancel = TRUE
+      )
+    )
+
+  })
+
+
+}

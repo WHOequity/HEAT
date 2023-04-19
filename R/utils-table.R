@@ -17,19 +17,37 @@
 # along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 round_for_tables <- function(x, decimal_places) {
-  vals <- format(round(x, decimal_places), nsmall = decimal_places)
-  vals[trimws(vals) == "NA"] <- ""
+
+  if(is.infinite(decimal_places)){
+    decimal_places <- max(nchar(x), na.rm = TRUE)
+    vals <- format(round(x, decimal_places), nsmall = decimal_places)
+  } else {
+    vals <- format(round(x, decimal_places), nsmall = decimal_places)
+    vals[trimws(vals) == "NA"] <- ""
+  }
+
   vals
 }
 
 
-table_disclaimer <- function(language = "en") {
+table_disclaimer <- function(language = "en", is_who_dataset) {
   if (!is_heat_plus()) {
+
+    nonwho_disclaimer <- ""
+
+    if(!is_who_dataset()){
+      nonwho_disclaimer <-  c(
+        paste('"', get_nonwho_disclaimer(), '"'),
+        "\n"
+      )
+    }
+
     c(
       paste('"', translate(c(language, "downloads", "text", "heat1")), '"'),
       "\n",
       paste('"', translate(c(language, "downloads", "text", "heat2")), '"'),
-      "\n"
+      "\n",
+      nonwho_disclaimer
     )
   } else {
     c(

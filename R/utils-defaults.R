@@ -43,6 +43,10 @@ default_dimension <- function(values, max) {
   head(values, max)
 }
 
+default_determinant <- function(values, max){
+  head(values, max)
+}
+
 default_measure <- function(values, max) {
   head(values, max)
 }
@@ -140,6 +144,52 @@ default_indicator_dimension <- function(strata,
   indicator_dimension_dtls
 }
 
+default_determinants <- function(determinants, current_determinants, new_setting, new_year) {
+
+
+  # All indicators and all dimensions in country
+  yrs <- suppressWarnings(as.numeric(new_year))
+
+  if(any(is.na(yrs))){
+    all_determinants <- determinants %>%
+      dplyr::filter(
+        setting == !!new_setting,
+        sdh_year == max(sdh_year)
+      ) %>%
+      dplyr::distinct(sdh_abbr, sdh_name)
+  } else {
+    yrs <- unique(c(sapply(yrs, function(yr) (yr-5):yr)))
+    all_determinants <- determinants %>%
+      dplyr::filter(
+        setting == !!new_setting,
+        sdh_year %in% yrs,
+      ) %>%
+      dplyr::distinct(sdh_abbr, sdh_name)
+  }
+
+
+  sorted_determinants <- all_determinants %>%
+    dplyr::arrange(sdh_name)
+
+
+  determinants_dtls <- list(
+    determinants_values = sorted_determinants$sdh_abbr,
+    determinants_choices = sorted_determinants$sdh_name,
+    determinants_selected = sorted_determinants$sdh_name[1]
+  )
+
+  # Test if any current indicators exist in country
+  determinants_match <- all_determinants %>%
+    dplyr::filter(sdh_name %in% !!current_determinants)
+
+  # New setting does have at least one current indicators
+  if (NROW(determinants_match) > 0) {
+    determinants_dtls[["determinants_selected"]] <- determinants_match$sdh_name
+  }
+
+  determinants_dtls
+}
+
 pick_measures <- function(possible_measures, dimension, language) {
   possible_measures %>%
     dplyr::distinct(dimension, measure) %>%
@@ -148,3 +198,8 @@ pick_measures <- function(possible_measures, dimension, language) {
     dplyr::mutate(choices = measure_name(values, language)) %>%
     dplyr::arrange(choices)
 }
+
+
+# choose_determinant <- function(values){
+#   values$sdh_name
+# }

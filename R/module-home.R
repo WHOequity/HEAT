@@ -26,7 +26,7 @@ homeUI <- function(id) {
 
 homeServer <- function(input, output, session) {
 
-  list(
+  lst <- list(
     open_explore = reactive({
       input$open_explore
     }),
@@ -34,4 +34,13 @@ homeServer <- function(input, output, session) {
       input$open_compare
     })
   )
+
+  if(!is_heat_plus()){
+    lst$open_determinant <-  reactive({
+      input$open_determinant
+    })
+  }
+
+  lst
+
 }

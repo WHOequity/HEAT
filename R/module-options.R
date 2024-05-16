@@ -19,7 +19,8 @@
 optionsUI <- function(id, data_labels, confidence_intervals, reference_lines,
                       subgroup_highlight, sorting, axis_limits, label_format,
                       titles, columns_disaggregated, columns_summary,
-                      decimal_places, lang) {
+                      columns_determinant = FALSE,
+                      decimal_places, regression_line = FALSE, lang) {
   ns <- NS(id)
 
   list(
@@ -90,7 +91,6 @@ optionsUI <- function(id, data_labels, confidence_intervals, reference_lines,
     },
     # summary table columns ----
     if (columns_summary) {
-
       list(
         h6(i18n("options.labels.content")), # Table content"),
         hr() %>% margin(top = 0) %>% background("black"),
@@ -135,6 +135,78 @@ optionsUI <- function(id, data_labels, confidence_intervals, reference_lines,
             selected = c(
               "setting", "year", "indicatorname", "dimension", "measurename",
               "estimate"
+            )
+          ) %>%
+            active("grey") %>%
+            shadow()
+        ),
+        formGroup(
+          label = div(i18n("options.labels.decimals")), # "Number of decimals",
+          radiobarInput(
+            id = ns("table_decimals"),
+            choices = 0:5,
+            selected = 1
+          ) %>%
+            shadow("small")
+        )
+      )
+    },
+    # determinant table columns ----
+    if (columns_determinant) {
+      list(
+        h6(i18n("options.labels.content")), # Table content"),
+        hr() %>% margin(top = 0) %>% background("black"),
+        formGroup(
+          label = div(i18n("options.labels.variables")), # Variables",
+          chipInput(
+            i18n(
+              ns = "options.values",
+              target = "button"
+            ),
+            id = ns("columns"),
+            inline = TRUE,
+            placeholder = "inputs.placeholders.selection",
+            choices = list(
+              "setting",
+              "year",
+              "source",
+              "indicatorabbr",
+              "indicatorname",
+              "settingavg",
+              "sdhyear",
+              "sdhsource",
+              "sdhabbr",
+              "sdhname",
+              "sdhestimate",
+              "sdhnote"
+            ),
+            values = c(
+              "setting",
+              "year",
+              "source",
+              "indicatorabbr",
+              "indicatorname",
+              "settingavg",
+              "sdhyear",
+              "sdhsource",
+              "sdhabbr",
+              "sdhname",
+              "sdhestimate",
+              "sdhnote"
+            ),
+            selected = c(
+              "setting",
+              "year",
+              #"source",
+              #"indicatorabbr",
+              "indicatorname",
+              "settingavg",
+              "sdhyear",
+              #"sdhsource",
+              #"sdhabbr",
+              "sdhname",
+              "sdhestimate"
+              #"sdhnote"
             )
           ) %>%
             active("grey") %>%
@@ -250,6 +322,23 @@ optionsUI <- function(id, data_labels, confidence_intervals, reference_lines,
           ),
           values = c("setting", "median"),
           selected = "median"
+        ) %>%
+          margin(bottom = 3)
+      )
+    },
+    if (isTRUE(regression_line)) { # regression line ----
+      list(
+        h6(i18n("options.labels.regression")), # "Regression line"),
+        hr() %>% margin(top = 0) %>% background("black"),
+        checkboxInput(
+          id = ns("regression_line"),
+          # choices = c("Include regression line"),
+          choices = list(
+            div(i18n("options.labels.inclregression"))
+          ),
+          values = "includereg",
+          selected = "includereg"
+
         ) %>%
           margin(bottom = 3)
       )
@@ -438,6 +527,7 @@ optionsServer <- function(input, output, session, parent,
     sort_by = NULL,
     sort_order = NULL,
     reference_lines = NULL,
+    regression_line = NULL,
     axis_max = NULL,
     axis_min = NULL,
     axis_vertical_max = NULL,
@@ -484,6 +574,9 @@ optionsServer <- function(input, output, session, parent,
 
   # conf intervals ----
   observe(state$confidence_interval <- input$confidence_interval)
+
+  # regression line ----
+  observe(state$regression_line <- input$regression_line)
 
   # titles ----
 
@@ -640,7 +733,7 @@ optionsServer <- function(input, output, session, parent,
         session = session
       )
 
-      if (less_than_zero) {
+      if (is_log_scale() && less_than_zero) {
         state$axis_min <- 0.1
       }
     })
@@ -657,7 +750,7 @@ optionsServer <- function(input, output, session, parent,
         session = session
       )
 
-      if (less_than_zero) {
+      if (is_log_scale() && less_than_zero) {
         state$axis_vertical_min <- 0.1
       }
     })
@@ -717,6 +810,7 @@ optionsServer <- function(input, output, session, parent,
     data_labels = reactive(state$data_labels),
     confidence_interval = reactive(!is.null(state$confidence_interval)),
     reference_lines = reactive(state$reference_lines),
+    regression_line = reactive(!is.null(state$regression_line)),
     highlight_subgroup = reactive(state$highlight_subgroup),
     update_highlight_subgroup = update_highlight_subgroup,
     sort_by = reactive(state$sort_by),

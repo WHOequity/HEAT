@@ -78,7 +78,6 @@ title_compare_disaggregated <- function(data, language = "en") {
   n_settings <- data %>%
     dplyr::group_by(setting) %>%
     dplyr::n_groups()
-
   tmp_title <- translate(c(language, "charts", "titles", "comparedisag"))
   tmp_title <- gsub(pattern = "\\[indicator_name\\]", data$indicator_name[1], tmp_title)
   tmp_title <- gsub(pattern = "\\[dimension\\]", tolower(data$dimension[1]), tmp_title)
@@ -92,10 +91,27 @@ title_compare_summary <- function(data, language = "en") {
     dplyr::group_by(setting) %>%
     dplyr::n_groups()
 
+
   tmp_title <- translate(c(language, "charts", "titles", "comparesumm"))
   tmp_title <- gsub(pattern = "\\[indicator_name\\]", data$indicator_name[1], tmp_title)
   tmp_title <- gsub(pattern = "\\[dimension\\]", tolower(data$dimension[1]), tmp_title)
   tmp_title <- gsub(pattern = "\\[number_settings\\]", n_settings, tmp_title)
+
+  as.character(tmp_title)
+}
+
+title_determinant <- function(data, language = "en") {
+
+  n_settings <- data %>%
+    dplyr::group_by(setting) %>%
+    dplyr::n_groups()
+
+  tmp_title <- glue::glue("Association between {data$indicator_name[1]} and {data$sdh_name[1]} in {n_settings} settings")
+
+  # tmp_title <- translate(c(language, "charts", "titles", "comparedisag"))
+  # tmp_title <- gsub(pattern = "\\[indicator_name\\]", data$indicator_name[1], tmp_title)
+  # #tmp_title <- gsub(pattern = "\\[dimension\\]", tolower(data$dimension[1]), tmp_title)
+  # tmp_title <- gsub(pattern = "\\[number_settings\\]", n_settings, tmp_title)
 
   as.character(tmp_title)
 }

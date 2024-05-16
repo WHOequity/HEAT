@@ -19,6 +19,7 @@
 #' @export
 assets <- function() {
   list(
+    tags$script(src = "https://www.googletagmanager.com/gtag/js?id=G-L76PYL961C", type = "text/javascript", async = ""),
     tags$script(src = "heat-assets/jspdf/promise-polyfill.js", type = "text/javascript"),
     tags$script(src = "heat-assets/html2canvas/html2canvas.min.js", type = "text/javascript"),
     tags$script(src = "heat-assets/jspdf/jspdf.min.js", type = "text/javascript"),
@@ -27,7 +28,9 @@ assets <- function() {
     tags$script(src = "heat-assets/js/loc-i18next.min.js", type = "text/javascript"),
     tags$link(rel = "stylesheet", href = "heat-assets/css/landing.css"),
     tags$link(rel = "stylesheet", href = "heat-assets/css/main.css"),
-    tags$script(src = "heat-assets/js/main.js", type = "text/javascript")
+    tags$script(src = "heat-assets/js/main.js", type = "text/javascript"),
+
+    tags$script(src = "heat-assets/js/google-analytics.js", type = "text/javascript")
   )
 }
 

@@ -344,6 +344,14 @@ special_message <- function(txt, this, ...){
 
 }
 
+is_annual <- function(dn){
+  unique(heatdata::info_databases$annual[heatdata::info_databases$internal_name == dn])
+}
+
+is_determinant_graph <- function(current){
+  grepl("determinant_graph", current)
+}
+
 # message(
 #   "Data rows: ", nrow(Data$main()), "\n",
 #   paste(state$setting, collapse = ", "), "\n",

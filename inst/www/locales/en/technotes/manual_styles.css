@@ -1,0 +1,58 @@
+/* CSS Stylesheet for HEAT Manual*/
+
+h3.subtitle {
+  line-height: 40px;
+  color: black;
+}
+
+h1{
+  margin-top:10px;
+  margin-bottom:10px;
+  color: #008dc9;
+  line-height: 40px;
+}
+
+h2, h3, h4, h5{
+  margin-top:6px;
+  margin-bottom:5px;
+}
+
+body{
+  font-size: 16px;
+}
+
+div {
+  background-color: rgba(255, 255, 255, 0.2)   /* 35% opaque white */;
+  padding: 0.2em;
+}
+
+.infobox1 {
+  padding: 1em 2em 1em 2em;
+  margin-bottom: 10px;
+  border: 2px solid white;
+  border-radius: 10px;
+  background: #008dc9 5px center/3em no-repeat;
+  color: white;
+}
+
+.infobox3 {
+  padding: 1em 2em 1em 2em;
+  margin-bottom: 10px;
+  border: 2px solid white;
+  border-radius: 10px;
+  background: green 5px center/3em no-repeat;
+  color: white;
+}
+
+.infobox2 {
+  padding: 1em 2em 1em 2em;
+  margin-bottom: 10px;
+  border: 2px solid white;
+  border-radius: 10px;
+  background: orange 5px center/3em no-repeat;
+  color: white;
+}
+
+.caution {
+  background-image: url("images/box.png");
+}

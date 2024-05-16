@@ -1,7 +1,7 @@
 {
   "benchmarks": {
     "labels": {
-      "income": "Filter by country-income group",
+      "income": "Filter by setting-income group",
       "region": "Filter by WHO region",
       "setting": "Select comparison settings",
       "date": "Benchmark date",
@@ -24,6 +24,7 @@
     "disclaimers": {
       "nodefault": "There are no data for this combination of date, indicator and/or dimension of inequality. Change the selection to view available data.",
       "nomap": "There is either no data for this combination of variables or there are no boundaries of subnational regions that match those in the data. Maps are only available for Demographic and Health Survey (DHS) data.",
+      "nodeterminant": "There are no data for this combination of variables. Change the selection to view available data.",
       "nomapdataset": "There are no maps associated with this dataset.",
       "compareineq": "By default, settings from the same income group and WHO region as the selected setting are shown, if data are available.",
       "disclaimer": "Please note that these data are from externally published sources and are therefore not WHO official estimates. Please refer to the Indicator Metadata in the About menu for more information."
@@ -40,17 +41,24 @@
     },
     "titles": {
       "comparedisag": "[indicator_name] by [dimension] in [number_settings] settings",
-      "comparesumm": "[indicator_name]: setting average and within-setting inequality (according to [dimension]) in [number_settings] settings"
+      "comparesumm": "[indicator_name]: setting average and within-setting inequality (according to [dimension]) in [number_settings] settings",
+      "determinants": "Association between [indicator_name] and [sdh_name] in [number_settings] settings"
     },
     "tooltips": {
       "affectedpop": "of affected population",
       "estimate": "Estimate",
       "95ci": "95% CI",
-      "settingavg": "Setting average"
+      "settingavg": "Setting average",
+      "nationalavg": "National average",
+      "indicatorestimate": "Indicator estimate",
+      "determinantestimate": "Determinant estimate",
+      "rsquared": "R-squared",
+      "pvalue": "P-value"
     },
     "warnings": {
       "available": "Estimates are displayed when data are available for the selected combination of variables; if estimates are not shown, data are not available or not reported because of small sample sizes.",
       "availablemap": "Estimates are displayed when data for the selected combination of variables and boundaries of subnational regions that match those in the data are available; if estimates are not shown, either data or boundaries are not available. Maps are only available for Demographic and Health Survey (DHS) data.",
+      "availabledeterminants": "Estimates are displayed when data are available for the selected combination of variables.",
       "axismin": "Axis minimum must be greater than 0 for log-scale axis",
       "verticalaxismin": "Vertical axis minimum must be greater than 0 for log-scale axis"
     }
@@ -70,11 +78,11 @@
       "graph": "The graph will be downloaded as a png or jpg image or pdf. Titles and axis labels will be displayed according to your selections.",
       "map": "The graph will be downloaded as a png or jpg image or pdf. Titles will be displayed according to your selections.",
       "data": "The data will be downloaded as a text file with values separated by commas or tabs, according to your selection. These can be opened in a text editor or spreadsheet package.",
-      "heat1": "Health Equity Assessment Toolkit (HEAT): Software for exploring and comparing health inequalities in countries. Built-in database edition. Version 5.0. Geneva, World Health Organization, 2023.",
-      "heat2": "The disaggregated data used in this version were drawn from the WHO Health Inequality Monitor data repository (2023 update) which may have been revised or updated since that time. The most recent version of that database is available on the WHO website (https://www.who.int/data/inequality-monitor/data).",
+      "heat1": "Health Equity Assessment Toolkit (HEAT): Software for exploring and comparing health inequalities in countries and territories. Built-in database edition. Version 6.0. Geneva, World Health Organization, 2024.",
+      "heat2": "The data used in this version were drawn from the WHO Health Inequality Monitor data repository (2023 update) which may have been revised or updated since that time. The most recent version of that database is available on the WHO website (https://www.who.int/data/inequality-monitor/data).",
       "disclaimer1": "The designations employed and the presentation of the material in this toolkit do not imply the expression of any opinion whatsoever on the part of WHO concerning the legal status of any country, territory, city or area or of its authorities, or concerning the delimitation of its frontiers or boundaries. Dotted and dashed lines on maps represent approximate border lines for which there may not yet be full agreement.",
       "disclaimer2": "The international borders of the map provided reflect the current political and geographic status as of the date of publication. However, the technical health information is based on data accurate with respect to the year selected. The disconnect in this arrangement should be noted but no implications regarding political or terminological status should be drawn from this arrangement as it is purely a function of technical and graphical limitations.",
-      "heatplus1": "Health Equity Assessment Toolkit Plus (HEAT Plus): Software for exploring and comparing health inequalities in countries. Upload database edition. Version 5.0. Geneva, World Health Organization, 2023.",
+      "heatplus1": "Health Equity Assessment Toolkit Plus (HEAT Plus): Software for exploring and comparing health inequalities in countries. Upload database edition. Version 6.0. Geneva, World Health Organization, 2024.",
       "heatplus2": "WHO provides this toolkit without data, and all data added to, or resulting from, the toolkit are the sole responsibility of the user, not WHO."
     },
     "values": {
@@ -84,9 +92,9 @@
   },
   "home": {
     "citations": {
-      "heat1": "Suggested citation: Health Equity Assessment Toolkit (HEAT): Software for exploring and comparing health inequalities in countries. Built-in database edition. Version 5.0. Geneva: WHO, 2023.",
+      "heat1": "Suggested citation: Health Equity Assessment Toolkit (HEAT): Software for exploring and comparing health inequalities in countries. Built-in database edition. Version 6.0. Geneva: WHO, 2024.",
       "heat2": " ",
-      "heatplus1": "Suggested citation: Health Equity Assessment Toolkit Plus (HEAT Plus): Software for exploring and comparing health inequalities in countries. Upload database edition. Version 5.0. Geneva: WHO, 2023.",
+      "heatplus1": "Suggested citation: Health Equity Assessment Toolkit Plus (HEAT Plus): Software for exploring and comparing health inequalities in countries. Upload database edition. Version 6.0. Geneva: WHO, 2024.",
       "heatplus2": "WHO provides this toolkit without data, and all data added to, or resulting from, the toolkit are the sole responsibility of the user, not WHO.",
       "heatplus3": " "
     },
@@ -97,14 +105,14 @@
     },
     "paragraphs": {
       "heat1": "This built-in database edition of the HEAT software uses data from the WHO Health Inequality Data Repository (2023 update).",
-      "heat2": "HEAT enables the interactive exploration and comparison of health inequalities in countries.",
+      "heat2": "HEAT enables the interactive exploration and comparison of health inequalities in countries and territories.",
       "heat3a": "Use HEAT to",
       "heat3b": "explore inequalities",
-      "heat3c": "in one country of interest to determine the latest situation of inequality and the change in inequality over time.",
+      "heat3c": "in one setting of interest to determine the latest situation of inequality and the change in inequality over time.",
       "heat4": "Health inequality data, including disaggregated data and summary measures, are visualized in a variety of interactive graphs, maps and tables.",
       "heat5a": "Use HEAT to",
       "heat5b": "compare inequalities",
-      "heat5c": "in one country of interest with the situation in other countries and do benchmarking.",
+      "heat5c": "in one setting of interest with the situation in other settings and do benchmarking.",
       "heat6": "Customized results can be exported and saved in different formats.",
       "heat7": "Measuring and monitoring health inequalities is crucial to identify differences in health between different population subgroups, providing important evidence for policies, programmes and practices that aim to tackle health inequities and achieve health for all.",
       "heat8": "The Health Equity Assessment Toolkit facilitates the analysis and reporting of health inequality data. Disaggregated data and summary measures are visualised in a variety of interactive ways. Customized results can be exported and used to inform priority-setting and policy-making.",
@@ -144,7 +152,7 @@
       "remove_dates": "Remove dates"
     },
     "labels": {
-      "setting": "Setting (e.g. country, province, district)",
+      "setting": "Setting (e.g. country/territory, province, district)",
       "source_plural": "Data sources",
       "year": "Date",
       "year_plural": "Dates",
@@ -154,7 +162,8 @@
       "dimension": "Inequality dimension",
       "dimension_plural": "Inequality dimensions",
       "measure": "Summary measure",
-      "measure_plural": "Summary measures"
+      "measure_plural": "Summary measures",
+      "determinant": "Determinant"
     },
     "placeholders": {
       "selection": "Make a selection"
@@ -191,7 +200,8 @@
       "saving": "Saving results",
       "complete": "Upload complete",
       "success": "Upload successful",
-      "uploaded": "The database was uploaded."
+      "uploaded": "The database was uploaded.",
+      "note": "Please wait while your data are uploaded. The processing time will depend on the size of your database and the number of strata."
     },
     "warnings": {
       "fileerror": "Error in file",
@@ -244,12 +254,12 @@
       "rep_gho_alcohol_blurb": "Indicators related to alcohol consumption disaggregated by sex. (Original data source: WHO Global Health Observatory (GHO); updated 03/2023).",
       "rep_gho_tobacco_blurb": "Indicators related to tobacco use disaggregated by sex. (Original data source: WHO Global Health Observatory (GHO); updated 03/2023).",
       "rep_gho_ncd_blurb": "Indicators related to noncommunicable diseases and risk factors (including alcohol consumption, insufficient physical activity, nutrition, raised blood pressure, raised blood glucose, tobacco use) disaggregated by sex. (Original data source: WHO Global Health Observatory (GHO); updated 03/2023).",
-      "rep_eurostat_ah_blurb": "Indicators related to health status and health behaviours and risk factors (including alcohol, physical activity, nutrition, blood pressure, blood glucose, tobacco use) disaggregated by age, economic status, education, place of residence and sex. (Original data source: Eurostat, the statistical office of the European Union; updated 01/2023).",
-      "rep_oecd_ah_blurb": "Indicators related to self-reported health status in OECD countries, disaggregated by age, economic status, education and sex. (Original data source: Organisation for Economic Co-operation and Development, HEALTH_STAT dataset; updated 11/2022).",
+      "rep_eurostat_ah_blurb": "Indicators related to health status and health behaviours and risk factors (including alcohol, physical activity, nutrition, blood pressure, blood glucose, tobacco use) disaggregated by age, economic status, education, place of residence and sex. (Original data source: Eurostat, the statistical office of the European Union; updated 07/2023).",
+      "rep_oecd_ah_blurb": "Indicators related to self-reported health status in OECD countries, disaggregated by age, economic status, education and sex. (Original data source: Organisation for Economic Co-operation and Development, HEALTH_STAT dataset; updated 07/2023).",
       "rep_dhs_hca_blurb": "Indicators related to health care access disaggregated by age, economic status, education, employment status, marital status, number of living children, place of residence and subnational region. (Original data source: Demographic and Health Survey (DHS) Program; updated 02/2023).",
       "rep_gho_hc_blurb": "Indicators related to the health care system and health care access disaggregated by age, economic status, place of residence and sex. (Original data source: WHO Global Health Observatory (GHO); updated 03/2023).",
-      "rep_eurostat_hc_blurb": "Indicators related to health care disaggregated by age, economic status, education, place of residence and sex. (Original data source: Eurostat, the statistical office of the European Union; updated 01/2023).",
-      "rep_oecd_hc_blurb": "Indicators related to health care quality, resources and expenditure in OECD countries, disaggregated by age and sex. (Original data source: Organisation for Economic Co-operation and Development, EBDAG / HEALTH_REAC / HEALTH_HCQI datasets; updated 11/2022).",
+      "rep_eurostat_hc_blurb": "Indicators related to health care disaggregated by age, economic status, education, place of residence and sex. (Original data source: Eurostat, the statistical office of the European Union; updated 07/2023).",
+      "rep_oecd_hc_blurb": "Indicators related to health care quality, resources and expenditure in OECD countries, disaggregated by age and sex. (Original data source: Organisation for Economic Co-operation and Development, EBDAG / HEALTH_REAC / HEALTH_HCQI datasets; updated 07/2023).",
       "rep_ghe_death_sex_blurb": "Disease mortality rates per 100 000 population disaggregated by sex. (Original data source: WHO Global Health Estimates (GHE); updated 08/2022).",
       "rep_ghe_daly_sex_blurb": "Disability-adjusted life years (DALYs) per 100 000 population disaggregated by sex. (Original data source: WHO Global Health Estimates (GHE); updated 08/2022).",
       "rep_ghe_yld_sex_blurb": "Years of healthy life lost due to disability (YLD) per 100 000 population disaggregated by sex. (Original data source: WHO Global Health Estimates (GHE); updated 08/2022).",
@@ -261,8 +271,11 @@
       "rep_gho_mortality_blurb": "Life expectancy and mortality rates disaggregated by sex. (Original data source: WHO Global Health Observatory (GHO); updated 03/2023).",
       "rep_ihme_inc_blurb": "Disease incidence estimates disaggregated by sex. (Original data source: Institute for Health Metrics and Evaluation (IHME) Global Burden of Disease study 2019; updated 09/2022).",
       "rep_ihme_prev_blurb": "Disease prevalence estimates disaggregated by sex. (Original data source: Institute for Health Metrics and Evaluation (IHME) Global Burden of Disease study 2019; updated 09/2022).",
-      "rep_eurostat_disab1_blurb": "Indicators related to health status, health behaviours and risk factors, health care and health determinants in European countries disaggregated by disability. (Original data source: Eurostat, the statistical office of the European Union; updated 01/2023).",
-      "rep_eurostat_disab2_blurb": "Indicators related to health status, health behvaiours and risk factors, health care and health determinants among people with disability in European countries, disaggregated by age and sex. (Original data source: Eurostat, the statistical office of the European Union; updated 01/2023).",
+      "rep_eurostat_disab1_blurb": "Indicators related to health status, health behaviours and risk factors, health care and health determinants in European countries disaggregated by disability. (Original data source: Eurostat, the statistical office of the European Union; updated 07/2023).",
+      "rep_eurostat_disab2_blurb": "Indicators related to health status, health behaviours and risk factors, health care and health determinants among people with disability in European countries, disaggregated by age and sex. (Original data source: Eurostat, the statistical office of the European Union; updated 07/2023).",
+      "rep_eurostat_mig1_blurb": "Indicators related to health status, health behaviours and risk factors, health care and health determinants in European countries disaggregated by migratory status. (Original data source: Eurostat, the statistical office of the European Union; updated 07/2023).",
+      "rep_eurostat_mig2_blurb": "Indicators related to health status, health behaviours and risk factors, health care and health determinants among people who are migrants in European countries, disaggregated by age, sex and type of migrant. (Original data source: Eurostat, the statistical office of the European Union; updated 07/2023).",
+      "rep_unsd_unhcr_mig_blurb": "The number of international migrants and refugees per 1000 population, disaggregated by age, urban/rural place of residence and sex. (Original data source: United Nations Statistical Department (UNSD) International Migrant Stock 2020 and UN Refugee Agency (UNHCR) Refugee Population Statistics Database; updated 07/2023).",
       "rep_wash_blurb": "Access to drinking water, sanitation and hygiene (WASH) within households, schools and health care facilities disaggregated by place of residence. (Original data source: WHO/UNICEF Joint Monitoring Programme for Water Supply, Sanitation and Hygiene (JMP); updated 03/2023).",
       "rep_gpw13_blurb": "Indicators used within the impact measurement of WHO’s Thirteenth General Programme of Work (GPW 13), WHO’s strategy for the period 2019-2025, disaggregated by age, economic status, education, place of residence, sex and subnational region. (Original data sources: Re-analysis of Demographic and Health Surveys (DHS), Multiple Indicator Cluster Surveys (MICS), and Reproductive Health Surveys (RHS); WHO Global Health Estimates; WHO Global Health Observatory (GHO); WHO/UNICEF Joint Monitoring Programme for Water Supply, Sanitation and Hygiene (JMP); UNICEF/WHO/World Bank Joint Malnutrition Estimates; UNAIDS/UNICEF/WHO HIV incidence estimates; updated 03/2023).",
       "rep_wb_blurb": "Indicators related to health determinants (e.g. education, employment and environment) disaggregated by economic status, place of residence and sex. (Original data source: The World Bank Data Catalog; updated 02/2023).",
@@ -273,8 +286,8 @@
       "rep_gdl2_blurb": "Indicators used to create development indices (Human Development Index, Gender Development Index, International Wealth Index, Gini coefficient and Theil-T) disaggregated by economic status, place of residence, poverty status and subnational region. (Original data source: Global Data Lab; updated 01/2023).",
       "rep_mpi_blurb": "Multidimensional Poverty Index (MPI) disaggregated by ethnicity/race/caste (Original data source: United Nations Development Programme (UNDP) 2021; updated 10/2022) and disaggregated by age, place of residence, sex of household head and subnational region. (Original data source: Oxford Poverty and Human Development Initiative (OPHI) 2022; updated 10/2022).",
       "rep_dhs_unicef_cpr_blurb": "Indicators related to child protection and female genital mutilation (FGM) disaggregated by age, economic status, education, employment status, marital status, number of living children, place of residence, religion, sex and subnational region. (Original data sources: Demographic and Health Survey (DHS) Program and UNICEF Data Warehouse; updated 12/2022).",
-      "rep_eurostat_sdh_blurb": "Indicators related to health determinants (housing conditions, income distribution, poverty and material deprivation) in European countries disaggregated by age and sex. (Original data source: Eurostat, the statistical office of the European Union; updated 01/2023).",
-      "rep_oecd_sdh_blurb": "Indicators related to the determinants of health and well-being in OECD countries, disaggregated by age, education and sex. (Original data source: Organisation for Economic Co-operation and Development, 'How's Life? Well-Being' dataset; updated 11/2022)."
+      "rep_eurostat_sdh_blurb": "Indicators related to health determinants (housing conditions, income distribution, poverty and material deprivation) in European countries disaggregated by age, economic status, education, place of residence and sex. (Original data source: Eurostat, the statistical office of the European Union; updated 07/2023).",
+      "rep_oecd_sdh_blurb": "Indicators related to the determinants of health and well-being in OECD countries, disaggregated by age, education and sex. (Original data source: Organisation for Economic Co-operation and Development, 'How's Life? Well-Being' dataset; updated 07/2023)."
     },
     "category": {
       "sdg_category": "Sustainable Development Goals",
@@ -287,9 +300,10 @@
       "healthcare_category": "Health care",
       "dburden_category": "Burden of disease",
       "disability_category": "Disability",
+      "migration_category": "Migration",
       "env_category": "Environmental health",
       "gpw13_category": "WHO General Programme of Work",
-      "beyondhealth_category": "Beyond the health sector"
+      "beyondhealth_category": "Health determinants"
     },
     "dataset_name": {
       "rep_sdg_dataset": "Sustainable Development Goals (SDGs)",
@@ -339,6 +353,9 @@
       "rep_ihme_prev_dataset": "Disease prevalence estimates (IHME Global Burden of Disease study)",
       "rep_eurostat_disab1_dataset": "Indicators disaggregated by disability (Eurostat)",
       "rep_eurostat_disab2_dataset": "Indicators among people with disabilities (Eurostat)",
+      "rep_eurostat_mig1_dataset": "Indicators disaggregated by migratory status (Eurostat)",
+      "rep_eurostat_mig2_dataset": "Indicators among people who are migrants (Eurostat)",
+      "rep_unsd_unhcr_mig_dataset": "International migrants and refugees (UNSD/UNHCR)",
       "rep_wash_dataset": "Water, sanitation and hygiene (WHO/UNICEF JMP)",
       "rep_gpw13_dataset": "WHO 13th General Programme of Work (multiple data sources)",
       "rep_gho_env_dataset": "Environmental health (WHO Global Health Observatory)",
@@ -370,6 +387,7 @@
       "home": "Home",
       "explore": "Explore inequality",
       "compare": "Compare inequality",
+      "determinants": "Determinants",
       "disag": "Disaggregated data",
       "summary": "Summary measures",
       "about": "About",
@@ -387,6 +405,7 @@
       "logout": "Logout",
       "choose_dataset": "Choose dataset",
       "spinner": "Loading new dataset…",
+      "determinants_tooltip": "Determinants are only shown for datasets with annual data",
       "hline": "Horizontal line",
       "vbar": "Vertical bar",
       "hbar": "Horizontal bar",
@@ -418,6 +437,8 @@
       "reference": "Reference lines",
       "average": "Setting average",
       "median": "Median",
+      "regression": "Regression line",
+      "inclregression": "Regression line",
       "sortdata": "Sort data",
       "sortby": "Sort by",
       "subgroup": "Subgroup",
@@ -453,7 +474,13 @@
       "popshare": "Population share",
       "flag": "Note",
       "settingavg": "Setting average",
-      "format": "Format"
+      "format": "Format",
+      "sdhyear": "Determinant date",
+      "sdhsource": "Determinant source",
+      "sdhabbr": "Determinant abbreviation",
+      "sdhname": "Determinant name",
+      "sdhestimate": "Determinant setting average",
+      "sdhnote": "Determinant note"
     }
   },
   "sidepanel": {
@@ -530,6 +557,7 @@
       "Age (4 groups) (15-65+)": "Age (4 groups) (15-65+)",
       "Age (4 groups) (18-65+)": "Age (4 groups) (18-65+)",
       "Age (5 groups) (0-50+)": "Age (5 groups) (0-50+)",
+      "Age (5 groups) (0-60+)": "Age (5 groups) (0-60+)",
       "Age (5 groups) (0-65+)": "Age (5 groups) (0-65+)",
       "Age (5 groups) (15-49)": "Age (5 groups) (15-49)",
       "Age (5 groups) (15-65+)": "Age (5 groups) (15-65+)",
@@ -582,19 +610,25 @@
       "Marital status": "Marital status",
       "Municipality": "Municipality",
       "Migratory status": "Migratory status",
+      "Migratory status (country of birth)": "Migratory status (country of birth)",
+      "Migratory status (country of citizenship)": "Migratory status (country of citizenship)",
       "Number of living children": "Number of living children",
       "Place of residence": "Place of residence",
       "Poverty status": "Poverty status",
       "Religion": "Religion",
       "School type": "School type",
       "Subnational region": "Subnational region",
-      "TB drug resistance": "TB drug resistance"
+      "TB drug resistance": "TB drug resistance",
+      "Type of migrant": "Type of migrant",
+      "Type of migrant (country of birth)": "Type of migrant (country of birth)",
+      "Type of migrant (country of citizenship)": "Type of migrant (country of citizenship)"
     },
     "groups": {
       "highincome": "High income",
       "uppermiddleincome": "Upper middle income",
       "lowermiddleincome": "Lower middle income",
-      "lowincome": "Low income"
+      "lowincome": "Low income",
+      "noincome": "No income group defined"
     },
     "indicators": {
       "aci": "Absolute concentration index (ACI)",
@@ -726,6 +760,7 @@
       "Estonia": "Estonia",
       "Eswatini": "Eswatini",
       "Ethiopia": "Ethiopia",
+      "Faroe Islands": "Faroe Islands",
       "Fiji": "Fiji",
       "Finland": "Finland",
       "France": "France",
@@ -793,7 +828,9 @@
       "Niger": "Niger",
       "Nigeria": "Nigeria",
       "Niue": "Niue",
+      "North Macedonia": "North Macedonia",
       "Norway": "Norway",
+      "occupied Palestinian territory": "occupied Palestinian territory",
       "Oman": "Oman",
       "Pakistan": "Pakistan",
       "Palau": "Palau",
@@ -804,6 +841,7 @@
       "Philippines": "Philippines",
       "Poland": "Poland",
       "Portugal": "Portugal",
+      "Puerto Rico": "Puerto Rico",
       "Qatar": "Qatar",
       "Republic of Korea": "Republic of Korea",
       "Republic of Moldova": "Republic of Moldova",
@@ -837,9 +875,10 @@
       "Syrian Arab Republic": "Syrian Arab Republic",
       "Tajikistan": "Tajikistan",
       "Thailand": "Thailand",
-      "North Macedonia": "North Macedonia",
+      "The United Kingdom": "The United Kingdom",
       "Timor-Leste": "Timor-Leste",
       "Togo": "Togo",
+      "Tokelau": "Tokelau",
       "Tonga": "Tonga",
       "Trinidad and Tobago": "Trinidad and Tobago",
       "Tunisia": "Tunisia",
@@ -849,7 +888,6 @@
       "Uganda": "Uganda",
       "Ukraine": "Ukraine",
       "United Arab Emirates": "United Arab Emirates",
-      "United Kingdom": "United Kingdom",
       "United Republic of Tanzania": "United Republic of Tanzania",
       "United States of America": "United States of America",
       "Uruguay": "Uruguay",
@@ -945,6 +983,9 @@
       "60-69 years": "60-69 years",
       "70-79 years": "70-79 years",
       "80+ years": "80+ years",
+      "12-17 years": "12-17 years",
+      "10-19 years": "10-19 years",
+      "20-59 years": "20-59 years",
       "1": "1",
       "2-3": "2-3",
       "4-5": "4-5",
@@ -1041,10 +1082,10 @@
       "Living together": "Living together",
       "Married": "Married",
       "Married or living together": "Married or living together",
-      "EU Migrants": "EU Migrants",
-      "Migrants": "Migrants",
-      "Non-EU Migrants": "Non-EU Migrants",
+      "Migrant": "Migrant",
       "Non-migrant": "Non-migrant",
+      "EU migrant": "EU migrant",
+      "Non-EU migrant": "Non-EU migrant",
       "None": "None",
       "1-2 children": "1-2 children",
       "3-4 children": "3-4 children",

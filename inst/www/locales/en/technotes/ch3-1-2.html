@@ -1,0 +1,693 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.2.335">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>heat-technotes – ch3-1-2</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1.6em;
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<script src="site_libs/quarto-html/quarto.js"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit"
+  }
+}</script>
+
+  <script>window.backupDefine = window.define; window.define = undefined;</script><script src="https://cdn.jsdelivr.net/npm/katex@0.15.1/dist/katex.min.js"></script>
+  <script>document.addEventListener("DOMContentLoaded", function () {
+ var mathElements = document.getElementsByClassName("math");
+ var macros = [];
+ for (var i = 0; i < mathElements.length; i++) {
+  var texText = mathElements[i].firstChild;
+  if (mathElements[i].tagName == "SPAN") {
+   katex.render(texText.data, mathElements[i], {
+    displayMode: mathElements[i].classList.contains('display'),
+    throwOnError: false,
+    macros: macros,
+    fleqn: false
+   });
+}}});
+  </script>
+  <script>window.define = window.backupDefine; window.backupDefine = undefined;</script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.1/dist/katex.min.css">
+
+<link rel="stylesheet" href="manual_styles.css">
+</head>
+
+<body class="nav-sidebar floating fullcontent">
+
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+    <div class="container-fluid d-flex justify-content-between">
+      <h1 class="quarto-secondary-nav-title">Technical Notes</h1>
+      <button type="button" class="quarto-btn-toggle btn" aria-label="Show secondary navigation">
+        <i class="bi bi-chevron-right"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="./">Technical Notes</a> 
+        <div class="sidebar-tools-main">
+    <a href="./about.html" title="About" class="sidebar-tool px-1"><i class="bi bi-question-circle"></i></a>
+    <a href="./docs/HEAT_HEATPlus_technical_notes.pdf" title="PDF" class="sidebar-tool px-1"><i class="bi bi-file-earmark-pdf"></i></a>
+</div>
+    </div>
+      </div>
+      <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+      </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link">Introduction</a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="./ch2.html" class="sidebar-item-text sidebar-link">Disaggregated data</a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#" aria-expanded="true">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./ch2-1.html" class="sidebar-item-text sidebar-link">Indicators</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./ch2-2.html" class="sidebar-item-text sidebar-link">Dimensions of inequality</a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="./ch3.html" class="sidebar-item-text sidebar-link">Summary measures</a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true">Simple measures</a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth2 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./ch3-1-1.html" class="sidebar-item-text sidebar-link">Difference (D)</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./ch3-1-2.html" class="sidebar-item-text sidebar-link active">Ratio (R)</a>
+  </div>
+</li>
+      </ul>
+  </li>
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="false">Disproportionality</a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="false">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth2 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./ch3-2-1.html" class="sidebar-item-text sidebar-link">Absolute concentration index (ACI)</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./ch3-2-2.html" class="sidebar-item-text sidebar-link">Relative concentration index (RCI)</a>
+  </div>
+</li>
+      </ul>
+  </li>
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="false">Regression-based</a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="false">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth2 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./ch3-3-1.html" class="sidebar-item-text sidebar-link">Slope index of inequality</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./ch3-3-2.html" class="sidebar-item-text sidebar-link">Relative index of inequality</a>
+  </div>
+</li>
+      </ul>
+  </li>
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" aria-expanded="false">Variance measures</a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" aria-expanded="false">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth2 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./ch3-4-1.html" class="sidebar-item-text sidebar-link">Between-group variance (BGV)</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./ch3-4-2.html" class="sidebar-item-text sidebar-link">Between-group standard deviation (BGSD)</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./ch3-4-3.html" class="sidebar-item-text sidebar-link">Coefficient of variation (CV)</a>
+  </div>
+</li>
+      </ul>
+  </li>
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" aria-expanded="false">Mean difference</a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" aria-expanded="false">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth2 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./ch3-5-1.html" class="sidebar-item-text sidebar-link">Mean difference from mean (unweighted) (MDMU)</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./ch3-5-2.html" class="sidebar-item-text sidebar-link">Mean difference from mean (weighted) (MDMW)</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./ch3-5-3.html" class="sidebar-item-text sidebar-link">Mean difference from best perfoming subgroup (unweighted) (MDBU)</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./ch3-5-4.html" class="sidebar-item-text sidebar-link">Mean difference from best perfoming subgroup (weighted) (MDBW)</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./ch3-5-5.html" class="sidebar-item-text sidebar-link">Mean difference from reference subgroup (unweighted) (MDRU)</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./ch3-5-6.html" class="sidebar-item-text sidebar-link">Mean difference from reference subgroup (weighted) (MDRW)</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./ch3-5-7.html" class="sidebar-item-text sidebar-link">Index of disparity (unweighted) (IDISU)</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./ch3-5-8.html" class="sidebar-item-text sidebar-link">Index of disparity (weighted) (IDISW)</a>
+  </div>
+</li>
+      </ul>
+  </li>
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" aria-expanded="false">Disproportionality</a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" aria-expanded="false">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-7" class="collapse list-unstyled sidebar-section depth2 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./ch3-6-1.html" class="sidebar-item-text sidebar-link">Theil index (TI)</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./ch3-6-2.html" class="sidebar-item-text sidebar-link">Mean log deviation (MLD)</a>
+  </div>
+</li>
+      </ul>
+  </li>
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-8" aria-expanded="false">Impact measures</a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-8" aria-expanded="false">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-8" class="collapse list-unstyled sidebar-section depth2 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./ch3-7-1.html" class="sidebar-item-text sidebar-link">Population attributable fraction (PAF)</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./ch3-7-2.html" class="sidebar-item-text sidebar-link">Population attributable risk (PAR)</a>
+  </div>
+</li>
+      </ul>
+  </li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-9" aria-expanded="true">Annex</a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-9" aria-expanded="true">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-9" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./annex-1.html" class="sidebar-item-text sidebar-link">Annex 1</a>
+  </div>
+</li>
+      </ul>
+  </li>
+    </ul>
+    </div>
+</nav>
+<!-- margin-sidebar -->
+    
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+
+
+<section id="ratio-r" class="level3">
+<h3 class="anchored" data-anchor-id="ratio-r">Ratio (R)</h3>
+<section id="definition" class="level4">
+<h4 class="anchored" data-anchor-id="definition">Definition</h4>
+<p>R is a relative measure of inequality that shows the ratio of two population subgroups. It is calculated for all inequality dimensions, provided that subgroup estimates are available for the two subgroups used in the calculation of R. R has no unit, therefore it can be used to compare the situation of inequality across indicators with different units.</p>
+</section>
+<section id="calculation" class="level4">
+<h4 class="anchored" data-anchor-id="calculation">Calculation</h4>
+<p>R is calculated as the ratio of two subgroups: <span class="math display">R=y_1/y_2</span> Note that the selection of <span class="math inline">y_1</span> and <span class="math inline">y_2</span> depends on the characteristics of the inequality dimension and the type of indicator, for which R is calculated. Table 2 provides an overview of the calculation of R.</p>
+<p><strong>Table 2</strong> Calculation of the Ratio (R)</p>
+<style type="text/css">
+.tg  {border-collapse:collapse;border-spacing:0;}
+.tg td{border-color:black;border-style:solid;border-width:1px;font-family:Arial, sans-serif;font-size:14px;
+  overflow:hidden;padding:10px 5px;word-break:normal;}
+.tg th{border-color:black;border-style:solid;border-width:1px;font-family:Arial, sans-serif;font-size:14px;
+  font-weight:normal;overflow:hidden;padding:10px 5px;word-break:normal;}
+.tg .tg-1wig{font-weight:bold;text-align:left;vertical-align:middle}
+.tg .tg-baqh{text-align:center;vertical-align:middle}
+.tg .tg-0lax{text-align:left;vertical-align:middle}
+.tg .tg-amwm{font-weight:bold;text-align:center;vertical-align:middle}
+</style>
+
+<table class="tg">
+<thead>
+<tr>
+<th class="tg-0lax" colspan="2">
+</th>
+<th class="tg-baqh" colspan="2">
+<span style="font-weight:bold">Indicator type</span>
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tg-1wig">
+Dimension type
+</td>
+<td class="tg-baqh">
+Reference subgroup selected?
+</td>
+<td class="tg-amwm">
+Favourable indicator
+</td>
+<td class="tg-amwm">
+Adverse indicator
+</td>
+</tr>
+<tr>
+<td class="tg-1wig" rowspan="2">
+Binary dimension
+</td>
+<td class="tg-baqh">
+Yes
+</td>
+<td class="tg-baqh">
+Reference group / Other group
+</td>
+<td class="tg-baqh">
+Other group / Reference group
+</td>
+</tr>
+<tr>
+<td class="tg-baqh">
+No
+</td>
+<td class="tg-baqh">
+Highest / Lowest
+</td>
+<td class="tg-baqh">
+Highest / Lowest
+</td>
+</tr>
+<tr>
+<td class="tg-1wig">
+Ordered dimension
+</td>
+<td class="tg-baqh">
+N/A
+</td>
+<td class="tg-baqh">
+Most-advantaged / Most-disadvantaged
+</td>
+<td class="tg-baqh">
+Most-disadvantaged / Most-advantaged
+</td>
+</tr>
+<tr>
+<td class="tg-1wig" rowspan="2">
+Non-ordered dimension
+</td>
+<td class="tg-baqh">
+Yes
+</td>
+<td class="tg-baqh">
+Reference group / <br>Other group (that maximizes the ratio)
+</td>
+<td class="tg-baqh">
+Other group (that maximizes the ratio) / Reference group
+</td>
+</tr>
+<tr>
+<td class="tg-baqh">
+No
+</td>
+<td class="tg-baqh">
+Highest / Lowest
+</td>
+<td class="tg-baqh">
+Highest / Lowest
+</td>
+</tr>
+</tbody>
+
+</table>
+<p>The variance of R is calculated as: <span class="math display">var(R)= (1/y_2)^2σ_1^2+ (y_1/y_2)^2σ_2^2</span> where <span class="math inline">σ_1</span> and <span class="math inline">σ_2</span> indicate the standard errors of the estimates of subgroups 1 and 2.</p>
+</section>
+<section id="interpretation" class="level4">
+<h4 class="anchored" data-anchor-id="interpretation">Interpretation</h4>
+<p>If there is no inequality, R takes the value one. R takes only positive values. The further the value of R from one, the higher the level of inequality.</p>
+<p>Note that R is displayed on a logarithmic scale. R values are intrinsically asymmetric: a ratio of one (no inequality) is halfway between a ratio of 0.5 (the denominator subgroup having half the value of the numerator subgroup) and a ratio of 2.0 (the denominator subgroup having double the value of the numerator subgroup).</p>
+</section>
+<section id="example" class="level4">
+<h4 class="anchored" data-anchor-id="example">Example</h4>
+<p>Figure a shows data on skilled birth attendance disaggregated by economic status for two years (2005 and 2010). For each year, there are five bars – one for each wealth quintile. The graph shows that, overall, coverage increased in all quintiles and inequality between quintiles reduced over time. The ratio quantifies the level of inequality in each year. Figure b shows that the ratio of quintile 5 to quintile 1 reduced from 4.1 in 2005 to 1.7 in 2010. In 2005, coverage in quintile 5 was about four times higher than in quintile 1, while in 2010, coverage in quintile 5 was less than two times higher than in quintile 1. Relative economic-related inequality decreased between 2005 and 2010.</p>
+<div class="cell" data-warnings="false">
+<table class="table table-sm table-striped">
+<colgroup>
+<col style="width: 50%">
+<col style="width: 50%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: center;">Figure a. Births attended by skilled health personnel disaggregated by economic status</th>
+<th style="text-align: center;">Figure b. Economic-related inequality in births attended by skilled health personnel: ratio (R)</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;"><img src="images/Picture9.png" class="img-fluid" style="width:80.0%"></td>
+<td style="text-align: center;"><img src="images/Picture10.png" class="img-fluid" style="width:80.0%"></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>Figure c shows data on skilled birth attendance disaggregated by subnational region for two years (2005 and 2010). For each year, there are multiple bars – one for each region. The graph shows that, overall, coverage increased in all regions and inequality between regions reduced over time. The ratio quantifies the level of inequality in each year. Figure d shows that the ratio of the best to the worst performing region reduced from 6.9 in 2005 to 3.1 in 2010. In 2005, coverage in the best performing region was almost seven times higher than in the worst performing region, while in 2010, coverage in the best performing region was about three times higher than in the worst performing region. Relative economic-related inequality decreased between 2005 and 2010.</p>
+<div class="cell" data-warnings="false">
+<table class="table table-sm table-striped">
+<colgroup>
+<col style="width: 50%">
+<col style="width: 50%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: center;">Figure c.&nbsp;Births attended by skilled health personnel disaggregated by subnational region</th>
+<th style="text-align: center;">Figure d.&nbsp;Subnational regional inequality in births attended by skilled health personnel: ratio (R)</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;"><img src="images/Picture11.png" class="img-fluid" style="width:80.0%"></td>
+<td style="text-align: center;"><img src="images/Picture12.png" class="img-fluid" style="width:80.0%"></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="other-difference-measures" class="level4">
+<h4 class="anchored" data-anchor-id="other-difference-measures">Other difference measures</h4>
+<p>In addition to the ratio measure described above, variations of the ratio are calculated for non-ordered inequality dimensions with many subgroups, such as subnational region. The following ratio measures are calculated for</p>
+<ul>
+<li>Dimensions with more than 30 subgroups:
+<ul>
+<li><strong>Ratio of percentile 80 to percentile 20</strong>. The ratio of percentile 80 to percentile 20 is calculated by identifying the subgroups that correspond to percentiles 80 and 20 and dividing the estimate for percentile 80 by the estimate for percentile 20: <span class="math inline">R_{p80p20}=y_{p80}⁄y_{p20}</span></li>
+<li><strong>Ratio of mean estimates in quintile 5 to quintile 1</strong>. The ratio of mean estimates in quintile 5 and quintile 1 is calculated by dividing subgroups into quintiles, determining the mean estimate for each quintile and dividing the mean estimate in quintile 5 by the mean estimate in quintile 1: <span class="math inline">R_{q5q1}=y_{q5}⁄y_{q1}</span></li>
+</ul></li>
+<li>Dimensions with more than 60 subgroups:
+<ul>
+<li><strong>Ratio of percentile 90 to percentile 10</strong>. The ratio of percentile 90 to percentile 10 is calculated by identifying the subgroups that correspond to percentiles 90 and 10 and dividing the estimate for percentile 90 by the estimate for percentile 10: <span class="math inline">R_{p90p10}=y_{p90}⁄y_{p10}</span></li>
+<li><strong>Ratio of mean estimates in decile 10 to decile 1</strong>. The ratio of mean estimates in decile 10 to decile 1 is calculated by dividing subgroups into deciles, determining the mean estimate for each decile and dividing the mean estimate in decile 10 by the mean estimate in decile 1: <span class="math inline">R_{d10d1}=y_{d10}⁄y_{d1}</span></li>
+</ul></li>
+<li>Dimensions with more than 100 subgroups:
+<ul>
+<li><strong>Ratio of percentile 95 to percentile 5</strong>. The ratio of percentile 95 to percentile 5 is calculated by identifying the subgroups that correspond to percentiles 95 and 5 and dividing the estimate for percentile 95 by the estimate for percentile 5: <span class="math inline">R_{p95p5}=y_{p95}⁄y_{p5}</span></li>
+<li><strong>Ratio of mean estimates in the top 5% to the bottom 5%</strong>. The ratio of mean estimates in the top 5% to the bottom 5% is calculated by dividing subgroups into vigintiles, determining the mean estimate for each vigintile and dividing the mean estimate in the top 5% by the mean estimate in the bottom 5%: <span class="math inline">R_{v20v1}=y_{v20}⁄y_{v1}</span></li>
+</ul></li>
+</ul>
+<p>For dimensions with many subgroups, these measures may be a more accurate reflection of the level of inequality than measuring the ratio of the maximum and minimum values using the (range) ratio, as they avoid using possible outlier values. They are displayed in the ‘Summary measures’ tab of the selection menu for horizontal bar graphs showing disaggregated data under the ‘Explore inequality’ component of the tool.</p>
+<p><img src="images/Picture13.png" class="img-fluid" data-fig-align="center"> <br><br> <img src="images/Picture14.png" class="img-fluid" data-fig-align="center"></p>
+<div class="infobox1 warning">
+<p><font size="4.5"> <strong>💡 Ratio (R)</strong> </font></p>
+<p>Measures the ratio of two population subgroups.</p>
+<p>Takes the value one if there is no inequality. Takes only positive values (larger or smaller than one). The further the value from one, the higher the level of inequality. Variations of the ratio are calculated for non-ordered inequality dimensions with many subgroups. These measures avoid using possible outlier values.</p>
+<ul>
+<li>Measures relative inequality (relative measure)</li>
+<li>Suitable for all inequality dimensions</li>
+<li>Takes into account two population subgroups (simple measure)</li>
+<li>Does not take into account the population size of subgroups (unweighted measure)</li>
+</ul>
+</div>
+
+
+</section>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    target: function(trigger) {
+      return trigger.previousElementSibling;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+</body></html>

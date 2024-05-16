@@ -11,9 +11,22 @@ $(function () {
   $("nav").toggleClass("navbar-expand-xl navbar-expand-custom");
 
   Shiny.addCustomMessageHandler("modal-stay-open", function (message) {
-    console.log('in here')
     $("body").addClass("modal-open")
   })
+
+
+Shiny.addCustomMessageHandler("enable_determinants", function(message){
+
+  if(message['is_annual'] === true){
+    $("button[value='determinants']").removeClass("disabled");
+    $("button[value='determinants']").prop('title', '');
+  } else {
+    $("button[value='determinants']").addClass("disabled");
+    $("button[value='determinants']").prop('title', 'Determinants are only shown for datasets with annual data');
+  }
+
+})
+
 
 Shiny.addCustomMessageHandler("hide-map-button", function(message){
 
@@ -51,15 +64,20 @@ Shiny.addCustomMessageHandler("hide-map-button", function(message){
     add_class_invalid("#heat-explore_summary_bar-year", message);
     add_class_invalid("#heat-explore_summary_line-year", message);
     add_class_invalid("#heat-explore_summary_table-year", message);
-
     add_class_invalid("#heat-compare_disag_table-year", message);
     add_class_invalid("#heat-compare_disag_graph-year", message);
     add_class_invalid("#heat-compare_summary_graph-year", message);
     add_class_invalid("#heat-compare_summary_table-year", message);
+    add_class_invalid("#heat-determinant_graph-year", message);
+    add_class_invalid("#heat-determinant_table-year", message);
+  });
+
+    Shiny.addCustomMessageHandler("make-invalid-determinant", function (message) {
+      add_class_invalid("#heat-determinant_graph-determinant", message);
+      add_class_invalid("#heat-determinant_table-determinant", message);
   });
 
   Shiny.addCustomMessageHandler("chart-timer", function (message) {
-      console.log('in chart timer listen')
       checkForChartTimerDebug();
   });
 
@@ -187,7 +205,7 @@ Shiny.addCustomMessageHandler("hide-map-button", function(message){
     }
 
     var chart = document.querySelector(msg.selector);
-    var width = msg.width || chart.offsetWidth;
+    var width = msg.width || chart.offsetWidth * 1.035;
     var height = msg.height || chart.offsetHeight;
 
     if (!msg.height && chart.querySelector(".heat-chart-disclaimer")) {
@@ -453,7 +471,6 @@ function saveImage(url, type, filename, width, height) {
 }
 
 function add_class_invalid(idval, message, classval = "invalid-val") {
-  console.log(message['from'])
   const invalid_vals = [].concat(message["invalid"]);
   const valid_vals = [].concat(message["valid"]);
   var checkExist1 = setInterval(function () {
@@ -499,7 +516,6 @@ function checkForChartTimerDebug() {
   var checkExist4 = setInterval(function () {
     //
     if ($(".highcharts-root").length) {
-      console.log('in js')
       Shiny.setInputValue("heat-chartexists_debug_timer", Math.random());
       clearInterval(checkExist4);
     }

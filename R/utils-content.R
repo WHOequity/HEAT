@@ -26,7 +26,7 @@ licenseModal <- function(ns = NULL) {
     size = "lg",
     header = "Terms of use and software license agreement",
     htmltools::includeHTML(
-      system.file("www/locales/en/license-popup.html", package = get_heat_prefix())
+      pkgload:::shim_system.file("www/locales/en/license-popup.html", package = get_heat_prefix())
     ),
     footer = div(
       buttonInput(
@@ -56,7 +56,8 @@ languageSelect <- function() {
     full.names = FALSE
   )
 
-  possible_langs <- possible_langs[possible_langs != ""]
+
+  possible_langs <- possible_langs[nchar(possible_langs) == 2]
 
   tags$select(
     class = "custom-select d-inline-block w-auto",

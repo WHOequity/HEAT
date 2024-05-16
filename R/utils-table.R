@@ -18,10 +18,17 @@
 
 round_for_tables <- function(x, decimal_places) {
 
+  if(all(is.na(x))){
+    vals <- rep("", length(x))
+    return(vals)
+  }
+
   if(is.infinite(decimal_places)){
     decimal_places <- max(nchar(x), na.rm = TRUE)
+    decimal_places <- ifelse(decimal_places > 20, 20, decimal_places)
     vals <- format(round(x, decimal_places), nsmall = decimal_places)
   } else {
+    decimal_places <- ifelse(decimal_places > 20, 20, decimal_places)
     vals <- format(round(x, decimal_places), nsmall = decimal_places)
     vals[trimws(vals) == "NA"] <- ""
   }
@@ -35,7 +42,7 @@ table_disclaimer <- function(language = "en", is_who_dataset) {
 
     nonwho_disclaimer <- ""
 
-    if(!is_who_dataset()){
+    if(!is.null(is_who_dataset()) && !is_who_dataset() && !is_heat_plus()){
       nonwho_disclaimer <-  c(
         paste('"', get_nonwho_disclaimer(), '"'),
         "\n"

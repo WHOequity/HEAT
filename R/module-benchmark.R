@@ -110,7 +110,7 @@ benchmarkUI <- function(id) {
           id = ns("recent"),
           choices = "recent",
           values = "recent",
-          selected = NULL
+          selected = "recent"
         ) %>%
           margin(bottom = 2),
         collapsePane(
@@ -164,12 +164,12 @@ benchmarkServer <- function(input, output, session, parent, Data,
   #data_date_to_integer <- Data$date_to_integer()
 
 
-
   ns <- session$ns
   this <- ns(NULL)
 
 
   add_time("enter benchmarkServer", this)
+
 
   # ├ setters ----
   setBenchmarkYear <- function(values) {
@@ -177,6 +177,7 @@ benchmarkServer <- function(input, output, session, parent, Data,
     state$benchmark_year_beg <- comp_yrs$beg
     state$benchmark_year_end <- comp_yrs$end
   }
+
 
 
   # helpers ----
@@ -203,6 +204,7 @@ benchmarkServer <- function(input, output, session, parent, Data,
     )
 
     new_comparisons <- benchmark_comparisons(
+      Events$set_benchmark_setting$selected,
       Data$setting_yr_src(),
       Data$country_info(),
       input$income,
@@ -258,7 +260,9 @@ benchmarkServer <- function(input, output, session, parent, Data,
       selected = input$region
     )
     add_time("observe d_region()", this)
+
     new_comparisons <- benchmark_comparisons(
+      Events$set_benchmark_setting$selected,
       Data$setting_yr_src(),
       Data$country_info(),
       input$income,
@@ -337,7 +341,9 @@ benchmarkServer <- function(input, output, session, parent, Data,
       selected = input$benchmark_source
     )
 
+
     new_comparisons <- benchmark_comparisons(
+      Events$set_benchmark_setting$selected,
       Data$setting_yr_src(),
       Data$country_info(),
       input$income,
@@ -411,6 +417,7 @@ benchmarkServer <- function(input, output, session, parent, Data,
   r_comparison <- reactive(input$comparison)
   d_comparison <- debounce(r_comparison, 450)
 
+
   # ├ observe comparison ----
   observeEvent(d_comparison(), {
     req(visible())
@@ -419,24 +426,28 @@ benchmarkServer <- function(input, output, session, parent, Data,
       from = this,
       selected = input$comparison
     )
-  })
+  }, ignoreNULL = FALSE)
 
   # ├ set_benchmark_comparison ----
   observeEvent(Events$set_benchmark_comparison, {
+
     msg <- Events$set_benchmark_comparison
+    if(is.null(msg$selected))
+      msg$selected <- "" # yonder bug, git199
     msg_yr <- Events$set_year
     do_update <- function() {
       if (!ignoreMessage(msg)) {
-        updateChipInput(
-          id = "comparison",
-          choices = msg$choices,
-          values = msg$values,
-          selected = msg$selected,
-          session = session
-        )
 
+          updateChipInput(
+            id = "comparison",
+            choices = msg$choices,
+            values = msg$values,
+            selected = msg$selected,
+            session = session
+          )
 
-      }
+        }
+
     }
 
     if (immediateMessage(msg)) {
@@ -567,15 +578,16 @@ benchmarkServer <- function(input, output, session, parent, Data,
             Data$date_to_integer()
           )
 
+          txt <- translate(c(isolate(language()), "benchmarks", "text", "error"))
+
           if(!is.null(input$recent))
             return()
           if(!is.null(value) && as.numeric(end_year) < as.numeric(beg_year))
-            translate(c(language, "benchmarks", "text", "error"))  #Start date should be before end date"
-            #"text"
+            txt #Start date should be before end date"
         }
 
-        iv$add_rule("benchmark_year_beg", f)
-        iv$add_rule("benchmark_year_end", f)
+        iv$add_rule(ns("benchmark_year_beg"), f)
+        iv$add_rule(ns("benchmark_year_end"), f)
         iv$enable()
 
       }
@@ -641,15 +653,16 @@ benchmarkServer <- function(input, output, session, parent, Data,
             Data$date_to_integer()
           )
 
+          txt <- translate(c(isolate(language()), "benchmarks", "text", "error"))
+
           if(!is.null(input$recent))
             return()
           if(!is.null(value) && as.numeric(end_year) < as.numeric(beg_year))
-            translate(c(isolate(language()), "benchmarks", "text", "error")) #Start date should be before end date"
-            #"text"
+            txt #Start date should be before end date"
         }
 
-        iv$add_rule("benchmark_year_beg", f)
-        iv$add_rule("benchmark_year_end", f)
+        iv$add_rule(ns("benchmark_year_beg"), f)
+        iv$add_rule(ns("benchmark_year_end"), f)
         iv$enable()
 
 
@@ -668,7 +681,6 @@ benchmarkServer <- function(input, output, session, parent, Data,
 
   # set all benchmark fields ----
   observeEvent(c(Events$set_benchmark_setting), {
-
     req(Events$set_benchmark_setting)
 
     add_time("observe set_benchmark_setting", this)
@@ -683,11 +695,16 @@ benchmarkServer <- function(input, output, session, parent, Data,
     if (NROW(selection_setting) > 0) {
       new_income <- selection_setting$wbincome_name
       new_region <- selection_setting$whoreg6
-      new_comparisons <- benchmark_comparisons(Data$setting_yr_src(),
-                                               Data$country_info(),
-                                               new_income,
-                                               new_region,
-                                               src)
+
+
+      new_comparisons <- benchmark_comparisons(
+        Events$set_benchmark_setting$selected,
+        Data$setting_yr_src(),
+        Data$country_info(),
+        new_income,
+        new_region,
+        src
+      )
     } else {
       new_income <- NULL
       new_region <- NULL

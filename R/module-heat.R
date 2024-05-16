@@ -116,6 +116,7 @@ heatApp <- function(launch.browser = TRUE, port = 8080) {
             heatServer, "heat",
             open_explore = m_home$open_explore,
             open_compare = m_home$open_compare,
+            open_determinant = if(!is_heat_plus()) m_home$open_determinant else NULL,
             language = r_lang,
             initial_dataset = m_data_choose$dataset_name()
           )
@@ -147,6 +148,8 @@ heatUI <- function(id, home, nav_extra = NULL) {
               languageSelect(),
               if (!getOption("heat.plus", FALSE)) actionButton(inputId = ns("datachoose"), label = tags$span(i18n("navigation.labels.choose_dataset"))) |>
                 margin(right = 2),
+              if(getOption("heat.plus", "FALSE"))  nav_extra %>%
+                margin(right = 2)
           ) %>%
             margin(right = 2),
 
@@ -199,6 +202,7 @@ heatUI <- function(id, home, nav_extra = NULL) {
               ),
               values = c("disag", "summary")
             ),
+            if(!is_heat_plus()) "determinants" else NULL,
             menuInput(
               align = "right",
               id = ns("about"),
@@ -215,14 +219,21 @@ heatUI <- function(id, home, nav_extra = NULL) {
                 "acknowledgements"
               )
             )
-          ),
-          values = c("home", "explore", "compare", "about"),
+          ) |>
+            purrr::compact(),
+          values = c(
+            "home",
+            "explore",
+            "compare",
+            if(!is_heat_plus()) "determinants" else NULL,
+            "about"
+            ),
           selected = "home"
         ) %>%
           margin(left = -4, right = -4) %>%
-          active(if (getOption("heat.plus", FALSE)) "green" else "orange"),
+          active(if (getOption("heat.plus", FALSE)) "green" else "orange")
         #if (getOption("heat.plus", TRUE)) dataChooseDropdown(ns("dc")),
-        nav_extra  # extra nav components ----
+          # extra nav components ----
         # div(class="desktop-lang-select",
         #     languageSelect()
         # )
@@ -316,7 +327,19 @@ heatUI <- function(id, home, nav_extra = NULL) {
                       "| ",
                       tags$span(i18n("navigation.labels.summary"))
                   )
-                )
+                ),
+                if(!is_heat_plus()){
+                  navPane(
+                    fade = FALSE,
+                    id = ns("pane_determinant_titles"),
+                    uiOutput(ns('dataname_detdis')),
+                    div(class = "grey-pane-title",
+                        tags$span(i18n("navigation.labels.determinants"))
+                        #tags$span("Determinants")
+                    )
+                  )
+                }
+
               )
             ),
             column(
@@ -402,7 +425,27 @@ heatUI <- function(id, home, nav_extra = NULL) {
                     selected = "graph"
                   ) %>%
                     active(if (getOption("heat.plus", FALSE)) "green" else "orange")
-                )
+                ),
+                if(!is_heat_plus()){
+                  navPane(
+                    fade = FALSE,
+                    id = ns("pane_nav_determinant"),
+                    radiobarInput(
+                      id = ns("nav_determinant"),
+                      choices = list(
+                        list(div(i18n("navigation.labels.graph")), icon("chart-line")),
+                        list(div(i18n("navigation.labels.table")), icon("table"))
+                      ),
+                      values = c(
+                        "graph",
+                        "table"
+                      ),
+                      selected = "graph"
+                    ) %>%
+                      active(if (getOption("heat.plus", FALSE)) "green" else "orange")
+                  )
+                }
+
               )
             )
           )
@@ -767,7 +810,76 @@ heatUI <- function(id, home, nav_extra = NULL) {
                 decimal_places = FALSE
               )
             )
-          )
+          ),
+          if(!is_heat_plus()){
+            navPane(
+              fade = FALSE,
+              id = ns("pane_determinant_graph"),
+              # determinant graph ----
+              viewUI(
+                id = ns("determinant_graph"),
+                nav = c(NAV$SELECTION, NAV$BENCHMARK, NAV$OPTIONS, NAV$DOWNLOADS),
+                source = Inf,
+                year = 1,
+                indicator = 1,
+                determinant = 1,
+                dimension = NULL,
+                measure = NULL,
+                summaries = FALSE,
+                benchmarks = TRUE,
+                output = function(...) uiOutput(class = "heat-plot-output container-fluid", ...),
+                options = list(
+                  data_labels = FALSE,
+                  confidence_intervals = FALSE,
+                  reference_lines = FALSE,
+                  regression_line = TRUE,
+                  subgroup_highlight = FALSE,
+                  sorting = FALSE,
+                  axis_limits = 4,
+                  label_format = TRUE,
+                  titles = c("main", "horizontal", "vertical"),
+                  columns_disaggregated = FALSE,
+                  columns_summary = FALSE,
+                  decimal_places = FALSE
+                )
+              )
+            )
+            },
+          if(!is_heat_plus()){
+            navPane(
+              fade = FALSE,
+              id = ns("pane_determinant_table"),
+              # determinant table ----
+              viewUI(
+                id = ns("determinant_table"),
+                nav = c(NAV$SELECTION, NAV$BENCHMARK, NAV$OPTIONS, NAV$DOWNLOADS),
+                source = Inf,
+                year = 1,
+                indicator = Inf,
+                determinant = Inf,
+                dimension = NULL,
+                measure = NULL,
+                summaries = FALSE,
+                benchmarks = TRUE,
+                output = function(...) DT::dataTableOutput(...),
+                options = list(
+                  data_labels = FALSE,
+                  confidence_intervals = FALSE,
+                  reference_lines = FALSE,
+                  subgroup_highlight = FALSE,
+                  sorting = FALSE,
+                  axis_limits = FALSE,
+                  label_format = FALSE,
+                  titles = NULL,
+                  columns_disaggregated = FALSE,
+                  columns_summary = FALSE,
+                  columns_determinant = TRUE,
+                  decimal_places = FALSE
+                )
+              )
+            )
+          }
+
         )
       )
     )
@@ -777,6 +889,7 @@ heatUI <- function(id, home, nav_extra = NULL) {
 #' @export
 heatServer <- function(input, output, session, Data = NULL,
                        open_explore = NULL, open_compare = NULL,
+                       open_determinant = NULL,
                        nullify = NULL, on_data_open = NULL, language = NULL,
                        initial_dataset = "rep_rmnch") {
   ns <- session$ns
@@ -806,6 +919,8 @@ heatServer <- function(input, output, session, Data = NULL,
     data_change_explore_summary = FALSE,
     data_change_compare_disag = FALSE,
     data_change_compare_summary = FALSE,
+    data_change_determinant = FALSE,
+    #data_change_determinant = FALSE,
     data_name = initial_dataset,
     force_ui_data_refresh = FALSE # git687
   )
@@ -885,6 +1000,15 @@ heatServer <- function(input, output, session, Data = NULL,
           heatdata::translate_subset(language = language())
 
       }),
+      setting_avg = reactive({
+        req(language(), dataset_name())
+
+        add_time("Begin reading inequality data")
+
+        heatdata::get_heat_table(dataset_name(), "data_setting_avg") |>
+          heatdata::translate_subset(language = language())
+
+      }),
       strata = reactive({
         req(language(), dataset_name())
 
@@ -920,6 +1044,15 @@ heatServer <- function(input, output, session, Data = NULL,
         heatdata::get_heat_table(dataset_name(), "info_date_to_integer") |>
           heatdata::translate_subset(language = language())
 
+      }),
+      determinants = reactive({
+        req(language(), dataset_name(), !is_heat_plus())
+
+        add_time("Begin reading date_to_integer data")
+
+        heatdata::get_heat_table(dataset_name(), "determinants") |>
+          heatdata::translate_subset(language = language())
+
       })
     )
   }
@@ -938,7 +1071,7 @@ heatServer <- function(input, output, session, Data = NULL,
 
     if (clicked == "home") {
       showNavPane(ns("pane_home"))
-    } else if (clicked == "explore" || clicked == "compare") {
+    } else if (clicked == "explore" || clicked == "compare" || clicked == "determinants") {
       showNavPane(ns("pane_main"))
     } else {
       showNavPane(ns("pane_other"))
@@ -965,11 +1098,12 @@ heatServer <- function(input, output, session, Data = NULL,
     path <- file.path("www", "locales", "en", file)
 
     if (is.null(.about_cache[[path]])) {
-      lines <- readLines(system.file(path, package = get_heat_prefix()))
+      lines <- readLines(pkgload:::shim_system.file(path, package = get_heat_prefix()))
 
       metadata <- heatdata::info_databases |>
         dplyr::filter(internal_name == dataset_name()) |>
-        dplyr::pull(metadata)
+        dplyr::pull(metadata) |>
+        unique()
 
       metadata <- paste0("heat-assets/locales/en/", metadata)
 
@@ -1091,6 +1225,22 @@ heatServer <- function(input, output, session, Data = NULL,
     }
   })
 
+  observe({
+
+    req(input$nav == "determinants")
+    clicked <- input$nav_determinant
+    if (clicked == "graph") {
+      showNavPane(ns("pane_determinant_graph"))
+    } else if (clicked == "table") {
+      showNavPane(ns("pane_determinant_table"))
+    }
+
+    showNavPane(ns("pane_nav_determinant"))
+    showNavPane(ns("pane_determinant_titles"))
+
+  })
+
+
   if (!is.null(open_explore)) {
     if (!is.list(open_explore)) {
       open_explore <- list(open_explore)
@@ -1113,6 +1263,19 @@ heatServer <- function(input, output, session, Data = NULL,
       observeEvent(r(), {
         updateNavInput("nav", selected = "compare", session = session)
         updateMenuInput("compare", selected = "disag", session = session)
+      })
+    })
+  }
+
+  if (!is.null(open_determinant)) {
+    if (!is.list(open_determinant)) {
+      open_determinant <- list(open_determinant)
+    }
+
+    lapply(open_determinant, function(r) {
+      observeEvent(r(), {
+        updateNavInput("nav", selected = "determinants", session = session)
+        updateMenuInput("determinants", selected = "disag", session = session)
       })
     })
   }
@@ -1152,9 +1315,16 @@ heatServer <- function(input, output, session, Data = NULL,
     updateRadiobarInput("nav_compare_disag", selected = "graph")
     updateRadiobarInput("nav_compare_summary", selected = "graph")
 
+    if(!is_heat_plus())
+      updateRadiobarInput("nav_determinant", selected = "graph")
+
     updateNavInput("nav", selected = "explore", session = session)
     updateMenuInput("explore", selected = "disag", session = session)
     updateMenuInput("compare", selected = FALSE, session = session)
+
+    if(!is_heat_plus())
+      updateMenuInput("determinants", selected = FALSE, session = session)
+
     showNavPane(ns("pane_explore_disag_line"))
 
     # git687
@@ -1165,6 +1335,7 @@ heatServer <- function(input, output, session, Data = NULL,
     state$data_change_explore_summary <- TRUE
     state$data_change_compare_disag <- TRUE
     state$data_change_compare_summary <- TRUE
+    state$data_change_determinant <- TRUE
 
     datname <- gsub("data_", "", dataset_name()) |> unique()
     # txt <- heatdata::info_databases$dataset_name[heatdata::info_databases$internal_name == datname ] |>
@@ -1179,6 +1350,8 @@ heatServer <- function(input, output, session, Data = NULL,
     output$dataname_expsum <- renderUI(tmpui)
     output$dataname_comdis <- renderUI(tmpui)
     output$dataname_comsum <- renderUI(tmpui)
+    output$dataname_detdis <- renderUI(tmpui)
+    #output$dataname_detsum <- renderUI(tmpui)
 
     Events$set_recent_year <- list(
       from = "init",
@@ -1191,6 +1364,11 @@ heatServer <- function(input, output, session, Data = NULL,
 
     disp <- ifelse(state$is_map_dataset, "true", "false")
     session$sendCustomMessage("hide-map-button", list(display = disp))
+
+    is_annual_ds <- unique(info_database$annual)
+
+    if(!is_heat_plus())
+      session$sendCustomMessage("enable_determinants", list(is_annual = is_annual_ds))
 
 
     session$onFlushed(waiter::waiter_hide)
@@ -1245,13 +1423,14 @@ heatServer <- function(input, output, session, Data = NULL,
   )
 
 
+  if(is_heat_plus()){
+    state$heat_plus <- TRUE
+  }
 
   # VIEWS ON DELAYED LOAD ----
 
-  observeEvent(input$chartexists, {
-
-
-
+  observeEvent(c(input$chartexists, state$heat_plus), {
+    message('Chart has loaded')
 
     # compare disaggregated graph ----
     callModule(
@@ -1680,6 +1859,100 @@ heatServer <- function(input, output, session, Data = NULL,
       }
     )
 
+    if(!is_heat_plus()){
+      # determinant disaggregated table ----
+      callModule(
+        viewServer, "determinant_table",
+        Events = Events, Data = Data,
+        visible = reactive(
+          input$nav == "determinants" &&
+            input$nav_determinant == "table"
+        ),
+        source = Inf,
+        year = 1,
+        indicator = Inf,
+        dimension = Inf,
+        measure = NULL,
+        determinant = Inf,
+        summaries = FALSE, benchmarks = TRUE, render = DT::renderDataTable,
+        downloads = list(
+          chart = FALSE
+        ),
+        language = language,
+        dataset_name = dataset_name,
+        is_who_dataset = reactive(state$is_who_dataset),
+        is_map_dataset = reactive(state$is_map_dataset),
+        visual = function(.data, ...) {
+          args <- list(...)
+          table_determinant(
+            .data = .data,
+            columns = args$columns,
+            decimal_places = args$table_decimals,
+            focus_setting = args$focus_setting,
+            data_only = args$data_only,
+            rename = args$rename,
+            language = args$language
+          )
+
+        }
+      )
+
+      # determinant disaggregated graph ----
+      callModule(
+        viewServer, "determinant_graph",
+        Events = Events, Data = Data,
+        visible = reactive(
+          input$nav == "determinants" &&
+            input$nav_determinant == "graph"
+        ),
+        source = Inf,
+        year = 1,
+        indicator = 1,
+        dimension = 1,
+        measure = NULL,
+        determinant = 1,
+        summaries = FALSE,
+        benchmarks = TRUE, render = renderUI,
+        options = list(
+          title = title_determinant,
+          regression_line = TRUE
+        ),
+        downloads = list(
+          chart = TRUE
+        ),
+        language = language,
+        dataset_name = dataset_name,
+        is_who_dataset = reactive(state$is_who_dataset),
+        is_map_dataset = reactive(state$is_map_dataset),
+        visual = function(.data, ...) {
+          args <- list(...)
+
+          chartDeterminant(
+            data = .data,
+            title_main = args$title_main,
+            title_horizontal = args$title_horizontal,
+            title_vertical = args$title_vertical,
+            axis_horizontal_min = args$axis_horizontal_min,
+            axis_horizontal_max = args$axis_horizontal_max,
+            axis_vertical_min = args$axis_vertical_min,
+            axis_vertical_max = args$axis_vertical_max,
+            focus_setting = args$focus_setting,
+            regression_line = args$regression_line,
+            label_style = args$label_style,
+            label_size = args$label_size,
+            decimal_places = args$decimal_places,
+            language = args$language,
+            is_who_dataset = args$is_who_dataset
+          )
+        }
+      )
+
+    }
+
+
+
+
+    message('Done loading modules')
   }, once = TRUE)
   # observe change in main data ----
   observeEvent(c(Data$main(), language()), {

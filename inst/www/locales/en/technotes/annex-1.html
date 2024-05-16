@@ -1,0 +1,1163 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.2.335">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>heat-technotes – annex-1</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1.6em;
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<script src="site_libs/quarto-html/quarto.js"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit"
+  }
+}</script>
+
+  <script>window.backupDefine = window.define; window.define = undefined;</script><script src="https://cdn.jsdelivr.net/npm/katex@0.15.1/dist/katex.min.js"></script>
+  <script>document.addEventListener("DOMContentLoaded", function () {
+ var mathElements = document.getElementsByClassName("math");
+ var macros = [];
+ for (var i = 0; i < mathElements.length; i++) {
+  var texText = mathElements[i].firstChild;
+  if (mathElements[i].tagName == "SPAN") {
+   katex.render(texText.data, mathElements[i], {
+    displayMode: mathElements[i].classList.contains('display'),
+    throwOnError: false,
+    macros: macros,
+    fleqn: false
+   });
+}}});
+  </script>
+  <script>window.define = window.backupDefine; window.backupDefine = undefined;</script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.1/dist/katex.min.css">
+
+<link rel="stylesheet" href="manual_styles.css">
+</head>
+
+<body class="nav-sidebar floating fullcontent">
+
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+    <div class="container-fluid d-flex justify-content-between">
+      <h1 class="quarto-secondary-nav-title">Technical Notes</h1>
+      <button type="button" class="quarto-btn-toggle btn" aria-label="Show secondary navigation">
+        <i class="bi bi-chevron-right"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="./">Technical Notes</a> 
+        <div class="sidebar-tools-main">
+    <a href="./about.html" title="About" class="sidebar-tool px-1"><i class="bi bi-question-circle"></i></a>
+    <a href="./docs/HEAT_HEATPlus_technical_notes.pdf" title="PDF" class="sidebar-tool px-1"><i class="bi bi-file-earmark-pdf"></i></a>
+</div>
+    </div>
+      </div>
+      <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+      </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link">Introduction</a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="./ch2.html" class="sidebar-item-text sidebar-link">Disaggregated data</a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#" aria-expanded="true">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./ch2-1.html" class="sidebar-item-text sidebar-link">Indicators</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./ch2-2.html" class="sidebar-item-text sidebar-link">Dimensions of inequality</a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="./ch3.html" class="sidebar-item-text sidebar-link">Summary measures</a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="false">Simple measures</a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="false">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth2 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./ch3-1-1.html" class="sidebar-item-text sidebar-link">Difference (D)</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./ch3-1-2.html" class="sidebar-item-text sidebar-link">Ratio (R)</a>
+  </div>
+</li>
+      </ul>
+  </li>
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="false">Disproportionality</a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="false">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth2 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./ch3-2-1.html" class="sidebar-item-text sidebar-link">Absolute concentration index (ACI)</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./ch3-2-2.html" class="sidebar-item-text sidebar-link">Relative concentration index (RCI)</a>
+  </div>
+</li>
+      </ul>
+  </li>
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="false">Regression-based</a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="false">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth2 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./ch3-3-1.html" class="sidebar-item-text sidebar-link">Slope index of inequality</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./ch3-3-2.html" class="sidebar-item-text sidebar-link">Relative index of inequality</a>
+  </div>
+</li>
+      </ul>
+  </li>
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" aria-expanded="false">Variance measures</a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" aria-expanded="false">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth2 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./ch3-4-1.html" class="sidebar-item-text sidebar-link">Between-group variance (BGV)</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./ch3-4-2.html" class="sidebar-item-text sidebar-link">Between-group standard deviation (BGSD)</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./ch3-4-3.html" class="sidebar-item-text sidebar-link">Coefficient of variation (CV)</a>
+  </div>
+</li>
+      </ul>
+  </li>
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" aria-expanded="false">Mean difference</a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" aria-expanded="false">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth2 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./ch3-5-1.html" class="sidebar-item-text sidebar-link">Mean difference from mean (unweighted) (MDMU)</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./ch3-5-2.html" class="sidebar-item-text sidebar-link">Mean difference from mean (weighted) (MDMW)</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./ch3-5-3.html" class="sidebar-item-text sidebar-link">Mean difference from best perfoming subgroup (unweighted) (MDBU)</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./ch3-5-4.html" class="sidebar-item-text sidebar-link">Mean difference from best perfoming subgroup (weighted) (MDBW)</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./ch3-5-5.html" class="sidebar-item-text sidebar-link">Mean difference from reference subgroup (unweighted) (MDRU)</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./ch3-5-6.html" class="sidebar-item-text sidebar-link">Mean difference from reference subgroup (weighted) (MDRW)</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./ch3-5-7.html" class="sidebar-item-text sidebar-link">Index of disparity (unweighted) (IDISU)</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./ch3-5-8.html" class="sidebar-item-text sidebar-link">Index of disparity (weighted) (IDISW)</a>
+  </div>
+</li>
+      </ul>
+  </li>
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" aria-expanded="false">Disproportionality</a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" aria-expanded="false">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-7" class="collapse list-unstyled sidebar-section depth2 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./ch3-6-1.html" class="sidebar-item-text sidebar-link">Theil index (TI)</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./ch3-6-2.html" class="sidebar-item-text sidebar-link">Mean log deviation (MLD)</a>
+  </div>
+</li>
+      </ul>
+  </li>
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-8" aria-expanded="false">Impact measures</a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-8" aria-expanded="false">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-8" class="collapse list-unstyled sidebar-section depth2 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./ch3-7-1.html" class="sidebar-item-text sidebar-link">Population attributable fraction (PAF)</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./ch3-7-2.html" class="sidebar-item-text sidebar-link">Population attributable risk (PAR)</a>
+  </div>
+</li>
+      </ul>
+  </li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-9" aria-expanded="true">Annex</a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-9" aria-expanded="true">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-9" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./annex-1.html" class="sidebar-item-text sidebar-link active">Annex 1</a>
+  </div>
+</li>
+      </ul>
+  </li>
+    </ul>
+    </div>
+</nav>
+<!-- margin-sidebar -->
+    
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+
+
+<section id="annex-1-summary-measures-overview" class="level2">
+<h2 class="anchored" data-anchor-id="annex-1-summary-measures-overview">Annex 1 Summary measures: overview</h2>
+<br> <br>
+<style type="text/css">
+.tg  {border-collapse:collapse;border-spacing:0;margin:0px auto;}
+.tg td{border-color:black;border-style:solid;border-width:1px;font-family:Arial, sans-serif;font-size:10px;
+  overflow:hidden;padding:4px 12x;word-break:normal;}
+.tg th{border-color:black;border-style:solid;border-width:1px;font-family:Arial, sans-serif;font-size:10px;
+  font-weight:normal;overflow:hidden;padding:4px 12px;word-break:normal;}
+.tg .tg-cly1{text-align:center;vertical-align:middle}
+.tg .tg-g7sd{border-color:inherit;font-weight:bold;text-align:center;vertical-align:middle}
+.tg .tg-yla0{font-weight:bold;text-align:center;vertical-align:middle}
+.tg .tg-0lax{text-align:center;vertical-align:middle}
+</style>
+
+<table class="tg">
+<thead>
+<tr>
+<th class="tg-g7sd">
+Summary measure <br>(abbreviation)
+</th>
+<th class="tg-yla0">
+Formula
+</th>
+<th class="tg-yla0">
+<br>Absolute/<br>Relative
+</th>
+<th class="tg-yla0">
+<br>Simple/<br>Complex
+</th>
+<th class="tg-yla0">
+<br>Weighted/<br>Unweighted
+</th>
+<th class="tg-yla0">
+<br>Ordered/<br>Non-ordered
+</th>
+<th class="tg-yla0">
+&nbsp;&nbsp;&nbsp;&nbsp;<br>Unit&nbsp;&nbsp;&nbsp;&nbsp;
+</th>
+<th class="tg-yla0">
+<br>Value of no<br>inequality
+</th>
+<th class="tg-yla0">
+&nbsp;&nbsp;&nbsp;&nbsp;<br>Interpretation&nbsp;&nbsp;&nbsp;&nbsp;
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tg-cly1">
+&nbsp;&nbsp;&nbsp;<br>Difference (D)&nbsp;&nbsp;&nbsp;
+</td>
+<td class="tg-0lax">
+&nbsp;&nbsp;&nbsp;<br><span class="math inline">D=y_1-y_2</span>&nbsp;&nbsp;&nbsp;
+</td>
+<td class="tg-cly1">
+&nbsp;&nbsp;&nbsp;<br>Absolute&nbsp;&nbsp;&nbsp;
+</td>
+<td class="tg-cly1">
+&nbsp;&nbsp;&nbsp;<br>Simple&nbsp;&nbsp;&nbsp;
+</td>
+<td class="tg-cly1">
+&nbsp;&nbsp;&nbsp;<br>Unweighted&nbsp;&nbsp;&nbsp;
+</td>
+<td class="tg-cly1">
+Ordered / Non-ordered
+</td>
+<td class="tg-cly1">
+Unit of indicator
+</td>
+<td class="tg-cly1">
+&nbsp;&nbsp;&nbsp;<br>Zero&nbsp;&nbsp;&nbsp;
+</td>
+<td class="tg-cly1">
+The larger the absolute value of D, the&nbsp;&nbsp;&nbsp;higher the level of inequality.&nbsp;&nbsp;&nbsp;&nbsp;
+</td>
+</tr>
+<tr>
+<td class="tg-cly1">
+&nbsp;&nbsp;&nbsp;<br>Ratio (R)&nbsp;&nbsp;&nbsp;
+</td>
+<td class="tg-0lax">
+&nbsp;&nbsp;&nbsp;<br><span class="math inline">R=y_1/y_2</span>&nbsp;&nbsp;&nbsp;
+</td>
+<td class="tg-cly1">
+&nbsp;&nbsp;&nbsp;<br>Relative&nbsp;&nbsp;&nbsp;
+</td>
+<td class="tg-cly1">
+&nbsp;&nbsp;&nbsp;<br>Simple&nbsp;&nbsp;&nbsp;
+</td>
+<td class="tg-cly1">
+&nbsp;&nbsp;&nbsp;<br>Unweighted&nbsp;&nbsp;&nbsp;
+</td>
+<td class="tg-cly1">
+Ordered / Non-ordered
+</td>
+<td class="tg-cly1">
+&nbsp;&nbsp;&nbsp;<br>No unit&nbsp;&nbsp;&nbsp;
+</td>
+<td class="tg-cly1">
+&nbsp;&nbsp;&nbsp;<br>One&nbsp;&nbsp;&nbsp;
+</td>
+<td class="tg-cly1">
+R takes only positive values. The further&nbsp;&nbsp;&nbsp;the value of R from 1, the higher the level of inequality.&nbsp;&nbsp;&nbsp;&nbsp;
+</td>
+</tr>
+<tr>
+<td class="tg-cly1">
+&nbsp;&nbsp;&nbsp;<br>Absolute concentration index (ACI)&nbsp;&nbsp;&nbsp;
+</td>
+<td class="tg-0lax">
+&nbsp;&nbsp;&nbsp;<br><span class="math inline">ACI=\Sigma_jp_j(2X_j-1)y_j</span>&nbsp;&nbsp;&nbsp;
+</td>
+<td class="tg-cly1">
+&nbsp;&nbsp;&nbsp;<br>Absolute&nbsp;&nbsp;&nbsp;
+</td>
+<td class="tg-cly1">
+&nbsp;&nbsp;&nbsp;<br>Complex&nbsp;&nbsp;&nbsp;
+</td>
+<td class="tg-cly1">
+&nbsp;&nbsp;&nbsp;<br>Weighted&nbsp;&nbsp;&nbsp;
+</td>
+<td class="tg-cly1">
+&nbsp;&nbsp;&nbsp;<br>Ordered&nbsp;&nbsp;&nbsp;
+</td>
+<td class="tg-cly1">
+Unit of indicator
+</td>
+<td class="tg-cly1">
+&nbsp;&nbsp;&nbsp;<br>Zero&nbsp;&nbsp;&nbsp;
+</td>
+<td class="tg-cly1">
+The larger the absolute value of ACI, the&nbsp;&nbsp;&nbsp;higher the level of inequality. Positive (negative) values indicate a&nbsp;&nbsp;&nbsp;concentration of the indicator among the advantaged (disadvantaged).&nbsp;&nbsp;&nbsp;&nbsp;
+</td>
+</tr>
+<tr>
+<td class="tg-cly1">
+&nbsp;&nbsp;&nbsp;<br>Relative concentration index (RCI)&nbsp;&nbsp;&nbsp;
+</td>
+<td class="tg-0lax">
+&nbsp;&nbsp;&nbsp;<br><span class="math inline">RCI=\frac{ACI}{μ}*100</span>&nbsp;&nbsp;&nbsp;
+</td>
+<td class="tg-cly1">
+&nbsp;&nbsp;&nbsp;<br>Relative&nbsp;&nbsp;&nbsp;
+</td>
+<td class="tg-cly1">
+&nbsp;&nbsp;&nbsp;<br>Complex&nbsp;&nbsp;&nbsp;
+</td>
+<td class="tg-cly1">
+&nbsp;&nbsp;&nbsp;<br>Weighted&nbsp;&nbsp;&nbsp;
+</td>
+<td class="tg-cly1">
+&nbsp;&nbsp;&nbsp;<br>Ordered&nbsp;&nbsp;&nbsp;
+</td>
+<td class="tg-cly1">
+&nbsp;&nbsp;&nbsp;<br>No unit&nbsp;&nbsp;&nbsp;
+</td>
+<td class="tg-cly1">
+&nbsp;&nbsp;&nbsp;<br>Zero&nbsp;&nbsp;&nbsp;
+</td>
+<td class="tg-cly1">
+The larger the absolute value of RCI, the higher&nbsp;&nbsp;&nbsp;the level of inequality. RCI is bounded between -100 and +100. Positive&nbsp;&nbsp;&nbsp;(negative) values indicate a concentration of the indicator among the&nbsp;&nbsp;&nbsp;advantaged (disadvantaged).&nbsp;&nbsp;&nbsp;&nbsp;
+</td>
+</tr>
+<tr>
+<td class="tg-cly1">
+&nbsp;&nbsp;&nbsp;<br>Slope index of inequality (SII)&nbsp;&nbsp;&nbsp;
+</td>
+<td class="tg-0lax">
+&nbsp;&nbsp;&nbsp;<br><span class="math inline">SII=v_1-v_0</span>&nbsp;&nbsp;&nbsp;
+</td>
+<td class="tg-cly1">
+&nbsp;&nbsp;&nbsp;<br>Absolute&nbsp;&nbsp;&nbsp;
+</td>
+<td class="tg-cly1">
+&nbsp;&nbsp;&nbsp;<br>Complex&nbsp;&nbsp;&nbsp;
+</td>
+<td class="tg-cly1">
+&nbsp;&nbsp;&nbsp;<br>Weighted&nbsp;&nbsp;&nbsp;
+</td>
+<td class="tg-cly1">
+&nbsp;&nbsp;&nbsp;<br>Ordered&nbsp;&nbsp;&nbsp;
+</td>
+<td class="tg-cly1">
+Unit of indicator
+</td>
+<td class="tg-cly1">
+&nbsp;&nbsp;&nbsp;<br>Zero&nbsp;&nbsp;&nbsp;
+</td>
+<td class="tg-cly1">
+The larger the absolute value of SII, the&nbsp;&nbsp;&nbsp;higher the level of inequality. For favourable (adverse) indicators, positive&nbsp;&nbsp;&nbsp;values indicate a concentration among the advantaged (disadvantaged) and&nbsp;&nbsp;&nbsp;negative values indicate a concentration among the disadvantaged&nbsp;&nbsp;&nbsp;(advantaged).&nbsp;&nbsp;&nbsp;&nbsp;
+</td>
+</tr>
+<tr>
+<td class="tg-cly1">
+&nbsp;&nbsp;&nbsp;<br>Relative index of inequality (RII)&nbsp;&nbsp;&nbsp;&nbsp;
+</td>
+<td class="tg-0lax">
+&nbsp;&nbsp;&nbsp;<br><span class="math inline">RII=v_1/v_0</span>&nbsp;&nbsp;&nbsp;
+</td>
+<td class="tg-cly1">
+&nbsp;&nbsp;&nbsp;<br>Relative&nbsp;&nbsp;&nbsp;
+</td>
+<td class="tg-cly1">
+&nbsp;&nbsp;&nbsp;<br>Complex&nbsp;&nbsp;&nbsp;
+</td>
+<td class="tg-cly1">
+&nbsp;&nbsp;&nbsp;<br>Weighted&nbsp;&nbsp;&nbsp;
+</td>
+<td class="tg-cly1">
+&nbsp;&nbsp;&nbsp;<br>Ordered&nbsp;&nbsp;&nbsp;
+</td>
+<td class="tg-cly1">
+&nbsp;&nbsp;&nbsp;<br>No unit&nbsp;&nbsp;&nbsp;
+</td>
+<td class="tg-cly1">
+&nbsp;&nbsp;&nbsp;<br>One&nbsp;&nbsp;&nbsp;
+</td>
+<td class="tg-cly1">
+RII takes only positive values. The&nbsp;&nbsp;&nbsp;further the value of RII from 1, the higher the level of inequality. For&nbsp;&nbsp;&nbsp;favourable (adverse) indicators, values&gt;1 indicate a concentration among&nbsp;&nbsp;&nbsp;the advantaged (disadvantaged) and values&lt;1 values indicate a&nbsp;&nbsp;&nbsp;concentration among the disadvantaged (advantaged).&nbsp;&nbsp;&nbsp;&nbsp;
+</td>
+</tr>
+<tr>
+<td class="tg-cly1">
+&nbsp;&nbsp;&nbsp;<br>Between-group variance (BGV)&nbsp;&nbsp;&nbsp;
+</td>
+<td class="tg-0lax">
+&nbsp;&nbsp;&nbsp;<br><span class="math inline">BGV=\Sigma_jp_j(y_j-μ)^2</span>&nbsp;&nbsp;&nbsp;
+</td>
+<td class="tg-cly1">
+&nbsp;&nbsp;&nbsp;<br>Absolute&nbsp;&nbsp;&nbsp;
+</td>
+<td class="tg-cly1">
+&nbsp;&nbsp;&nbsp;<br>Complex&nbsp;&nbsp;&nbsp;
+</td>
+<td class="tg-cly1">
+&nbsp;&nbsp;&nbsp;<br>Weighted&nbsp;&nbsp;&nbsp;
+</td>
+<td class="tg-cly1">
+&nbsp;&nbsp;&nbsp;<br>Non-ordered&nbsp;&nbsp;&nbsp;
+</td>
+<td class="tg-cly1">
+&nbsp;&nbsp;&nbsp;<br>Squared unit <br>&nbsp;&nbsp;&nbsp;<br>of indicator&nbsp;&nbsp;&nbsp;
+</td>
+<td class="tg-cly1">
+&nbsp;&nbsp;&nbsp;<br>Zero&nbsp;&nbsp;&nbsp;
+</td>
+<td class="tg-cly1">
+BGV takes only positive values with larger&nbsp;&nbsp;&nbsp;values indicating higher levels of inequality.&nbsp;&nbsp;&nbsp;&nbsp;
+</td>
+</tr>
+<tr>
+<td class="tg-cly1">
+&nbsp;&nbsp;&nbsp;<br>Between-group standard deviation (BGSD)&nbsp;&nbsp;&nbsp;
+</td>
+<td class="tg-0lax">
+&nbsp;&nbsp;&nbsp;<br><span class="math inline">BGSD=\sqrt{BGV}</span>&nbsp;&nbsp;&nbsp;
+</td>
+<td class="tg-cly1">
+&nbsp;&nbsp;&nbsp;<br>Absolute&nbsp;&nbsp;&nbsp;
+</td>
+<td class="tg-cly1">
+&nbsp;&nbsp;&nbsp;<br>Complex&nbsp;&nbsp;&nbsp;
+</td>
+<td class="tg-cly1">
+&nbsp;&nbsp;&nbsp;<br>Weighted&nbsp;&nbsp;&nbsp;
+</td>
+<td class="tg-cly1">
+&nbsp;&nbsp;&nbsp;<br>Non-ordered&nbsp;&nbsp;&nbsp;
+</td>
+<td class="tg-cly1">
+Unit of indicator
+</td>
+<td class="tg-cly1">
+&nbsp;&nbsp;&nbsp;<br>Zero&nbsp;&nbsp;&nbsp;
+</td>
+<td class="tg-cly1">
+BGSD takes only positive values with larger&nbsp;&nbsp;&nbsp;values indicating higher levels of inequality.&nbsp;&nbsp;&nbsp;
+</td>
+</tr>
+<tr>
+<td class="tg-cly1">
+&nbsp;&nbsp;&nbsp;<br>Coefficient of variation (COV)&nbsp;&nbsp;&nbsp;
+</td>
+<td class="tg-0lax">
+&nbsp;&nbsp;&nbsp;<br><span class="math inline">COV=\frac{BGSD}{\mu}*100</span>&nbsp;&nbsp;&nbsp;
+</td>
+<td class="tg-cly1">
+&nbsp;&nbsp;&nbsp;<br>Relative&nbsp;&nbsp;&nbsp;
+</td>
+<td class="tg-cly1">
+&nbsp;&nbsp;&nbsp;<br>Complex&nbsp;&nbsp;&nbsp;
+</td>
+<td class="tg-cly1">
+&nbsp;&nbsp;&nbsp;<br>Weighted&nbsp;&nbsp;&nbsp;
+</td>
+<td class="tg-cly1">
+&nbsp;&nbsp;&nbsp;<br>Non-ordered&nbsp;&nbsp;&nbsp;
+</td>
+<td class="tg-cly1">
+&nbsp;&nbsp;&nbsp;<br>No unit&nbsp;&nbsp;&nbsp;
+</td>
+<td class="tg-cly1">
+&nbsp;&nbsp;&nbsp;<br>Zero&nbsp;&nbsp;&nbsp;
+</td>
+<td class="tg-cly1">
+COV takes only positive values with larger&nbsp;&nbsp;&nbsp;values indicating higher levels of inequality.&nbsp;&nbsp;&nbsp;
+</td>
+</tr>
+<tr>
+<td class="tg-cly1">
+&nbsp;&nbsp;&nbsp;<br>Mean difference from mean (unweighted) (MDMU)&nbsp;&nbsp;&nbsp;
+</td>
+<td class="tg-0lax">
+&nbsp;&nbsp;&nbsp;<br><span class="math inline">MDMU=\frac{1}{n}*\Sigma_j|y_j-\mu|</span>&nbsp;&nbsp;&nbsp;
+</td>
+<td class="tg-cly1">
+&nbsp;&nbsp;&nbsp;<br>Absolute&nbsp;&nbsp;&nbsp;
+</td>
+<td class="tg-cly1">
+&nbsp;&nbsp;&nbsp;<br>Complex&nbsp;&nbsp;&nbsp;
+</td>
+<td class="tg-cly1">
+&nbsp;&nbsp;&nbsp;<br>Unweighted&nbsp;&nbsp;&nbsp;
+</td>
+<td class="tg-cly1">
+&nbsp;&nbsp;&nbsp;<br>Non-ordered&nbsp;&nbsp;&nbsp;
+</td>
+<td class="tg-cly1">
+Unit of indicator
+</td>
+<td class="tg-cly1">
+&nbsp;&nbsp;&nbsp;<br>Zero&nbsp;&nbsp;&nbsp;
+</td>
+<td class="tg-cly1">
+MDMU takes only positive values with&nbsp;&nbsp;&nbsp;larger values indicating higher levels of inequality.&nbsp;&nbsp;&nbsp;&nbsp;
+</td>
+</tr>
+<tr>
+<td class="tg-cly1">
+&nbsp;&nbsp;&nbsp;<br>Mean difference from mean (weighted) (MDMW)&nbsp;&nbsp;&nbsp;
+</td>
+<td class="tg-0lax">
+&nbsp;&nbsp;&nbsp;<br><span class="math inline">MDMW=\Sigma_jp_j|y_j-\mu|</span>&nbsp;&nbsp;&nbsp;
+</td>
+<td class="tg-cly1">
+&nbsp;&nbsp;&nbsp;<br>Absolute&nbsp;&nbsp;&nbsp;
+</td>
+<td class="tg-cly1">
+&nbsp;&nbsp;&nbsp;<br>Complex&nbsp;&nbsp;&nbsp;
+</td>
+<td class="tg-cly1">
+&nbsp;&nbsp;&nbsp;<br>Weighted&nbsp;&nbsp;&nbsp;
+</td>
+<td class="tg-cly1">
+&nbsp;&nbsp;&nbsp;<br>Non-ordered&nbsp;&nbsp;&nbsp;
+</td>
+<td class="tg-cly1">
+Unit of indicator
+</td>
+<td class="tg-cly1">
+&nbsp;&nbsp;&nbsp;<br>Zero&nbsp;&nbsp;&nbsp;
+</td>
+<td class="tg-cly1">
+MDMW takes only positive values with&nbsp;&nbsp;&nbsp;larger values indicating higher levels of inequality.&nbsp;&nbsp;&nbsp;&nbsp;
+</td>
+</tr>
+<tr>
+<td class="tg-cly1">
+&nbsp;&nbsp;&nbsp;<br>Mean difference from best performing subgroup (unweighted)&nbsp;&nbsp;&nbsp;(MDBU)&nbsp;&nbsp;&nbsp;
+</td>
+<td class="tg-0lax">
+&nbsp;&nbsp;&nbsp;<br><span class="math inline">MDBU=\frac{1}{n}*\Sigma_j|y_j-y_{best}|</span>&nbsp;&nbsp;&nbsp;
+</td>
+<td class="tg-cly1">
+&nbsp;&nbsp;&nbsp;<br>Absolute&nbsp;&nbsp;&nbsp;
+</td>
+<td class="tg-cly1">
+&nbsp;&nbsp;&nbsp;<br>Complex&nbsp;&nbsp;&nbsp;
+</td>
+<td class="tg-cly1">
+&nbsp;&nbsp;&nbsp;<br>Unweighted&nbsp;&nbsp;&nbsp;
+</td>
+<td class="tg-cly1">
+&nbsp;&nbsp;&nbsp;<br>Non-ordered&nbsp;&nbsp;&nbsp;
+</td>
+<td class="tg-cly1">
+Unit of indicator
+</td>
+<td class="tg-cly1">
+&nbsp;&nbsp;&nbsp;<br>Zero&nbsp;&nbsp;&nbsp;
+</td>
+<td class="tg-cly1">
+MDBU takes only positive values with&nbsp;&nbsp;&nbsp;larger values indicating higher levels of inequality.&nbsp;&nbsp;&nbsp;&nbsp;
+</td>
+</tr>
+<tr>
+<td class="tg-cly1">
+&nbsp;&nbsp;&nbsp;<br>Mean difference from best performing subgroup (weighted)&nbsp;&nbsp;&nbsp;(MDBW)&nbsp;&nbsp;&nbsp;
+</td>
+<td class="tg-0lax">
+&nbsp;&nbsp;&nbsp;<br><span class="math inline">MDBW=\Sigma_jp_j|y_j-y_{best}|</span>&nbsp;&nbsp;&nbsp;
+</td>
+<td class="tg-cly1">
+&nbsp;&nbsp;&nbsp;<br>Absolute&nbsp;&nbsp;&nbsp;
+</td>
+<td class="tg-cly1">
+&nbsp;&nbsp;&nbsp;<br>Complex&nbsp;&nbsp;&nbsp;
+</td>
+<td class="tg-cly1">
+&nbsp;&nbsp;&nbsp;<br>Weighted&nbsp;&nbsp;&nbsp;
+</td>
+<td class="tg-cly1">
+&nbsp;&nbsp;&nbsp;<br>Non-ordered&nbsp;&nbsp;&nbsp;
+</td>
+<td class="tg-cly1">
+Unit of indicator
+</td>
+<td class="tg-cly1">
+&nbsp;&nbsp;&nbsp;<br>Zero&nbsp;&nbsp;&nbsp;
+</td>
+<td class="tg-cly1">
+MDBW takes only positive values with&nbsp;&nbsp;&nbsp;larger values indicating higher levels of inequality.&nbsp;&nbsp;&nbsp;&nbsp;
+</td>
+</tr>
+<tr>
+<td class="tg-cly1">
+&nbsp;&nbsp;&nbsp;<br>Mean difference from reference subgroup (unweighted)&nbsp;&nbsp;&nbsp;(MDRU)&nbsp;&nbsp;&nbsp;
+</td>
+<td class="tg-0lax">
+&nbsp;&nbsp;&nbsp;<br><span class="math inline">MDRU=\frac{1}{n}*\Sigma_j|y_j-y_{ref}|</span>&nbsp;&nbsp;&nbsp;
+</td>
+<td class="tg-cly1">
+&nbsp;&nbsp;&nbsp;<br>Absolute&nbsp;&nbsp;&nbsp;
+</td>
+<td class="tg-cly1">
+&nbsp;&nbsp;&nbsp;<br>Complex&nbsp;&nbsp;&nbsp;
+</td>
+<td class="tg-cly1">
+&nbsp;&nbsp;&nbsp;<br>Unweighted&nbsp;&nbsp;&nbsp;
+</td>
+<td class="tg-cly1">
+&nbsp;&nbsp;&nbsp;<br>Non-ordered&nbsp;&nbsp;&nbsp;
+</td>
+<td class="tg-cly1">
+Unit of indicator
+</td>
+<td class="tg-cly1">
+&nbsp;&nbsp;&nbsp;<br>Zero&nbsp;&nbsp;&nbsp;
+</td>
+<td class="tg-cly1">
+MDRU takes only positive values with&nbsp;&nbsp;&nbsp;larger values indicating higher levels of inequality.&nbsp;&nbsp;&nbsp;&nbsp;
+</td>
+</tr>
+<tr>
+<td class="tg-cly1">
+&nbsp;&nbsp;&nbsp;<br>Mean difference from reference subgroup (weighted)&nbsp;&nbsp;&nbsp;(MDRW)&nbsp;&nbsp;&nbsp;
+</td>
+<td class="tg-0lax">
+&nbsp;&nbsp;&nbsp;<br><span class="math inline">MDRW=\Sigma_jp_j|y_j-y_{ref}|</span>&nbsp;&nbsp;&nbsp;
+</td>
+<td class="tg-cly1">
+&nbsp;&nbsp;&nbsp;<br>Absolute&nbsp;&nbsp;&nbsp;
+</td>
+<td class="tg-cly1">
+&nbsp;&nbsp;&nbsp;<br>Complex&nbsp;&nbsp;&nbsp;
+</td>
+<td class="tg-cly1">
+&nbsp;&nbsp;&nbsp;<br>Weighted&nbsp;&nbsp;&nbsp;
+</td>
+<td class="tg-cly1">
+&nbsp;&nbsp;&nbsp;<br>Non-ordered&nbsp;&nbsp;&nbsp;
+</td>
+<td class="tg-cly1">
+Unit of indicator
+</td>
+<td class="tg-cly1">
+&nbsp;&nbsp;&nbsp;<br>Zero&nbsp;&nbsp;&nbsp;
+</td>
+<td class="tg-cly1">
+MDRW takes only positive values with&nbsp;&nbsp;&nbsp;larger values indicating higher levels of inequality.&nbsp;&nbsp;&nbsp;&nbsp;
+</td>
+</tr>
+<tr>
+<td class="tg-cly1">
+&nbsp;&nbsp;&nbsp;<br>Index of disparity (unweighted) (IDISU)&nbsp;&nbsp;&nbsp;
+</td>
+<td class="tg-0lax">
+&nbsp;&nbsp;&nbsp;<br><span class="math inline">IDISU=\frac{MDMU}{\mu}*100</span>&nbsp;&nbsp;&nbsp;
+</td>
+<td class="tg-cly1">
+&nbsp;&nbsp;&nbsp;<br>Relative&nbsp;&nbsp;&nbsp;
+</td>
+<td class="tg-cly1">
+&nbsp;&nbsp;&nbsp;<br>Complex&nbsp;&nbsp;&nbsp;
+</td>
+<td class="tg-cly1">
+&nbsp;&nbsp;&nbsp;<br>Unweighted&nbsp;&nbsp;&nbsp;
+</td>
+<td class="tg-cly1">
+&nbsp;&nbsp;&nbsp;<br>Non-ordered&nbsp;&nbsp;&nbsp;
+</td>
+<td class="tg-cly1">
+&nbsp;&nbsp;&nbsp;<br>No unit&nbsp;&nbsp;&nbsp;
+</td>
+<td class="tg-cly1">
+&nbsp;&nbsp;&nbsp;<br>Zero&nbsp;&nbsp;&nbsp;
+</td>
+<td class="tg-cly1">
+IDISU takes only positive values with&nbsp;&nbsp;&nbsp;larger values indicating higher levels of inequality.&nbsp;&nbsp;&nbsp;&nbsp;
+</td>
+</tr>
+<tr>
+<td class="tg-cly1">
+&nbsp;&nbsp;&nbsp;<br>Index of disparity (weighted) (IDISW)&nbsp;&nbsp;&nbsp;
+</td>
+<td class="tg-0lax">
+&nbsp;&nbsp;&nbsp;<br><span class="math inline">IDISW=\frac{MDMW}{\mu}*100</span>&nbsp;&nbsp;&nbsp;
+</td>
+<td class="tg-cly1">
+&nbsp;&nbsp;&nbsp;<br>Relative&nbsp;&nbsp;&nbsp;
+</td>
+<td class="tg-cly1">
+&nbsp;&nbsp;&nbsp;<br>Complex&nbsp;&nbsp;&nbsp;
+</td>
+<td class="tg-cly1">
+&nbsp;&nbsp;&nbsp;<br>Weighted&nbsp;&nbsp;&nbsp;
+</td>
+<td class="tg-cly1">
+&nbsp;&nbsp;&nbsp;<br>Non-ordered&nbsp;&nbsp;&nbsp;
+</td>
+<td class="tg-cly1">
+&nbsp;&nbsp;&nbsp;<br>No unit&nbsp;&nbsp;&nbsp;
+</td>
+<td class="tg-cly1">
+&nbsp;&nbsp;&nbsp;<br>Zero&nbsp;&nbsp;&nbsp;
+</td>
+<td class="tg-cly1">
+IDISW takes only positive values with&nbsp;&nbsp;&nbsp;larger values indicating higher levels of inequality.&nbsp;&nbsp;&nbsp;&nbsp;
+</td>
+</tr>
+<tr>
+<td class="tg-cly1">
+&nbsp;&nbsp;&nbsp;<br>Theil index (TI)&nbsp;&nbsp;&nbsp;
+</td>
+<td class="tg-0lax">
+&nbsp;&nbsp;&nbsp;<br><span class="math inline">TI=\Sigma_jp_j\frac{y_j}{\mu}ln\frac{y_j}{\mu}*1000</span>&nbsp;&nbsp;&nbsp;
+</td>
+<td class="tg-cly1">
+&nbsp;&nbsp;&nbsp;<br>Relative&nbsp;&nbsp;&nbsp;
+</td>
+<td class="tg-cly1">
+&nbsp;&nbsp;&nbsp;<br>Complex&nbsp;&nbsp;&nbsp;
+</td>
+<td class="tg-cly1">
+&nbsp;&nbsp;&nbsp;<br>Weighted&nbsp;&nbsp;&nbsp;
+</td>
+<td class="tg-cly1">
+&nbsp;&nbsp;&nbsp;<br>Non-ordered&nbsp;&nbsp;&nbsp;
+</td>
+<td class="tg-cly1">
+&nbsp;&nbsp;&nbsp;<br>No unit&nbsp;&nbsp;&nbsp;
+</td>
+<td class="tg-cly1">
+&nbsp;&nbsp;&nbsp;<br>Zero&nbsp;&nbsp;&nbsp;
+</td>
+<td class="tg-cly1">
+The larger the absolute value of TI, the&nbsp;&nbsp;&nbsp;greater the level of inequality.&nbsp;&nbsp;&nbsp;&nbsp;
+</td>
+</tr>
+<tr>
+<td class="tg-cly1">
+&nbsp;&nbsp;&nbsp;<br>Mean log deviation (MLD)&nbsp;&nbsp;&nbsp;
+</td>
+<td class="tg-0lax">
+&nbsp;&nbsp;&nbsp;<br><span class="math display">MLD=\Sigma_jp_j(-ln(\frac{y_j}{\mu}))*1000</span>&nbsp;&nbsp;&nbsp;
+</td>
+<td class="tg-cly1">
+&nbsp;&nbsp;&nbsp;<br>Relative&nbsp;&nbsp;&nbsp;
+</td>
+<td class="tg-cly1">
+&nbsp;&nbsp;&nbsp;<br>Complex&nbsp;&nbsp;&nbsp;
+</td>
+<td class="tg-cly1">
+&nbsp;&nbsp;&nbsp;<br>Weighted&nbsp;&nbsp;&nbsp;
+</td>
+<td class="tg-cly1">
+&nbsp;&nbsp;&nbsp;<br>Non-ordered&nbsp;&nbsp;&nbsp;
+</td>
+<td class="tg-cly1">
+&nbsp;&nbsp;&nbsp;<br>No unit&nbsp;&nbsp;&nbsp;
+</td>
+<td class="tg-cly1">
+&nbsp;&nbsp;&nbsp;<br>Zero&nbsp;&nbsp;&nbsp;
+</td>
+<td class="tg-cly1">
+The larger the absolute value of MLD, the&nbsp;&nbsp;&nbsp;higher the level of inequality.&nbsp;&nbsp;&nbsp;&nbsp;
+</td>
+</tr>
+<tr>
+<td class="tg-cly1">
+&nbsp;&nbsp;&nbsp;<br>Population attributable fraction (PAF)&nbsp;&nbsp;&nbsp;
+</td>
+<td class="tg-0lax">
+&nbsp;&nbsp;&nbsp;<br><span class="math display">PAF=\frac{PAR}{\mu}*100</span>&nbsp;&nbsp;&nbsp;
+</td>
+<td class="tg-cly1">
+&nbsp;&nbsp;&nbsp;<br>Relative&nbsp;&nbsp;&nbsp;
+</td>
+<td class="tg-cly1">
+&nbsp;&nbsp;&nbsp;<br>Complex&nbsp;&nbsp;&nbsp;
+</td>
+<td class="tg-cly1">
+&nbsp;&nbsp;&nbsp;<br>Weighted&nbsp;&nbsp;&nbsp;
+</td>
+<td class="tg-cly1">
+Ordered / Non-ordered
+</td>
+<td class="tg-cly1">
+&nbsp;&nbsp;&nbsp;<br>No unit&nbsp;&nbsp;&nbsp;
+</td>
+<td class="tg-cly1">
+&nbsp;&nbsp;&nbsp;<br>Zero&nbsp;&nbsp;&nbsp;
+</td>
+<td class="tg-cly1">
+The larger the absolute value of PAF, the&nbsp;&nbsp;&nbsp;larger the level of inequality. PAF takes positive values for favourable&nbsp;&nbsp;&nbsp;indicators and negative values for adverse indicators.&nbsp;&nbsp;&nbsp;&nbsp;
+</td>
+</tr>
+<tr>
+<td class="tg-cly1">
+&nbsp;&nbsp;&nbsp;<br>Population attributable risk (PAR)&nbsp;&nbsp;&nbsp;
+</td>
+<td class="tg-0lax">
+&nbsp;&nbsp;&nbsp;<br><span class="math inline">PAR=y_{ref}-\mu</span>&nbsp;&nbsp;&nbsp;
+</td>
+<td class="tg-cly1">
+&nbsp;&nbsp;&nbsp;<br>Absolute&nbsp;&nbsp;&nbsp;
+</td>
+<td class="tg-cly1">
+&nbsp;&nbsp;&nbsp;<br>Complex&nbsp;&nbsp;&nbsp;
+</td>
+<td class="tg-cly1">
+&nbsp;&nbsp;&nbsp;<br>Weighted&nbsp;&nbsp;&nbsp;
+</td>
+<td class="tg-cly1">
+Ordered / Non-ordered
+</td>
+<td class="tg-cly1">
+Unit of indicator
+</td>
+<td class="tg-cly1">
+&nbsp;&nbsp;&nbsp;<br>Zero&nbsp;&nbsp;&nbsp;
+</td>
+<td class="tg-cly1">
+The larger the absolute value, the higher&nbsp;&nbsp;&nbsp;the level of inequality. PAR takes positive values for favourable indicators&nbsp;&nbsp;&nbsp;and negative values for adverse indicators.&nbsp;&nbsp;&nbsp;&nbsp;
+</td>
+</tr>
+</tbody>
+
+</table>
+<p><span class="math inline">y_j</span> = Estimate for subgroup j.</p>
+<p><span class="math inline">y_{high}</span> = Estimate for subgroup high.</p>
+<p><span class="math inline">y_{low}</span> = Estimate for subgroup low.</p>
+<p><span class="math inline">y_{ref}</span> = Estimate for reference subgroup.</p>
+<p><span class="math inline">p_j</span> = Population share for subgroup j.</p>
+<p><span class="math inline">X_j=∑_jp_j-0.5p_j</span> = Relative rank of subgroup j.</p>
+<p><span class="math inline">μ</span> = Setting average.</p>
+<p><span class="math inline">v_0</span>= Predicted value of the hypothetical person at the bottom of the social-group distribution (rank 0).</p>
+<p><span class="math inline">v_1</span>= Predicted value of the hypothetical person at the top of the social-group distribution (rank 1).</p>
+<p><span class="math inline">n</span> = Number of subgroups.</p>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    target: function(trigger) {
+      return trigger.previousElementSibling;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+</body></html>

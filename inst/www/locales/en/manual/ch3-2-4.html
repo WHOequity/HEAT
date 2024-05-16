@@ -1,0 +1,605 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.2.335">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>HEAT Manual – ch3-2-4</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1.6em;
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<script src="site_libs/quarto-html/quarto.js"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit"
+  }
+}</script>
+
+
+<link rel="stylesheet" href="manual_styles.css">
+</head>
+
+<body class="nav-sidebar floating fullcontent">
+
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+    <div class="container-fluid d-flex justify-content-between">
+      <h1 class="quarto-secondary-nav-title">User Manual <br></h1>
+      <button type="button" class="quarto-btn-toggle btn" aria-label="Show secondary navigation">
+        <i class="bi bi-chevron-right"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="./">User Manual <br></a> 
+        <div class="sidebar-tools-main">
+    <a href="./about.html" title="About" class="sidebar-tool px-1"><i class="bi bi-question-circle"></i></a>
+    <a href="./docs/HEAT_user_manual.pdf" title="PDF" class="sidebar-tool px-1"><i class="bi bi-file-earmark-pdf"></i></a>
+</div>
+    </div>
+      </div>
+      <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+      </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./ch1.html" class="sidebar-item-text sidebar-link">Introduction</a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./ch2.html" class="sidebar-item-text sidebar-link">How to access HEAT</a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true">How to use HEAT</a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="false">Getting started</a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="false">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth2 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./ch3.html" class="sidebar-item-text sidebar-link">Choose dataset</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./ch3-1-2.html" class="sidebar-item-text sidebar-link">Choose language</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./ch3-1-3.html" class="sidebar-item-text sidebar-link">Heat Structure</a>
+  </div>
+</li>
+      </ul>
+  </li>
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true">Navigating HEAT</a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth2 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./ch3-2.html" class="sidebar-item-text sidebar-link">Navigation menu</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./ch3-2-2.html" class="sidebar-item-text sidebar-link">Views</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./ch3-2-3.html" class="sidebar-item-text sidebar-link">Visualization menu</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./ch3-2-4.html" class="sidebar-item-text sidebar-link active">Selection menu</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./ch3-2-5.html" class="sidebar-item-text sidebar-link">Tooltips</a>
+  </div>
+</li>
+      </ul>
+  </li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./ch3-3.html" class="sidebar-item-text sidebar-link">Learning more</a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="true">Explore Inequality</a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="true">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./ch4.html" class="sidebar-item-text sidebar-link">Overview</a>
+  </div>
+</li>
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="./ch4-1.html" class="sidebar-item-text sidebar-link">Disaggregated data</a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" aria-expanded="false">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth2 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./ch4-1-1.html" class="sidebar-item-text sidebar-link">Horizontal line graph</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./ch4-1-2.html" class="sidebar-item-text sidebar-link">Vertical bar graph</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./ch4-1-3.html" class="sidebar-item-text sidebar-link">Horizontal bar graph</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./ch4-1-4.html" class="sidebar-item-text sidebar-link">Map</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./ch4-1-5.html" class="sidebar-item-text sidebar-link">Table</a>
+  </div>
+</li>
+      </ul>
+  </li>
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="./ch4-2.html" class="sidebar-item-text sidebar-link">Summary measures</a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" aria-expanded="false">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth2 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./ch4-2-1.html" class="sidebar-item-text sidebar-link">Bar graph</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./ch4-2-2.html" class="sidebar-item-text sidebar-link">Line graph</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./ch4-2-3.html" class="sidebar-item-text sidebar-link">Table</a>
+  </div>
+</li>
+      </ul>
+  </li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" aria-expanded="true">Compare Inequality</a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" aria-expanded="true">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-7" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./ch5.html" class="sidebar-item-text sidebar-link">Overview</a>
+  </div>
+</li>
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="./ch5-1.html" class="sidebar-item-text sidebar-link">Disaggregated data</a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-8" aria-expanded="false">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-8" class="collapse list-unstyled sidebar-section depth2 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./ch5-1-2.html" class="sidebar-item-text sidebar-link">Graph</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./ch5-1-3.html" class="sidebar-item-text sidebar-link">Table</a>
+  </div>
+</li>
+      </ul>
+  </li>
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="./ch5-2.html" class="sidebar-item-text sidebar-link">Summary data</a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-9" aria-expanded="false">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-9" class="collapse list-unstyled sidebar-section depth2 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./ch5-2-2.html" class="sidebar-item-text sidebar-link">Graph</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./ch5-2-3.html" class="sidebar-item-text sidebar-link">Table</a>
+  </div>
+</li>
+      </ul>
+  </li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-10" aria-expanded="true">Determinants</a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-10" aria-expanded="true">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-10" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./ch6.html" class="sidebar-item-text sidebar-link">Overview</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./ch6-1.html" class="sidebar-item-text sidebar-link">Graph</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./ch6-2.html" class="sidebar-item-text sidebar-link">Table</a>
+  </div>
+</li>
+      </ul>
+  </li>
+    </ul>
+    </div>
+</nav>
+<!-- margin-sidebar -->
+    
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+
+
+<section id="selection-menu" class="level3">
+<h3 class="anchored" data-anchor-id="selection-menu">Selection menu</h3>
+<p>The selection menu on the left of each view allows you to customize the results displayed in the visual. The selection menu comprises three or four tabs, depending on the view you are looking at.</p>
+<div class="quarto-layout-panel">
+<div class="quarto-layout-row quarto-layout-valign-top">
+<div class="quarto-layout-cell" style="flex-basis: 66.7%;justify-content: center;">
+<ul>
+<li><strong>Selection</strong> Select the data displayed in the visual, including your setting of interest, data source(s), date(s), indicator(s), inequality dimension(s) and summary measure(s), if applicable.</li>
+</ul>
+</div>
+<div class="quarto-layout-cell" style="flex-basis: 33.3%;justify-content: center;">
+<p><img src="images/Picture23.png" class="img-fluid"></p>
+</div>
+</div>
+<div class="quarto-layout-row quarto-layout-valign-top">
+<div class="quarto-layout-cell" style="flex-basis: 66.7%;justify-content: center;">
+<ul>
+<li><strong>Options</strong> Use different options to modify your visual, such as selecting axis ranges and adding titles. The options that are available vary from view to view, depending on what data and visualization type you are looking at.</li>
+</ul>
+</div>
+<div class="quarto-layout-cell" style="flex-basis: 33.3%;justify-content: center;">
+<p><img src="images/Picture21.png" class="img-fluid"></p>
+</div>
+</div>
+<div class="quarto-layout-row quarto-layout-valign-top">
+<div class="quarto-layout-cell" style="flex-basis: 66.7%;justify-content: center;">
+<ul>
+<li><strong>Downloads</strong> Download the results displayed in the visual, including the graph (as png or jpg images or pdf) and/or the data (as comma or tab separated text files). Note that in table views, you are only able to download the data (i.e.&nbsp;no graph).</li>
+</ul>
+</div>
+<div class="quarto-layout-cell" style="flex-basis: 33.3%;justify-content: center;">
+<p><img src="images/Picture24.png" class="img-fluid"></p>
+</div>
+</div>
+<div class="quarto-layout-row quarto-layout-valign-top">
+<div class="quarto-layout-cell" style="flex-basis: 66.7%;justify-content: center;">
+<ul>
+<li><strong>Summary measures</strong> See specific summary measure calculations. Note that this tab is only available under the ‘Explore inequality’ component for ‘Disaggregated data’ displayed in ‘Horizontal bar graphs’. Specific difference and ratio measures are calculated for inequality dimensions with more than 30 population subgroups (such as subnational regions in some countries).</li>
+</ul>
+</div>
+<div class="quarto-layout-cell" style="flex-basis: 33.3%;justify-content: center;">
+<p><img src="images/Picture25.png" class="img-fluid"></p>
+</div>
+</div>
+<div class="quarto-layout-row quarto-layout-valign-top">
+<div class="quarto-layout-cell" style="flex-basis: 66.7%;justify-content: center;">
+<ul>
+<li><strong>Benchmarks</strong> Choose the comparison settings for benchmarking. This tab is only available in views under the ‘Compare inequality’ component of the tool.</li>
+</ul>
+</div>
+<div class="quarto-layout-cell" style="flex-basis: 33.3%;justify-content: center;">
+<p><img src="images/Picture22.png" class="img-fluid"></p>
+</div>
+</div>
+</div>
+<p>Each tab of the selection menu comprises multiple selectors that allow you to modify the data displayed in the visual. To facilitate navigation, the different selector types are described in Table 2.</p>
+<p><strong>Table 2</strong> Selector types</p>
+<div class="cell" data-warnings="false">
+<table class="table table-sm table-striped">
+<colgroup>
+<col style="width: 30%">
+<col style="width: 70%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;"><strong>Selector type</strong></th>
+<th style="text-align: left;"><strong>Navigation</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Dropdown menu <br> (single select)</td>
+<td style="text-align: left;">Select a single item, such as your setting of interest. <br> <img src="images/Picture26.png" class="img-fluid" style="width:80.0%"> <br> Click the box to see all the available settings and make your selection.<br> <img src="images/Picture27.png" class="img-fluid" style="width:80.0%"> <br> Alternatively, replace an already chosen setting by clicking the box and typing (part of) the name of the setting you are looking for. <br> <img src="images/Picture28.png" class="img-fluid" style="width:80.0%"></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Dropdown menu <br> (multi-select)</td>
+<td style="text-align: left;">Select one or more items, such as your indicator(s) of interest. <br> <img src="images/Picture29.png" class="img-fluid" style="width:80.0%"> <br> Click the box to see all the available indicators and make your selection. <br> <img src="images/Picture30.png" class="img-fluid" style="width:80.0%"> <br> Alternatively, search for a specific indicator by typing (part of) the name of the indicator you are looking for and make your selection. <br> <img src="images/Picture31.png" class="img-fluid" style="width:80.0%"> <br> Remove selected indicators, by clicking on the indicator name. <br> <img src="images/Picture32.png" class="img-fluid" style="width:80.0%"> <br> Note that often there is a limit to the number of items that you can display in the visual. For example, in most graphs, you can only show up to five indicators simultaneously. Once you have selected the maximum number of items, the selector will become grey and irresponsive. To make further changes, first remove selected items and then continue add new ones. <br> <img src="images/Picture33.png" class="img-fluid" style="width:80.0%"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Numeric input</td>
+<td style="text-align: left;">Enter numeric values, e.g.&nbsp;the axis minimum and maximum. <br> <img src="images/Picture34.png" class="img-fluid" style="width:80.0%"> <br>Click inside the box and enter a number. <br> <img src="images/Picture35.png" class="img-fluid" style="width:80.0%"> <br> Alternatively, use the arrows to select a number. <br> <img src="images/Picture36.png" class="img-fluid" style="width:80.0%"></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Text input <br> (empty)</td>
+<td style="text-align: left;">Enter information, such as horizontal and vertical axis titles. <br> <img src="images/Picture37.png" class="img-fluid" style="width:80.0%"> <br> Click inside the box and enter your text. <br> <img src="images/Picture38.png" class="img-fluid" style="width:80.0%"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Text input <br> (pre-filled)</td>
+<td style="text-align: left;">Modify existing information, such as the main title (by default, the main title includes information about the setting, data source(s) and year(s) displayed in the visual) <br> <img src="images/Picture39.png" class="img-fluid" style="width:80.0%"> <br> Click inside the box and delete, alter or replace the main title with the text of your choice.<br> <img src="images/Picture40.png" class="img-fluid" style="width:80.0%"></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Checkbox</td>
+<td style="text-align: left;">Limit the view, e.g.&nbsp;to the most recent date, or include information, such as 95% confidence intervals. <br> <img src="images/Picture41.png" class="img-fluid" style="width:80.0%"> <br> <br> <img src="images/Picture42.png" class="img-fluid" style="width:80.0%"> <br> Check the box to limit the view to the most recent year or include 95% confidence intervals. <br> <img src="images/Picture43.png" class="img-fluid" style="width:80.0%"> <br> <img src="images/Picture44.png" class="img-fluid" style="width:80.0%"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Radio button</td>
+<td style="text-align: left;">Choose between different options, such as the sort order of your data. <br> <img src="images/Picture45.png" class="img-fluid" style="width:80.0%"> <br> Click the sort order of your choice to rearrange data in ascending or descending order. <br> <img src="images/Picture46.png" class="img-fluid" style="width:80.0%"></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Switch button</td>
+<td style="text-align: left;">Switch an item on or off, such as reference lines in graphs. <br> <img src="images/Picture47.png" class="img-fluid" style="width:80.0%"> <br> Click the switch to display setting average and/or median lines. <br> <img src="images/Picture48.png" class="img-fluid" style="width:80.0%"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Toggle button</td>
+<td style="text-align: left;">Toggle between different options, such as the file type for graph downloads. <br> <img src="images/Picture49.png" class="img-fluid" style="width:80.0%"> <br> Select the file type of your choice by clicking the relevant button.<br> <img src="images/Picture50.png" class="img-fluid" style="width:80.0%"></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Action button</td>
+<td style="text-align: left;">Launch actions, such as the download of your graph.<br> <img src="images/Picture51.png" class="img-fluid" style="width:80.0%"> <br> Click the button to start the graph download. <br> <img src="images/Picture52.png" class="img-fluid" style="width:80.0%"></td>
+</tr>
+</tbody>
+</table>
+</div>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    target: function(trigger) {
+      return trigger.previousElementSibling;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+</body></html>

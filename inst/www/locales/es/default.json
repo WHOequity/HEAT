@@ -1,7 +1,7 @@
 {
   "benchmarks": {
     "labels": {
-      "income": "Filtrar por grupo de país según ingreso",
+      "income": "Filtrar según grupo de escenario-ingreso",
       "region": "Filtrar por región de la OMS",
       "setting": "Seleccionar comparación de escenarios",
       "date": "Fecha de referencia",
@@ -24,6 +24,7 @@
     "disclaimers": {
       "nodefault": "No existe datos para esta combinación de fecha, indicador y/o dimensión de desigualdad. Cambie la selección para visualizar los datos disponibles.",
       "nomap": "No hay datos para esta combinación de variables o no hay límites de regiones subnacionales que coincidan con los de los datos. Los mapas sólo están disponibles para los datos de las Encuestas Demográficas y de Salud (DHS).",
+      "nodeterminant": "No existe datos para esta combinación de variables. Cambie la selección para ver los datos disponibles.",
       "nomapdataset": "No hay mapas asociados con este conjunto de datos.",
       "compareineq": "De manera predeterminada, se muestran los escenarios del mismo grupo de ingresos y región de la OMS que el escenario seleccionado, si datos están disponibles.",
       "disclaimer": "Tenga en cuenta que estos datos son de fuentes externas publicadas y, por lo tanto, no son estimaciones oficiales de la OMS. Por favor, consulte los Metadatos de indicadores en el menú Acerca de para obtener más información."
@@ -40,17 +41,24 @@
     },
     "titles": {
       "comparedisag": "[indicator_name] según [dimension] en [number_settings] escenarios",
-      "comparesumm": "[indicator_name]: escenario promedio y desigualdad al interior del escenario (según [dimension]) en [number_settings] escenarios"
+      "comparesumm": "[indicator_name]: escenario promedio y desigualdad al interior del escenario (según [dimension]) en [number_settings] escenarios",
+      "determinants": "Asociación entre [indicator_name] y [sdh_name] en [number_settings] escenarios"
     },
     "tooltips": {
       "affectedpop": "de población afectada",
       "estimate": "Estimado",
       "95ci": "IC 95%",
-      "settingavg": "Promedio del escenario"
+      "settingavg": "Promedio del escenario",
+      "nationalavg": "Promedio nacional",
+      "indicatorestimate": "Estimado del indicador",
+      "determinantestimate": "Estimado del determinante",
+      "rsquared": "R cuadrado",
+      "pvalue": "Valor p"
     },
     "warnings": {
       "available": "Los estimados son presentados cuando existen datos disponibles para la combinación de variables seleccionadas; si los estimados no aparecen, no hay datos disponibles o no se informan debido al pequeño tamaño de la muestra.",
       "availablemap": "Las estimaciones se muestran cuando están disponibles los datos para la combinación seleccionada de variables y límites de regiones subnacionales que coinciden con los de los datos; si no se muestran estimaciones, los datos o los límites no están disponibles. Los mapas sólo están disponibles para los datos de las Encuestas Demográficas y de Salud (DHS).",
+      "availabledeterminants": "Los estimados son presentados cuando existen datos disponibles para la combinación de variables seleccionadas.",
       "axismin": "El valor mínimo del eje debe ser mayor a 0 para el eje en escala logarítmica",
       "verticalaxismin": "El valor mínimo del eje vertical debe ser mayor a 0 para el eje en escala logarítmica"
     }
@@ -70,11 +78,11 @@
       "graph": "El gráfico será descargado como una imagen png o jpg o pdf. Los títulos y etiquetas de eje serán presentadas de acuerdo a su selección.",
       "map": "El gráfico será descargado como una imagen png o jpg o pdf. Los títulos serán presentadas de acuerdo a su selección.",
       "data": "Los datos serán descargados como archivo de texto con valores separados por comas o tabulaciones (tabs), según su selección. Este archivo podrá ser abierto en un editor de texto o un editor de hojas de cálculo.",
-      "heat1": "Herramienta de valoración de la equidad en salud (HEAT): Software para la exploración y comparación de desigualdades en salud en países. Edición de base de datos integrada. Versión 5.0. Ginebra: Organización Mundial de la Salud, 2023.",
-      "heat2": "Los datos desagregados usados en esta versión fueron tomados de la repositorio de datos del Monitor de Desigualdades en Salud de la OMS (actualización 2023), los cuales pueden haber sido revisados o actualizados desde entonces. La versión más reciente de dicha base de datos está disponible en la página web de la OMS  (https://www.who.int/data/inequality-monitor/data).",
+      "heat1": "Herramienta de valoración de la equidad en salud (HEAT): Software para la exploración y comparación de desigualdades en salud en países y territorios. Edición de base de datos integrada. Versión 6.0. Ginebra: Organización Mundial de la Salud, 2024.",
+      "heat2": "Los datos usados en esta versión fueron tomados del repositorio de datos del Monitor de Desigualdades en Salud de la OMS (actualización 2023), los cuales pueden haber sido revisados o actualizados desde entonces. La versión más reciente de dicha base de datos está disponible en la página web de la OMS  (https://www.who.int/data/inequality-monitor/data).",
       "disclaimer1": "Las designaciones empleadas y la presentación del material en esta herramienta no implican en absoluto la expresión de alguna opinión por parte de la OMS concerniente al estado legal de cualquier pais, territorio, ciudad o area ni de sus autoridades, ni concerniente a la delimitación de sus fronteras o límites. Las líneas punteadas o discontínuas en los mapas representan bordes fronterizos aproximados sobre los cuales puede no haber aún acuerdo completo.",
       "disclaimer2": "Los límites internacionales del mapa provisto reflejan el actual estado político y geográfico a la fecha de publicación. Sin embargo, la información técnica sobre salud se basa en datos precisos con respecto al año seleccionado. Se hace notar la desconexión en este arreglo, pero no se deben generar implicaciones respecto al estado político o terminológico a partir de dicho arreglo, ya que éste es puramente una función de las limitaciones técnicas y gráficos.",
-      "heatplus1": "Herramienta adicional de valoración de la equidad en salud (HEAT Plus): Software para la exploración y comparación de desigualdades en salud en países. Edición para carga de base de datos. Versión 5.0. Ginebra: Organización Mundial de la Salud, 2023.",
+      "heatplus1": "Herramienta adicional de valoración de la equidad en salud (HEAT Plus): Software para la exploración y comparación de desigualdades en salud en países. Edición para carga de base de datos. Versión 6.0. Ginebra: Organización Mundial de la Salud, 2024.",
       "heatplus2": "La OMS proporciona esta herramienta sin datos; cualesquiera datos agregados a, o que resulten de, la herramienta son de responsabilidad exclusiva del usuario, no de la OMS."
     },
     "values": {
@@ -84,9 +92,9 @@
   },
   "home": {
     "citations": {
-      "heat1": "Cita sugerida: Herramienta de valoración de la equidad en salud (HEAT): Software para la exploración y comparación de desigualdades en salud en países. Edición de base de datos integrada. Versión 5.0. Ginebra: Organización Mundial de la Salud, 2023.",
+      "heat1": "Cita sugerida: Herramienta de valoración de la equidad en salud (HEAT): Software para la exploración y comparación de desigualdades en salud en países. Edición de base de datos integrada. Versión 6.0. Ginebra: Organización Mundial de la Salud, 2024.",
       "heat2": "Nota: \"HEAT\" es el acrónimo del título en idioma inglés (Health Equity Assessment Toolkit) y puede ser usado como tal para referirse al producto de modo coloquial.",
-      "heatplus1": "Cita sugerida: Herramienta adicional de valoración de la equidad en salud (HEAT Plus): Software para la exploración y comparación de desigualdades en salud en países. Edición para carga de base de datos. Versión 5.0. Ginebra: Organización Mundial de la Salud, 2023.",
+      "heatplus1": "Cita sugerida: Herramienta adicional de valoración de la equidad en salud (HEAT Plus): Software para la exploración y comparación de desigualdades en salud en países. Edición para carga de base de datos. Versión 6.0. Ginebra: Organización Mundial de la Salud, 2024.",
       "heatplus2": "La OMS proporciona esta herramienta sin datos; cualesquiera datos agregados a, o que resulten de, la herramienta son de responsabilidad exclusiva del usuario, no de la OMS.",
       "heatplus3": "Nota: \"HEAT Plus\" es el acrónimo original del título en idioma inglés (Health Equity Assessment Toolkit Plus) y puede ser usado como tal para referirse al producto de modo coloquial."
     },
@@ -97,14 +105,14 @@
     },
     "paragraphs": {
       "heat1": "Esta edición del software HEAT con base de datos integrada usa datos del Repositorio de Desigualdades en Salud de la OMS (actualización 2023).",
-      "heat2": "HEAT permite la exploración y comparación interactiva de las desigualdades en salud en los países",
+      "heat2": "HEAT permite la exploración y comparación interactiva de las desigualdades en salud en los países y territorios.",
       "heat3a": "Use HEAT para",
       "heat3b": "explorar desigualdades",
-      "heat3c": "en un país de interés para determinar el estado actual de la situación de desigualdad y el cambio de la desigualdad en el tiempo.",
+      "heat3c": "en un escenario de interés para determinar el estado actual de la situación de desigualdad y el cambio de la desigualdad en el tiempo.",
       "heat4": "Los datos de desigualdad en salud, incluyendo datos desagregados y medidas de resumen, se visualizan en una variedad de gráficos, mapas y tablas interactivas.",
       "heat5a": "Use HEAT para",
       "heat5b": "comparar desigualdades",
-      "heat5c": "en un país de interés con la situación en otros países y establecer puntos de referencia.",
+      "heat5c": "en un escenario de interés con la situación en otros escenarios y establecer puntos de referencia.",
       "heat6": "Los resultados personalizados pueden ser exportados y guardados en diferentes formatos.",
       "heat7": "La medición y el monitoreo de las desigualdades en salud son cruciales para identificar diferencias en la salud entre diferentes subgrupos poblacionales, proporcionando evidencia importante para las políticas, los programas y las prácticas digiridas a combatir las inequidades en salud y alcanzar la salud para todos.",
       "heat8": "La Herramienta de Valoración de la Equidad en Salud (HEAT) facilita el análisis y el reporte de datos sobre desigualdad en salud. Los datos desagregados y las medidas de resumen son visualizadas en una variedad de formas interactivas. Los resultados personalizados pueden ser exportados y usados para informar el establecimiento de prioridades y la definición de políticas.",
@@ -144,7 +152,7 @@
       "remove_dates": "Quitar fechas"
     },
     "labels": {
-      "setting": "Escenario (e.g., pais, provincia, distrito)",
+      "setting": "Escenario (p. ej., pais/territorio, provincia, distrito)",
       "source_plural": "Fuentes de datos",
       "year": "Fecha",
       "year_plural": "Fechas",
@@ -154,7 +162,8 @@
       "dimension": "Dimensión de desigualdad",
       "dimension_plural": "Dimensiones de desigualdad",
       "measure": "Medida de resumen",
-      "measure_plural": "Medidas de resumen"
+      "measure_plural": "Medidas de resumen",
+      "determinant": "Determinante"
     },
     "placeholders": {
       "selection": "Haga una selección"
@@ -191,7 +200,8 @@
       "saving": "Guardar los resultados",
       "complete": "Se completó el cargado",
       "success": "Cargado exitoso",
-      "uploaded": "La base de datos fue cargada."
+      "uploaded": "La base de datos fue cargada.",
+      "note": "Por favor, espere mientras se cargan sus datos. El tiempo de procesamiento dependerá del tamaño de su base de datos y de la cantidad de estratos. "
     },
     "warnings": {
       "fileerror": "Error en el archivo",
@@ -244,12 +254,12 @@
       "rep_gho_alcohol_blurb": "Indicadores relacionados con el consumo de alcohol desagregados por sexo. (Fuente de datos original: Observatorio Mundial de la Salud de la OMS (GHO); actualizado el 03/2023).",
       "rep_gho_tobacco_blurb": "Indicadores relacionados con el consumo de tabaco desagregados por sexo. (Fuente de datos original: Observatorio Mundial de la Salud de la OMS (GHO); actualizado el 03/2023).",
       "rep_gho_ncd_blurb": "Indicadores relacionados con enfermedades no transmisibles y factores de riesgo (incluyendo consumo de alcohol, actividad física insuficiente, nutrición, presión arterial elevada, glucemia elevada, consumo de tabaco) desagregados por sexo. (Fuente de datos original: Observatorio Mundial de la Salud de la OMS (GHO); actualizado el 03/2023).",
-      "rep_eurostat_ah_blurb": "Indicadores relacionados con el estado de salud y comportamientos de salud y factores de riesgo (incluyendo alcohol, actividad física, nutrición, presión arterial, glucosa en sangre, consumo de tabaco) desagregados por edad, situación económica, educación, lugar de residencia y sexo. (Fuente de datos original: Eurostat, la oficina estadística de la Unión Europea; actualizado 01/2023).",
-      "rep_oecd_ah_blurb": "Indicadores relacionados con el estado de salud autoinformado en los países de la OCDE, desglosados por edad, situación económica, educación y sexo. (Fuente de datos original: Organización para la Cooperación y el Desarrollo Económicos, conjunto de datos HEALTH_STAT; actualizado 11/2022).",
+      "rep_eurostat_ah_blurb": "Indicadores relacionados con el estado de salud y comportamientos de salud y factores de riesgo (incluyendo alcohol, actividad física, nutrición, presión arterial, glucosa en sangre, consumo de tabaco) desagregados por edad, situación económica, educación, lugar de residencia y sexo. (Fuente de datos original: Eurostat, la oficina estadística de la Unión Europea; actualizado 07/2023).",
+      "rep_oecd_ah_blurb": "Indicadores relacionados con el estado de salud autoinformado en los países de la OCDE, desglosados por edad, situación económica, educación y sexo. (Fuente de datos original: Organización para la Cooperación y el Desarrollo Económicos, conjunto de datos HEALTH_STAT; actualizado 07/2023).",
       "rep_dhs_hca_blurb": "Indicadores relacionados con el acceso a la atención de la salud desagregados por edad, situación económica, educación, situación laboral, estado civil, número de hijos vivos, lugar de residencia y región subnacional. (Fuente de datos original: Programa de Encuesta Demográfica y de Salud (DHS); actualizado 02/2023).",
       "rep_gho_hc_blurb": "Indicadores relacionados con el sistema de salud y el acceso a la atención de la salud desagregados por edad, situación económica, lugar de residencia y sexo. (Fuente de datos original: Observatorio Mundial de la Salud de la OMS; actualizado el 03/2023).",
-      "rep_eurostat_hc_blurb": "Indicadores relacionados con la atención de la salud desagregados por edad, situación económica, educación, lugar de residencia y sexo. (Fuente de datos original: Eurostat, la oficina estadística de la Unión Europea; actualizado 01/2023).",
-      "rep_oecd_hc_blurb": "Indicadores relacionados con la calidad, los recursos y el gasto en atención de la salud en los países de la OCDE, desagregados por edad y sexo. (Fuente de datos original: Organización para la Cooperación y el Desarrollo Económicos, conjuntos de datos EBDAG / HEALTH_REAC / HEALTH_HCQI; actualizado el 11/2022).",
+      "rep_eurostat_hc_blurb": "Indicadores relacionados con la atención de la salud desagregados por edad, situación económica, educación, lugar de residencia y sexo. (Fuente de datos original: Eurostat, la oficina estadística de la Unión Europea; actualizado 07/2023).",
+      "rep_oecd_hc_blurb": "Indicadores relacionados con la calidad, los recursos y el gasto en atención de la salud en los países de la OCDE, desagregados por edad y sexo. (Fuente de datos original: Organización para la Cooperación y el Desarrollo Económicos, conjuntos de datos EBDAG / HEALTH_REAC / HEALTH_HCQI; actualizado el 07/2023).",
       "rep_ghe_death_sex_blurb": "Tasas de mortalidad por enfermedad por 100 000 habitantes desagregadas por sexo. (Fuente de datos original: Estimaciones de salud mundial de la OMS (GHE); actualizado 08/2022).",
       "rep_ghe_daly_sex_blurb": "Años de vida ajustados por discapacidad (AVAD) por 100 000 habitantes desagregado por sexo. (Fuente de datos original: Estimaciones de salud mundial de la OMS (GHE); actualizado 08/2022).",
       "rep_ghe_yld_sex_blurb": "Años de vida saludable perdidos por discapacidad (AVD) por 100 000 habitantes desagregado por sexo. (Fuente de datos original: Estimaciones de salud mundial de la OMS (GHE); actualizado 08/2022).",
@@ -261,8 +271,11 @@
       "rep_gho_mortality_blurb": "Esperanza de vida y tasas de mortalidad desagregadas por sexo. (Fuente de datos original: Observatorio Mundial de la Salud de la OMS (GHO); actualizado el 03/2023).",
       "rep_ihme_inc_blurb": "Estimaciones de incidencia de enfermedades desagregadas por sexo. (Fuente de datos original: Estudio de carga global de enfermedad, Institute for Health Metrics and Evaluation (IHME) 2019; actualizado 09/2022).",
       "rep_ihme_prev_blurb": "Estimaciones de prevalencia de enfermedades desagregadas por sexo. (Fuente de datos original: Estudio de carga global de enfermedad, Institute for Health Metrics and Evaluation (IHME) 2019; actualizado 09/2022).",
-      "rep_eurostat_disab1_blurb": "Indicadores relacionados con el estado de salud, conductas de salud y factores de riesgo, cuidado de la salud y determinantes de la salud en países europeos desagregados por discapacidad. (Fuente de datos original: Eurostat, la oficina estadística de la Unión Europea; actualizado 01/2023).",
-      "rep_eurostat_disab2_blurb": "Indicadores relacionados con el estado de salud, conductas de salud y factores de riesgo, cuidado de la salud y determinantes de la salud entre las personas con discapacidad en los países europeos, desagregados por edad y sexo. (Fuente de datos original: Eurostat, la oficina estadística de la Unión Europea; actualizado 01/2023).",
+      "rep_eurostat_disab1_blurb": "Indicadores relacionados con el estado de salud, conductas de salud y factores de riesgo, cuidado de la salud y determinantes de la salud en países europeos desagregados por discapacidad. (Fuente de datos original: Eurostat, la oficina estadística de la Unión Europea; actualizado 07/2023).",
+      "rep_eurostat_disab2_blurb": "Indicadores relacionados con el estado de salud, conductas de salud y factores de riesgo, cuidado de la salud y determinantes de la salud entre las personas con discapacidad en los países europeos, desagregados por edad y sexo. (Fuente de datos original: Eurostat, la oficina estadística de la Unión Europea; actualizado 07/2023).",
+      "rep_eurostat_mig1_blurb": "Indicadores relacionados con el estado de salud, conductas de salud y factores de riesgo, atención médica y determinantes de la salud en países europeos desagregados por estatus migratorio. (Fuente de datos original: Eurostat, la oficina estadística de la Unión Europea; actualizado 07/2023).",
+      "rep_eurostat_mig2_blurb": "Indicadores relacionados con el estado de salud, conductas de salud y factores de riesgo, atención de la salud y determinantes de la salud entre las personas migrantes en los países europeos, desagregados por edad, sexo y tipo de migrante. (Fuente de datos original: Eurostat, la oficina estadística de la Unión Europea; actualizado 07/2023).",
+      "rep_unsd_unhcr_mig_blurb": "El número de migrantes y refugiados internacionales por cada 1000 habitantes, desglosado por edad, lugar de residencia urbano/rural y sexo. (Fuente de datos original: Departamento de Estadística de las Naciones Unidas (UNSD) International Migrant Stock 2020 y la base de datos de estadísticas de población de refugiados de la Agencia de las Naciones Unidas para los Refugiados (ACNUR); actualizado el 07/2023).",
       "rep_wash_blurb": "Acceso a agua potable, saneamiento e higiene (WASH) dentro de los hogares, escuelas e instalaciones de atención médica desagregado por lugar de residencia. (Fuente de datos original: Programa Conjunto de Monitoreo del Abastecimiento de Agua, Saneamiento e Higiene (JMP) de la OMS/UNICEF; actualizado 03/2023).",
       "rep_gpw13_blurb": "Indicadores utilizados para medir el impacto del 13.º Programa General de Trabajo de la OMS (GPW 13), que define la estrategia de la OMS para el período 2019-2025, desagregados por edad, sexo, situación económica, educación, lugar de residencia y región subnacional. (Fuentes de datos originales: Re-análisis de las Encuestas Demográficas y de Salud (DHS), Encuestas de Indicadores Múltiples (MICS) y Encuestas de Salud Reproductiva (RHS); estimaciones de salud mundial de la OMS (GHE); Observatorio Mundial de la Salud de la OMS (GHO); Programa Conjunto de Monitoreo del Abastecimiento de Agua, Saneamiento e Higiene (JMP) de la OMS/UNICEF; Estimaciones conjuntas de desnutrición de UNICEF/OMS/Banco Mundial; Estimaciones de incidencia de VIH de ONUSIDA/UNICEF/OMS; actualizado 03/2023) .",
       "rep_wb_blurb": "Indicadores relacionados con los determinantes de la salud (por ejemplo, educación, empleo y medio ambiente) desagregados por situación económica, lugar de residencia y sexo. (Fuente de datos original: Catálogo de datos del Banco Mundial; actualizado 02/2023).",
@@ -273,8 +286,8 @@
       "rep_gdl2_blurb": "Indicadores utilizados para crear índices de desarrollo (Índice de Desarrollo Humano, Índice de Desarrollo de Género, Índice de Riqueza Internacional, coeficiente de Gini y Theil-T) desagregados por situación económica, lugar de residencia, situación de pobreza y región subnacional. (Fuente de datos original: Global Data Lab; actualizado 01/2023).",
       "rep_mpi_blurb": "Índice de Pobreza Multidimensional (IPM) desagregado por etnia/raza/casta (Fuente de datos original: Programa de las Naciones Unidas para el Desarrollo (PNUD) 2021; actualizado en octubre de 2022) y desagregado por edad, lugar de residencia, sexo de la cabeza de familia y región subnacional. (Original fuente de datos: Iniciativa de Oxford sobre Pobreza y Desarrollo Humano (OPHI) 2022; actualizado 10/2022).",
       "rep_dhs_unicef_cpr_blurb": "Indicadores relacionados con la protección infantil y la mutilación genital femenina (MGF) desagregados por edad, situación económica, educación, situación laboral, estado civil, número de hijos vivos, lugar de residencia, religión, sexo y región subnacional. (Fuentes de datos originales: Programa de encuestas demográficas y de salud (DHS) y almacén de datos de UNICEF; actualizado 12/2022).",
-      "rep_eurostat_sdh_blurb": "Indicadores relacionados con los determinantes de la salud (condiciones de la vivienda, distribución de la renta, pobreza y privaciones materiales) en los países europeos desagregados por edad y sexo. (Fuente de datos original: Eurostat, la oficina estadística de la Unión Europea; actualizado 01/2023).",
-      "rep_oecd_sdh_blurb": "Indicadores relacionados con los determinantes de la salud y el bienestar en los países de la OCDE, desagregados por edad, educación y sexo. (Fuente de datos original: Organización para la Cooperación y el Desarrollo Económicos, conjunto de datos 'How's Life? Well-Being'; actualizado el 11/2022)."
+      "rep_eurostat_sdh_blurb": "Indicadores relacionados con los determinantes de la salud (condiciones de la vivienda, distribución de la renta, pobreza y privaciones materiales) en los países europeos desagregados por edad, situación económica, educación, lugar de residencia y sexo. (Fuente de datos original: Eurostat, la oficina estadística de la Unión Europea; actualizado 07/2023).",
+      "rep_oecd_sdh_blurb": "Indicadores relacionados con los determinantes de la salud y el bienestar en los países de la OCDE, desagregados por edad, educación y sexo. (Fuente de datos original: Organización para la Cooperación y el Desarrollo Económicos, conjunto de datos 'How's Life? Well-Being'; actualizado el 07/2023)."
     },
     "category": {
       "sdg_category": "Objetivos de desarrollo sostenible",
@@ -287,9 +300,10 @@
       "healthcare_category": "Cuidado de la salud",
       "dburden_category": "Carga de enfermedad",
       "disability_category": "Discapacidad",
+      "migration_category": "Migración",
       "env_category": "Salud ambiental",
       "gpw13_category": "Programa General de Trabajo de la OMS",
-      "beyondhealth_category": "Más allá del sector salud"
+      "beyondhealth_category": "Determinantes de la salud"
     },
     "dataset_name": {
       "rep_sdg_dataset": "Objetivos de desarrollo sostenible",
@@ -339,6 +353,9 @@
       "rep_ihme_prev_dataset": "Estimaciones de prevalencia de enfermedades (estudio IHME Carga Mundial de Morbilidad)",
       "rep_eurostat_disab1_dataset": "Indicadores desagregados por discapacidad (Eurostat)",
       "rep_eurostat_disab2_dataset": "Indicadores entre personas con discapacidad (Eurostat)",
+      "rep_eurostat_mig1_dataset": "Indicadores desagregados por estatus migratorio (Eurostat)",
+      "rep_eurostat_mig2_dataset": "Indicadores entre personas inmigrantes (Eurostat)",
+      "rep_unsd_unhcr_mig_dataset": "Migrantes y refugiados internacionales (UNSD/ACNUR)",
       "rep_wash_dataset": "Agua, saneamiento e higiene (OMS/UNICEF JMP)",
       "rep_gpw13_dataset": "13.º Programa General de Trabajo de la OMS (múltiples fuentes de datos)",
       "rep_gho_env_dataset": "Salud ambiental (Observatorio Mundial de la Salud de la OMS)",
@@ -370,6 +387,7 @@
       "home": "Inicio",
       "explore": "Explorar desigualdades",
       "compare": "Comparar desigualdades",
+      "determinants": "Determinantes",
       "disag": "Datos desagregados",
       "summary": "Medidas de resumen",
       "about": "Acerca de",
@@ -387,6 +405,7 @@
       "logout": "Cerrar sesión",
       "choose_dataset": "Elija el conjunto de datos",
       "spinner": "Cargando nuevo conjunto de datos…",
+      "determinants_tooltip": "Los determinantes solo se muestran para los conjuntos de datos con datos anuales",
       "hline": "Línea horizontal",
       "vbar": "Barra vertical",
       "hbar": "Barra horizontal",
@@ -418,6 +437,8 @@
       "reference": "Líneas de referencia",
       "average": "Estableciendo el promedio",
       "median": "Mediana",
+      "regression": "Línea de regresión",
+      "inclregression": "Línea de regresión",
       "sortdata": "Ordenar los datos",
       "sortby": "Ordenar por",
       "subgroup": "Subgrupo",
@@ -445,7 +466,7 @@
       "indicatorname": "Nombre del indicador",
       "dimension": "Dimensión",
       "subgroup": "Subgrupo",
-      "measureabbr": "Abreviatura de la medición sintética",
+      "measureabbr": "Abreviatura de la medida de resumen",
       "measurename": "Nombre de la Medida de resumen",
       "estimate": "Estimado",
       "lowerbound": "Límite inferior IC95%",
@@ -453,7 +474,13 @@
       "popshare": "Cuota poblacional",
       "flag": "Nota",
       "settingavg": "Promedio del escenario",
-      "format": "Formato"
+      "format": "Formato",
+      "sdhyear": "Fecha del determinante",
+      "sdhsource": "Fuente del determinante",
+      "sdhabbr": "Abreviatura del determinante",
+      "sdhname": "Nombre del determinante",
+      "sdhestimate": "Promedio del escenario del determinante",
+      "sdhnote": "Nota para determinante"
     }
   },
   "sidepanel": {
@@ -530,6 +557,7 @@
       "Age (4 groups) (15-65+)": "Edad (4 grupos) (15-65+)",
       "Age (4 groups) (18-65+)": "Edad (4 grupos) (18-65+)",
       "Age (5 groups) (0-50+)": "Edad (5 grupos) (0-50+)",
+      "Age (5 groups) (0-60+)": "Edad (5 grupos) (0-60+)",
       "Age (5 groups) (0-65+)": "Edad (5 grupos) (0-65+)",
       "Age (5 groups) (15-49)": "Edad (5 grupos) (15-49)",
       "Age (5 groups) (15-65+)": "Edad (5 grupos) (15-65+)",
@@ -582,19 +610,25 @@
       "Marital status": "Estado civil",
       "Municipality": "Municipio",
       "Migratory status": "Estatus migratorio",
+      "Migratory status (country of birth)": "Estatus migratorio (país de nacimiento)",
+      "Migratory status (country of citizenship)": "Estatus migratorio (país de ciudadanía)",
       "Number of living children": "Numero de niños vivos",
       "Place of residence": "Lugar de residencia",
       "Poverty status": "Estado de pobreza",
       "Religion": "Religión",
       "School type": "Tipo de escuela",
       "Subnational region": "Región subnacional",
-      "TB drug resistance": "Resistencia a los medicamentos contra la tuberculosis"
+      "TB drug resistance": "Resistencia a los medicamentos contra la tuberculosis",
+      "Type of migrant": "Tipo de migrante",
+      "Type of migrant (country of birth)": "Tipo de migrante (país de nacimiento)",
+      "Type of migrant (country of citizenship)": "Tipo de migrante (país de ciudadanía)"
     },
     "groups": {
       "highincome": "Ingreso alto",
       "uppermiddleincome": "Ingreso medio alto",
       "lowermiddleincome": "Ingreso medio bajo",
-      "lowincome": "Ingreso bajo"
+      "lowincome": "Ingreso bajo",
+      "noincome": "No hay grupo de ingresos definido"
     },
     "indicators": {
       "aci": "Índice de concentración absoluto (ACI)",
@@ -726,6 +760,7 @@
       "Estonia": "Estonia",
       "Eswatini": "Eswatini",
       "Ethiopia": "Etiopía",
+      "Faroe Islands": "Islas Feroe",
       "Fiji": "Fiji",
       "Finland": "Finlandia",
       "France": "Francia",
@@ -793,7 +828,9 @@
       "Niger": "Níger",
       "Nigeria": "Nigeria",
       "Niue": "Niue",
+      "North Macedonia": "Macedonia del Norte",
       "Norway": "Noruega",
+      "occupied Palestinian territory": "Territorio Palestino Ocupado",
       "Oman": "Omán",
       "Pakistan": "Pakistán",
       "Palau": "Palau",
@@ -804,6 +841,7 @@
       "Philippines": "Filipinas",
       "Poland": "Polonia",
       "Portugal": "Portugal",
+      "Puerto Rico": "Puerto Rico",
       "Qatar": "Qatar",
       "Republic of Korea": "República de Corea",
       "Republic of Moldova": "República de Moldova",
@@ -837,9 +875,10 @@
       "Syrian Arab Republic": "República Árabe Siria",
       "Tajikistan": "Tayikistán",
       "Thailand": "Tailandia",
-      "North Macedonia": "Macedonia del Norte",
+      "The United Kingdom": "Reino Unido de Gran Bretaña e Irlanda del Norte",
       "Timor-Leste": "Timor-Leste",
       "Togo": "Togo",
+      "Tokelau": "Tokelau",
       "Tonga": "Tonga",
       "Trinidad and Tobago": "Trinidad y Tobago",
       "Tunisia": "Túnez",
@@ -849,7 +888,6 @@
       "Uganda": "Uganda",
       "Ukraine": "Ucrania",
       "United Arab Emirates": "Emiratos Arabes Unidos",
-      "United Kingdom": "Reino Unido de Gran Bretaña e Irlanda del Norte",
       "United Republic of Tanzania": "República Unida de Tanzanía",
       "United States of America": "Estados Unidos de América",
       "Uruguay": "Uruguay",
@@ -945,6 +983,9 @@
       "60-69 years": "60-69 años",
       "70-79 years": "70-79 años",
       "80+ years": "80+ años",
+      "12-17 years": "12-17 años",
+      "10-19 years": "10-19 años",
+      "20-59 years": "20-59 años",
       "1": "1",
       "2-3": "2-3",
       "4-5": "4-5",
@@ -1041,10 +1082,10 @@
       "Living together": "Viviendo juntos",
       "Married": "Casado",
       "Married or living together": "Casados o viviendo juntos",
-      "EU Migrants": "Migrantes de la UE",
-      "Migrants": "Migrantes",
-      "Non-EU Migrants": "Migrantes fuera de la UE",
+      "Migrant": "Migrante",
       "Non-migrant": "No migrante",
+      "EU migrant": "Migrante de la UE",
+      "Non-EU migrant": "Migrante fuera de la UE",
       "None": "Ninguno",
       "1-2 children": "1-2 niños",
       "3-4 children": "3-4 niños",

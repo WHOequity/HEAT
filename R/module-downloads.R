@@ -124,6 +124,15 @@ downloadsServer <- function(input, output, session,
 
     content = function(temp) {
 
+      dat <- data() %>%
+        dplyr::rename(date = year)
+
+      if("flag" %in% names(dat)){
+        dat <- dat %>%
+          dplyr::rename(note = flag)
+      }
+
+
       cat(
         file = temp,
         table_disclaimer(language(), is_who_dataset),
@@ -131,12 +140,12 @@ downloadsServer <- function(input, output, session,
       )
       if (input$data_extension == "csv") {
         suppressWarnings(write.table(
-          x = data(), file = temp, sep = ",", row.names = FALSE,
+          x = dat, file = temp, sep = ",", row.names = FALSE,
           append = TRUE, na = ""
         ))
       } else if (input$data_extension == "tsv") {
         suppressWarnings(write.table(
-          x = data(), file = temp, sep = "\t", row.names = FALSE,
+          x = dat, file = temp, sep = "\t", row.names = FALSE,
           append = TRUE, na = ""
         ))
       }

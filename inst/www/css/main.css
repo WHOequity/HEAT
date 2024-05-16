@@ -129,6 +129,10 @@ input + .fa {
   cursor: no-drop;
 }
 
+.nav-link.disabled{
+  pointer-events: auto;
+}
+
 button {
   cursor: pointer;
 }
@@ -375,7 +379,8 @@ button {
   transform: translateY(-50%) translateX(-50%) rotate(-90deg);
   font-family: "Lucida Grande", "Lucida Sans Unicode", Arial, Helvetica,
     sans-serif;
-  white-space: nowrap;
+  width: 500px;
+  /*white-space: nowrap;*/
 }
 
 .heat-chart-disclaimer {
@@ -577,7 +582,7 @@ label.btn.btn-grey.hidestuff{
   justify-content: center;
 }
 
-.heat-view-controls .fa {
+.heat-view-controls .fa,.far,.fas {
   margin-right: 10px;
   font-size: 1rem !important;
 }
@@ -959,12 +964,17 @@ body:not(.pg-loaded) {
     /*background-color: #3b94cb;*/
   }
 
+
+
+
   /* when .nav-link is open, these are the sub items
   like "Disaggregated data"*/
   .navbar .dropdown-item {
     text-align: center;
     color: white;
   }
+
+
 
   /* This is the submenu with  user manual etc */
   .navbar-nav .dropdown-menu {
@@ -1158,7 +1168,16 @@ body:not(.pg-loaded) {
   }
 }
 
+
+.yonder-select button.dropdown-item{
+    text-wrap: pretty !important;
+    white-space: normal !important;
+}
+
+
 /* don't remember what this was for but we don't use navbar-expand-xl
+$('button.dropdown-item').css('text-wrap', 'pretty')
+
 @media (min-width: 1300px) {
   .container,
   .container-lg,

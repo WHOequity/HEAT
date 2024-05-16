@@ -1,0 +1,53 @@
+/* CSS Stylesheet for HEAT Manual About page*/
+
+.hero-banner {
+  position: relative;
+  background-image: linear-gradient(rgba(255, 255, 255, 0.6), rgba(255, 255, 255, 0.6)),url('images/background.png');
+  background-repeat: no-repeat;
+  background-size: 100%;
+  background-color: rgb(240,245,249);
+  display: flex;
+  justify-content: center;
+}
+
+.hero-banner h1 {
+  color: #39729E;
+  font-size: 2.5rem;
+}
+
+@media (min-width: 1000px) {
+.hero-banner .hero-image {
+  display: initial;
+  width: 270px;
+}
+}
+
+.hero-banner .hero-image p {
+  margin-bottom: 0;
+}
+
+.hero-banner .hero-image-left {
+  left: 0;
+  bottom: 0;
+}
+
+.hero-banner .hero-image-right {
+  right: 0;
+  bottom: 0;
+}
+
+.hero-banner .content-block {
+  z-index: 0;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-banner .content-block {
+    max-width: 800px;
+  }
+  .hero-banner .content-block .hero-text {
+    width: 100%;
+  }
+  .hero-banner .content-block .hero-animation {
+    display: none;
+  }
+}

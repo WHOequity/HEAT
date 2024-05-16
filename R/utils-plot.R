@@ -184,6 +184,7 @@ chart_legend <- function(items,
                          by_dimension = TRUE) {
   char_width <- px_to_pt(10)
 
+
   if (by_dimension) {
     items_split <- split(items, items$dimension)
 
@@ -193,7 +194,11 @@ chart_legend <- function(items,
           color = color,
           name = label,
           showInLegend = TRUE,
-          type = type
+          type = type,
+          marker = list(
+            symbol = "circle",
+            enabled = type != "line"
+          )
         )
       })
 
@@ -215,9 +220,6 @@ chart_legend <- function(items,
             grouping = FALSE,
             events = list(
               legendItemClick = JS("function() { return false; }")
-            ),
-            marker = list(
-              symbol = symbol
             )
           )
         ) %>%
@@ -279,7 +281,8 @@ chart_legend <- function(items,
             legendItemClick = JS("function() { return false; }")
           ),
           marker = list(
-            symbol = symbol
+            symbol = symbol,
+            enabled = !items$type == "line"
           )
         )
       ) %>%
@@ -407,7 +410,7 @@ plot_line_median <- function(value, language, zindex = 5) {
   )
 }
 
-chart_tooltip <- function(chart, heading, body, ..., decimal_places = 1) {
+chart_tooltip <- function(chart, heading, body, ..., decimal_places = 1, lm_dtl = NULL, language = NULL) {
 
   body_str <- paste(
     purrr::map_chr(body, function(x) {
@@ -425,9 +428,41 @@ chart_tooltip <- function(chart, heading, body, ..., decimal_places = 1) {
   # body_str <- "(false ? '<tr><td style = \"padding-top: 0.15rem;\">Works!</td></tr>' : '') + '<tr><td style = \"padding-top: 0.15rem;\">' +  this.point.subgroup + (this.point.popshare === 'NA' ? '' : ' (' + this.point.popshare + '% of affected population)')  + '</td></tr>'+'<tr><td style = \"padding-top: 0.15rem;\">' +  'Estimate: ' + this.point.estimate + (this.point.ci_lb === 'NA' ? '; 95% CI   not available ' : '; 95% CI ' + this.point.ci_lb + '-' + this.point.ci_ub)  + '</td></tr>'+'<tr><td style = \"padding-top: 0.15rem;\">' +  'Setting average: '  + this.point.setting_average  + '</td></tr>'"
 
 
+
+  r2 <- ifelse(is.null(lm_dtl), "", lm_dtl$r2)
+  p_val <- ifelse(is.null(lm_dtl), "", lm_dtl$p_val)
+  slope <- ifelse(is.null(lm_dtl), "", lm_dtl$slope)
+  intercept <- ifelse(is.null(lm_dtl), "", lm_dtl$intercept)
+
+
+
+  # if language is NULL then it's not determinants
+  if(is.null(language))
+    language <- "en"
+  indic_est_text <- translate(c(language, "charts","tooltips","indicatorestimate"))
+  r_sq_text <- translate(c(language, "charts","tooltips","rsquared"))
+  pvalue_text <- translate(c(language, "charts","tooltips","pvalue"))
+  det_est_text <- translate(c(language, "charts","tooltips","determinantestimate"))
+
+
+
+  escape_chars <- function(str){
+    gsub("'", "\\'", str, fixed = TRUE)
+  }
+  indic_est_text <- escape_chars(indic_est_text)
+
   formatter_js <- glue(
     "function() {{ ",
+
+    "if(this.series.name=='determinant_line') {{",
+    # "console.log(this);",
+    "return '<div { chart_tooltip_attributes(lm_line=TRUE) }>",
+    "{indic_est_text} = {intercept} + {slope} * {det_est_text}<br>",
+    "{r_sq_text}: {r2}<br>",
+    "{pvalue_text}: {p_val}</div>';",
+    "}}",
     "if(!this.point.setting) {{return false}} else {{",
+    #"console.log(this);",
     "return '<table { chart_tooltip_attributes() }>' + ",
     "'<thead>' + ",
     "'<tr><td style = \"font-weight: 700; border-bottom: 1px solid #263238;\">' + ",
@@ -438,7 +473,7 @@ chart_tooltip <- function(chart, heading, body, ..., decimal_places = 1) {
     "{body_str} +",
     "'</tbody>' + ",
     "'</table>' ",
-    "}}}"
+    "}}}}"
   )
 
   hc_tooltip(
@@ -463,8 +498,13 @@ chart_tooltip <- function(chart, heading, body, ..., decimal_places = 1) {
   )
 }
 
-chart_tooltip_attributes <- function() {
-  "style=\"margin: 1px; color: #263238; background-color: #fafafa; letter-spacing: .5px; opacity: 0.85; border-collapse: separate; border-spacing: 5px 5px; border: none;\" data-html2canvas-ignore=\"true\""
+chart_tooltip_attributes <- function(lm_line = FALSE) {
+  if(!lm_line){
+    res <- "style=\"margin: 1px; color: #263238; background-color: #fafafa; letter-spacing: .5px; opacity: 0.85; border-collapse: separate; border-spacing: 5px 5px; border: none;\" data-html2canvas-ignore=\"true\""
+  } else {
+    res <- "style=\"margin: 5px; color: #263238; background-color: #fafafa; letter-spacing: .5px; opacity: 0.85;\" data-html2canvas-ignore=\"true\""
+  }
+
 }
 
 highcharterDependencies <- function() {
@@ -489,6 +529,10 @@ chart_map_disclaimer <- function(language) {
 }
 
 chart_disclaimer <- function(language = "en", is_who_dataset) {
+
+  if(is.null(is_who_dataset))
+    is_who_dataset <- FALSE
+
   if (is_heat_plus()) {
     div(
       class = "heat-chart-disclaimer",
@@ -525,8 +569,10 @@ chart_disclaimer <- function(language = "en", is_who_dataset) {
         # "Health Equity Assessment Toolkit (HEAT): Software for exploring and comparing
         #  health inequalities in countries. Built-in database edition.
         #  Version 4.0 (beta). Geneva, World Health Organization, 2020."
-        if(!is_who_dataset)
+        if(!is_who_dataset && !is_heat_plus()){
           get_nonwho_disclaimer()
+        }
+
       ) %>%
         font(size = "xs")
     )
@@ -934,6 +980,7 @@ get_axis_min_max <- function(.data,
     log_sum_measure <- is_log_scale(.data$measure[1])
   }
 
+
   # if manual_axis_min and manual axis_max are both not null
   # just return the manual values
   if ((!is.null(manual_axis_min) & !is.null(manual_axis_max))) {
@@ -1156,12 +1203,19 @@ round_vars <- function(.data, vars_to_round, decimal_places) {
     )
 }
 
-standard_tooltip_header <- function(summary_measure = FALSE) {
-  "this.point.setting + ', ' + this.point.source + ' ' + this.point.year"
+standard_tooltip_header <- function(summary_measure = FALSE, determinant = FALSE) {
+
+  if(!determinant){
+    "this.point.setting + ', ' + this.point.source + ' ' + this.point.year"
+  } else {
+    "this.point.setting"
+  }
+
 }
 
 standard_tooltip_body <- function(include_conf = TRUE, from_map = FALSE,
-                                  summary_measure = FALSE, language = "en") {
+                                  summary_measure = FALSE, language = "en",
+                                  from_determinant = FALSE) {
   label_estimate <- translate(c(language, "charts", "tooltips", "estimate"))
   label_setting_avg <- paste0(
     "'", translate(c(language, "charts", "tooltips", "settingavg")), ": '"
@@ -1170,12 +1224,30 @@ standard_tooltip_body <- function(include_conf = TRUE, from_map = FALSE,
   text_notavailable <- translate(c(language, "charts","legend","notavailable"))
   text_ci <- translate(c(language, "charts","tooltips","95ci"))#"95% CI"
   text_flag <- translate(c(language, "options", "values", "flag"))
+  label_determinant <- paste0("'", translate(c(language, "charts","tooltips","determinant")), ": '")
+  label_indicator <- paste0("'", "Indicator", ": '")
+  label_national_avg <- paste0(
+    "'", translate(c(language, "charts","tooltips","nationalavg")), ": '"
+  )
+  label_determinant_year <- paste0(
+    "'", translate(c(language, "charts","tooltips","sdhyear")), ": '"
+  )
 
   text_conf <- paste(
     " + (this.point.ci_lb === 'NA' ? ';", text_ci, " ", tolower(text_notavailable), "' : ';", text_ci, "' + this.point.ci_lb + '-' + this.point.ci_ub)"
   )
 
-  if (!from_map && !summary_measure) {
+
+  if(from_determinant){
+    tooltip_body <- c(
+      paste("this.point.indicator_name + ', ' + this.point.source + ' ' + this.point.year"),
+      paste(label_national_avg, "+ '<span style=\"font-weight:900\" >'", " + this.point.setting_average + ", "'</span>'"),
+      "this.point.sdh_name + ', ' + this.point.sdh_source + ' ' + this.point.sdh_year",
+      paste(label_national_avg, "+ '<span style=\"font-weight:900\" >'", " + this.point.sdh_estimate + ", "'</span>'")
+    )
+  }
+
+  if (!from_map && !from_determinant && !summary_measure) {
     tooltip_body <- c(
       glue::glue("this.point.subgroup + (this.point.popshare === 'NA' ? '' : ' (' + this.point.popshare + '{label_of_affected_pop})')"),
       paste0(
@@ -1189,6 +1261,7 @@ standard_tooltip_body <- function(include_conf = TRUE, from_map = FALSE,
 
   }
 
+
   if (from_map) {
 
     tooltip_body <- c(
@@ -1199,7 +1272,7 @@ standard_tooltip_body <- function(include_conf = TRUE, from_map = FALSE,
     )
   }
 
-  if (!from_map && summary_measure) {
+  if (!from_map && !from_determinant && summary_measure) {
 
     tooltip_body <- "this.point.measure_name + ': ' + this.point.inequal"
     if (include_conf) tooltip_body <- glue::glue("{tooltip_body} + (this.point.ci_lb === 'NA' ? '; {text_ci} {tolower(text_notavailable)}' : '; {text_ci} ' + this.point.ci_lb + '-' + this.point.ci_ub)")

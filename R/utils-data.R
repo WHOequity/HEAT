@@ -277,7 +277,8 @@ benchmark_regions <- function(country_info) {
     dplyr::select(choices = whoreg6_name, values = whoreg6)
 }
 
-benchmark_comparisons <- function(setting_yr_src, country_info, income_group, region, sources) {
+benchmark_comparisons <- function(focus_setting, setting_yr_src, country_info, income_group, region, sources) {
+
 
   if(!is.null(sources) && !any(sources == " ")){
     setting_yr_src <- setting_yr_src |>
@@ -310,6 +311,7 @@ benchmark_comparisons <- function(setting_yr_src, country_info, income_group, re
   }
 
   filter_regions %>%
+    dplyr::filter(setting != focus_setting) |>
     dplyr::select(setting, iso3) %>%
     dplyr::mutate(
       choices = setting,

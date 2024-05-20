@@ -70,13 +70,6 @@ By installing and/or using the Toolkit, you (the “Licensee”) enter into an
 agreement with the World Health Organization (“WHO”) and you accept all terms, 
 conditions, and requirements of the Agreement.
 
-Please read these Terms of Use and Software License Agreement (the “Agreement”) 
-carefully before installing the Health Equity Assessment Toolkit (the “Toolkit”).
-
-By installing and/or using the Toolkit, you (the “Licensee”) enter into an 
-agreement with the World Health Organization (“WHO”) and you accept all terms, 
-conditions, and requirements of the Agreement.
-
 1. Components and Types of the Toolkit
 
 1.1. The Toolkit contains software developed by WHO (the “Software”). WHO has,
